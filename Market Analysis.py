@@ -3,12 +3,19 @@ import glob
 import pandas as pd
 from datetime import datetime
 
-date = datetime.now().strftime('%m-%d-%Y')
-baseDirectory = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
-marketDataInputDirectory = baseDirectory + "Market Analysis Data\\" + date + "\\"
-marketDataOutputDirectory = baseDirectory + "Market Analysis Data\\"
-#outputCSVFile = outputDirectory + "~priceData.csv"
-outputExcelFile = marketDataOutputDirectory + "~priceData.xlsx"
+def set_constants():
+    if os.environ['COMPUTERNAME'] == 'SEA-1800100736':
+        DATE = '07-12-2018'
+        BASE_DIRECTORY = "C:\\Users\\brewshan\\PycharmProjects\\Market_Analysis\\"
+        INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "data\\" + DATE + "\\"
+        OUTPUT_DATA_DIRECTORY = BASE_DIRECTORY + "output\\"
+    elif os.environ['COMPUTERNAME'] == 'SHANETRADINGD':
+        DATE = datetime.now().strftime('%m-%d-%Y')
+        BASE_DIRECTORY = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
+        INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\" + DATE + "\\"
+        OUTPUT_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\"
+    OUTPUT_EXCEL_FILENAME = OUTPUT_DATA_DIRECTORY + "~priceData.xlsx"
+
 
 def readAndCombineDataFiles():
     global concatDF
@@ -46,6 +53,7 @@ def writeExcelFile():
     writer.save()
 
 
-readAndCombineDataFiles()
-getInflationData()
-writeExcelFile()
+set_constants()
+#readAndCombineDataFiles()
+#getInflationData()
+#writeExcelFile()
