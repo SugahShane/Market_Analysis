@@ -3,57 +3,56 @@ import glob
 import pandas as pd
 from datetime import datetime
 
-def set_constants():
-    if os.environ['COMPUTERNAME'] == 'SEA-1800100736':
-        DATE = '07-12-2018'
-        BASE_DIRECTORY = "C:\\Users\\brewshan\\PycharmProjects\\Market_Analysis\\"
-        INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "data\\" + DATE + "\\"
-        OUTPUT_DATA_DIRECTORY = BASE_DIRECTORY + "output\\"
-    elif os.environ['COMPUTERNAME'] == 'SHANETRADINGD':
-        DATE = datetime.now().strftime('%m-%d-%Y')
-        BASE_DIRECTORY = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
-        INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\" + DATE + "\\"
-        OUTPUT_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\"
-    OUTPUT_EXCEL_FILENAME = OUTPUT_DATA_DIRECTORY + "~priceData.xlsx"
+def read_and_combine_data_files(etf_df):
+    etf_last_day_df = pd.DataFrame()
 
+    os.chdir(INPUT_DATA_DIRECTORY)
+    file_list = glob.glob("*.csv")
 
-def readAndCombineDataFiles():
-    global concatDF
-    concatDF = pd.DataFrame()
-    global concatLastDF
-    concatLastDF = pd.DataFrame()
-
-    os.chdir(marketDataInputDirectory)
-    fileList = glob.glob("*.csv")
-
-    for filename in fileList:
+    for filename in file_list:
         print(filename)
         df = pd.read_csv(filename)
-        dfLastDay = df.tail(1)
+        last_day_df = df.tail(1)
 
-        if concatDF.empty:
+        if etf_df.empty:
             df.sort_values(by='Date', ascending=False)
-            concatDF = df.copy()
-            concatLastDF = dfLastDay.copy()
+            etf_df = df.copy()
+            etf_last_day_df = last_day_df.copy()
         else:
-            concatDF = pd.merge(concatDF, df, on='Date', how='outer')
-            concatLastDF = pd.merge(concatLastDF, dfLastDay, on='Date', how='left')
+            etf_df = pd.merge(etf_df, df, on='Date', how='outer')
+            etf_last_day_df = pd.merge(etf_last_day_df, last_day_df, on='Date', how='left')
 
-def getInflationData():
-    global inflationDF
-    inflationDF = concatDF[['Date', 'DBC_Close', 'XLB_Close', 'XAU_Close', 'XLF_Close']]
-    #print(inflationDF)
+def get_inflation_data():
+    inflation_df = etf_df[['Date', 'DBC_Close', 'XLB_Close', 'XAU_Close', 'XLF_Close']]
+    #print(inflation_df)
 
 
-def writeExcelFile():
-    writer = pd.ExcelWriter(outputExcelFile)
-    concatDF.to_excel(writer, 'All Data')
-    concatLastDF.to_excel(writer, 'Last Day')
-    inflationDF.to_excel(writer, 'Inflation')
+def write_excel_file():
+    writer = pd.ExcelWriter(OUTPUT_EXCEL_FILENAME)
+    etf_df.to_excel(writer, 'All Data')
+    etf_df.head(1).to_excel(writer, 'Last Day')
+    #inflation_df.to_excel(writer, 'Inflation')
     writer.save()
 
 
-set_constants()
-#readAndCombineDataFiles()
-#getInflationData()
-#writeExcelFile()
+if os.environ['COMPUTERNAME'] == 'SEA-1800100736':
+    DATE = '07-12-2018'
+    BASE_DIRECTORY = "C:\\Users\\brewshan\\PycharmProjects\\Market_Analysis\\"
+    INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "data\\" + DATE + "\\"
+    OUTPUT_DATA_DIRECTORY = BASE_DIRECTORY + "output\\"
+elif os.environ['COMPUTERNAME'] == 'SHANETRADINGD':
+    DATE = datetime.now().strftime('%m-%d-%Y')
+    BASE_DIRECTORY = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
+    INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\" + DATE + "\\"
+    OUTPUT_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\"
+else:
+    DATE = datetime.now().strftime('%m-%d-%Y')
+    BASE_DIRECTORY = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
+    INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\" + DATE + "\\"
+    OUTPUT_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\"
+OUTPUT_EXCEL_FILENAME = OUTPUT_DATA_DIRECTORY + "~priceData.xlsx"
+
+etf_df = pd.DataFrame()
+read_and_combine_data_files(etf_df)
+#get_inflation_data()
+write_excel_file()
