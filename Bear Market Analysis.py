@@ -241,6 +241,5 @@ def matplotlib_graph_sqn_data(sqn_dataframe):
 price_data = read_data_from_csv()
 wb = Workbook()
 drawdown_analysis(price_data[['Date', 'SP500_Close']], wb)
-wb.save(OUTPUT_DIRECTORY + OUTPUT_EXCEL_FILENAME)
-#publishPriceTableToPlotly(priceData)
 sqn_analysis(price_data)
+wb.save(OUTPUT_DIRECTORY + OUTPUT_EXCEL_FILENAME)
