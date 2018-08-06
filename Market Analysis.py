@@ -41,8 +41,8 @@ if os.environ['COMPUTERNAME'] == 'SEA-1800100736':
     INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "data\\" + DATE + "\\"
     OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 elif os.environ['COMPUTERNAME'] == 'SHANE-TRADING-D':
-    DATE = '07-12-2018'
-    #DATE = datetime.now().strftime('%m-%d-%Y')
+    #DATE = '07-12-2018'
+    DATE = datetime.now().strftime('%m-%d-%Y')
     BASE_DIRECTORY = "D:\\Users\\Shane\\SkyDrive\\Documents\\Trading\\Research\\Data\\"
     INPUT_DATA_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\" + DATE + "\\"
     OUTPUT_DIRECTORY = BASE_DIRECTORY + "Market Analysis Data\\"
