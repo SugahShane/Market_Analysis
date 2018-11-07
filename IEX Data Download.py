@@ -2,9 +2,6 @@ from iexfinance import get_historical_data
 from datetime import datetime
 import pandas as pd
 import time
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
 
 
 START_DATE = datetime(2018, 1, 1)
@@ -16,14 +13,13 @@ INPUT_DATA_FILENAME = "TestData.csv"
 OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 OUTPUT_EXCEL_FILENAME = "Market Data.xlsx"
 
-
 def read_equity_list_from_csv():
     print("Reading data file: " + DATA_DIRECTORY + INPUT_DATA_FILENAME)
     df = pd.read_csv(DATA_DIRECTORY + INPUT_DATA_FILENAME)
     return df
 
 
-def get_equity_price_data_from_iex(instruments_df):
+def get_equity_price_data(instruments_df):
     instruments_price_data_df = pd.DataFrame()
     for row in instruments_df.itertuples():
         print("Processing: " + getattr(row, "Instrument"))
@@ -40,30 +36,10 @@ def get_equity_price_data_from_iex(instruments_df):
     return instruments_price_data_df
 
 
-def generate_dash_dashboard(instruments_df):
-    app = dash.Dash()
-    app.layout = html.Div(children=[
-        html.H1('Market Analysis Dashboard'),
-        dcc.Graph(
-            id='example',
-            figure={
-                'data': [
-                    {'x': instruments_df,
-                     'y': instruments_df,
-                     'type': 'line',
-                     'name': 'S&P500'
-                     }
-                ],
-                'layout': {'title': 'Basic Dash Example'}
-            }
-        )
-    ])
-
-    if __name__ == '__main__':
-        app.run_server(debug=True)
+def get_cryptocurrency_price_data():
+    print("Processing Cryptocurrencies")
 
 
 instruments_df = read_equity_list_from_csv()
-instruments_price_data_df = get_equity_price_data_from_iex(instruments_df)
-generate_dash_dashboard(instruments_df)
-
+instruments_price_data_df = get_equity_price_data(instruments_df)
+#print(instruments_price_data_df.head(20))
