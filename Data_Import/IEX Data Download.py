@@ -6,9 +6,10 @@ import time
 
 START_DATE = datetime(2018, 1, 1)
 END_DATE = datetime.now()
-BASE_DIRECTORY = "C:\\Users\\Shane\\Dropbox\\PyCharm Projects\\Market_Analysis\\"
+BASE_DIRECTORY = "D:\\Users\\Shane\\Dropbox\\PyCharm Projects\\Market_Analysis\\"
 DATA_DIRECTORY = BASE_DIRECTORY + "data\\"
-#INPUT_DATA_FILENAME = "DataInstruments.csv"
+#INPUT_DATA_FILENAME = "MarketDashboardInstruments.csv"
+#INPUT_DATA_FILENAME = "PortfolioInstruments.csv"
 INPUT_DATA_FILENAME = "TestData.csv"
 OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 OUTPUT_EXCEL_FILENAME = "Market Data.xlsx"
