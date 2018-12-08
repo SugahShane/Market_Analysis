@@ -60,7 +60,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 143);
+/******/ 	return __webpack_require__(__webpack_require__.s = 150);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -97,7 +97,7 @@ if (typeof Object.create === 'function') {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* eslint-disable node/no-deprecated-api */
-var buffer = __webpack_require__(2)
+var buffer = __webpack_require__(3)
 var Buffer = buffer.Buffer
 
 // alternative to using Object.keys for old browsers
@@ -165,6 +165,41 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(315));
+__export(__webpack_require__(316));
+__export(__webpack_require__(317));
+__export(__webpack_require__(318));
+__export(__webpack_require__(319));
+__export(__webpack_require__(18));
+__export(__webpack_require__(320));
+__export(__webpack_require__(321));
+__export(__webpack_require__(322));
+__export(__webpack_require__(323));
+__export(__webpack_require__(324));
+__export(__webpack_require__(325));
+__export(__webpack_require__(326));
+__export(__webpack_require__(327));
+__export(__webpack_require__(328));
+__export(__webpack_require__(329));
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
  * The buffer module from node.js, for the browser.
  *
@@ -175,9 +210,9 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 
 
 
-var base64 = __webpack_require__(86)
-var ieee754 = __webpack_require__(150)
-var isArray = __webpack_require__(151)
+var base64 = __webpack_require__(88)
+var ieee754 = __webpack_require__(157)
+var isArray = __webpack_require__(158)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1955,45 +1990,1710 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-__export(__webpack_require__(312));
-__export(__webpack_require__(313));
-__export(__webpack_require__(314));
-__export(__webpack_require__(315));
-__export(__webpack_require__(316));
-__export(__webpack_require__(18));
-__export(__webpack_require__(317));
-__export(__webpack_require__(318));
-__export(__webpack_require__(319));
-__export(__webpack_require__(320));
-__export(__webpack_require__(321));
-__export(__webpack_require__(322));
-__export(__webpack_require__(323));
-__export(__webpack_require__(324));
-__export(__webpack_require__(325));
-__export(__webpack_require__(326));
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.9.1
+//     http://underscorejs.org
+//     (c) 2009-2018 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+//     Underscore may be freely distributed under the MIT license.
+
+(function() {
+
+  // Baseline setup
+  // --------------
+
+  // Establish the root object, `window` (`self`) in the browser, `global`
+  // on the server, or `this` in some virtual machines. We use `self`
+  // instead of `window` for `WebWorker` support.
+  var root = typeof self == 'object' && self.self === self && self ||
+            typeof global == 'object' && global.global === global && global ||
+            this ||
+            {};
+
+  // Save the previous value of the `_` variable.
+  var previousUnderscore = root._;
+
+  // Save bytes in the minified (but not gzipped) version:
+  var ArrayProto = Array.prototype, ObjProto = Object.prototype;
+  var SymbolProto = typeof Symbol !== 'undefined' ? Symbol.prototype : null;
+
+  // Create quick reference variables for speed access to core prototypes.
+  var push = ArrayProto.push,
+      slice = ArrayProto.slice,
+      toString = ObjProto.toString,
+      hasOwnProperty = ObjProto.hasOwnProperty;
+
+  // All **ECMAScript 5** native function implementations that we hope to use
+  // are declared here.
+  var nativeIsArray = Array.isArray,
+      nativeKeys = Object.keys,
+      nativeCreate = Object.create;
+
+  // Naked function reference for surrogate-prototype-swapping.
+  var Ctor = function(){};
+
+  // Create a safe reference to the Underscore object for use below.
+  var _ = function(obj) {
+    if (obj instanceof _) return obj;
+    if (!(this instanceof _)) return new _(obj);
+    this._wrapped = obj;
+  };
+
+  // Export the Underscore object for **Node.js**, with
+  // backwards-compatibility for their old module API. If we're in
+  // the browser, add `_` as a global object.
+  // (`nodeType` is checked to ensure that `module`
+  // and `exports` are not HTML elements.)
+  if (typeof exports != 'undefined' && !exports.nodeType) {
+    if (typeof module != 'undefined' && !module.nodeType && module.exports) {
+      exports = module.exports = _;
+    }
+    exports._ = _;
+  } else {
+    root._ = _;
+  }
+
+  // Current version.
+  _.VERSION = '1.9.1';
+
+  // Internal function that returns an efficient (for current engines) version
+  // of the passed-in callback, to be repeatedly applied in other Underscore
+  // functions.
+  var optimizeCb = function(func, context, argCount) {
+    if (context === void 0) return func;
+    switch (argCount == null ? 3 : argCount) {
+      case 1: return function(value) {
+        return func.call(context, value);
+      };
+      // The 2-argument case is omitted because we’re not using it.
+      case 3: return function(value, index, collection) {
+        return func.call(context, value, index, collection);
+      };
+      case 4: return function(accumulator, value, index, collection) {
+        return func.call(context, accumulator, value, index, collection);
+      };
+    }
+    return function() {
+      return func.apply(context, arguments);
+    };
+  };
+
+  var builtinIteratee;
+
+  // An internal function to generate callbacks that can be applied to each
+  // element in a collection, returning the desired result — either `identity`,
+  // an arbitrary callback, a property matcher, or a property accessor.
+  var cb = function(value, context, argCount) {
+    if (_.iteratee !== builtinIteratee) return _.iteratee(value, context);
+    if (value == null) return _.identity;
+    if (_.isFunction(value)) return optimizeCb(value, context, argCount);
+    if (_.isObject(value) && !_.isArray(value)) return _.matcher(value);
+    return _.property(value);
+  };
+
+  // External wrapper for our callback generator. Users may customize
+  // `_.iteratee` if they want additional predicate/iteratee shorthand styles.
+  // This abstraction hides the internal-only argCount argument.
+  _.iteratee = builtinIteratee = function(value, context) {
+    return cb(value, context, Infinity);
+  };
+
+  // Some functions take a variable number of arguments, or a few expected
+  // arguments at the beginning and then a variable number of values to operate
+  // on. This helper accumulates all remaining arguments past the function’s
+  // argument length (or an explicit `startIndex`), into an array that becomes
+  // the last argument. Similar to ES6’s "rest parameter".
+  var restArguments = function(func, startIndex) {
+    startIndex = startIndex == null ? func.length - 1 : +startIndex;
+    return function() {
+      var length = Math.max(arguments.length - startIndex, 0),
+          rest = Array(length),
+          index = 0;
+      for (; index < length; index++) {
+        rest[index] = arguments[index + startIndex];
+      }
+      switch (startIndex) {
+        case 0: return func.call(this, rest);
+        case 1: return func.call(this, arguments[0], rest);
+        case 2: return func.call(this, arguments[0], arguments[1], rest);
+      }
+      var args = Array(startIndex + 1);
+      for (index = 0; index < startIndex; index++) {
+        args[index] = arguments[index];
+      }
+      args[startIndex] = rest;
+      return func.apply(this, args);
+    };
+  };
+
+  // An internal function for creating a new object that inherits from another.
+  var baseCreate = function(prototype) {
+    if (!_.isObject(prototype)) return {};
+    if (nativeCreate) return nativeCreate(prototype);
+    Ctor.prototype = prototype;
+    var result = new Ctor;
+    Ctor.prototype = null;
+    return result;
+  };
+
+  var shallowProperty = function(key) {
+    return function(obj) {
+      return obj == null ? void 0 : obj[key];
+    };
+  };
+
+  var has = function(obj, path) {
+    return obj != null && hasOwnProperty.call(obj, path);
+  }
+
+  var deepGet = function(obj, path) {
+    var length = path.length;
+    for (var i = 0; i < length; i++) {
+      if (obj == null) return void 0;
+      obj = obj[path[i]];
+    }
+    return length ? obj : void 0;
+  };
+
+  // Helper for collection methods to determine whether a collection
+  // should be iterated as an array or as an object.
+  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
+  // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
+  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+  var getLength = shallowProperty('length');
+  var isArrayLike = function(collection) {
+    var length = getLength(collection);
+    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
+  };
+
+  // Collection Functions
+  // --------------------
+
+  // The cornerstone, an `each` implementation, aka `forEach`.
+  // Handles raw objects in addition to array-likes. Treats all
+  // sparse array-likes as if they were dense.
+  _.each = _.forEach = function(obj, iteratee, context) {
+    iteratee = optimizeCb(iteratee, context);
+    var i, length;
+    if (isArrayLike(obj)) {
+      for (i = 0, length = obj.length; i < length; i++) {
+        iteratee(obj[i], i, obj);
+      }
+    } else {
+      var keys = _.keys(obj);
+      for (i = 0, length = keys.length; i < length; i++) {
+        iteratee(obj[keys[i]], keys[i], obj);
+      }
+    }
+    return obj;
+  };
+
+  // Return the results of applying the iteratee to each element.
+  _.map = _.collect = function(obj, iteratee, context) {
+    iteratee = cb(iteratee, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length,
+        results = Array(length);
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      results[index] = iteratee(obj[currentKey], currentKey, obj);
+    }
+    return results;
+  };
+
+  // Create a reducing function iterating left or right.
+  var createReduce = function(dir) {
+    // Wrap code that reassigns argument variables in a separate function than
+    // the one that accesses `arguments.length` to avoid a perf hit. (#1991)
+    var reducer = function(obj, iteratee, memo, initial) {
+      var keys = !isArrayLike(obj) && _.keys(obj),
+          length = (keys || obj).length,
+          index = dir > 0 ? 0 : length - 1;
+      if (!initial) {
+        memo = obj[keys ? keys[index] : index];
+        index += dir;
+      }
+      for (; index >= 0 && index < length; index += dir) {
+        var currentKey = keys ? keys[index] : index;
+        memo = iteratee(memo, obj[currentKey], currentKey, obj);
+      }
+      return memo;
+    };
+
+    return function(obj, iteratee, memo, context) {
+      var initial = arguments.length >= 3;
+      return reducer(obj, optimizeCb(iteratee, context, 4), memo, initial);
+    };
+  };
+
+  // **Reduce** builds up a single result from a list of values, aka `inject`,
+  // or `foldl`.
+  _.reduce = _.foldl = _.inject = createReduce(1);
+
+  // The right-associative version of reduce, also known as `foldr`.
+  _.reduceRight = _.foldr = createReduce(-1);
+
+  // Return the first value which passes a truth test. Aliased as `detect`.
+  _.find = _.detect = function(obj, predicate, context) {
+    var keyFinder = isArrayLike(obj) ? _.findIndex : _.findKey;
+    var key = keyFinder(obj, predicate, context);
+    if (key !== void 0 && key !== -1) return obj[key];
+  };
+
+  // Return all the elements that pass a truth test.
+  // Aliased as `select`.
+  _.filter = _.select = function(obj, predicate, context) {
+    var results = [];
+    predicate = cb(predicate, context);
+    _.each(obj, function(value, index, list) {
+      if (predicate(value, index, list)) results.push(value);
+    });
+    return results;
+  };
+
+  // Return all the elements for which a truth test fails.
+  _.reject = function(obj, predicate, context) {
+    return _.filter(obj, _.negate(cb(predicate)), context);
+  };
+
+  // Determine whether all of the elements match a truth test.
+  // Aliased as `all`.
+  _.every = _.all = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length;
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      if (!predicate(obj[currentKey], currentKey, obj)) return false;
+    }
+    return true;
+  };
+
+  // Determine if at least one element in the object matches a truth test.
+  // Aliased as `any`.
+  _.some = _.any = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = !isArrayLike(obj) && _.keys(obj),
+        length = (keys || obj).length;
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys ? keys[index] : index;
+      if (predicate(obj[currentKey], currentKey, obj)) return true;
+    }
+    return false;
+  };
+
+  // Determine if the array or object contains a given item (using `===`).
+  // Aliased as `includes` and `include`.
+  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
+    if (!isArrayLike(obj)) obj = _.values(obj);
+    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
+    return _.indexOf(obj, item, fromIndex) >= 0;
+  };
+
+  // Invoke a method (with arguments) on every item in a collection.
+  _.invoke = restArguments(function(obj, path, args) {
+    var contextPath, func;
+    if (_.isFunction(path)) {
+      func = path;
+    } else if (_.isArray(path)) {
+      contextPath = path.slice(0, -1);
+      path = path[path.length - 1];
+    }
+    return _.map(obj, function(context) {
+      var method = func;
+      if (!method) {
+        if (contextPath && contextPath.length) {
+          context = deepGet(context, contextPath);
+        }
+        if (context == null) return void 0;
+        method = context[path];
+      }
+      return method == null ? method : method.apply(context, args);
+    });
+  });
+
+  // Convenience version of a common use case of `map`: fetching a property.
+  _.pluck = function(obj, key) {
+    return _.map(obj, _.property(key));
+  };
+
+  // Convenience version of a common use case of `filter`: selecting only objects
+  // containing specific `key:value` pairs.
+  _.where = function(obj, attrs) {
+    return _.filter(obj, _.matcher(attrs));
+  };
+
+  // Convenience version of a common use case of `find`: getting the first object
+  // containing specific `key:value` pairs.
+  _.findWhere = function(obj, attrs) {
+    return _.find(obj, _.matcher(attrs));
+  };
+
+  // Return the maximum element (or element-based computation).
+  _.max = function(obj, iteratee, context) {
+    var result = -Infinity, lastComputed = -Infinity,
+        value, computed;
+    if (iteratee == null || typeof iteratee == 'number' && typeof obj[0] != 'object' && obj != null) {
+      obj = isArrayLike(obj) ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value != null && value > result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(v, index, list) {
+        computed = iteratee(v, index, list);
+        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
+          result = v;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Return the minimum element (or element-based computation).
+  _.min = function(obj, iteratee, context) {
+    var result = Infinity, lastComputed = Infinity,
+        value, computed;
+    if (iteratee == null || typeof iteratee == 'number' && typeof obj[0] != 'object' && obj != null) {
+      obj = isArrayLike(obj) ? obj : _.values(obj);
+      for (var i = 0, length = obj.length; i < length; i++) {
+        value = obj[i];
+        if (value != null && value < result) {
+          result = value;
+        }
+      }
+    } else {
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(v, index, list) {
+        computed = iteratee(v, index, list);
+        if (computed < lastComputed || computed === Infinity && result === Infinity) {
+          result = v;
+          lastComputed = computed;
+        }
+      });
+    }
+    return result;
+  };
+
+  // Shuffle a collection.
+  _.shuffle = function(obj) {
+    return _.sample(obj, Infinity);
+  };
+
+  // Sample **n** random values from a collection using the modern version of the
+  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  // If **n** is not specified, returns a single random element.
+  // The internal `guard` argument allows it to work with `map`.
+  _.sample = function(obj, n, guard) {
+    if (n == null || guard) {
+      if (!isArrayLike(obj)) obj = _.values(obj);
+      return obj[_.random(obj.length - 1)];
+    }
+    var sample = isArrayLike(obj) ? _.clone(obj) : _.values(obj);
+    var length = getLength(sample);
+    n = Math.max(Math.min(n, length), 0);
+    var last = length - 1;
+    for (var index = 0; index < n; index++) {
+      var rand = _.random(index, last);
+      var temp = sample[index];
+      sample[index] = sample[rand];
+      sample[rand] = temp;
+    }
+    return sample.slice(0, n);
+  };
+
+  // Sort the object's values by a criterion produced by an iteratee.
+  _.sortBy = function(obj, iteratee, context) {
+    var index = 0;
+    iteratee = cb(iteratee, context);
+    return _.pluck(_.map(obj, function(value, key, list) {
+      return {
+        value: value,
+        index: index++,
+        criteria: iteratee(value, key, list)
+      };
+    }).sort(function(left, right) {
+      var a = left.criteria;
+      var b = right.criteria;
+      if (a !== b) {
+        if (a > b || a === void 0) return 1;
+        if (a < b || b === void 0) return -1;
+      }
+      return left.index - right.index;
+    }), 'value');
+  };
+
+  // An internal function used for aggregate "group by" operations.
+  var group = function(behavior, partition) {
+    return function(obj, iteratee, context) {
+      var result = partition ? [[], []] : {};
+      iteratee = cb(iteratee, context);
+      _.each(obj, function(value, index) {
+        var key = iteratee(value, index, obj);
+        behavior(result, value, key);
+      });
+      return result;
+    };
+  };
+
+  // Groups the object's values by a criterion. Pass either a string attribute
+  // to group by, or a function that returns the criterion.
+  _.groupBy = group(function(result, value, key) {
+    if (has(result, key)) result[key].push(value); else result[key] = [value];
+  });
+
+  // Indexes the object's values by a criterion, similar to `groupBy`, but for
+  // when you know that your index values will be unique.
+  _.indexBy = group(function(result, value, key) {
+    result[key] = value;
+  });
+
+  // Counts instances of an object that group by a certain criterion. Pass
+  // either a string attribute to count by, or a function that returns the
+  // criterion.
+  _.countBy = group(function(result, value, key) {
+    if (has(result, key)) result[key]++; else result[key] = 1;
+  });
+
+  var reStrSymbol = /[^\ud800-\udfff]|[\ud800-\udbff][\udc00-\udfff]|[\ud800-\udfff]/g;
+  // Safely create a real, live array from anything iterable.
+  _.toArray = function(obj) {
+    if (!obj) return [];
+    if (_.isArray(obj)) return slice.call(obj);
+    if (_.isString(obj)) {
+      // Keep surrogate pair characters together
+      return obj.match(reStrSymbol);
+    }
+    if (isArrayLike(obj)) return _.map(obj, _.identity);
+    return _.values(obj);
+  };
+
+  // Return the number of elements in an object.
+  _.size = function(obj) {
+    if (obj == null) return 0;
+    return isArrayLike(obj) ? obj.length : _.keys(obj).length;
+  };
+
+  // Split a collection into two arrays: one whose elements all satisfy the given
+  // predicate, and one whose elements all do not satisfy the predicate.
+  _.partition = group(function(result, value, pass) {
+    result[pass ? 0 : 1].push(value);
+  }, true);
+
+  // Array Functions
+  // ---------------
+
+  // Get the first element of an array. Passing **n** will return the first N
+  // values in the array. Aliased as `head` and `take`. The **guard** check
+  // allows it to work with `_.map`.
+  _.first = _.head = _.take = function(array, n, guard) {
+    if (array == null || array.length < 1) return n == null ? void 0 : [];
+    if (n == null || guard) return array[0];
+    return _.initial(array, array.length - n);
+  };
+
+  // Returns everything but the last entry of the array. Especially useful on
+  // the arguments object. Passing **n** will return all the values in
+  // the array, excluding the last N.
+  _.initial = function(array, n, guard) {
+    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
+  };
+
+  // Get the last element of an array. Passing **n** will return the last N
+  // values in the array.
+  _.last = function(array, n, guard) {
+    if (array == null || array.length < 1) return n == null ? void 0 : [];
+    if (n == null || guard) return array[array.length - 1];
+    return _.rest(array, Math.max(0, array.length - n));
+  };
+
+  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
+  // Especially useful on the arguments object. Passing an **n** will return
+  // the rest N values in the array.
+  _.rest = _.tail = _.drop = function(array, n, guard) {
+    return slice.call(array, n == null || guard ? 1 : n);
+  };
+
+  // Trim out all falsy values from an array.
+  _.compact = function(array) {
+    return _.filter(array, Boolean);
+  };
+
+  // Internal implementation of a recursive `flatten` function.
+  var flatten = function(input, shallow, strict, output) {
+    output = output || [];
+    var idx = output.length;
+    for (var i = 0, length = getLength(input); i < length; i++) {
+      var value = input[i];
+      if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
+        // Flatten current level of array or arguments object.
+        if (shallow) {
+          var j = 0, len = value.length;
+          while (j < len) output[idx++] = value[j++];
+        } else {
+          flatten(value, shallow, strict, output);
+          idx = output.length;
+        }
+      } else if (!strict) {
+        output[idx++] = value;
+      }
+    }
+    return output;
+  };
+
+  // Flatten out an array, either recursively (by default), or just one level.
+  _.flatten = function(array, shallow) {
+    return flatten(array, shallow, false);
+  };
+
+  // Return a version of the array that does not contain the specified value(s).
+  _.without = restArguments(function(array, otherArrays) {
+    return _.difference(array, otherArrays);
+  });
+
+  // Produce a duplicate-free version of the array. If the array has already
+  // been sorted, you have the option of using a faster algorithm.
+  // The faster algorithm will not work with an iteratee if the iteratee
+  // is not a one-to-one function, so providing an iteratee will disable
+  // the faster algorithm.
+  // Aliased as `unique`.
+  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
+    if (!_.isBoolean(isSorted)) {
+      context = iteratee;
+      iteratee = isSorted;
+      isSorted = false;
+    }
+    if (iteratee != null) iteratee = cb(iteratee, context);
+    var result = [];
+    var seen = [];
+    for (var i = 0, length = getLength(array); i < length; i++) {
+      var value = array[i],
+          computed = iteratee ? iteratee(value, i, array) : value;
+      if (isSorted && !iteratee) {
+        if (!i || seen !== computed) result.push(value);
+        seen = computed;
+      } else if (iteratee) {
+        if (!_.contains(seen, computed)) {
+          seen.push(computed);
+          result.push(value);
+        }
+      } else if (!_.contains(result, value)) {
+        result.push(value);
+      }
+    }
+    return result;
+  };
+
+  // Produce an array that contains the union: each distinct element from all of
+  // the passed-in arrays.
+  _.union = restArguments(function(arrays) {
+    return _.uniq(flatten(arrays, true, true));
+  });
+
+  // Produce an array that contains every item shared between all the
+  // passed-in arrays.
+  _.intersection = function(array) {
+    var result = [];
+    var argsLength = arguments.length;
+    for (var i = 0, length = getLength(array); i < length; i++) {
+      var item = array[i];
+      if (_.contains(result, item)) continue;
+      var j;
+      for (j = 1; j < argsLength; j++) {
+        if (!_.contains(arguments[j], item)) break;
+      }
+      if (j === argsLength) result.push(item);
+    }
+    return result;
+  };
+
+  // Take the difference between one array and a number of other arrays.
+  // Only the elements present in just the first array will remain.
+  _.difference = restArguments(function(array, rest) {
+    rest = flatten(rest, true, true);
+    return _.filter(array, function(value){
+      return !_.contains(rest, value);
+    });
+  });
+
+  // Complement of _.zip. Unzip accepts an array of arrays and groups
+  // each array's elements on shared indices.
+  _.unzip = function(array) {
+    var length = array && _.max(array, getLength).length || 0;
+    var result = Array(length);
+
+    for (var index = 0; index < length; index++) {
+      result[index] = _.pluck(array, index);
+    }
+    return result;
+  };
+
+  // Zip together multiple lists into a single array -- elements that share
+  // an index go together.
+  _.zip = restArguments(_.unzip);
+
+  // Converts lists into objects. Pass either a single array of `[key, value]`
+  // pairs, or two parallel arrays of the same length -- one of keys, and one of
+  // the corresponding values. Passing by pairs is the reverse of _.pairs.
+  _.object = function(list, values) {
+    var result = {};
+    for (var i = 0, length = getLength(list); i < length; i++) {
+      if (values) {
+        result[list[i]] = values[i];
+      } else {
+        result[list[i][0]] = list[i][1];
+      }
+    }
+    return result;
+  };
+
+  // Generator function to create the findIndex and findLastIndex functions.
+  var createPredicateIndexFinder = function(dir) {
+    return function(array, predicate, context) {
+      predicate = cb(predicate, context);
+      var length = getLength(array);
+      var index = dir > 0 ? 0 : length - 1;
+      for (; index >= 0 && index < length; index += dir) {
+        if (predicate(array[index], index, array)) return index;
+      }
+      return -1;
+    };
+  };
+
+  // Returns the first index on an array-like that passes a predicate test.
+  _.findIndex = createPredicateIndexFinder(1);
+  _.findLastIndex = createPredicateIndexFinder(-1);
+
+  // Use a comparator function to figure out the smallest index at which
+  // an object should be inserted so as to maintain order. Uses binary search.
+  _.sortedIndex = function(array, obj, iteratee, context) {
+    iteratee = cb(iteratee, context, 1);
+    var value = iteratee(obj);
+    var low = 0, high = getLength(array);
+    while (low < high) {
+      var mid = Math.floor((low + high) / 2);
+      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
+    }
+    return low;
+  };
+
+  // Generator function to create the indexOf and lastIndexOf functions.
+  var createIndexFinder = function(dir, predicateFind, sortedIndex) {
+    return function(array, item, idx) {
+      var i = 0, length = getLength(array);
+      if (typeof idx == 'number') {
+        if (dir > 0) {
+          i = idx >= 0 ? idx : Math.max(idx + length, i);
+        } else {
+          length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
+        }
+      } else if (sortedIndex && idx && length) {
+        idx = sortedIndex(array, item);
+        return array[idx] === item ? idx : -1;
+      }
+      if (item !== item) {
+        idx = predicateFind(slice.call(array, i, length), _.isNaN);
+        return idx >= 0 ? idx + i : -1;
+      }
+      for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
+        if (array[idx] === item) return idx;
+      }
+      return -1;
+    };
+  };
+
+  // Return the position of the first occurrence of an item in an array,
+  // or -1 if the item is not included in the array.
+  // If the array is large and already in sort order, pass `true`
+  // for **isSorted** to use binary search.
+  _.indexOf = createIndexFinder(1, _.findIndex, _.sortedIndex);
+  _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
+
+  // Generate an integer Array containing an arithmetic progression. A port of
+  // the native Python `range()` function. See
+  // [the Python documentation](http://docs.python.org/library/functions.html#range).
+  _.range = function(start, stop, step) {
+    if (stop == null) {
+      stop = start || 0;
+      start = 0;
+    }
+    if (!step) {
+      step = stop < start ? -1 : 1;
+    }
+
+    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var range = Array(length);
+
+    for (var idx = 0; idx < length; idx++, start += step) {
+      range[idx] = start;
+    }
+
+    return range;
+  };
+
+  // Chunk a single array into multiple arrays, each containing `count` or fewer
+  // items.
+  _.chunk = function(array, count) {
+    if (count == null || count < 1) return [];
+    var result = [];
+    var i = 0, length = array.length;
+    while (i < length) {
+      result.push(slice.call(array, i, i += count));
+    }
+    return result;
+  };
+
+  // Function (ahem) Functions
+  // ------------------
+
+  // Determines whether to execute a function as a constructor
+  // or a normal function with the provided arguments.
+  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
+    if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
+    var self = baseCreate(sourceFunc.prototype);
+    var result = sourceFunc.apply(self, args);
+    if (_.isObject(result)) return result;
+    return self;
+  };
+
+  // Create a function bound to a given object (assigning `this`, and arguments,
+  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
+  // available.
+  _.bind = restArguments(function(func, context, args) {
+    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
+    var bound = restArguments(function(callArgs) {
+      return executeBound(func, bound, context, this, args.concat(callArgs));
+    });
+    return bound;
+  });
+
+  // Partially apply a function by creating a version that has had some of its
+  // arguments pre-filled, without changing its dynamic `this` context. _ acts
+  // as a placeholder by default, allowing any combination of arguments to be
+  // pre-filled. Set `_.partial.placeholder` for a custom placeholder argument.
+  _.partial = restArguments(function(func, boundArgs) {
+    var placeholder = _.partial.placeholder;
+    var bound = function() {
+      var position = 0, length = boundArgs.length;
+      var args = Array(length);
+      for (var i = 0; i < length; i++) {
+        args[i] = boundArgs[i] === placeholder ? arguments[position++] : boundArgs[i];
+      }
+      while (position < arguments.length) args.push(arguments[position++]);
+      return executeBound(func, bound, this, this, args);
+    };
+    return bound;
+  });
+
+  _.partial.placeholder = _;
+
+  // Bind a number of an object's methods to that object. Remaining arguments
+  // are the method names to be bound. Useful for ensuring that all callbacks
+  // defined on an object belong to it.
+  _.bindAll = restArguments(function(obj, keys) {
+    keys = flatten(keys, false, false);
+    var index = keys.length;
+    if (index < 1) throw new Error('bindAll must be passed function names');
+    while (index--) {
+      var key = keys[index];
+      obj[key] = _.bind(obj[key], obj);
+    }
+  });
+
+  // Memoize an expensive function by storing its results.
+  _.memoize = function(func, hasher) {
+    var memoize = function(key) {
+      var cache = memoize.cache;
+      var address = '' + (hasher ? hasher.apply(this, arguments) : key);
+      if (!has(cache, address)) cache[address] = func.apply(this, arguments);
+      return cache[address];
+    };
+    memoize.cache = {};
+    return memoize;
+  };
+
+  // Delays a function for the given number of milliseconds, and then calls
+  // it with the arguments supplied.
+  _.delay = restArguments(function(func, wait, args) {
+    return setTimeout(function() {
+      return func.apply(null, args);
+    }, wait);
+  });
+
+  // Defers a function, scheduling it to run after the current call stack has
+  // cleared.
+  _.defer = _.partial(_.delay, _, 1);
+
+  // Returns a function, that, when invoked, will only be triggered at most once
+  // during a given window of time. Normally, the throttled function will run
+  // as much as it can, without ever going more than once per `wait` duration;
+  // but if you'd like to disable the execution on the leading edge, pass
+  // `{leading: false}`. To disable execution on the trailing edge, ditto.
+  _.throttle = function(func, wait, options) {
+    var timeout, context, args, result;
+    var previous = 0;
+    if (!options) options = {};
+
+    var later = function() {
+      previous = options.leading === false ? 0 : _.now();
+      timeout = null;
+      result = func.apply(context, args);
+      if (!timeout) context = args = null;
+    };
+
+    var throttled = function() {
+      var now = _.now();
+      if (!previous && options.leading === false) previous = now;
+      var remaining = wait - (now - previous);
+      context = this;
+      args = arguments;
+      if (remaining <= 0 || remaining > wait) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        previous = now;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      } else if (!timeout && options.trailing !== false) {
+        timeout = setTimeout(later, remaining);
+      }
+      return result;
+    };
+
+    throttled.cancel = function() {
+      clearTimeout(timeout);
+      previous = 0;
+      timeout = context = args = null;
+    };
+
+    return throttled;
+  };
+
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
+  _.debounce = function(func, wait, immediate) {
+    var timeout, result;
+
+    var later = function(context, args) {
+      timeout = null;
+      if (args) result = func.apply(context, args);
+    };
+
+    var debounced = restArguments(function(args) {
+      if (timeout) clearTimeout(timeout);
+      if (immediate) {
+        var callNow = !timeout;
+        timeout = setTimeout(later, wait);
+        if (callNow) result = func.apply(this, args);
+      } else {
+        timeout = _.delay(later, wait, this, args);
+      }
+
+      return result;
+    });
+
+    debounced.cancel = function() {
+      clearTimeout(timeout);
+      timeout = null;
+    };
+
+    return debounced;
+  };
+
+  // Returns the first function passed as an argument to the second,
+  // allowing you to adjust arguments, run code before and after, and
+  // conditionally execute the original function.
+  _.wrap = function(func, wrapper) {
+    return _.partial(wrapper, func);
+  };
+
+  // Returns a negated version of the passed-in predicate.
+  _.negate = function(predicate) {
+    return function() {
+      return !predicate.apply(this, arguments);
+    };
+  };
+
+  // Returns a function that is the composition of a list of functions, each
+  // consuming the return value of the function that follows.
+  _.compose = function() {
+    var args = arguments;
+    var start = args.length - 1;
+    return function() {
+      var i = start;
+      var result = args[start].apply(this, arguments);
+      while (i--) result = args[i].call(this, result);
+      return result;
+    };
+  };
+
+  // Returns a function that will only be executed on and after the Nth call.
+  _.after = function(times, func) {
+    return function() {
+      if (--times < 1) {
+        return func.apply(this, arguments);
+      }
+    };
+  };
+
+  // Returns a function that will only be executed up to (but not including) the Nth call.
+  _.before = function(times, func) {
+    var memo;
+    return function() {
+      if (--times > 0) {
+        memo = func.apply(this, arguments);
+      }
+      if (times <= 1) func = null;
+      return memo;
+    };
+  };
+
+  // Returns a function that will be executed at most one time, no matter how
+  // often you call it. Useful for lazy initialization.
+  _.once = _.partial(_.before, 2);
+
+  _.restArguments = restArguments;
+
+  // Object Functions
+  // ----------------
+
+  // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
+  var hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
+  var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
+    'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
+
+  var collectNonEnumProps = function(obj, keys) {
+    var nonEnumIdx = nonEnumerableProps.length;
+    var constructor = obj.constructor;
+    var proto = _.isFunction(constructor) && constructor.prototype || ObjProto;
+
+    // Constructor is a special case.
+    var prop = 'constructor';
+    if (has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
+
+    while (nonEnumIdx--) {
+      prop = nonEnumerableProps[nonEnumIdx];
+      if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
+        keys.push(prop);
+      }
+    }
+  };
+
+  // Retrieve the names of an object's own properties.
+  // Delegates to **ECMAScript 5**'s native `Object.keys`.
+  _.keys = function(obj) {
+    if (!_.isObject(obj)) return [];
+    if (nativeKeys) return nativeKeys(obj);
+    var keys = [];
+    for (var key in obj) if (has(obj, key)) keys.push(key);
+    // Ahem, IE < 9.
+    if (hasEnumBug) collectNonEnumProps(obj, keys);
+    return keys;
+  };
+
+  // Retrieve all the property names of an object.
+  _.allKeys = function(obj) {
+    if (!_.isObject(obj)) return [];
+    var keys = [];
+    for (var key in obj) keys.push(key);
+    // Ahem, IE < 9.
+    if (hasEnumBug) collectNonEnumProps(obj, keys);
+    return keys;
+  };
+
+  // Retrieve the values of an object's properties.
+  _.values = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var values = Array(length);
+    for (var i = 0; i < length; i++) {
+      values[i] = obj[keys[i]];
+    }
+    return values;
+  };
+
+  // Returns the results of applying the iteratee to each element of the object.
+  // In contrast to _.map it returns an object.
+  _.mapObject = function(obj, iteratee, context) {
+    iteratee = cb(iteratee, context);
+    var keys = _.keys(obj),
+        length = keys.length,
+        results = {};
+    for (var index = 0; index < length; index++) {
+      var currentKey = keys[index];
+      results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
+    }
+    return results;
+  };
+
+  // Convert an object into a list of `[key, value]` pairs.
+  // The opposite of _.object.
+  _.pairs = function(obj) {
+    var keys = _.keys(obj);
+    var length = keys.length;
+    var pairs = Array(length);
+    for (var i = 0; i < length; i++) {
+      pairs[i] = [keys[i], obj[keys[i]]];
+    }
+    return pairs;
+  };
+
+  // Invert the keys and values of an object. The values must be serializable.
+  _.invert = function(obj) {
+    var result = {};
+    var keys = _.keys(obj);
+    for (var i = 0, length = keys.length; i < length; i++) {
+      result[obj[keys[i]]] = keys[i];
+    }
+    return result;
+  };
+
+  // Return a sorted list of the function names available on the object.
+  // Aliased as `methods`.
+  _.functions = _.methods = function(obj) {
+    var names = [];
+    for (var key in obj) {
+      if (_.isFunction(obj[key])) names.push(key);
+    }
+    return names.sort();
+  };
+
+  // An internal function for creating assigner functions.
+  var createAssigner = function(keysFunc, defaults) {
+    return function(obj) {
+      var length = arguments.length;
+      if (defaults) obj = Object(obj);
+      if (length < 2 || obj == null) return obj;
+      for (var index = 1; index < length; index++) {
+        var source = arguments[index],
+            keys = keysFunc(source),
+            l = keys.length;
+        for (var i = 0; i < l; i++) {
+          var key = keys[i];
+          if (!defaults || obj[key] === void 0) obj[key] = source[key];
+        }
+      }
+      return obj;
+    };
+  };
+
+  // Extend a given object with all the properties in passed-in object(s).
+  _.extend = createAssigner(_.allKeys);
+
+  // Assigns a given object with all the own properties in the passed-in object(s).
+  // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+  _.extendOwn = _.assign = createAssigner(_.keys);
+
+  // Returns the first key on an object that passes a predicate test.
+  _.findKey = function(obj, predicate, context) {
+    predicate = cb(predicate, context);
+    var keys = _.keys(obj), key;
+    for (var i = 0, length = keys.length; i < length; i++) {
+      key = keys[i];
+      if (predicate(obj[key], key, obj)) return key;
+    }
+  };
+
+  // Internal pick helper function to determine if `obj` has key `key`.
+  var keyInObj = function(value, key, obj) {
+    return key in obj;
+  };
+
+  // Return a copy of the object only containing the whitelisted properties.
+  _.pick = restArguments(function(obj, keys) {
+    var result = {}, iteratee = keys[0];
+    if (obj == null) return result;
+    if (_.isFunction(iteratee)) {
+      if (keys.length > 1) iteratee = optimizeCb(iteratee, keys[1]);
+      keys = _.allKeys(obj);
+    } else {
+      iteratee = keyInObj;
+      keys = flatten(keys, false, false);
+      obj = Object(obj);
+    }
+    for (var i = 0, length = keys.length; i < length; i++) {
+      var key = keys[i];
+      var value = obj[key];
+      if (iteratee(value, key, obj)) result[key] = value;
+    }
+    return result;
+  });
+
+  // Return a copy of the object without the blacklisted properties.
+  _.omit = restArguments(function(obj, keys) {
+    var iteratee = keys[0], context;
+    if (_.isFunction(iteratee)) {
+      iteratee = _.negate(iteratee);
+      if (keys.length > 1) context = keys[1];
+    } else {
+      keys = _.map(flatten(keys, false, false), String);
+      iteratee = function(value, key) {
+        return !_.contains(keys, key);
+      };
+    }
+    return _.pick(obj, iteratee, context);
+  });
+
+  // Fill in a given object with default properties.
+  _.defaults = createAssigner(_.allKeys, true);
+
+  // Creates an object that inherits from the given prototype object.
+  // If additional properties are provided then they will be added to the
+  // created object.
+  _.create = function(prototype, props) {
+    var result = baseCreate(prototype);
+    if (props) _.extendOwn(result, props);
+    return result;
+  };
+
+  // Create a (shallow-cloned) duplicate of an object.
+  _.clone = function(obj) {
+    if (!_.isObject(obj)) return obj;
+    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
+  };
+
+  // Invokes interceptor with the obj, and then returns obj.
+  // The primary purpose of this method is to "tap into" a method chain, in
+  // order to perform operations on intermediate results within the chain.
+  _.tap = function(obj, interceptor) {
+    interceptor(obj);
+    return obj;
+  };
+
+  // Returns whether an object has a given set of `key:value` pairs.
+  _.isMatch = function(object, attrs) {
+    var keys = _.keys(attrs), length = keys.length;
+    if (object == null) return !length;
+    var obj = Object(object);
+    for (var i = 0; i < length; i++) {
+      var key = keys[i];
+      if (attrs[key] !== obj[key] || !(key in obj)) return false;
+    }
+    return true;
+  };
+
+
+  // Internal recursive comparison function for `isEqual`.
+  var eq, deepEq;
+  eq = function(a, b, aStack, bStack) {
+    // Identical objects are equal. `0 === -0`, but they aren't identical.
+    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    // `null` or `undefined` only equal to itself (strict comparison).
+    if (a == null || b == null) return false;
+    // `NaN`s are equivalent, but non-reflexive.
+    if (a !== a) return b !== b;
+    // Exhaust primitive checks
+    var type = typeof a;
+    if (type !== 'function' && type !== 'object' && typeof b != 'object') return false;
+    return deepEq(a, b, aStack, bStack);
+  };
+
+  // Internal recursive comparison function for `isEqual`.
+  deepEq = function(a, b, aStack, bStack) {
+    // Unwrap any wrapped objects.
+    if (a instanceof _) a = a._wrapped;
+    if (b instanceof _) b = b._wrapped;
+    // Compare `[[Class]]` names.
+    var className = toString.call(a);
+    if (className !== toString.call(b)) return false;
+    switch (className) {
+      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
+      case '[object RegExp]':
+      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
+      case '[object String]':
+        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+        // equivalent to `new String("5")`.
+        return '' + a === '' + b;
+      case '[object Number]':
+        // `NaN`s are equivalent, but non-reflexive.
+        // Object(NaN) is equivalent to NaN.
+        if (+a !== +a) return +b !== +b;
+        // An `egal` comparison is performed for other numeric values.
+        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
+      case '[object Date]':
+      case '[object Boolean]':
+        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
+        // millisecond representations. Note that invalid dates with millisecond representations
+        // of `NaN` are not equivalent.
+        return +a === +b;
+      case '[object Symbol]':
+        return SymbolProto.valueOf.call(a) === SymbolProto.valueOf.call(b);
+    }
+
+    var areArrays = className === '[object Array]';
+    if (!areArrays) {
+      if (typeof a != 'object' || typeof b != 'object') return false;
+
+      // Objects with different constructors are not equivalent, but `Object`s or `Array`s
+      // from different frames are.
+      var aCtor = a.constructor, bCtor = b.constructor;
+      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
+                               _.isFunction(bCtor) && bCtor instanceof bCtor)
+                          && ('constructor' in a && 'constructor' in b)) {
+        return false;
+      }
+    }
+    // Assume equality for cyclic structures. The algorithm for detecting cyclic
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+
+    // Initializing stack of traversed objects.
+    // It's done here since we only need them for objects and arrays comparison.
+    aStack = aStack || [];
+    bStack = bStack || [];
+    var length = aStack.length;
+    while (length--) {
+      // Linear search. Performance is inversely proportional to the number of
+      // unique nested structures.
+      if (aStack[length] === a) return bStack[length] === b;
+    }
+
+    // Add the first object to the stack of traversed objects.
+    aStack.push(a);
+    bStack.push(b);
+
+    // Recursively compare objects and arrays.
+    if (areArrays) {
+      // Compare array lengths to determine if a deep comparison is necessary.
+      length = a.length;
+      if (length !== b.length) return false;
+      // Deep compare the contents, ignoring non-numeric properties.
+      while (length--) {
+        if (!eq(a[length], b[length], aStack, bStack)) return false;
+      }
+    } else {
+      // Deep compare objects.
+      var keys = _.keys(a), key;
+      length = keys.length;
+      // Ensure that both objects contain the same number of properties before comparing deep equality.
+      if (_.keys(b).length !== length) return false;
+      while (length--) {
+        // Deep compare each member
+        key = keys[length];
+        if (!(has(b, key) && eq(a[key], b[key], aStack, bStack))) return false;
+      }
+    }
+    // Remove the first object from the stack of traversed objects.
+    aStack.pop();
+    bStack.pop();
+    return true;
+  };
+
+  // Perform a deep comparison to check if two objects are equal.
+  _.isEqual = function(a, b) {
+    return eq(a, b);
+  };
+
+  // Is a given array, string, or object empty?
+  // An "empty" object has no enumerable own-properties.
+  _.isEmpty = function(obj) {
+    if (obj == null) return true;
+    if (isArrayLike(obj) && (_.isArray(obj) || _.isString(obj) || _.isArguments(obj))) return obj.length === 0;
+    return _.keys(obj).length === 0;
+  };
+
+  // Is a given value a DOM element?
+  _.isElement = function(obj) {
+    return !!(obj && obj.nodeType === 1);
+  };
+
+  // Is a given value an array?
+  // Delegates to ECMA5's native Array.isArray
+  _.isArray = nativeIsArray || function(obj) {
+    return toString.call(obj) === '[object Array]';
+  };
+
+  // Is a given variable an object?
+  _.isObject = function(obj) {
+    var type = typeof obj;
+    return type === 'function' || type === 'object' && !!obj;
+  };
+
+  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError, isMap, isWeakMap, isSet, isWeakSet.
+  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error', 'Symbol', 'Map', 'WeakMap', 'Set', 'WeakSet'], function(name) {
+    _['is' + name] = function(obj) {
+      return toString.call(obj) === '[object ' + name + ']';
+    };
+  });
+
+  // Define a fallback version of the method in browsers (ahem, IE < 9), where
+  // there isn't any inspectable "Arguments" type.
+  if (!_.isArguments(arguments)) {
+    _.isArguments = function(obj) {
+      return has(obj, 'callee');
+    };
+  }
+
+  // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
+  // IE 11 (#1621), Safari 8 (#1929), and PhantomJS (#2236).
+  var nodelist = root.document && root.document.childNodes;
+  if (typeof /./ != 'function' && typeof Int8Array != 'object' && typeof nodelist != 'function') {
+    _.isFunction = function(obj) {
+      return typeof obj == 'function' || false;
+    };
+  }
+
+  // Is a given object a finite number?
+  _.isFinite = function(obj) {
+    return !_.isSymbol(obj) && isFinite(obj) && !isNaN(parseFloat(obj));
+  };
+
+  // Is the given value `NaN`?
+  _.isNaN = function(obj) {
+    return _.isNumber(obj) && isNaN(obj);
+  };
+
+  // Is a given value a boolean?
+  _.isBoolean = function(obj) {
+    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
+  };
+
+  // Is a given value equal to null?
+  _.isNull = function(obj) {
+    return obj === null;
+  };
+
+  // Is a given variable undefined?
+  _.isUndefined = function(obj) {
+    return obj === void 0;
+  };
+
+  // Shortcut function for checking if an object has a given property directly
+  // on itself (in other words, not on a prototype).
+  _.has = function(obj, path) {
+    if (!_.isArray(path)) {
+      return has(obj, path);
+    }
+    var length = path.length;
+    for (var i = 0; i < length; i++) {
+      var key = path[i];
+      if (obj == null || !hasOwnProperty.call(obj, key)) {
+        return false;
+      }
+      obj = obj[key];
+    }
+    return !!length;
+  };
+
+  // Utility Functions
+  // -----------------
+
+  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
+  // previous owner. Returns a reference to the Underscore object.
+  _.noConflict = function() {
+    root._ = previousUnderscore;
+    return this;
+  };
+
+  // Keep the identity function around for default iteratees.
+  _.identity = function(value) {
+    return value;
+  };
+
+  // Predicate-generating functions. Often useful outside of Underscore.
+  _.constant = function(value) {
+    return function() {
+      return value;
+    };
+  };
+
+  _.noop = function(){};
+
+  // Creates a function that, when passed an object, will traverse that object’s
+  // properties down the given `path`, specified as an array of keys or indexes.
+  _.property = function(path) {
+    if (!_.isArray(path)) {
+      return shallowProperty(path);
+    }
+    return function(obj) {
+      return deepGet(obj, path);
+    };
+  };
+
+  // Generates a function for a given object that returns a given property.
+  _.propertyOf = function(obj) {
+    if (obj == null) {
+      return function(){};
+    }
+    return function(path) {
+      return !_.isArray(path) ? obj[path] : deepGet(obj, path);
+    };
+  };
+
+  // Returns a predicate for checking whether an object has a given set of
+  // `key:value` pairs.
+  _.matcher = _.matches = function(attrs) {
+    attrs = _.extendOwn({}, attrs);
+    return function(obj) {
+      return _.isMatch(obj, attrs);
+    };
+  };
+
+  // Run a function **n** times.
+  _.times = function(n, iteratee, context) {
+    var accum = Array(Math.max(0, n));
+    iteratee = optimizeCb(iteratee, context, 1);
+    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
+    return accum;
+  };
+
+  // Return a random integer between min and max (inclusive).
+  _.random = function(min, max) {
+    if (max == null) {
+      max = min;
+      min = 0;
+    }
+    return min + Math.floor(Math.random() * (max - min + 1));
+  };
+
+  // A (possibly faster) way to get the current timestamp as an integer.
+  _.now = Date.now || function() {
+    return new Date().getTime();
+  };
+
+  // List of HTML entities for escaping.
+  var escapeMap = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '`': '&#x60;'
+  };
+  var unescapeMap = _.invert(escapeMap);
+
+  // Functions for escaping and unescaping strings to/from HTML interpolation.
+  var createEscaper = function(map) {
+    var escaper = function(match) {
+      return map[match];
+    };
+    // Regexes for identifying a key that needs to be escaped.
+    var source = '(?:' + _.keys(map).join('|') + ')';
+    var testRegexp = RegExp(source);
+    var replaceRegexp = RegExp(source, 'g');
+    return function(string) {
+      string = string == null ? '' : '' + string;
+      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
+    };
+  };
+  _.escape = createEscaper(escapeMap);
+  _.unescape = createEscaper(unescapeMap);
+
+  // Traverses the children of `obj` along `path`. If a child is a function, it
+  // is invoked with its parent as context. Returns the value of the final
+  // child, or `fallback` if any child is undefined.
+  _.result = function(obj, path, fallback) {
+    if (!_.isArray(path)) path = [path];
+    var length = path.length;
+    if (!length) {
+      return _.isFunction(fallback) ? fallback.call(obj) : fallback;
+    }
+    for (var i = 0; i < length; i++) {
+      var prop = obj == null ? void 0 : obj[path[i]];
+      if (prop === void 0) {
+        prop = fallback;
+        i = length; // Ensure we don't continue iterating.
+      }
+      obj = _.isFunction(prop) ? prop.call(obj) : prop;
+    }
+    return obj;
+  };
+
+  // Generate a unique integer id (unique within the entire client session).
+  // Useful for temporary DOM ids.
+  var idCounter = 0;
+  _.uniqueId = function(prefix) {
+    var id = ++idCounter + '';
+    return prefix ? prefix + id : id;
+  };
+
+  // By default, Underscore uses ERB-style template delimiters, change the
+  // following template settings to use alternative delimiters.
+  _.templateSettings = {
+    evaluate: /<%([\s\S]+?)%>/g,
+    interpolate: /<%=([\s\S]+?)%>/g,
+    escape: /<%-([\s\S]+?)%>/g
+  };
+
+  // When customizing `templateSettings`, if you don't want to define an
+  // interpolation, evaluation or escaping regex, we need one that is
+  // guaranteed not to match.
+  var noMatch = /(.)^/;
+
+  // Certain characters need to be escaped so that they can be put into a
+  // string literal.
+  var escapes = {
+    "'": "'",
+    '\\': '\\',
+    '\r': 'r',
+    '\n': 'n',
+    '\u2028': 'u2028',
+    '\u2029': 'u2029'
+  };
+
+  var escapeRegExp = /\\|'|\r|\n|\u2028|\u2029/g;
+
+  var escapeChar = function(match) {
+    return '\\' + escapes[match];
+  };
+
+  // JavaScript micro-templating, similar to John Resig's implementation.
+  // Underscore templating handles arbitrary delimiters, preserves whitespace,
+  // and correctly escapes quotes within interpolated code.
+  // NB: `oldSettings` only exists for backwards compatibility.
+  _.template = function(text, settings, oldSettings) {
+    if (!settings && oldSettings) settings = oldSettings;
+    settings = _.defaults({}, settings, _.templateSettings);
+
+    // Combine delimiters into one regular expression via alternation.
+    var matcher = RegExp([
+      (settings.escape || noMatch).source,
+      (settings.interpolate || noMatch).source,
+      (settings.evaluate || noMatch).source
+    ].join('|') + '|$', 'g');
+
+    // Compile the template source, escaping string literals appropriately.
+    var index = 0;
+    var source = "__p+='";
+    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
+      source += text.slice(index, offset).replace(escapeRegExp, escapeChar);
+      index = offset + match.length;
+
+      if (escape) {
+        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
+      } else if (interpolate) {
+        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
+      } else if (evaluate) {
+        source += "';\n" + evaluate + "\n__p+='";
+      }
+
+      // Adobe VMs need the match returned to produce the correct offset.
+      return match;
+    });
+    source += "';\n";
+
+    // If a variable is not specified, place data values in local scope.
+    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
+
+    source = "var __t,__p='',__j=Array.prototype.join," +
+      "print=function(){__p+=__j.call(arguments,'');};\n" +
+      source + 'return __p;\n';
+
+    var render;
+    try {
+      render = new Function(settings.variable || 'obj', '_', source);
+    } catch (e) {
+      e.source = source;
+      throw e;
+    }
+
+    var template = function(data) {
+      return render.call(this, data, _);
+    };
+
+    // Provide the compiled source as a convenience for precompilation.
+    var argument = settings.variable || 'obj';
+    template.source = 'function(' + argument + '){\n' + source + '}';
+
+    return template;
+  };
+
+  // Add a "chain" function. Start chaining a wrapped Underscore object.
+  _.chain = function(obj) {
+    var instance = _(obj);
+    instance._chain = true;
+    return instance;
+  };
+
+  // OOP
+  // ---------------
+  // If Underscore is called as a function, it returns a wrapped object that
+  // can be used OO-style. This wrapper holds altered versions of all the
+  // underscore functions. Wrapped objects may be chained.
+
+  // Helper function to continue chaining intermediate results.
+  var chainResult = function(instance, obj) {
+    return instance._chain ? _(obj).chain() : obj;
+  };
+
+  // Add your own custom functions to the Underscore object.
+  _.mixin = function(obj) {
+    _.each(_.functions(obj), function(name) {
+      var func = _[name] = obj[name];
+      _.prototype[name] = function() {
+        var args = [this._wrapped];
+        push.apply(args, arguments);
+        return chainResult(this, func.apply(_, args));
+      };
+    });
+    return _;
+  };
+
+  // Add all of the Underscore functions to the wrapper object.
+  _.mixin(_);
+
+  // Add all mutator Array functions to the wrapper.
+  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      var obj = this._wrapped;
+      method.apply(obj, arguments);
+      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
+      return chainResult(this, obj);
+    };
+  });
+
+  // Add all accessor Array functions to the wrapper.
+  _.each(['concat', 'join', 'slice'], function(name) {
+    var method = ArrayProto[name];
+    _.prototype[name] = function() {
+      return chainResult(this, method.apply(this._wrapped, arguments));
+    };
+  });
+
+  // Extracts the result from a wrapped and chained object.
+  _.prototype.value = function() {
+    return this._wrapped;
+  };
+
+  // Provide unwrapping proxy for some methods used in engine operations
+  // such as arithmetic and JSON stringification.
+  _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
+
+  _.prototype.toString = function() {
+    return String(this._wrapped);
+  };
+
+  // AMD registration happens at the end for compatibility with AMD loaders
+  // that may not enforce next-turn semantics on modules. Even though general
+  // practice for AMD registration is to be anonymous, underscore registers
+  // as a named module because, like jQuery, it is a base library that is
+  // popular enough to be bundled in a third party lib, but not be part of
+  // an AMD load request. Those cases could generate an error when an
+  // anonymous define() is called outside of a loader request.
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+      return _;
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  }
+}());
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(43)(module)))
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {(function (module, exports) {
@@ -2048,7 +3748,7 @@ __export(__webpack_require__(326));
 
   var Buffer;
   try {
-    Buffer = __webpack_require__(192).Buffer;
+    Buffer = __webpack_require__(195).Buffer;
   } catch (e) {
   }
 
@@ -5424,1562 +7124,7 @@ __export(__webpack_require__(326));
   };
 })(typeof module === 'undefined' || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(71)(module)))
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
-//     http://underscorejs.org
-//     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
-
-(function() {
-
-  // Baseline setup
-  // --------------
-
-  // Establish the root object, `window` in the browser, or `exports` on the server.
-  var root = this;
-
-  // Save the previous value of the `_` variable.
-  var previousUnderscore = root._;
-
-  // Save bytes in the minified (but not gzipped) version:
-  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-
-  // Create quick reference variables for speed access to core prototypes.
-  var
-    push             = ArrayProto.push,
-    slice            = ArrayProto.slice,
-    toString         = ObjProto.toString,
-    hasOwnProperty   = ObjProto.hasOwnProperty;
-
-  // All **ECMAScript 5** native function implementations that we hope to use
-  // are declared here.
-  var
-    nativeIsArray      = Array.isArray,
-    nativeKeys         = Object.keys,
-    nativeBind         = FuncProto.bind,
-    nativeCreate       = Object.create;
-
-  // Naked function reference for surrogate-prototype-swapping.
-  var Ctor = function(){};
-
-  // Create a safe reference to the Underscore object for use below.
-  var _ = function(obj) {
-    if (obj instanceof _) return obj;
-    if (!(this instanceof _)) return new _(obj);
-    this._wrapped = obj;
-  };
-
-  // Export the Underscore object for **Node.js**, with
-  // backwards-compatibility for the old `require()` API. If we're in
-  // the browser, add `_` as a global object.
-  if (true) {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = _;
-    }
-    exports._ = _;
-  } else {
-    root._ = _;
-  }
-
-  // Current version.
-  _.VERSION = '1.8.3';
-
-  // Internal function that returns an efficient (for current engines) version
-  // of the passed-in callback, to be repeatedly applied in other Underscore
-  // functions.
-  var optimizeCb = function(func, context, argCount) {
-    if (context === void 0) return func;
-    switch (argCount == null ? 3 : argCount) {
-      case 1: return function(value) {
-        return func.call(context, value);
-      };
-      case 2: return function(value, other) {
-        return func.call(context, value, other);
-      };
-      case 3: return function(value, index, collection) {
-        return func.call(context, value, index, collection);
-      };
-      case 4: return function(accumulator, value, index, collection) {
-        return func.call(context, accumulator, value, index, collection);
-      };
-    }
-    return function() {
-      return func.apply(context, arguments);
-    };
-  };
-
-  // A mostly-internal function to generate callbacks that can be applied
-  // to each element in a collection, returning the desired result — either
-  // identity, an arbitrary callback, a property matcher, or a property accessor.
-  var cb = function(value, context, argCount) {
-    if (value == null) return _.identity;
-    if (_.isFunction(value)) return optimizeCb(value, context, argCount);
-    if (_.isObject(value)) return _.matcher(value);
-    return _.property(value);
-  };
-  _.iteratee = function(value, context) {
-    return cb(value, context, Infinity);
-  };
-
-  // An internal function for creating assigner functions.
-  var createAssigner = function(keysFunc, undefinedOnly) {
-    return function(obj) {
-      var length = arguments.length;
-      if (length < 2 || obj == null) return obj;
-      for (var index = 1; index < length; index++) {
-        var source = arguments[index],
-            keys = keysFunc(source),
-            l = keys.length;
-        for (var i = 0; i < l; i++) {
-          var key = keys[i];
-          if (!undefinedOnly || obj[key] === void 0) obj[key] = source[key];
-        }
-      }
-      return obj;
-    };
-  };
-
-  // An internal function for creating a new object that inherits from another.
-  var baseCreate = function(prototype) {
-    if (!_.isObject(prototype)) return {};
-    if (nativeCreate) return nativeCreate(prototype);
-    Ctor.prototype = prototype;
-    var result = new Ctor;
-    Ctor.prototype = null;
-    return result;
-  };
-
-  var property = function(key) {
-    return function(obj) {
-      return obj == null ? void 0 : obj[key];
-    };
-  };
-
-  // Helper for collection methods to determine whether a collection
-  // should be iterated as an array or as an object
-  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
-  // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
-  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
-  var getLength = property('length');
-  var isArrayLike = function(collection) {
-    var length = getLength(collection);
-    return typeof length == 'number' && length >= 0 && length <= MAX_ARRAY_INDEX;
-  };
-
-  // Collection Functions
-  // --------------------
-
-  // The cornerstone, an `each` implementation, aka `forEach`.
-  // Handles raw objects in addition to array-likes. Treats all
-  // sparse array-likes as if they were dense.
-  _.each = _.forEach = function(obj, iteratee, context) {
-    iteratee = optimizeCb(iteratee, context);
-    var i, length;
-    if (isArrayLike(obj)) {
-      for (i = 0, length = obj.length; i < length; i++) {
-        iteratee(obj[i], i, obj);
-      }
-    } else {
-      var keys = _.keys(obj);
-      for (i = 0, length = keys.length; i < length; i++) {
-        iteratee(obj[keys[i]], keys[i], obj);
-      }
-    }
-    return obj;
-  };
-
-  // Return the results of applying the iteratee to each element.
-  _.map = _.collect = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length,
-        results = Array(length);
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      results[index] = iteratee(obj[currentKey], currentKey, obj);
-    }
-    return results;
-  };
-
-  // Create a reducing function iterating left or right.
-  function createReduce(dir) {
-    // Optimized iterator function as using arguments.length
-    // in the main function will deoptimize the, see #1991.
-    function iterator(obj, iteratee, memo, keys, index, length) {
-      for (; index >= 0 && index < length; index += dir) {
-        var currentKey = keys ? keys[index] : index;
-        memo = iteratee(memo, obj[currentKey], currentKey, obj);
-      }
-      return memo;
-    }
-
-    return function(obj, iteratee, memo, context) {
-      iteratee = optimizeCb(iteratee, context, 4);
-      var keys = !isArrayLike(obj) && _.keys(obj),
-          length = (keys || obj).length,
-          index = dir > 0 ? 0 : length - 1;
-      // Determine the initial value if none is provided.
-      if (arguments.length < 3) {
-        memo = obj[keys ? keys[index] : index];
-        index += dir;
-      }
-      return iterator(obj, iteratee, memo, keys, index, length);
-    };
-  }
-
-  // **Reduce** builds up a single result from a list of values, aka `inject`,
-  // or `foldl`.
-  _.reduce = _.foldl = _.inject = createReduce(1);
-
-  // The right-associative version of reduce, also known as `foldr`.
-  _.reduceRight = _.foldr = createReduce(-1);
-
-  // Return the first value which passes a truth test. Aliased as `detect`.
-  _.find = _.detect = function(obj, predicate, context) {
-    var key;
-    if (isArrayLike(obj)) {
-      key = _.findIndex(obj, predicate, context);
-    } else {
-      key = _.findKey(obj, predicate, context);
-    }
-    if (key !== void 0 && key !== -1) return obj[key];
-  };
-
-  // Return all the elements that pass a truth test.
-  // Aliased as `select`.
-  _.filter = _.select = function(obj, predicate, context) {
-    var results = [];
-    predicate = cb(predicate, context);
-    _.each(obj, function(value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
-    });
-    return results;
-  };
-
-  // Return all the elements for which a truth test fails.
-  _.reject = function(obj, predicate, context) {
-    return _.filter(obj, _.negate(cb(predicate)), context);
-  };
-
-  // Determine whether all of the elements match a truth test.
-  // Aliased as `all`.
-  _.every = _.all = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length;
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      if (!predicate(obj[currentKey], currentKey, obj)) return false;
-    }
-    return true;
-  };
-
-  // Determine if at least one element in the object matches a truth test.
-  // Aliased as `any`.
-  _.some = _.any = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = !isArrayLike(obj) && _.keys(obj),
-        length = (keys || obj).length;
-    for (var index = 0; index < length; index++) {
-      var currentKey = keys ? keys[index] : index;
-      if (predicate(obj[currentKey], currentKey, obj)) return true;
-    }
-    return false;
-  };
-
-  // Determine if the array or object contains a given item (using `===`).
-  // Aliased as `includes` and `include`.
-  _.contains = _.includes = _.include = function(obj, item, fromIndex, guard) {
-    if (!isArrayLike(obj)) obj = _.values(obj);
-    if (typeof fromIndex != 'number' || guard) fromIndex = 0;
-    return _.indexOf(obj, item, fromIndex) >= 0;
-  };
-
-  // Invoke a method (with arguments) on every item in a collection.
-  _.invoke = function(obj, method) {
-    var args = slice.call(arguments, 2);
-    var isFunc = _.isFunction(method);
-    return _.map(obj, function(value) {
-      var func = isFunc ? method : value[method];
-      return func == null ? func : func.apply(value, args);
-    });
-  };
-
-  // Convenience version of a common use case of `map`: fetching a property.
-  _.pluck = function(obj, key) {
-    return _.map(obj, _.property(key));
-  };
-
-  // Convenience version of a common use case of `filter`: selecting only objects
-  // containing specific `key:value` pairs.
-  _.where = function(obj, attrs) {
-    return _.filter(obj, _.matcher(attrs));
-  };
-
-  // Convenience version of a common use case of `find`: getting the first object
-  // containing specific `key:value` pairs.
-  _.findWhere = function(obj, attrs) {
-    return _.find(obj, _.matcher(attrs));
-  };
-
-  // Return the maximum element (or element-based computation).
-  _.max = function(obj, iteratee, context) {
-    var result = -Infinity, lastComputed = -Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value > result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed > lastComputed || computed === -Infinity && result === -Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Return the minimum element (or element-based computation).
-  _.min = function(obj, iteratee, context) {
-    var result = Infinity, lastComputed = Infinity,
-        value, computed;
-    if (iteratee == null && obj != null) {
-      obj = isArrayLike(obj) ? obj : _.values(obj);
-      for (var i = 0, length = obj.length; i < length; i++) {
-        value = obj[i];
-        if (value < result) {
-          result = value;
-        }
-      }
-    } else {
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index, list) {
-        computed = iteratee(value, index, list);
-        if (computed < lastComputed || computed === Infinity && result === Infinity) {
-          result = value;
-          lastComputed = computed;
-        }
-      });
-    }
-    return result;
-  };
-
-  // Shuffle a collection, using the modern version of the
-  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
-  _.shuffle = function(obj) {
-    var set = isArrayLike(obj) ? obj : _.values(obj);
-    var length = set.length;
-    var shuffled = Array(length);
-    for (var index = 0, rand; index < length; index++) {
-      rand = _.random(0, index);
-      if (rand !== index) shuffled[index] = shuffled[rand];
-      shuffled[rand] = set[index];
-    }
-    return shuffled;
-  };
-
-  // Sample **n** random values from a collection.
-  // If **n** is not specified, returns a single random element.
-  // The internal `guard` argument allows it to work with `map`.
-  _.sample = function(obj, n, guard) {
-    if (n == null || guard) {
-      if (!isArrayLike(obj)) obj = _.values(obj);
-      return obj[_.random(obj.length - 1)];
-    }
-    return _.shuffle(obj).slice(0, Math.max(0, n));
-  };
-
-  // Sort the object's values by a criterion produced by an iteratee.
-  _.sortBy = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    return _.pluck(_.map(obj, function(value, index, list) {
-      return {
-        value: value,
-        index: index,
-        criteria: iteratee(value, index, list)
-      };
-    }).sort(function(left, right) {
-      var a = left.criteria;
-      var b = right.criteria;
-      if (a !== b) {
-        if (a > b || a === void 0) return 1;
-        if (a < b || b === void 0) return -1;
-      }
-      return left.index - right.index;
-    }), 'value');
-  };
-
-  // An internal function used for aggregate "group by" operations.
-  var group = function(behavior) {
-    return function(obj, iteratee, context) {
-      var result = {};
-      iteratee = cb(iteratee, context);
-      _.each(obj, function(value, index) {
-        var key = iteratee(value, index, obj);
-        behavior(result, value, key);
-      });
-      return result;
-    };
-  };
-
-  // Groups the object's values by a criterion. Pass either a string attribute
-  // to group by, or a function that returns the criterion.
-  _.groupBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key].push(value); else result[key] = [value];
-  });
-
-  // Indexes the object's values by a criterion, similar to `groupBy`, but for
-  // when you know that your index values will be unique.
-  _.indexBy = group(function(result, value, key) {
-    result[key] = value;
-  });
-
-  // Counts instances of an object that group by a certain criterion. Pass
-  // either a string attribute to count by, or a function that returns the
-  // criterion.
-  _.countBy = group(function(result, value, key) {
-    if (_.has(result, key)) result[key]++; else result[key] = 1;
-  });
-
-  // Safely create a real, live array from anything iterable.
-  _.toArray = function(obj) {
-    if (!obj) return [];
-    if (_.isArray(obj)) return slice.call(obj);
-    if (isArrayLike(obj)) return _.map(obj, _.identity);
-    return _.values(obj);
-  };
-
-  // Return the number of elements in an object.
-  _.size = function(obj) {
-    if (obj == null) return 0;
-    return isArrayLike(obj) ? obj.length : _.keys(obj).length;
-  };
-
-  // Split a collection into two arrays: one whose elements all satisfy the given
-  // predicate, and one whose elements all do not satisfy the predicate.
-  _.partition = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var pass = [], fail = [];
-    _.each(obj, function(value, key, obj) {
-      (predicate(value, key, obj) ? pass : fail).push(value);
-    });
-    return [pass, fail];
-  };
-
-  // Array Functions
-  // ---------------
-
-  // Get the first element of an array. Passing **n** will return the first N
-  // values in the array. Aliased as `head` and `take`. The **guard** check
-  // allows it to work with `_.map`.
-  _.first = _.head = _.take = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[0];
-    return _.initial(array, array.length - n);
-  };
-
-  // Returns everything but the last entry of the array. Especially useful on
-  // the arguments object. Passing **n** will return all the values in
-  // the array, excluding the last N.
-  _.initial = function(array, n, guard) {
-    return slice.call(array, 0, Math.max(0, array.length - (n == null || guard ? 1 : n)));
-  };
-
-  // Get the last element of an array. Passing **n** will return the last N
-  // values in the array.
-  _.last = function(array, n, guard) {
-    if (array == null) return void 0;
-    if (n == null || guard) return array[array.length - 1];
-    return _.rest(array, Math.max(0, array.length - n));
-  };
-
-  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-  // Especially useful on the arguments object. Passing an **n** will return
-  // the rest N values in the array.
-  _.rest = _.tail = _.drop = function(array, n, guard) {
-    return slice.call(array, n == null || guard ? 1 : n);
-  };
-
-  // Trim out all falsy values from an array.
-  _.compact = function(array) {
-    return _.filter(array, _.identity);
-  };
-
-  // Internal implementation of a recursive `flatten` function.
-  var flatten = function(input, shallow, strict, startIndex) {
-    var output = [], idx = 0;
-    for (var i = startIndex || 0, length = getLength(input); i < length; i++) {
-      var value = input[i];
-      if (isArrayLike(value) && (_.isArray(value) || _.isArguments(value))) {
-        //flatten current level of array or arguments object
-        if (!shallow) value = flatten(value, shallow, strict);
-        var j = 0, len = value.length;
-        output.length += len;
-        while (j < len) {
-          output[idx++] = value[j++];
-        }
-      } else if (!strict) {
-        output[idx++] = value;
-      }
-    }
-    return output;
-  };
-
-  // Flatten out an array, either recursively (by default), or just one level.
-  _.flatten = function(array, shallow) {
-    return flatten(array, shallow, false);
-  };
-
-  // Return a version of the array that does not contain the specified value(s).
-  _.without = function(array) {
-    return _.difference(array, slice.call(arguments, 1));
-  };
-
-  // Produce a duplicate-free version of the array. If the array has already
-  // been sorted, you have the option of using a faster algorithm.
-  // Aliased as `unique`.
-  _.uniq = _.unique = function(array, isSorted, iteratee, context) {
-    if (!_.isBoolean(isSorted)) {
-      context = iteratee;
-      iteratee = isSorted;
-      isSorted = false;
-    }
-    if (iteratee != null) iteratee = cb(iteratee, context);
-    var result = [];
-    var seen = [];
-    for (var i = 0, length = getLength(array); i < length; i++) {
-      var value = array[i],
-          computed = iteratee ? iteratee(value, i, array) : value;
-      if (isSorted) {
-        if (!i || seen !== computed) result.push(value);
-        seen = computed;
-      } else if (iteratee) {
-        if (!_.contains(seen, computed)) {
-          seen.push(computed);
-          result.push(value);
-        }
-      } else if (!_.contains(result, value)) {
-        result.push(value);
-      }
-    }
-    return result;
-  };
-
-  // Produce an array that contains the union: each distinct element from all of
-  // the passed-in arrays.
-  _.union = function() {
-    return _.uniq(flatten(arguments, true, true));
-  };
-
-  // Produce an array that contains every item shared between all the
-  // passed-in arrays.
-  _.intersection = function(array) {
-    var result = [];
-    var argsLength = arguments.length;
-    for (var i = 0, length = getLength(array); i < length; i++) {
-      var item = array[i];
-      if (_.contains(result, item)) continue;
-      for (var j = 1; j < argsLength; j++) {
-        if (!_.contains(arguments[j], item)) break;
-      }
-      if (j === argsLength) result.push(item);
-    }
-    return result;
-  };
-
-  // Take the difference between one array and a number of other arrays.
-  // Only the elements present in just the first array will remain.
-  _.difference = function(array) {
-    var rest = flatten(arguments, true, true, 1);
-    return _.filter(array, function(value){
-      return !_.contains(rest, value);
-    });
-  };
-
-  // Zip together multiple lists into a single array -- elements that share
-  // an index go together.
-  _.zip = function() {
-    return _.unzip(arguments);
-  };
-
-  // Complement of _.zip. Unzip accepts an array of arrays and groups
-  // each array's elements on shared indices
-  _.unzip = function(array) {
-    var length = array && _.max(array, getLength).length || 0;
-    var result = Array(length);
-
-    for (var index = 0; index < length; index++) {
-      result[index] = _.pluck(array, index);
-    }
-    return result;
-  };
-
-  // Converts lists into objects. Pass either a single array of `[key, value]`
-  // pairs, or two parallel arrays of the same length -- one of keys, and one of
-  // the corresponding values.
-  _.object = function(list, values) {
-    var result = {};
-    for (var i = 0, length = getLength(list); i < length; i++) {
-      if (values) {
-        result[list[i]] = values[i];
-      } else {
-        result[list[i][0]] = list[i][1];
-      }
-    }
-    return result;
-  };
-
-  // Generator function to create the findIndex and findLastIndex functions
-  function createPredicateIndexFinder(dir) {
-    return function(array, predicate, context) {
-      predicate = cb(predicate, context);
-      var length = getLength(array);
-      var index = dir > 0 ? 0 : length - 1;
-      for (; index >= 0 && index < length; index += dir) {
-        if (predicate(array[index], index, array)) return index;
-      }
-      return -1;
-    };
-  }
-
-  // Returns the first index on an array-like that passes a predicate test
-  _.findIndex = createPredicateIndexFinder(1);
-  _.findLastIndex = createPredicateIndexFinder(-1);
-
-  // Use a comparator function to figure out the smallest index at which
-  // an object should be inserted so as to maintain order. Uses binary search.
-  _.sortedIndex = function(array, obj, iteratee, context) {
-    iteratee = cb(iteratee, context, 1);
-    var value = iteratee(obj);
-    var low = 0, high = getLength(array);
-    while (low < high) {
-      var mid = Math.floor((low + high) / 2);
-      if (iteratee(array[mid]) < value) low = mid + 1; else high = mid;
-    }
-    return low;
-  };
-
-  // Generator function to create the indexOf and lastIndexOf functions
-  function createIndexFinder(dir, predicateFind, sortedIndex) {
-    return function(array, item, idx) {
-      var i = 0, length = getLength(array);
-      if (typeof idx == 'number') {
-        if (dir > 0) {
-            i = idx >= 0 ? idx : Math.max(idx + length, i);
-        } else {
-            length = idx >= 0 ? Math.min(idx + 1, length) : idx + length + 1;
-        }
-      } else if (sortedIndex && idx && length) {
-        idx = sortedIndex(array, item);
-        return array[idx] === item ? idx : -1;
-      }
-      if (item !== item) {
-        idx = predicateFind(slice.call(array, i, length), _.isNaN);
-        return idx >= 0 ? idx + i : -1;
-      }
-      for (idx = dir > 0 ? i : length - 1; idx >= 0 && idx < length; idx += dir) {
-        if (array[idx] === item) return idx;
-      }
-      return -1;
-    };
-  }
-
-  // Return the position of the first occurrence of an item in an array,
-  // or -1 if the item is not included in the array.
-  // If the array is large and already in sort order, pass `true`
-  // for **isSorted** to use binary search.
-  _.indexOf = createIndexFinder(1, _.findIndex, _.sortedIndex);
-  _.lastIndexOf = createIndexFinder(-1, _.findLastIndex);
-
-  // Generate an integer Array containing an arithmetic progression. A port of
-  // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-  _.range = function(start, stop, step) {
-    if (stop == null) {
-      stop = start || 0;
-      start = 0;
-    }
-    step = step || 1;
-
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
-    var range = Array(length);
-
-    for (var idx = 0; idx < length; idx++, start += step) {
-      range[idx] = start;
-    }
-
-    return range;
-  };
-
-  // Function (ahem) Functions
-  // ------------------
-
-  // Determines whether to execute a function as a constructor
-  // or a normal function with the provided arguments
-  var executeBound = function(sourceFunc, boundFunc, context, callingContext, args) {
-    if (!(callingContext instanceof boundFunc)) return sourceFunc.apply(context, args);
-    var self = baseCreate(sourceFunc.prototype);
-    var result = sourceFunc.apply(self, args);
-    if (_.isObject(result)) return result;
-    return self;
-  };
-
-  // Create a function bound to a given object (assigning `this`, and arguments,
-  // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
-  // available.
-  _.bind = function(func, context) {
-    if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-    if (!_.isFunction(func)) throw new TypeError('Bind must be called on a function');
-    var args = slice.call(arguments, 2);
-    var bound = function() {
-      return executeBound(func, bound, context, this, args.concat(slice.call(arguments)));
-    };
-    return bound;
-  };
-
-  // Partially apply a function by creating a version that has had some of its
-  // arguments pre-filled, without changing its dynamic `this` context. _ acts
-  // as a placeholder, allowing any combination of arguments to be pre-filled.
-  _.partial = function(func) {
-    var boundArgs = slice.call(arguments, 1);
-    var bound = function() {
-      var position = 0, length = boundArgs.length;
-      var args = Array(length);
-      for (var i = 0; i < length; i++) {
-        args[i] = boundArgs[i] === _ ? arguments[position++] : boundArgs[i];
-      }
-      while (position < arguments.length) args.push(arguments[position++]);
-      return executeBound(func, bound, this, this, args);
-    };
-    return bound;
-  };
-
-  // Bind a number of an object's methods to that object. Remaining arguments
-  // are the method names to be bound. Useful for ensuring that all callbacks
-  // defined on an object belong to it.
-  _.bindAll = function(obj) {
-    var i, length = arguments.length, key;
-    if (length <= 1) throw new Error('bindAll must be passed function names');
-    for (i = 1; i < length; i++) {
-      key = arguments[i];
-      obj[key] = _.bind(obj[key], obj);
-    }
-    return obj;
-  };
-
-  // Memoize an expensive function by storing its results.
-  _.memoize = function(func, hasher) {
-    var memoize = function(key) {
-      var cache = memoize.cache;
-      var address = '' + (hasher ? hasher.apply(this, arguments) : key);
-      if (!_.has(cache, address)) cache[address] = func.apply(this, arguments);
-      return cache[address];
-    };
-    memoize.cache = {};
-    return memoize;
-  };
-
-  // Delays a function for the given number of milliseconds, and then calls
-  // it with the arguments supplied.
-  _.delay = function(func, wait) {
-    var args = slice.call(arguments, 2);
-    return setTimeout(function(){
-      return func.apply(null, args);
-    }, wait);
-  };
-
-  // Defers a function, scheduling it to run after the current call stack has
-  // cleared.
-  _.defer = _.partial(_.delay, _, 1);
-
-  // Returns a function, that, when invoked, will only be triggered at most once
-  // during a given window of time. Normally, the throttled function will run
-  // as much as it can, without ever going more than once per `wait` duration;
-  // but if you'd like to disable the execution on the leading edge, pass
-  // `{leading: false}`. To disable execution on the trailing edge, ditto.
-  _.throttle = function(func, wait, options) {
-    var context, args, result;
-    var timeout = null;
-    var previous = 0;
-    if (!options) options = {};
-    var later = function() {
-      previous = options.leading === false ? 0 : _.now();
-      timeout = null;
-      result = func.apply(context, args);
-      if (!timeout) context = args = null;
-    };
-    return function() {
-      var now = _.now();
-      if (!previous && options.leading === false) previous = now;
-      var remaining = wait - (now - previous);
-      context = this;
-      args = arguments;
-      if (remaining <= 0 || remaining > wait) {
-        if (timeout) {
-          clearTimeout(timeout);
-          timeout = null;
-        }
-        previous = now;
-        result = func.apply(context, args);
-        if (!timeout) context = args = null;
-      } else if (!timeout && options.trailing !== false) {
-        timeout = setTimeout(later, remaining);
-      }
-      return result;
-    };
-  };
-
-  // Returns a function, that, as long as it continues to be invoked, will not
-  // be triggered. The function will be called after it stops being called for
-  // N milliseconds. If `immediate` is passed, trigger the function on the
-  // leading edge, instead of the trailing.
-  _.debounce = function(func, wait, immediate) {
-    var timeout, args, context, timestamp, result;
-
-    var later = function() {
-      var last = _.now() - timestamp;
-
-      if (last < wait && last >= 0) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        if (!immediate) {
-          result = func.apply(context, args);
-          if (!timeout) context = args = null;
-        }
-      }
-    };
-
-    return function() {
-      context = this;
-      args = arguments;
-      timestamp = _.now();
-      var callNow = immediate && !timeout;
-      if (!timeout) timeout = setTimeout(later, wait);
-      if (callNow) {
-        result = func.apply(context, args);
-        context = args = null;
-      }
-
-      return result;
-    };
-  };
-
-  // Returns the first function passed as an argument to the second,
-  // allowing you to adjust arguments, run code before and after, and
-  // conditionally execute the original function.
-  _.wrap = function(func, wrapper) {
-    return _.partial(wrapper, func);
-  };
-
-  // Returns a negated version of the passed-in predicate.
-  _.negate = function(predicate) {
-    return function() {
-      return !predicate.apply(this, arguments);
-    };
-  };
-
-  // Returns a function that is the composition of a list of functions, each
-  // consuming the return value of the function that follows.
-  _.compose = function() {
-    var args = arguments;
-    var start = args.length - 1;
-    return function() {
-      var i = start;
-      var result = args[start].apply(this, arguments);
-      while (i--) result = args[i].call(this, result);
-      return result;
-    };
-  };
-
-  // Returns a function that will only be executed on and after the Nth call.
-  _.after = function(times, func) {
-    return function() {
-      if (--times < 1) {
-        return func.apply(this, arguments);
-      }
-    };
-  };
-
-  // Returns a function that will only be executed up to (but not including) the Nth call.
-  _.before = function(times, func) {
-    var memo;
-    return function() {
-      if (--times > 0) {
-        memo = func.apply(this, arguments);
-      }
-      if (times <= 1) func = null;
-      return memo;
-    };
-  };
-
-  // Returns a function that will be executed at most one time, no matter how
-  // often you call it. Useful for lazy initialization.
-  _.once = _.partial(_.before, 2);
-
-  // Object Functions
-  // ----------------
-
-  // Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
-  var hasEnumBug = !{toString: null}.propertyIsEnumerable('toString');
-  var nonEnumerableProps = ['valueOf', 'isPrototypeOf', 'toString',
-                      'propertyIsEnumerable', 'hasOwnProperty', 'toLocaleString'];
-
-  function collectNonEnumProps(obj, keys) {
-    var nonEnumIdx = nonEnumerableProps.length;
-    var constructor = obj.constructor;
-    var proto = (_.isFunction(constructor) && constructor.prototype) || ObjProto;
-
-    // Constructor is a special case.
-    var prop = 'constructor';
-    if (_.has(obj, prop) && !_.contains(keys, prop)) keys.push(prop);
-
-    while (nonEnumIdx--) {
-      prop = nonEnumerableProps[nonEnumIdx];
-      if (prop in obj && obj[prop] !== proto[prop] && !_.contains(keys, prop)) {
-        keys.push(prop);
-      }
-    }
-  }
-
-  // Retrieve the names of an object's own properties.
-  // Delegates to **ECMAScript 5**'s native `Object.keys`
-  _.keys = function(obj) {
-    if (!_.isObject(obj)) return [];
-    if (nativeKeys) return nativeKeys(obj);
-    var keys = [];
-    for (var key in obj) if (_.has(obj, key)) keys.push(key);
-    // Ahem, IE < 9.
-    if (hasEnumBug) collectNonEnumProps(obj, keys);
-    return keys;
-  };
-
-  // Retrieve all the property names of an object.
-  _.allKeys = function(obj) {
-    if (!_.isObject(obj)) return [];
-    var keys = [];
-    for (var key in obj) keys.push(key);
-    // Ahem, IE < 9.
-    if (hasEnumBug) collectNonEnumProps(obj, keys);
-    return keys;
-  };
-
-  // Retrieve the values of an object's properties.
-  _.values = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var values = Array(length);
-    for (var i = 0; i < length; i++) {
-      values[i] = obj[keys[i]];
-    }
-    return values;
-  };
-
-  // Returns the results of applying the iteratee to each element of the object
-  // In contrast to _.map it returns an object
-  _.mapObject = function(obj, iteratee, context) {
-    iteratee = cb(iteratee, context);
-    var keys =  _.keys(obj),
-          length = keys.length,
-          results = {},
-          currentKey;
-      for (var index = 0; index < length; index++) {
-        currentKey = keys[index];
-        results[currentKey] = iteratee(obj[currentKey], currentKey, obj);
-      }
-      return results;
-  };
-
-  // Convert an object into a list of `[key, value]` pairs.
-  _.pairs = function(obj) {
-    var keys = _.keys(obj);
-    var length = keys.length;
-    var pairs = Array(length);
-    for (var i = 0; i < length; i++) {
-      pairs[i] = [keys[i], obj[keys[i]]];
-    }
-    return pairs;
-  };
-
-  // Invert the keys and values of an object. The values must be serializable.
-  _.invert = function(obj) {
-    var result = {};
-    var keys = _.keys(obj);
-    for (var i = 0, length = keys.length; i < length; i++) {
-      result[obj[keys[i]]] = keys[i];
-    }
-    return result;
-  };
-
-  // Return a sorted list of the function names available on the object.
-  // Aliased as `methods`
-  _.functions = _.methods = function(obj) {
-    var names = [];
-    for (var key in obj) {
-      if (_.isFunction(obj[key])) names.push(key);
-    }
-    return names.sort();
-  };
-
-  // Extend a given object with all the properties in passed-in object(s).
-  _.extend = createAssigner(_.allKeys);
-
-  // Assigns a given object with all the own properties in the passed-in object(s)
-  // (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-  _.extendOwn = _.assign = createAssigner(_.keys);
-
-  // Returns the first key on an object that passes a predicate test
-  _.findKey = function(obj, predicate, context) {
-    predicate = cb(predicate, context);
-    var keys = _.keys(obj), key;
-    for (var i = 0, length = keys.length; i < length; i++) {
-      key = keys[i];
-      if (predicate(obj[key], key, obj)) return key;
-    }
-  };
-
-  // Return a copy of the object only containing the whitelisted properties.
-  _.pick = function(object, oiteratee, context) {
-    var result = {}, obj = object, iteratee, keys;
-    if (obj == null) return result;
-    if (_.isFunction(oiteratee)) {
-      keys = _.allKeys(obj);
-      iteratee = optimizeCb(oiteratee, context);
-    } else {
-      keys = flatten(arguments, false, false, 1);
-      iteratee = function(value, key, obj) { return key in obj; };
-      obj = Object(obj);
-    }
-    for (var i = 0, length = keys.length; i < length; i++) {
-      var key = keys[i];
-      var value = obj[key];
-      if (iteratee(value, key, obj)) result[key] = value;
-    }
-    return result;
-  };
-
-   // Return a copy of the object without the blacklisted properties.
-  _.omit = function(obj, iteratee, context) {
-    if (_.isFunction(iteratee)) {
-      iteratee = _.negate(iteratee);
-    } else {
-      var keys = _.map(flatten(arguments, false, false, 1), String);
-      iteratee = function(value, key) {
-        return !_.contains(keys, key);
-      };
-    }
-    return _.pick(obj, iteratee, context);
-  };
-
-  // Fill in a given object with default properties.
-  _.defaults = createAssigner(_.allKeys, true);
-
-  // Creates an object that inherits from the given prototype object.
-  // If additional properties are provided then they will be added to the
-  // created object.
-  _.create = function(prototype, props) {
-    var result = baseCreate(prototype);
-    if (props) _.extendOwn(result, props);
-    return result;
-  };
-
-  // Create a (shallow-cloned) duplicate of an object.
-  _.clone = function(obj) {
-    if (!_.isObject(obj)) return obj;
-    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-  };
-
-  // Invokes interceptor with the obj, and then returns obj.
-  // The primary purpose of this method is to "tap into" a method chain, in
-  // order to perform operations on intermediate results within the chain.
-  _.tap = function(obj, interceptor) {
-    interceptor(obj);
-    return obj;
-  };
-
-  // Returns whether an object has a given set of `key:value` pairs.
-  _.isMatch = function(object, attrs) {
-    var keys = _.keys(attrs), length = keys.length;
-    if (object == null) return !length;
-    var obj = Object(object);
-    for (var i = 0; i < length; i++) {
-      var key = keys[i];
-      if (attrs[key] !== obj[key] || !(key in obj)) return false;
-    }
-    return true;
-  };
-
-
-  // Internal recursive comparison function for `isEqual`.
-  var eq = function(a, b, aStack, bStack) {
-    // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
-    if (a === b) return a !== 0 || 1 / a === 1 / b;
-    // A strict comparison is necessary because `null == undefined`.
-    if (a == null || b == null) return a === b;
-    // Unwrap any wrapped objects.
-    if (a instanceof _) a = a._wrapped;
-    if (b instanceof _) b = b._wrapped;
-    // Compare `[[Class]]` names.
-    var className = toString.call(a);
-    if (className !== toString.call(b)) return false;
-    switch (className) {
-      // Strings, numbers, regular expressions, dates, and booleans are compared by value.
-      case '[object RegExp]':
-      // RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
-      case '[object String]':
-        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-        // equivalent to `new String("5")`.
-        return '' + a === '' + b;
-      case '[object Number]':
-        // `NaN`s are equivalent, but non-reflexive.
-        // Object(NaN) is equivalent to NaN
-        if (+a !== +a) return +b !== +b;
-        // An `egal` comparison is performed for other numeric values.
-        return +a === 0 ? 1 / +a === 1 / b : +a === +b;
-      case '[object Date]':
-      case '[object Boolean]':
-        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-        // millisecond representations. Note that invalid dates with millisecond representations
-        // of `NaN` are not equivalent.
-        return +a === +b;
-    }
-
-    var areArrays = className === '[object Array]';
-    if (!areArrays) {
-      if (typeof a != 'object' || typeof b != 'object') return false;
-
-      // Objects with different constructors are not equivalent, but `Object`s or `Array`s
-      // from different frames are.
-      var aCtor = a.constructor, bCtor = b.constructor;
-      if (aCtor !== bCtor && !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-                               _.isFunction(bCtor) && bCtor instanceof bCtor)
-                          && ('constructor' in a && 'constructor' in b)) {
-        return false;
-      }
-    }
-    // Assume equality for cyclic structures. The algorithm for detecting cyclic
-    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-
-    // Initializing stack of traversed objects.
-    // It's done here since we only need them for objects and arrays comparison.
-    aStack = aStack || [];
-    bStack = bStack || [];
-    var length = aStack.length;
-    while (length--) {
-      // Linear search. Performance is inversely proportional to the number of
-      // unique nested structures.
-      if (aStack[length] === a) return bStack[length] === b;
-    }
-
-    // Add the first object to the stack of traversed objects.
-    aStack.push(a);
-    bStack.push(b);
-
-    // Recursively compare objects and arrays.
-    if (areArrays) {
-      // Compare array lengths to determine if a deep comparison is necessary.
-      length = a.length;
-      if (length !== b.length) return false;
-      // Deep compare the contents, ignoring non-numeric properties.
-      while (length--) {
-        if (!eq(a[length], b[length], aStack, bStack)) return false;
-      }
-    } else {
-      // Deep compare objects.
-      var keys = _.keys(a), key;
-      length = keys.length;
-      // Ensure that both objects contain the same number of properties before comparing deep equality.
-      if (_.keys(b).length !== length) return false;
-      while (length--) {
-        // Deep compare each member
-        key = keys[length];
-        if (!(_.has(b, key) && eq(a[key], b[key], aStack, bStack))) return false;
-      }
-    }
-    // Remove the first object from the stack of traversed objects.
-    aStack.pop();
-    bStack.pop();
-    return true;
-  };
-
-  // Perform a deep comparison to check if two objects are equal.
-  _.isEqual = function(a, b) {
-    return eq(a, b);
-  };
-
-  // Is a given array, string, or object empty?
-  // An "empty" object has no enumerable own-properties.
-  _.isEmpty = function(obj) {
-    if (obj == null) return true;
-    if (isArrayLike(obj) && (_.isArray(obj) || _.isString(obj) || _.isArguments(obj))) return obj.length === 0;
-    return _.keys(obj).length === 0;
-  };
-
-  // Is a given value a DOM element?
-  _.isElement = function(obj) {
-    return !!(obj && obj.nodeType === 1);
-  };
-
-  // Is a given value an array?
-  // Delegates to ECMA5's native Array.isArray
-  _.isArray = nativeIsArray || function(obj) {
-    return toString.call(obj) === '[object Array]';
-  };
-
-  // Is a given variable an object?
-  _.isObject = function(obj) {
-    var type = typeof obj;
-    return type === 'function' || type === 'object' && !!obj;
-  };
-
-  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError.
-  _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp', 'Error'], function(name) {
-    _['is' + name] = function(obj) {
-      return toString.call(obj) === '[object ' + name + ']';
-    };
-  });
-
-  // Define a fallback version of the method in browsers (ahem, IE < 9), where
-  // there isn't any inspectable "Arguments" type.
-  if (!_.isArguments(arguments)) {
-    _.isArguments = function(obj) {
-      return _.has(obj, 'callee');
-    };
-  }
-
-  // Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
-  // IE 11 (#1621), and in Safari 8 (#1929).
-  if (typeof /./ != 'function' && typeof Int8Array != 'object') {
-    _.isFunction = function(obj) {
-      return typeof obj == 'function' || false;
-    };
-  }
-
-  // Is a given object a finite number?
-  _.isFinite = function(obj) {
-    return isFinite(obj) && !isNaN(parseFloat(obj));
-  };
-
-  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-  _.isNaN = function(obj) {
-    return _.isNumber(obj) && obj !== +obj;
-  };
-
-  // Is a given value a boolean?
-  _.isBoolean = function(obj) {
-    return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-  };
-
-  // Is a given value equal to null?
-  _.isNull = function(obj) {
-    return obj === null;
-  };
-
-  // Is a given variable undefined?
-  _.isUndefined = function(obj) {
-    return obj === void 0;
-  };
-
-  // Shortcut function for checking if an object has a given property directly
-  // on itself (in other words, not on a prototype).
-  _.has = function(obj, key) {
-    return obj != null && hasOwnProperty.call(obj, key);
-  };
-
-  // Utility Functions
-  // -----------------
-
-  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-  // previous owner. Returns a reference to the Underscore object.
-  _.noConflict = function() {
-    root._ = previousUnderscore;
-    return this;
-  };
-
-  // Keep the identity function around for default iteratees.
-  _.identity = function(value) {
-    return value;
-  };
-
-  // Predicate-generating functions. Often useful outside of Underscore.
-  _.constant = function(value) {
-    return function() {
-      return value;
-    };
-  };
-
-  _.noop = function(){};
-
-  _.property = property;
-
-  // Generates a function for a given object that returns a given property.
-  _.propertyOf = function(obj) {
-    return obj == null ? function(){} : function(key) {
-      return obj[key];
-    };
-  };
-
-  // Returns a predicate for checking whether an object has a given set of
-  // `key:value` pairs.
-  _.matcher = _.matches = function(attrs) {
-    attrs = _.extendOwn({}, attrs);
-    return function(obj) {
-      return _.isMatch(obj, attrs);
-    };
-  };
-
-  // Run a function **n** times.
-  _.times = function(n, iteratee, context) {
-    var accum = Array(Math.max(0, n));
-    iteratee = optimizeCb(iteratee, context, 1);
-    for (var i = 0; i < n; i++) accum[i] = iteratee(i);
-    return accum;
-  };
-
-  // Return a random integer between min and max (inclusive).
-  _.random = function(min, max) {
-    if (max == null) {
-      max = min;
-      min = 0;
-    }
-    return min + Math.floor(Math.random() * (max - min + 1));
-  };
-
-  // A (possibly faster) way to get the current timestamp as an integer.
-  _.now = Date.now || function() {
-    return new Date().getTime();
-  };
-
-   // List of HTML entities for escaping.
-  var escapeMap = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '`': '&#x60;'
-  };
-  var unescapeMap = _.invert(escapeMap);
-
-  // Functions for escaping and unescaping strings to/from HTML interpolation.
-  var createEscaper = function(map) {
-    var escaper = function(match) {
-      return map[match];
-    };
-    // Regexes for identifying a key that needs to be escaped
-    var source = '(?:' + _.keys(map).join('|') + ')';
-    var testRegexp = RegExp(source);
-    var replaceRegexp = RegExp(source, 'g');
-    return function(string) {
-      string = string == null ? '' : '' + string;
-      return testRegexp.test(string) ? string.replace(replaceRegexp, escaper) : string;
-    };
-  };
-  _.escape = createEscaper(escapeMap);
-  _.unescape = createEscaper(unescapeMap);
-
-  // If the value of the named `property` is a function then invoke it with the
-  // `object` as context; otherwise, return it.
-  _.result = function(object, property, fallback) {
-    var value = object == null ? void 0 : object[property];
-    if (value === void 0) {
-      value = fallback;
-    }
-    return _.isFunction(value) ? value.call(object) : value;
-  };
-
-  // Generate a unique integer id (unique within the entire client session).
-  // Useful for temporary DOM ids.
-  var idCounter = 0;
-  _.uniqueId = function(prefix) {
-    var id = ++idCounter + '';
-    return prefix ? prefix + id : id;
-  };
-
-  // By default, Underscore uses ERB-style template delimiters, change the
-  // following template settings to use alternative delimiters.
-  _.templateSettings = {
-    evaluate    : /<%([\s\S]+?)%>/g,
-    interpolate : /<%=([\s\S]+?)%>/g,
-    escape      : /<%-([\s\S]+?)%>/g
-  };
-
-  // When customizing `templateSettings`, if you don't want to define an
-  // interpolation, evaluation or escaping regex, we need one that is
-  // guaranteed not to match.
-  var noMatch = /(.)^/;
-
-  // Certain characters need to be escaped so that they can be put into a
-  // string literal.
-  var escapes = {
-    "'":      "'",
-    '\\':     '\\',
-    '\r':     'r',
-    '\n':     'n',
-    '\u2028': 'u2028',
-    '\u2029': 'u2029'
-  };
-
-  var escaper = /\\|'|\r|\n|\u2028|\u2029/g;
-
-  var escapeChar = function(match) {
-    return '\\' + escapes[match];
-  };
-
-  // JavaScript micro-templating, similar to John Resig's implementation.
-  // Underscore templating handles arbitrary delimiters, preserves whitespace,
-  // and correctly escapes quotes within interpolated code.
-  // NB: `oldSettings` only exists for backwards compatibility.
-  _.template = function(text, settings, oldSettings) {
-    if (!settings && oldSettings) settings = oldSettings;
-    settings = _.defaults({}, settings, _.templateSettings);
-
-    // Combine delimiters into one regular expression via alternation.
-    var matcher = RegExp([
-      (settings.escape || noMatch).source,
-      (settings.interpolate || noMatch).source,
-      (settings.evaluate || noMatch).source
-    ].join('|') + '|$', 'g');
-
-    // Compile the template source, escaping string literals appropriately.
-    var index = 0;
-    var source = "__p+='";
-    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
-      source += text.slice(index, offset).replace(escaper, escapeChar);
-      index = offset + match.length;
-
-      if (escape) {
-        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
-      } else if (interpolate) {
-        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
-      } else if (evaluate) {
-        source += "';\n" + evaluate + "\n__p+='";
-      }
-
-      // Adobe VMs need the match returned to produce the correct offest.
-      return match;
-    });
-    source += "';\n";
-
-    // If a variable is not specified, place data values in local scope.
-    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-
-    source = "var __t,__p='',__j=Array.prototype.join," +
-      "print=function(){__p+=__j.call(arguments,'');};\n" +
-      source + 'return __p;\n';
-
-    try {
-      var render = new Function(settings.variable || 'obj', '_', source);
-    } catch (e) {
-      e.source = source;
-      throw e;
-    }
-
-    var template = function(data) {
-      return render.call(this, data, _);
-    };
-
-    // Provide the compiled source as a convenience for precompilation.
-    var argument = settings.variable || 'obj';
-    template.source = 'function(' + argument + '){\n' + source + '}';
-
-    return template;
-  };
-
-  // Add a "chain" function. Start chaining a wrapped Underscore object.
-  _.chain = function(obj) {
-    var instance = _(obj);
-    instance._chain = true;
-    return instance;
-  };
-
-  // OOP
-  // ---------------
-  // If Underscore is called as a function, it returns a wrapped object that
-  // can be used OO-style. This wrapper holds altered versions of all the
-  // underscore functions. Wrapped objects may be chained.
-
-  // Helper function to continue chaining intermediate results.
-  var result = function(instance, obj) {
-    return instance._chain ? _(obj).chain() : obj;
-  };
-
-  // Add your own custom functions to the Underscore object.
-  _.mixin = function(obj) {
-    _.each(_.functions(obj), function(name) {
-      var func = _[name] = obj[name];
-      _.prototype[name] = function() {
-        var args = [this._wrapped];
-        push.apply(args, arguments);
-        return result(this, func.apply(_, args));
-      };
-    });
-  };
-
-  // Add all of the Underscore functions to the wrapper object.
-  _.mixin(_);
-
-  // Add all mutator Array functions to the wrapper.
-  _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      var obj = this._wrapped;
-      method.apply(obj, arguments);
-      if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
-      return result(this, obj);
-    };
-  });
-
-  // Add all accessor Array functions to the wrapper.
-  _.each(['concat', 'join', 'slice'], function(name) {
-    var method = ArrayProto[name];
-    _.prototype[name] = function() {
-      return result(this, method.apply(this._wrapped, arguments));
-    };
-  });
-
-  // Extracts the result from a wrapped and chained object.
-  _.prototype.value = function() {
-    return this._wrapped;
-  };
-
-  // Provide unwrapping proxy for some methods used in engine operations
-  // such as arithmetic and JSON stringification.
-  _.prototype.valueOf = _.prototype.toJSON = _.prototype.value;
-
-  _.prototype.toString = function() {
-    return '' + this._wrapped;
-  };
-
-  // AMD registration happens at the end for compatibility with AMD loaders
-  // that may not enforce next-turn semantics on modules. Even though general
-  // practice for AMD registration is to be anonymous, underscore registers
-  // as a named module because, like jQuery, it is a base library that is
-  // popular enough to be bundled in a third party lib, but not be part of
-  // an AMD load request. Those cases could generate an error when an
-  // anonymous define() is called outside of a loader request.
-  if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function() {
-      return _;
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  }
-}.call(this));
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)(module)))
 
 /***/ }),
 /* 6 */
@@ -7005,8 +7150,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var collections_1 = __webpack_require__(330);
+var algorithm_1 = __webpack_require__(2);
+var collections_1 = __webpack_require__(333);
 /**
  * A message which can be delivered to a message handler.
  *
@@ -7522,20 +7667,21 @@ var MessageLoop;
 
 "use strict";
 
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-/*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2017, PhosphorJS Contributors
-|
-| Distributed under the terms of the BSD 3-Clause License.
-|
-| The full license is in the file LICENSE, distributed with this software.
-|----------------------------------------------------------------------------*/
-__export(__webpack_require__(327));
-__export(__webpack_require__(328));
-__export(__webpack_require__(329));
+__export(__webpack_require__(152));
+__export(__webpack_require__(79));
+__export(__webpack_require__(346));
+__export(__webpack_require__(347));
+__export(__webpack_require__(348));
+__export(__webpack_require__(349));
+__export(__webpack_require__(78));
+__export(__webpack_require__(25));
+__export(__webpack_require__(350));
 
 
 /***/ }),
@@ -7562,11 +7708,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var signaling_1 = __webpack_require__(11);
-var title_1 = __webpack_require__(80);
+var title_1 = __webpack_require__(81);
 /**
  * The base class of the Phosphor widget hierarchy.
  *
@@ -8510,21 +8656,20 @@ var Private;
 
 "use strict";
 
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(145));
-__export(__webpack_require__(78));
-__export(__webpack_require__(342));
-__export(__webpack_require__(343));
-__export(__webpack_require__(344));
-__export(__webpack_require__(345));
-__export(__webpack_require__(77));
-__export(__webpack_require__(25));
-__export(__webpack_require__(346));
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+__export(__webpack_require__(330));
+__export(__webpack_require__(331));
+__export(__webpack_require__(332));
 
 
 /***/ }),
@@ -8536,15 +8681,15 @@ __export(__webpack_require__(346));
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(198).version;
-elliptic.utils = __webpack_require__(199);
-elliptic.rand = __webpack_require__(107);
+elliptic.version = __webpack_require__(201).version;
+elliptic.utils = __webpack_require__(202);
+elliptic.rand = __webpack_require__(111);
 elliptic.curve = __webpack_require__(48);
-elliptic.curves = __webpack_require__(204);
+elliptic.curves = __webpack_require__(207);
 
 // Protocols
-elliptic.ec = __webpack_require__(212);
-elliptic.eddsa = __webpack_require__(216);
+elliptic.ec = __webpack_require__(215);
+elliptic.eddsa = __webpack_require__(219);
 
 
 /***/ }),
@@ -8561,7 +8706,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A concrete implementation of `ISignal`.
  *
@@ -9080,6 +9225,111 @@ var Private;
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+// widget_core implements some common patterns for the core widget collection
+// that are not to be used directly by third-party widget authors.
+var base_1 = __webpack_require__(7);
+var widget_description_1 = __webpack_require__(23);
+var version_1 = __webpack_require__(57);
+var _ = __webpack_require__(4);
+var CoreWidgetModel = /** @class */ (function (_super) {
+    __extends(CoreWidgetModel, _super);
+    function CoreWidgetModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    CoreWidgetModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _model_name: 'CoreWidgetModel',
+            _view_module: '@jupyter-widgets/controls',
+            _model_module: '@jupyter-widgets/controls',
+            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+        });
+    };
+    return CoreWidgetModel;
+}(base_1.WidgetModel));
+exports.CoreWidgetModel = CoreWidgetModel;
+var CoreDOMWidgetModel = /** @class */ (function (_super) {
+    __extends(CoreDOMWidgetModel, _super);
+    function CoreDOMWidgetModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    CoreDOMWidgetModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _model_name: 'CoreDOMWidgetModel',
+            _view_module: '@jupyter-widgets/controls',
+            _model_module: '@jupyter-widgets/controls',
+            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+        });
+    };
+    return CoreDOMWidgetModel;
+}(base_1.DOMWidgetModel));
+exports.CoreDOMWidgetModel = CoreDOMWidgetModel;
+var CoreDescriptionModel = /** @class */ (function (_super) {
+    __extends(CoreDescriptionModel, _super);
+    function CoreDescriptionModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    CoreDescriptionModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _model_name: 'CoreDescriptionModel',
+            _view_module: '@jupyter-widgets/controls',
+            _model_module: '@jupyter-widgets/controls',
+            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
+        });
+    };
+    return CoreDescriptionModel;
+}(widget_description_1.DescriptionModel));
+exports.CoreDescriptionModel = CoreDescriptionModel;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -19450,7 +19700,7 @@ return jQuery;
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = assert;
@@ -19467,111 +19717,6 @@ assert.equal = function assertEqual(l, r, msg) {
 
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-// widget_core implements some common patterns for the core widget collection
-// that are not to be used directly by third-party widget authors.
-var base_1 = __webpack_require__(9);
-var widget_description_1 = __webpack_require__(22);
-var version_1 = __webpack_require__(57);
-var _ = __webpack_require__(5);
-var CoreWidgetModel = /** @class */ (function (_super) {
-    __extends(CoreWidgetModel, _super);
-    function CoreWidgetModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CoreWidgetModel.prototype.defaults = function () {
-        return _.extend(_super.prototype.defaults.call(this), {
-            _model_name: 'CoreWidgetModel',
-            _view_module: '@jupyter-widgets/controls',
-            _model_module: '@jupyter-widgets/controls',
-            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-        });
-    };
-    return CoreWidgetModel;
-}(base_1.WidgetModel));
-exports.CoreWidgetModel = CoreWidgetModel;
-var CoreDOMWidgetModel = /** @class */ (function (_super) {
-    __extends(CoreDOMWidgetModel, _super);
-    function CoreDOMWidgetModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CoreDOMWidgetModel.prototype.defaults = function () {
-        return _.extend(_super.prototype.defaults.call(this), {
-            _model_name: 'CoreDOMWidgetModel',
-            _view_module: '@jupyter-widgets/controls',
-            _model_module: '@jupyter-widgets/controls',
-            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-        });
-    };
-    return CoreDOMWidgetModel;
-}(base_1.DOMWidgetModel));
-exports.CoreDOMWidgetModel = CoreDOMWidgetModel;
-var CoreDescriptionModel = /** @class */ (function (_super) {
-    __extends(CoreDescriptionModel, _super);
-    function CoreDescriptionModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CoreDescriptionModel.prototype.defaults = function () {
-        return _.extend(_super.prototype.defaults.call(this), {
-            _model_name: 'CoreDescriptionModel',
-            _view_module: '@jupyter-widgets/controls',
-            _model_module: '@jupyter-widgets/controls',
-            _view_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-            _model_module_version: version_1.JUPYTER_CONTROLS_VERSION,
-        });
-    };
-    return CoreDescriptionModel;
-}(widget_description_1.DescriptionModel));
-exports.CoreDescriptionModel = CoreDescriptionModel;
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -19580,11 +19725,11 @@ module.exports = g;
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
+var base_1 = __webpack_require__(7);
 exports.uuid = base_1.uuid;
 exports.WrappedError = base_1.WrappedError;
 exports.resolvePromisesDict = base_1.resolvePromisesDict;
-var base_2 = __webpack_require__(9);
+var base_2 = __webpack_require__(7);
 /**
  * Creates a wrappable Promise rejection function.
  *
@@ -19639,7 +19784,7 @@ exports.escape_html = escape_html;
 "use strict";
 
 
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(0);
 
 exports.inherits = inherits;
@@ -20119,7 +20264,7 @@ exports.ArrayIterator = ArrayIterator;
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var freeGlobal = __webpack_require__(122);
+var freeGlobal = __webpack_require__(126);
 
 /** Detect free variable `self`. */
 var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -20325,8 +20470,8 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 var Buffer = __webpack_require__(1).Buffer
-var Transform = __webpack_require__(43).Transform
-var StringDecoder = __webpack_require__(66).StringDecoder
+var Transform = __webpack_require__(63).Transform
+var StringDecoder = __webpack_require__(67).StringDecoder
 var inherits = __webpack_require__(0)
 
 function CipherBase (hashMode) {
@@ -20431,254 +20576,6 @@ module.exports = CipherBase
 
 "use strict";
 
-// Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var utils_1 = __webpack_require__(16);
-var version_1 = __webpack_require__(57);
-var DescriptionStyleModel = /** @class */ (function (_super) {
-    __extends(DescriptionStyleModel, _super);
-    function DescriptionStyleModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DescriptionStyleModel.prototype.defaults = function () {
-        return __assign({}, _super.prototype.defaults.call(this), { _model_name: 'DescriptionStyleModel', _model_module: '@jupyter-widgets/controls', _model_module_version: version_1.JUPYTER_CONTROLS_VERSION });
-    };
-    DescriptionStyleModel.styleProperties = {
-        description_width: {
-            selector: '.widget-label',
-            attribute: 'width',
-            default: null
-        },
-    };
-    return DescriptionStyleModel;
-}(base_1.StyleModel));
-exports.DescriptionStyleModel = DescriptionStyleModel;
-var DescriptionModel = /** @class */ (function (_super) {
-    __extends(DescriptionModel, _super);
-    function DescriptionModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DescriptionModel.prototype.defaults = function () {
-        return __assign({}, _super.prototype.defaults.call(this), { _model_name: 'DescriptionModel', _view_name: 'DescriptionView', _view_module: '@jupyter-widgets/controls', _model_module: '@jupyter-widgets/controls', _view_module_version: version_1.JUPYTER_CONTROLS_VERSION, _model_module_version: version_1.JUPYTER_CONTROLS_VERSION, description: '' });
-    };
-    return DescriptionModel;
-}(base_1.DOMWidgetModel));
-exports.DescriptionModel = DescriptionModel;
-var DescriptionView = /** @class */ (function (_super) {
-    __extends(DescriptionView, _super);
-    function DescriptionView() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    DescriptionView.prototype.render = function () {
-        this.label = document.createElement('label');
-        this.el.appendChild(this.label);
-        this.label.className = 'widget-label';
-        this.label.style.display = 'none';
-        this.listenTo(this.model, 'change:description', this.updateDescription);
-        this.updateDescription();
-    };
-    DescriptionView.prototype.typeset = function (element, text) {
-        this.displayed.then(function () { return utils_1.typeset(element, text); });
-    };
-    DescriptionView.prototype.updateDescription = function () {
-        var description = this.model.get('description');
-        if (description.length === 0) {
-            this.label.style.display = 'none';
-        }
-        else {
-            this.label.innerHTML = description;
-            this.typeset(this.label);
-            this.label.style.display = '';
-        }
-        this.label.title = description;
-    };
-    return DescriptionView;
-}(base_1.DOMWidgetView));
-exports.DescriptionView = DescriptionView;
-/**
- * For backwards compatibility with jupyter-js-widgets 2.x.
- *
- * Use DescriptionModel instead.
- */
-var LabeledDOMWidgetModel = /** @class */ (function (_super) {
-    __extends(LabeledDOMWidgetModel, _super);
-    function LabeledDOMWidgetModel() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return LabeledDOMWidgetModel;
-}(DescriptionModel));
-exports.LabeledDOMWidgetModel = LabeledDOMWidgetModel;
-/**
- * For backwards compatibility with jupyter-js-widgets 2.x.
- *
- * Use DescriptionView instead.
- */
-var LabeledDOMWidgetView = /** @class */ (function (_super) {
-    __extends(LabeledDOMWidgetView, _super);
-    function LabeledDOMWidgetView() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return LabeledDOMWidgetView;
-}(DescriptionView));
-exports.LabeledDOMWidgetView = LabeledDOMWidgetView;
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-// a duplex stream is just a stream that is both readable and writable.
-// Since JS doesn't have multiple prototypal inheritance, this class
-// prototypally inherits from Readable, and then parasitically from
-// Writable.
-
-
-
-/*<replacement>*/
-
-var pna = __webpack_require__(44);
-/*</replacement>*/
-
-/*<replacement>*/
-var objectKeys = Object.keys || function (obj) {
-  var keys = [];
-  for (var key in obj) {
-    keys.push(key);
-  }return keys;
-};
-/*</replacement>*/
-
-module.exports = Duplex;
-
-/*<replacement>*/
-var util = __webpack_require__(33);
-util.inherits = __webpack_require__(0);
-/*</replacement>*/
-
-var Readable = __webpack_require__(88);
-var Writable = __webpack_require__(65);
-
-util.inherits(Duplex, Readable);
-
-var keys = objectKeys(Writable.prototype);
-for (var v = 0; v < keys.length; v++) {
-  var method = keys[v];
-  if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
-}
-
-function Duplex(options) {
-  if (!(this instanceof Duplex)) return new Duplex(options);
-
-  Readable.call(this, options);
-  Writable.call(this, options);
-
-  if (options && options.readable === false) this.readable = false;
-
-  if (options && options.writable === false) this.writable = false;
-
-  this.allowHalfOpen = true;
-  if (options && options.allowHalfOpen === false) this.allowHalfOpen = false;
-
-  this.once('end', onend);
-}
-
-// the no-half-open enforcer
-function onend() {
-  // if we allow half-open state, or if the writable side ended,
-  // then we're ok.
-  if (this.allowHalfOpen || this._writableState.ended) return;
-
-  // no more data can be written.
-  // But allow more writes to happen in this tick.
-  pna.nextTick(onEndNT, this);
-}
-
-function onEndNT(self) {
-  self.end();
-}
-
-Object.defineProperty(Duplex.prototype, 'destroyed', {
-  get: function () {
-    if (this._readableState === undefined || this._writableState === undefined) {
-      return false;
-    }
-    return this._readableState.destroyed && this._writableState.destroyed;
-  },
-  set: function (value) {
-    // we ignore the value if the stream
-    // has not been initialized yet
-    if (this._readableState === undefined || this._writableState === undefined) {
-      return;
-    }
-
-    // backward compatibility, the user is explicitly
-    // managing destroyed
-    this._readableState.destroyed = value;
-    this._writableState.destroyed = value;
-  }
-});
-
-Duplex.prototype._destroy = function (err, cb) {
-  this.push(null);
-  this.end();
-
-  pna.nextTick(cb, err);
-};
-
-function forEach(xs, f) {
-  for (var i = 0, l = xs.length; i < l; i++) {
-    f(xs[i], i);
-  }
-}
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 Object.defineProperty(exports, "__esModule", { value: true });
 /*-----------------------------------------------------------------------------
 | Copyright (c) 2014-2017, PhosphorJS Contributors
@@ -20687,8 +20584,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var signaling_1 = __webpack_require__(11);
@@ -21458,6 +21355,266 @@ var Private;
 
 
 /***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_1 = __webpack_require__(7);
+var utils_1 = __webpack_require__(16);
+var version_1 = __webpack_require__(57);
+var DescriptionStyleModel = /** @class */ (function (_super) {
+    __extends(DescriptionStyleModel, _super);
+    function DescriptionStyleModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DescriptionStyleModel.prototype.defaults = function () {
+        return __assign({}, _super.prototype.defaults.call(this), { _model_name: 'DescriptionStyleModel', _model_module: '@jupyter-widgets/controls', _model_module_version: version_1.JUPYTER_CONTROLS_VERSION });
+    };
+    DescriptionStyleModel.styleProperties = {
+        description_width: {
+            selector: '.widget-label',
+            attribute: 'width',
+            default: null
+        },
+    };
+    return DescriptionStyleModel;
+}(base_1.StyleModel));
+exports.DescriptionStyleModel = DescriptionStyleModel;
+var DescriptionModel = /** @class */ (function (_super) {
+    __extends(DescriptionModel, _super);
+    function DescriptionModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DescriptionModel.prototype.defaults = function () {
+        return __assign({}, _super.prototype.defaults.call(this), { _model_name: 'DescriptionModel', _view_name: 'DescriptionView', _view_module: '@jupyter-widgets/controls', _model_module: '@jupyter-widgets/controls', _view_module_version: version_1.JUPYTER_CONTROLS_VERSION, _model_module_version: version_1.JUPYTER_CONTROLS_VERSION, description: '', description_tooltip: null });
+    };
+    return DescriptionModel;
+}(base_1.DOMWidgetModel));
+exports.DescriptionModel = DescriptionModel;
+var DescriptionView = /** @class */ (function (_super) {
+    __extends(DescriptionView, _super);
+    function DescriptionView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    DescriptionView.prototype.render = function () {
+        this.label = document.createElement('label');
+        this.el.appendChild(this.label);
+        this.label.className = 'widget-label';
+        this.label.style.display = 'none';
+        this.listenTo(this.model, 'change:description', this.updateDescription);
+        this.listenTo(this.model, 'change:description_tooltip', this.updateDescription);
+        this.updateDescription();
+    };
+    DescriptionView.prototype.typeset = function (element, text) {
+        this.displayed.then(function () { return utils_1.typeset(element, text); });
+    };
+    DescriptionView.prototype.updateDescription = function () {
+        var description = this.model.get('description');
+        var description_tooltip = this.model.get('description_tooltip');
+        if (description_tooltip === null) {
+            description_tooltip = description;
+        }
+        if (description.length === 0) {
+            this.label.style.display = 'none';
+        }
+        else {
+            this.label.innerHTML = description;
+            this.typeset(this.label);
+            this.label.style.display = '';
+        }
+        this.label.title = description_tooltip;
+    };
+    return DescriptionView;
+}(base_1.DOMWidgetView));
+exports.DescriptionView = DescriptionView;
+/**
+ * For backwards compatibility with jupyter-js-widgets 2.x.
+ *
+ * Use DescriptionModel instead.
+ */
+var LabeledDOMWidgetModel = /** @class */ (function (_super) {
+    __extends(LabeledDOMWidgetModel, _super);
+    function LabeledDOMWidgetModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LabeledDOMWidgetModel;
+}(DescriptionModel));
+exports.LabeledDOMWidgetModel = LabeledDOMWidgetModel;
+/**
+ * For backwards compatibility with jupyter-js-widgets 2.x.
+ *
+ * Use DescriptionView instead.
+ */
+var LabeledDOMWidgetView = /** @class */ (function (_super) {
+    __extends(LabeledDOMWidgetView, _super);
+    function LabeledDOMWidgetView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return LabeledDOMWidgetView;
+}(DescriptionView));
+exports.LabeledDOMWidgetView = LabeledDOMWidgetView;
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// a duplex stream is just a stream that is both readable and writable.
+// Since JS doesn't have multiple prototypal inheritance, this class
+// prototypally inherits from Readable, and then parasitically from
+// Writable.
+
+
+
+/*<replacement>*/
+
+var pna = __webpack_require__(44);
+/*</replacement>*/
+
+/*<replacement>*/
+var objectKeys = Object.keys || function (obj) {
+  var keys = [];
+  for (var key in obj) {
+    keys.push(key);
+  }return keys;
+};
+/*</replacement>*/
+
+module.exports = Duplex;
+
+/*<replacement>*/
+var util = __webpack_require__(33);
+util.inherits = __webpack_require__(0);
+/*</replacement>*/
+
+var Readable = __webpack_require__(91);
+var Writable = __webpack_require__(66);
+
+util.inherits(Duplex, Readable);
+
+{
+  // avoid scope creep, the keys array can then be collected
+  var keys = objectKeys(Writable.prototype);
+  for (var v = 0; v < keys.length; v++) {
+    var method = keys[v];
+    if (!Duplex.prototype[method]) Duplex.prototype[method] = Writable.prototype[method];
+  }
+}
+
+function Duplex(options) {
+  if (!(this instanceof Duplex)) return new Duplex(options);
+
+  Readable.call(this, options);
+  Writable.call(this, options);
+
+  if (options && options.readable === false) this.readable = false;
+
+  if (options && options.writable === false) this.writable = false;
+
+  this.allowHalfOpen = true;
+  if (options && options.allowHalfOpen === false) this.allowHalfOpen = false;
+
+  this.once('end', onend);
+}
+
+Object.defineProperty(Duplex.prototype, 'writableHighWaterMark', {
+  // making it explicit this property is not enumerable
+  // because otherwise some prototype manipulation in
+  // userland will fail
+  enumerable: false,
+  get: function () {
+    return this._writableState.highWaterMark;
+  }
+});
+
+// the no-half-open enforcer
+function onend() {
+  // if we allow half-open state, or if the writable side ended,
+  // then we're ok.
+  if (this.allowHalfOpen || this._writableState.ended) return;
+
+  // no more data can be written.
+  // But allow more writes to happen in this tick.
+  pna.nextTick(onEndNT, this);
+}
+
+function onEndNT(self) {
+  self.end();
+}
+
+Object.defineProperty(Duplex.prototype, 'destroyed', {
+  get: function () {
+    if (this._readableState === undefined || this._writableState === undefined) {
+      return false;
+    }
+    return this._readableState.destroyed && this._writableState.destroyed;
+  },
+  set: function (value) {
+    // we ignore the value if the stream
+    // has not been initialized yet
+    if (this._readableState === undefined || this._writableState === undefined) {
+      return;
+    }
+
+    // backward compatibility, the user is explicitly
+    // managing destroyed
+    this._readableState.destroyed = value;
+    this._writableState.destroyed = value;
+  }
+});
+
+Duplex.prototype._destroy = function (err, cb) {
+  this.push(null);
+  this.end();
+
+  pna.nextTick(cb, err);
+};
+
+/***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -21484,10 +21641,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base64_js_1 = __webpack_require__(86);
+var base64_js_1 = __webpack_require__(88);
 var coreutils_1 = __webpack_require__(26);
-var _isEqual = __webpack_require__(241);
-var isPlainObject = __webpack_require__(308);
+var _isEqual = __webpack_require__(244);
+var isPlainObject = __webpack_require__(311);
 /**
  * Find all strings in the first argument that are not in the second.
  */
@@ -21634,12 +21791,12 @@ function remove_buffers(state) {
             for (var i = 0; i < obj.length; i++) {
                 var value = obj[i];
                 if (value) {
-                    if (value.buffer instanceof ArrayBuffer || value instanceof ArrayBuffer) {
+                    if (value instanceof ArrayBuffer || ArrayBuffer.isView(value)) {
                         if (!is_cloned) {
                             obj = obj.slice();
                             is_cloned = true;
                         }
-                        buffers.push(value instanceof ArrayBuffer ? value : value.buffer);
+                        buffers.push(ArrayBuffer.isView(value) ? value.buffer : value);
                         buffer_paths.push(path.concat([i]));
                         // easier to just keep the array, but clear the entry, otherwise we have to think
                         // about array length, much easier this way
@@ -21665,12 +21822,12 @@ function remove_buffers(state) {
                 if (obj.hasOwnProperty(key)) {
                     var value = obj[key];
                     if (value) {
-                        if (value.buffer instanceof ArrayBuffer || value instanceof ArrayBuffer) {
+                        if (value instanceof ArrayBuffer || ArrayBuffer.isView(value)) {
                             if (!is_cloned) {
                                 obj = __assign({}, obj);
                                 is_cloned = true;
                             }
-                            buffers.push(value instanceof ArrayBuffer ? value : value.buffer);
+                            buffers.push(ArrayBuffer.isView(value) ? value.buffer : value);
                             buffer_paths.push(path.concat([key]));
                             delete obj[key]; // for objects/dicts we just delete them
                         }
@@ -21769,12 +21926,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-__export(__webpack_require__(146));
-__export(__webpack_require__(147));
-__export(__webpack_require__(148));
-__export(__webpack_require__(87));
-__export(__webpack_require__(239));
-__export(__webpack_require__(240));
+__export(__webpack_require__(153));
+__export(__webpack_require__(154));
+__export(__webpack_require__(155));
+__export(__webpack_require__(89));
+__export(__webpack_require__(242));
+__export(__webpack_require__(243));
 
 
 /***/ }),
@@ -21821,7 +21978,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(20)))
 
 /***/ }),
 /* 28 */
@@ -21914,8 +22071,8 @@ module.exports = Hash
 /* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsNative = __webpack_require__(255),
-    getValue = __webpack_require__(260);
+var baseIsNative = __webpack_require__(258),
+    getValue = __webpack_require__(263);
 
 /**
  * Gets the native function at `key` of `object`.
@@ -21951,27 +22108,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
 __export(__webpack_require__(40));
-__export(__webpack_require__(79));
-__export(__webpack_require__(332));
-__export(__webpack_require__(333));
-__export(__webpack_require__(334));
-__export(__webpack_require__(133));
+__export(__webpack_require__(80));
 __export(__webpack_require__(335));
 __export(__webpack_require__(336));
 __export(__webpack_require__(337));
-__export(__webpack_require__(24));
-__export(__webpack_require__(132));
+__export(__webpack_require__(137));
 __export(__webpack_require__(338));
+__export(__webpack_require__(339));
+__export(__webpack_require__(340));
+__export(__webpack_require__(22));
+__export(__webpack_require__(136));
+__export(__webpack_require__(341));
 __export(__webpack_require__(54));
 __export(__webpack_require__(41));
-__export(__webpack_require__(339));
-__export(__webpack_require__(134));
-__export(__webpack_require__(340));
-__export(__webpack_require__(135));
-__export(__webpack_require__(136));
-__export(__webpack_require__(83));
-__export(__webpack_require__(341));
-__export(__webpack_require__(80));
+__export(__webpack_require__(342));
+__export(__webpack_require__(343));
+__export(__webpack_require__(138));
+__export(__webpack_require__(344));
+__export(__webpack_require__(139));
+__export(__webpack_require__(140));
+__export(__webpack_require__(84));
+__export(__webpack_require__(345));
+__export(__webpack_require__(81));
 __export(__webpack_require__(8));
 
 
@@ -22177,34 +22335,12 @@ var Private;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
+
 var inherits = __webpack_require__(0)
-var md5 = __webpack_require__(61)
-var RIPEMD160 = __webpack_require__(62)
-var sha = __webpack_require__(67)
-
+var MD5 = __webpack_require__(62)
+var RIPEMD160 = __webpack_require__(68)
+var sha = __webpack_require__(69)
 var Base = __webpack_require__(21)
-
-function HashNoConstructor (hash) {
-  Base.call(this, 'digest')
-
-  this._hash = hash
-  this.buffers = []
-}
-
-inherits(HashNoConstructor, Base)
-
-HashNoConstructor.prototype._update = function (data) {
-  this.buffers.push(data)
-}
-
-HashNoConstructor.prototype._final = function () {
-  var buf = Buffer.concat(this.buffers)
-  var r = this._hash(buf)
-  this.buffers = null
-
-  return r
-}
 
 function Hash (hash) {
   Base.call(this, 'digest')
@@ -22224,13 +22360,12 @@ Hash.prototype._final = function () {
 
 module.exports = function createHash (alg) {
   alg = alg.toLowerCase()
-  if (alg === 'md5') return new HashNoConstructor(md5)
-  if (alg === 'rmd160' || alg === 'ripemd160') return new Hash(new RIPEMD160())
+  if (alg === 'md5') return new MD5()
+  if (alg === 'rmd160' || alg === 'ripemd160') return new RIPEMD160()
 
   return new Hash(sha(alg))
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
 
 /***/ }),
 /* 33 */
@@ -22344,7 +22479,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
 /* 34 */
@@ -22361,7 +22496,7 @@ function objectToString(o) {
   return buffer
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
 /* 35 */
@@ -22371,7 +22506,7 @@ function objectToString(o) {
 
 
 var utils = __webpack_require__(17);
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 
 function BlockHash() {
   this.pending = null;
@@ -22468,13 +22603,13 @@ BlockHash.prototype._pad = function pad() {
 
 var asn1 = exports;
 
-asn1.bignum = __webpack_require__(4);
+asn1.bignum = __webpack_require__(5);
 
-asn1.define = __webpack_require__(220).define;
+asn1.define = __webpack_require__(223).define;
 asn1.base = __webpack_require__(37);
-asn1.constants = __webpack_require__(113);
-asn1.decoders = __webpack_require__(226);
-asn1.encoders = __webpack_require__(228);
+asn1.constants = __webpack_require__(117);
+asn1.decoders = __webpack_require__(229);
+asn1.encoders = __webpack_require__(231);
 
 
 /***/ }),
@@ -22483,19 +22618,19 @@ asn1.encoders = __webpack_require__(228);
 
 var base = exports;
 
-base.Reporter = __webpack_require__(223).Reporter;
-base.DecoderBuffer = __webpack_require__(112).DecoderBuffer;
-base.EncoderBuffer = __webpack_require__(112).EncoderBuffer;
-base.Node = __webpack_require__(224);
+base.Reporter = __webpack_require__(226).Reporter;
+base.DecoderBuffer = __webpack_require__(116).DecoderBuffer;
+base.EncoderBuffer = __webpack_require__(116).EncoderBuffer;
+base.Node = __webpack_require__(227);
 
 
 /***/ }),
 /* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(75),
-    getRawTag = __webpack_require__(256),
-    objectToString = __webpack_require__(257);
+var Symbol = __webpack_require__(76),
+    getRawTag = __webpack_require__(259),
+    objectToString = __webpack_require__(260);
 
 /** `Object#toString` result references. */
 var nullTag = '[object Null]',
@@ -23055,9 +23190,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(6);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var widget_1 = __webpack_require__(8);
 /**
  * A concrete layout implementation suitable for many use cases.
@@ -23338,7 +23473,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(12) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(14) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -23358,134 +23493,29 @@ return $.ui.version = "1.12.1";
 
 /***/ }),
 /* 43 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-module.exports = Stream;
-
-var EE = __webpack_require__(63).EventEmitter;
-var inherits = __webpack_require__(0);
-
-inherits(Stream, EE);
-Stream.Readable = __webpack_require__(64);
-Stream.Writable = __webpack_require__(161);
-Stream.Duplex = __webpack_require__(162);
-Stream.Transform = __webpack_require__(163);
-Stream.PassThrough = __webpack_require__(164);
-
-// Backwards-compat with node 0.4.x
-Stream.Stream = Stream;
-
-
-
-// old-style streams.  Note that the pipe method (the only relevant
-// part of this class) is overridden in the Readable class.
-
-function Stream() {
-  EE.call(this);
-}
-
-Stream.prototype.pipe = function(dest, options) {
-  var source = this;
-
-  function ondata(chunk) {
-    if (dest.writable) {
-      if (false === dest.write(chunk) && source.pause) {
-        source.pause();
-      }
-    }
-  }
-
-  source.on('data', ondata);
-
-  function ondrain() {
-    if (source.readable && source.resume) {
-      source.resume();
-    }
-  }
-
-  dest.on('drain', ondrain);
-
-  // If the 'end' option is not supplied, dest.end() will be called when
-  // source gets the 'end' or 'close' events.  Only dest.end() once.
-  if (!dest._isStdio && (!options || options.end !== false)) {
-    source.on('end', onend);
-    source.on('close', onclose);
-  }
-
-  var didOnEnd = false;
-  function onend() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    dest.end();
-  }
-
-
-  function onclose() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    if (typeof dest.destroy === 'function') dest.destroy();
-  }
-
-  // don't leave dangling pipes when there are errors.
-  function onerror(er) {
-    cleanup();
-    if (EE.listenerCount(this, 'error') === 0) {
-      throw er; // Unhandled stream error in pipe.
-    }
-  }
-
-  source.on('error', onerror);
-  dest.on('error', onerror);
-
-  // remove all the event listeners that were added.
-  function cleanup() {
-    source.removeListener('data', ondata);
-    dest.removeListener('drain', ondrain);
-
-    source.removeListener('end', onend);
-    source.removeListener('close', onclose);
-
-    source.removeListener('error', onerror);
-    dest.removeListener('error', onerror);
-
-    source.removeListener('end', cleanup);
-    source.removeListener('close', cleanup);
-
-    dest.removeListener('close', cleanup);
-  }
-
-  source.on('end', cleanup);
-  source.on('close', cleanup);
-
-  dest.on('close', cleanup);
-
-  dest.emit('pipe', source);
-
-  // Allow for unix-like usage: A.pipe(B).pipe(C)
-  return dest;
+module.exports = function(module) {
+	if(!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if(!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
 };
 
 
@@ -23545,15 +23575,18 @@ function nextTick(fn, arg1, arg2, arg3) {
 /* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var apply = Function.prototype.apply;
+/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
+            (typeof self !== "undefined" && self) ||
+            window;
+var apply = Function.prototype.apply;
 
 // DOM APIs, for completeness
 
 exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
 };
 exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
 };
 exports.clearTimeout =
 exports.clearInterval = function(timeout) {
@@ -23568,7 +23601,7 @@ function Timeout(id, clearFn) {
 }
 Timeout.prototype.unref = Timeout.prototype.ref = function() {};
 Timeout.prototype.close = function() {
-  this._clearFn.call(window, this._id);
+  this._clearFn.call(scope, this._id);
 };
 
 // Does not start the time, just sets up the members needed.
@@ -23595,8 +23628,8 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(158);
-// On some exotic environments, it's not clear which object `setimmeidate` was
+__webpack_require__(163);
+// On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
 exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
@@ -23606,61 +23639,10 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 /* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(1).Buffer
-var MD5 = __webpack_require__(173)
-
-/* eslint-disable camelcase */
-function EVP_BytesToKey (password, salt, keyBits, ivLen) {
-  if (!Buffer.isBuffer(password)) password = Buffer.from(password, 'binary')
-  if (salt) {
-    if (!Buffer.isBuffer(salt)) salt = Buffer.from(salt, 'binary')
-    if (salt.length !== 8) throw new RangeError('salt should be Buffer with 8 byte length')
-  }
-
-  var keyLen = keyBits / 8
-  var key = Buffer.alloc(keyLen)
-  var iv = Buffer.alloc(ivLen || 0)
-  var tmp = Buffer.alloc(0)
-
-  while (keyLen > 0 || ivLen > 0) {
-    var hash = new MD5()
-    hash.update(tmp)
-    hash.update(password)
-    if (salt) hash.update(salt)
-    tmp = hash.digest()
-
-    var used = 0
-
-    if (keyLen > 0) {
-      var keyStart = key.length - keyLen
-      used = Math.min(keyLen, tmp.length)
-      tmp.copy(key, keyStart, 0, used)
-      keyLen -= used
-    }
-
-    if (used < tmp.length && ivLen > 0) {
-      var ivStart = iv.length - ivLen
-      var length = Math.min(ivLen, tmp.length - used)
-      tmp.copy(iv, ivStart, used, used + length)
-      ivLen -= length
-    }
-  }
-
-  tmp.fill(0)
-  return { key: key, iv: iv }
-}
-
-module.exports = EVP_BytesToKey
-
-
-/***/ }),
-/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // based on the aes implimentation in triple sec
@@ -23894,6 +23876,57 @@ module.exports.AES = AES
 
 
 /***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(1).Buffer
+var MD5 = __webpack_require__(62)
+
+/* eslint-disable camelcase */
+function EVP_BytesToKey (password, salt, keyBits, ivLen) {
+  if (!Buffer.isBuffer(password)) password = Buffer.from(password, 'binary')
+  if (salt) {
+    if (!Buffer.isBuffer(salt)) salt = Buffer.from(salt, 'binary')
+    if (salt.length !== 8) throw new RangeError('salt should be Buffer with 8 byte length')
+  }
+
+  var keyLen = keyBits / 8
+  var key = Buffer.alloc(keyLen)
+  var iv = Buffer.alloc(ivLen || 0)
+  var tmp = Buffer.alloc(0)
+
+  while (keyLen > 0 || ivLen > 0) {
+    var hash = new MD5()
+    hash.update(tmp)
+    hash.update(password)
+    if (salt) hash.update(salt)
+    tmp = hash.digest()
+
+    var used = 0
+
+    if (keyLen > 0) {
+      var keyStart = key.length - keyLen
+      used = Math.min(keyLen, tmp.length)
+      tmp.copy(key, keyStart, 0, used)
+      keyLen -= used
+    }
+
+    if (used < tmp.length && ivLen > 0) {
+      var ivStart = iv.length - ivLen
+      var length = Math.min(ivLen, tmp.length - used)
+      tmp.copy(iv, ivStart, used, used + length)
+      ivLen -= length
+    }
+  }
+
+  tmp.fill(0)
+  return { key: key, iv: iv }
+}
+
+module.exports = EVP_BytesToKey
+
+
+/***/ }),
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23902,21 +23935,21 @@ module.exports.AES = AES
 
 var curve = exports;
 
-curve.base = __webpack_require__(200);
-curve.short = __webpack_require__(201);
-curve.mont = __webpack_require__(202);
-curve.edwards = __webpack_require__(203);
+curve.base = __webpack_require__(203);
+curve.short = __webpack_require__(204);
+curve.mont = __webpack_require__(205);
+curve.edwards = __webpack_require__(206);
 
 
 /***/ }),
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(219)
-var aesid = __webpack_require__(231)
-var fixProc = __webpack_require__(232)
-var ciphers = __webpack_require__(68)
-var compat = __webpack_require__(96)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(222)
+var aesid = __webpack_require__(234)
+var fixProc = __webpack_require__(235)
+var ciphers = __webpack_require__(71)
+var compat = __webpack_require__(100)
 module.exports = parseKeys
 
 function parseKeys (buffer) {
@@ -24019,17 +24052,17 @@ function decrypt (data, password) {
   return Buffer.concat(out)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
 /* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var listCacheClear = __webpack_require__(245),
-    listCacheDelete = __webpack_require__(246),
-    listCacheGet = __webpack_require__(247),
-    listCacheHas = __webpack_require__(248),
-    listCacheSet = __webpack_require__(249);
+var listCacheClear = __webpack_require__(248),
+    listCacheDelete = __webpack_require__(249),
+    listCacheGet = __webpack_require__(250),
+    listCacheHas = __webpack_require__(251),
+    listCacheSet = __webpack_require__(252);
 
 /**
  * Creates an list cache object.
@@ -24063,7 +24096,7 @@ module.exports = ListCache;
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var eq = __webpack_require__(120);
+var eq = __webpack_require__(124);
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -24102,7 +24135,7 @@ module.exports = nativeCreate;
 /* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isKeyable = __webpack_require__(269);
+var isKeyable = __webpack_require__(272);
 
 /**
  * Gets the data for `map`.
@@ -24238,7 +24271,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A virtual node which represents plain text content.
  *
@@ -24799,7 +24832,7 @@ var Private;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var disposable_1 = __webpack_require__(81);
+var disposable_1 = __webpack_require__(82);
 /**
  * An object which manages a drag-drop operation.
  *
@@ -25647,11 +25680,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * The version of the Jupyter controls widget attribute spec that this package
  * implements.
  */
-exports.JUPYTER_CONTROLS_VERSION = '1.2.0';
+exports.JUPYTER_CONTROLS_VERSION = '1.4.0';
 
 
 /***/ }),
 /* 58 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__formatDecimal__ = __webpack_require__(86);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(x) {
+  return x = Object(__WEBPACK_IMPORTED_MODULE_0__formatDecimal__["a" /* default */])(Math.abs(x)), x ? x[1] : NaN;
+});
+
+
+/***/ }),
+/* 59 */
 /***/ (function(module, exports) {
 
 /*
@@ -25733,7 +25779,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -25779,7 +25825,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(370);
+var	fixUrls = __webpack_require__(386);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -26092,7 +26138,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Backbone.js 1.2.3
@@ -26111,7 +26157,7 @@ function updateLink (link, options, obj) {
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(5), __webpack_require__(12), exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, $, exports) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(4), __webpack_require__(14), exports], __WEBPACK_AMD_DEFINE_RESULT__ = (function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -27991,165 +28037,7 @@ function updateLink (link, options, obj) {
 
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
-
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-/*
- * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
- * Digest Algorithm, as defined in RFC 1321.
- * Version 2.1 Copyright (C) Paul Johnston 1999 - 2002.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- * Distributed under the BSD License
- * See http://pajhome.org.uk/crypt/md5 for more info.
- */
-
-var makeHash = __webpack_require__(152)
-
-/*
- * Calculate the MD5 of an array of little-endian words, and a bit length
- */
-function core_md5 (x, len) {
-  /* append padding */
-  x[len >> 5] |= 0x80 << ((len) % 32)
-  x[(((len + 64) >>> 9) << 4) + 14] = len
-
-  var a = 1732584193
-  var b = -271733879
-  var c = -1732584194
-  var d = 271733878
-
-  for (var i = 0; i < x.length; i += 16) {
-    var olda = a
-    var oldb = b
-    var oldc = c
-    var oldd = d
-
-    a = md5_ff(a, b, c, d, x[i + 0], 7, -680876936)
-    d = md5_ff(d, a, b, c, x[i + 1], 12, -389564586)
-    c = md5_ff(c, d, a, b, x[i + 2], 17, 606105819)
-    b = md5_ff(b, c, d, a, x[i + 3], 22, -1044525330)
-    a = md5_ff(a, b, c, d, x[i + 4], 7, -176418897)
-    d = md5_ff(d, a, b, c, x[i + 5], 12, 1200080426)
-    c = md5_ff(c, d, a, b, x[i + 6], 17, -1473231341)
-    b = md5_ff(b, c, d, a, x[i + 7], 22, -45705983)
-    a = md5_ff(a, b, c, d, x[i + 8], 7, 1770035416)
-    d = md5_ff(d, a, b, c, x[i + 9], 12, -1958414417)
-    c = md5_ff(c, d, a, b, x[i + 10], 17, -42063)
-    b = md5_ff(b, c, d, a, x[i + 11], 22, -1990404162)
-    a = md5_ff(a, b, c, d, x[i + 12], 7, 1804603682)
-    d = md5_ff(d, a, b, c, x[i + 13], 12, -40341101)
-    c = md5_ff(c, d, a, b, x[i + 14], 17, -1502002290)
-    b = md5_ff(b, c, d, a, x[i + 15], 22, 1236535329)
-
-    a = md5_gg(a, b, c, d, x[i + 1], 5, -165796510)
-    d = md5_gg(d, a, b, c, x[i + 6], 9, -1069501632)
-    c = md5_gg(c, d, a, b, x[i + 11], 14, 643717713)
-    b = md5_gg(b, c, d, a, x[i + 0], 20, -373897302)
-    a = md5_gg(a, b, c, d, x[i + 5], 5, -701558691)
-    d = md5_gg(d, a, b, c, x[i + 10], 9, 38016083)
-    c = md5_gg(c, d, a, b, x[i + 15], 14, -660478335)
-    b = md5_gg(b, c, d, a, x[i + 4], 20, -405537848)
-    a = md5_gg(a, b, c, d, x[i + 9], 5, 568446438)
-    d = md5_gg(d, a, b, c, x[i + 14], 9, -1019803690)
-    c = md5_gg(c, d, a, b, x[i + 3], 14, -187363961)
-    b = md5_gg(b, c, d, a, x[i + 8], 20, 1163531501)
-    a = md5_gg(a, b, c, d, x[i + 13], 5, -1444681467)
-    d = md5_gg(d, a, b, c, x[i + 2], 9, -51403784)
-    c = md5_gg(c, d, a, b, x[i + 7], 14, 1735328473)
-    b = md5_gg(b, c, d, a, x[i + 12], 20, -1926607734)
-
-    a = md5_hh(a, b, c, d, x[i + 5], 4, -378558)
-    d = md5_hh(d, a, b, c, x[i + 8], 11, -2022574463)
-    c = md5_hh(c, d, a, b, x[i + 11], 16, 1839030562)
-    b = md5_hh(b, c, d, a, x[i + 14], 23, -35309556)
-    a = md5_hh(a, b, c, d, x[i + 1], 4, -1530992060)
-    d = md5_hh(d, a, b, c, x[i + 4], 11, 1272893353)
-    c = md5_hh(c, d, a, b, x[i + 7], 16, -155497632)
-    b = md5_hh(b, c, d, a, x[i + 10], 23, -1094730640)
-    a = md5_hh(a, b, c, d, x[i + 13], 4, 681279174)
-    d = md5_hh(d, a, b, c, x[i + 0], 11, -358537222)
-    c = md5_hh(c, d, a, b, x[i + 3], 16, -722521979)
-    b = md5_hh(b, c, d, a, x[i + 6], 23, 76029189)
-    a = md5_hh(a, b, c, d, x[i + 9], 4, -640364487)
-    d = md5_hh(d, a, b, c, x[i + 12], 11, -421815835)
-    c = md5_hh(c, d, a, b, x[i + 15], 16, 530742520)
-    b = md5_hh(b, c, d, a, x[i + 2], 23, -995338651)
-
-    a = md5_ii(a, b, c, d, x[i + 0], 6, -198630844)
-    d = md5_ii(d, a, b, c, x[i + 7], 10, 1126891415)
-    c = md5_ii(c, d, a, b, x[i + 14], 15, -1416354905)
-    b = md5_ii(b, c, d, a, x[i + 5], 21, -57434055)
-    a = md5_ii(a, b, c, d, x[i + 12], 6, 1700485571)
-    d = md5_ii(d, a, b, c, x[i + 3], 10, -1894986606)
-    c = md5_ii(c, d, a, b, x[i + 10], 15, -1051523)
-    b = md5_ii(b, c, d, a, x[i + 1], 21, -2054922799)
-    a = md5_ii(a, b, c, d, x[i + 8], 6, 1873313359)
-    d = md5_ii(d, a, b, c, x[i + 15], 10, -30611744)
-    c = md5_ii(c, d, a, b, x[i + 6], 15, -1560198380)
-    b = md5_ii(b, c, d, a, x[i + 13], 21, 1309151649)
-    a = md5_ii(a, b, c, d, x[i + 4], 6, -145523070)
-    d = md5_ii(d, a, b, c, x[i + 11], 10, -1120210379)
-    c = md5_ii(c, d, a, b, x[i + 2], 15, 718787259)
-    b = md5_ii(b, c, d, a, x[i + 9], 21, -343485551)
-
-    a = safe_add(a, olda)
-    b = safe_add(b, oldb)
-    c = safe_add(c, oldc)
-    d = safe_add(d, oldd)
-  }
-
-  return [a, b, c, d]
-}
-
-/*
- * These functions implement the four basic operations the algorithm uses.
- */
-function md5_cmn (q, a, b, x, s, t) {
-  return safe_add(bit_rol(safe_add(safe_add(a, q), safe_add(x, t)), s), b)
-}
-
-function md5_ff (a, b, c, d, x, s, t) {
-  return md5_cmn((b & c) | ((~b) & d), a, b, x, s, t)
-}
-
-function md5_gg (a, b, c, d, x, s, t) {
-  return md5_cmn((b & d) | (c & (~d)), a, b, x, s, t)
-}
-
-function md5_hh (a, b, c, d, x, s, t) {
-  return md5_cmn(b ^ c ^ d, a, b, x, s, t)
-}
-
-function md5_ii (a, b, c, d, x, s, t) {
-  return md5_cmn(c ^ (b | (~d)), a, b, x, s, t)
-}
-
-/*
- * Add integers, wrapping at 2^32. This uses 16-bit operations internally
- * to work around bugs in some JS interpreters.
- */
-function safe_add (x, y) {
-  var lsw = (x & 0xFFFF) + (y & 0xFFFF)
-  var msw = (x >> 16) + (y >> 16) + (lsw >> 16)
-  return (msw << 16) | (lsw & 0xFFFF)
-}
-
-/*
- * Bitwise rotate a 32-bit number to the left.
- */
-function bit_rol (num, cnt) {
-  return (num << cnt) | (num >>> (32 - cnt))
-}
-
-module.exports = function md5 (buf) {
-  return makeHash(buf, core_md5)
-}
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 /* 62 */
@@ -28158,9 +28046,11 @@ module.exports = function md5 (buf) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(153)
+var HashBase = __webpack_require__(90)
 
-function RIPEMD160 () {
+var ARRAY16 = new Array(16)
+
+function MD5 () {
   HashBase.call(this, 64)
 
   // state
@@ -28168,237 +28058,94 @@ function RIPEMD160 () {
   this._b = 0xefcdab89
   this._c = 0x98badcfe
   this._d = 0x10325476
-  this._e = 0xc3d2e1f0
 }
 
-inherits(RIPEMD160, HashBase)
+inherits(MD5, HashBase)
 
-RIPEMD160.prototype._update = function () {
-  var m = new Array(16)
-  for (var i = 0; i < 16; ++i) m[i] = this._block.readInt32LE(i * 4)
+MD5.prototype._update = function () {
+  var M = ARRAY16
+  for (var i = 0; i < 16; ++i) M[i] = this._block.readInt32LE(i * 4)
 
-  var al = this._a
-  var bl = this._b
-  var cl = this._c
-  var dl = this._d
-  var el = this._e
+  var a = this._a
+  var b = this._b
+  var c = this._c
+  var d = this._d
 
-  // Mj = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
-  // K = 0x00000000
-  // Sj = 11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8
-  al = fn1(al, bl, cl, dl, el, m[0], 0x00000000, 11); cl = rotl(cl, 10)
-  el = fn1(el, al, bl, cl, dl, m[1], 0x00000000, 14); bl = rotl(bl, 10)
-  dl = fn1(dl, el, al, bl, cl, m[2], 0x00000000, 15); al = rotl(al, 10)
-  cl = fn1(cl, dl, el, al, bl, m[3], 0x00000000, 12); el = rotl(el, 10)
-  bl = fn1(bl, cl, dl, el, al, m[4], 0x00000000, 5); dl = rotl(dl, 10)
-  al = fn1(al, bl, cl, dl, el, m[5], 0x00000000, 8); cl = rotl(cl, 10)
-  el = fn1(el, al, bl, cl, dl, m[6], 0x00000000, 7); bl = rotl(bl, 10)
-  dl = fn1(dl, el, al, bl, cl, m[7], 0x00000000, 9); al = rotl(al, 10)
-  cl = fn1(cl, dl, el, al, bl, m[8], 0x00000000, 11); el = rotl(el, 10)
-  bl = fn1(bl, cl, dl, el, al, m[9], 0x00000000, 13); dl = rotl(dl, 10)
-  al = fn1(al, bl, cl, dl, el, m[10], 0x00000000, 14); cl = rotl(cl, 10)
-  el = fn1(el, al, bl, cl, dl, m[11], 0x00000000, 15); bl = rotl(bl, 10)
-  dl = fn1(dl, el, al, bl, cl, m[12], 0x00000000, 6); al = rotl(al, 10)
-  cl = fn1(cl, dl, el, al, bl, m[13], 0x00000000, 7); el = rotl(el, 10)
-  bl = fn1(bl, cl, dl, el, al, m[14], 0x00000000, 9); dl = rotl(dl, 10)
-  al = fn1(al, bl, cl, dl, el, m[15], 0x00000000, 8); cl = rotl(cl, 10)
+  a = fnF(a, b, c, d, M[0], 0xd76aa478, 7)
+  d = fnF(d, a, b, c, M[1], 0xe8c7b756, 12)
+  c = fnF(c, d, a, b, M[2], 0x242070db, 17)
+  b = fnF(b, c, d, a, M[3], 0xc1bdceee, 22)
+  a = fnF(a, b, c, d, M[4], 0xf57c0faf, 7)
+  d = fnF(d, a, b, c, M[5], 0x4787c62a, 12)
+  c = fnF(c, d, a, b, M[6], 0xa8304613, 17)
+  b = fnF(b, c, d, a, M[7], 0xfd469501, 22)
+  a = fnF(a, b, c, d, M[8], 0x698098d8, 7)
+  d = fnF(d, a, b, c, M[9], 0x8b44f7af, 12)
+  c = fnF(c, d, a, b, M[10], 0xffff5bb1, 17)
+  b = fnF(b, c, d, a, M[11], 0x895cd7be, 22)
+  a = fnF(a, b, c, d, M[12], 0x6b901122, 7)
+  d = fnF(d, a, b, c, M[13], 0xfd987193, 12)
+  c = fnF(c, d, a, b, M[14], 0xa679438e, 17)
+  b = fnF(b, c, d, a, M[15], 0x49b40821, 22)
 
-  // Mj = 7, 4, 13, 1, 10, 6, 15, 3, 12, 0, 9, 5, 2, 14, 11, 8
-  // K = 0x5a827999
-  // Sj = 7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12
-  el = fn2(el, al, bl, cl, dl, m[7], 0x5a827999, 7); bl = rotl(bl, 10)
-  dl = fn2(dl, el, al, bl, cl, m[4], 0x5a827999, 6); al = rotl(al, 10)
-  cl = fn2(cl, dl, el, al, bl, m[13], 0x5a827999, 8); el = rotl(el, 10)
-  bl = fn2(bl, cl, dl, el, al, m[1], 0x5a827999, 13); dl = rotl(dl, 10)
-  al = fn2(al, bl, cl, dl, el, m[10], 0x5a827999, 11); cl = rotl(cl, 10)
-  el = fn2(el, al, bl, cl, dl, m[6], 0x5a827999, 9); bl = rotl(bl, 10)
-  dl = fn2(dl, el, al, bl, cl, m[15], 0x5a827999, 7); al = rotl(al, 10)
-  cl = fn2(cl, dl, el, al, bl, m[3], 0x5a827999, 15); el = rotl(el, 10)
-  bl = fn2(bl, cl, dl, el, al, m[12], 0x5a827999, 7); dl = rotl(dl, 10)
-  al = fn2(al, bl, cl, dl, el, m[0], 0x5a827999, 12); cl = rotl(cl, 10)
-  el = fn2(el, al, bl, cl, dl, m[9], 0x5a827999, 15); bl = rotl(bl, 10)
-  dl = fn2(dl, el, al, bl, cl, m[5], 0x5a827999, 9); al = rotl(al, 10)
-  cl = fn2(cl, dl, el, al, bl, m[2], 0x5a827999, 11); el = rotl(el, 10)
-  bl = fn2(bl, cl, dl, el, al, m[14], 0x5a827999, 7); dl = rotl(dl, 10)
-  al = fn2(al, bl, cl, dl, el, m[11], 0x5a827999, 13); cl = rotl(cl, 10)
-  el = fn2(el, al, bl, cl, dl, m[8], 0x5a827999, 12); bl = rotl(bl, 10)
+  a = fnG(a, b, c, d, M[1], 0xf61e2562, 5)
+  d = fnG(d, a, b, c, M[6], 0xc040b340, 9)
+  c = fnG(c, d, a, b, M[11], 0x265e5a51, 14)
+  b = fnG(b, c, d, a, M[0], 0xe9b6c7aa, 20)
+  a = fnG(a, b, c, d, M[5], 0xd62f105d, 5)
+  d = fnG(d, a, b, c, M[10], 0x02441453, 9)
+  c = fnG(c, d, a, b, M[15], 0xd8a1e681, 14)
+  b = fnG(b, c, d, a, M[4], 0xe7d3fbc8, 20)
+  a = fnG(a, b, c, d, M[9], 0x21e1cde6, 5)
+  d = fnG(d, a, b, c, M[14], 0xc33707d6, 9)
+  c = fnG(c, d, a, b, M[3], 0xf4d50d87, 14)
+  b = fnG(b, c, d, a, M[8], 0x455a14ed, 20)
+  a = fnG(a, b, c, d, M[13], 0xa9e3e905, 5)
+  d = fnG(d, a, b, c, M[2], 0xfcefa3f8, 9)
+  c = fnG(c, d, a, b, M[7], 0x676f02d9, 14)
+  b = fnG(b, c, d, a, M[12], 0x8d2a4c8a, 20)
 
-  // Mj = 3, 10, 14, 4, 9, 15, 8, 1, 2, 7, 0, 6, 13, 11, 5, 12
-  // K = 0x6ed9eba1
-  // Sj = 11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5
-  dl = fn3(dl, el, al, bl, cl, m[3], 0x6ed9eba1, 11); al = rotl(al, 10)
-  cl = fn3(cl, dl, el, al, bl, m[10], 0x6ed9eba1, 13); el = rotl(el, 10)
-  bl = fn3(bl, cl, dl, el, al, m[14], 0x6ed9eba1, 6); dl = rotl(dl, 10)
-  al = fn3(al, bl, cl, dl, el, m[4], 0x6ed9eba1, 7); cl = rotl(cl, 10)
-  el = fn3(el, al, bl, cl, dl, m[9], 0x6ed9eba1, 14); bl = rotl(bl, 10)
-  dl = fn3(dl, el, al, bl, cl, m[15], 0x6ed9eba1, 9); al = rotl(al, 10)
-  cl = fn3(cl, dl, el, al, bl, m[8], 0x6ed9eba1, 13); el = rotl(el, 10)
-  bl = fn3(bl, cl, dl, el, al, m[1], 0x6ed9eba1, 15); dl = rotl(dl, 10)
-  al = fn3(al, bl, cl, dl, el, m[2], 0x6ed9eba1, 14); cl = rotl(cl, 10)
-  el = fn3(el, al, bl, cl, dl, m[7], 0x6ed9eba1, 8); bl = rotl(bl, 10)
-  dl = fn3(dl, el, al, bl, cl, m[0], 0x6ed9eba1, 13); al = rotl(al, 10)
-  cl = fn3(cl, dl, el, al, bl, m[6], 0x6ed9eba1, 6); el = rotl(el, 10)
-  bl = fn3(bl, cl, dl, el, al, m[13], 0x6ed9eba1, 5); dl = rotl(dl, 10)
-  al = fn3(al, bl, cl, dl, el, m[11], 0x6ed9eba1, 12); cl = rotl(cl, 10)
-  el = fn3(el, al, bl, cl, dl, m[5], 0x6ed9eba1, 7); bl = rotl(bl, 10)
-  dl = fn3(dl, el, al, bl, cl, m[12], 0x6ed9eba1, 5); al = rotl(al, 10)
+  a = fnH(a, b, c, d, M[5], 0xfffa3942, 4)
+  d = fnH(d, a, b, c, M[8], 0x8771f681, 11)
+  c = fnH(c, d, a, b, M[11], 0x6d9d6122, 16)
+  b = fnH(b, c, d, a, M[14], 0xfde5380c, 23)
+  a = fnH(a, b, c, d, M[1], 0xa4beea44, 4)
+  d = fnH(d, a, b, c, M[4], 0x4bdecfa9, 11)
+  c = fnH(c, d, a, b, M[7], 0xf6bb4b60, 16)
+  b = fnH(b, c, d, a, M[10], 0xbebfbc70, 23)
+  a = fnH(a, b, c, d, M[13], 0x289b7ec6, 4)
+  d = fnH(d, a, b, c, M[0], 0xeaa127fa, 11)
+  c = fnH(c, d, a, b, M[3], 0xd4ef3085, 16)
+  b = fnH(b, c, d, a, M[6], 0x04881d05, 23)
+  a = fnH(a, b, c, d, M[9], 0xd9d4d039, 4)
+  d = fnH(d, a, b, c, M[12], 0xe6db99e5, 11)
+  c = fnH(c, d, a, b, M[15], 0x1fa27cf8, 16)
+  b = fnH(b, c, d, a, M[2], 0xc4ac5665, 23)
 
-  // Mj = 1, 9, 11, 10, 0, 8, 12, 4, 13, 3, 7, 15, 14, 5, 6, 2
-  // K = 0x8f1bbcdc
-  // Sj = 11, 12, 14, 15, 14, 15, 9, 8, 9, 14, 5, 6, 8, 6, 5, 12
-  cl = fn4(cl, dl, el, al, bl, m[1], 0x8f1bbcdc, 11); el = rotl(el, 10)
-  bl = fn4(bl, cl, dl, el, al, m[9], 0x8f1bbcdc, 12); dl = rotl(dl, 10)
-  al = fn4(al, bl, cl, dl, el, m[11], 0x8f1bbcdc, 14); cl = rotl(cl, 10)
-  el = fn4(el, al, bl, cl, dl, m[10], 0x8f1bbcdc, 15); bl = rotl(bl, 10)
-  dl = fn4(dl, el, al, bl, cl, m[0], 0x8f1bbcdc, 14); al = rotl(al, 10)
-  cl = fn4(cl, dl, el, al, bl, m[8], 0x8f1bbcdc, 15); el = rotl(el, 10)
-  bl = fn4(bl, cl, dl, el, al, m[12], 0x8f1bbcdc, 9); dl = rotl(dl, 10)
-  al = fn4(al, bl, cl, dl, el, m[4], 0x8f1bbcdc, 8); cl = rotl(cl, 10)
-  el = fn4(el, al, bl, cl, dl, m[13], 0x8f1bbcdc, 9); bl = rotl(bl, 10)
-  dl = fn4(dl, el, al, bl, cl, m[3], 0x8f1bbcdc, 14); al = rotl(al, 10)
-  cl = fn4(cl, dl, el, al, bl, m[7], 0x8f1bbcdc, 5); el = rotl(el, 10)
-  bl = fn4(bl, cl, dl, el, al, m[15], 0x8f1bbcdc, 6); dl = rotl(dl, 10)
-  al = fn4(al, bl, cl, dl, el, m[14], 0x8f1bbcdc, 8); cl = rotl(cl, 10)
-  el = fn4(el, al, bl, cl, dl, m[5], 0x8f1bbcdc, 6); bl = rotl(bl, 10)
-  dl = fn4(dl, el, al, bl, cl, m[6], 0x8f1bbcdc, 5); al = rotl(al, 10)
-  cl = fn4(cl, dl, el, al, bl, m[2], 0x8f1bbcdc, 12); el = rotl(el, 10)
+  a = fnI(a, b, c, d, M[0], 0xf4292244, 6)
+  d = fnI(d, a, b, c, M[7], 0x432aff97, 10)
+  c = fnI(c, d, a, b, M[14], 0xab9423a7, 15)
+  b = fnI(b, c, d, a, M[5], 0xfc93a039, 21)
+  a = fnI(a, b, c, d, M[12], 0x655b59c3, 6)
+  d = fnI(d, a, b, c, M[3], 0x8f0ccc92, 10)
+  c = fnI(c, d, a, b, M[10], 0xffeff47d, 15)
+  b = fnI(b, c, d, a, M[1], 0x85845dd1, 21)
+  a = fnI(a, b, c, d, M[8], 0x6fa87e4f, 6)
+  d = fnI(d, a, b, c, M[15], 0xfe2ce6e0, 10)
+  c = fnI(c, d, a, b, M[6], 0xa3014314, 15)
+  b = fnI(b, c, d, a, M[13], 0x4e0811a1, 21)
+  a = fnI(a, b, c, d, M[4], 0xf7537e82, 6)
+  d = fnI(d, a, b, c, M[11], 0xbd3af235, 10)
+  c = fnI(c, d, a, b, M[2], 0x2ad7d2bb, 15)
+  b = fnI(b, c, d, a, M[9], 0xeb86d391, 21)
 
-  // Mj = 4, 0, 5, 9, 7, 12, 2, 10, 14, 1, 3, 8, 11, 6, 15, 13
-  // K = 0xa953fd4e
-  // Sj = 9, 15, 5, 11, 6, 8, 13, 12, 5, 12, 13, 14, 11, 8, 5, 6
-  bl = fn5(bl, cl, dl, el, al, m[4], 0xa953fd4e, 9); dl = rotl(dl, 10)
-  al = fn5(al, bl, cl, dl, el, m[0], 0xa953fd4e, 15); cl = rotl(cl, 10)
-  el = fn5(el, al, bl, cl, dl, m[5], 0xa953fd4e, 5); bl = rotl(bl, 10)
-  dl = fn5(dl, el, al, bl, cl, m[9], 0xa953fd4e, 11); al = rotl(al, 10)
-  cl = fn5(cl, dl, el, al, bl, m[7], 0xa953fd4e, 6); el = rotl(el, 10)
-  bl = fn5(bl, cl, dl, el, al, m[12], 0xa953fd4e, 8); dl = rotl(dl, 10)
-  al = fn5(al, bl, cl, dl, el, m[2], 0xa953fd4e, 13); cl = rotl(cl, 10)
-  el = fn5(el, al, bl, cl, dl, m[10], 0xa953fd4e, 12); bl = rotl(bl, 10)
-  dl = fn5(dl, el, al, bl, cl, m[14], 0xa953fd4e, 5); al = rotl(al, 10)
-  cl = fn5(cl, dl, el, al, bl, m[1], 0xa953fd4e, 12); el = rotl(el, 10)
-  bl = fn5(bl, cl, dl, el, al, m[3], 0xa953fd4e, 13); dl = rotl(dl, 10)
-  al = fn5(al, bl, cl, dl, el, m[8], 0xa953fd4e, 14); cl = rotl(cl, 10)
-  el = fn5(el, al, bl, cl, dl, m[11], 0xa953fd4e, 11); bl = rotl(bl, 10)
-  dl = fn5(dl, el, al, bl, cl, m[6], 0xa953fd4e, 8); al = rotl(al, 10)
-  cl = fn5(cl, dl, el, al, bl, m[15], 0xa953fd4e, 5); el = rotl(el, 10)
-  bl = fn5(bl, cl, dl, el, al, m[13], 0xa953fd4e, 6); dl = rotl(dl, 10)
-
-  var ar = this._a
-  var br = this._b
-  var cr = this._c
-  var dr = this._d
-  var er = this._e
-
-  // M'j = 5, 14, 7, 0, 9, 2, 11, 4, 13, 6, 15, 8, 1, 10, 3, 12
-  // K' = 0x50a28be6
-  // S'j = 8, 9, 9, 11, 13, 15, 15, 5, 7, 7, 8, 11, 14, 14, 12, 6
-  ar = fn5(ar, br, cr, dr, er, m[5], 0x50a28be6, 8); cr = rotl(cr, 10)
-  er = fn5(er, ar, br, cr, dr, m[14], 0x50a28be6, 9); br = rotl(br, 10)
-  dr = fn5(dr, er, ar, br, cr, m[7], 0x50a28be6, 9); ar = rotl(ar, 10)
-  cr = fn5(cr, dr, er, ar, br, m[0], 0x50a28be6, 11); er = rotl(er, 10)
-  br = fn5(br, cr, dr, er, ar, m[9], 0x50a28be6, 13); dr = rotl(dr, 10)
-  ar = fn5(ar, br, cr, dr, er, m[2], 0x50a28be6, 15); cr = rotl(cr, 10)
-  er = fn5(er, ar, br, cr, dr, m[11], 0x50a28be6, 15); br = rotl(br, 10)
-  dr = fn5(dr, er, ar, br, cr, m[4], 0x50a28be6, 5); ar = rotl(ar, 10)
-  cr = fn5(cr, dr, er, ar, br, m[13], 0x50a28be6, 7); er = rotl(er, 10)
-  br = fn5(br, cr, dr, er, ar, m[6], 0x50a28be6, 7); dr = rotl(dr, 10)
-  ar = fn5(ar, br, cr, dr, er, m[15], 0x50a28be6, 8); cr = rotl(cr, 10)
-  er = fn5(er, ar, br, cr, dr, m[8], 0x50a28be6, 11); br = rotl(br, 10)
-  dr = fn5(dr, er, ar, br, cr, m[1], 0x50a28be6, 14); ar = rotl(ar, 10)
-  cr = fn5(cr, dr, er, ar, br, m[10], 0x50a28be6, 14); er = rotl(er, 10)
-  br = fn5(br, cr, dr, er, ar, m[3], 0x50a28be6, 12); dr = rotl(dr, 10)
-  ar = fn5(ar, br, cr, dr, er, m[12], 0x50a28be6, 6); cr = rotl(cr, 10)
-
-  // M'j = 6, 11, 3, 7, 0, 13, 5, 10, 14, 15, 8, 12, 4, 9, 1, 2
-  // K' = 0x5c4dd124
-  // S'j = 9, 13, 15, 7, 12, 8, 9, 11, 7, 7, 12, 7, 6, 15, 13, 11
-  er = fn4(er, ar, br, cr, dr, m[6], 0x5c4dd124, 9); br = rotl(br, 10)
-  dr = fn4(dr, er, ar, br, cr, m[11], 0x5c4dd124, 13); ar = rotl(ar, 10)
-  cr = fn4(cr, dr, er, ar, br, m[3], 0x5c4dd124, 15); er = rotl(er, 10)
-  br = fn4(br, cr, dr, er, ar, m[7], 0x5c4dd124, 7); dr = rotl(dr, 10)
-  ar = fn4(ar, br, cr, dr, er, m[0], 0x5c4dd124, 12); cr = rotl(cr, 10)
-  er = fn4(er, ar, br, cr, dr, m[13], 0x5c4dd124, 8); br = rotl(br, 10)
-  dr = fn4(dr, er, ar, br, cr, m[5], 0x5c4dd124, 9); ar = rotl(ar, 10)
-  cr = fn4(cr, dr, er, ar, br, m[10], 0x5c4dd124, 11); er = rotl(er, 10)
-  br = fn4(br, cr, dr, er, ar, m[14], 0x5c4dd124, 7); dr = rotl(dr, 10)
-  ar = fn4(ar, br, cr, dr, er, m[15], 0x5c4dd124, 7); cr = rotl(cr, 10)
-  er = fn4(er, ar, br, cr, dr, m[8], 0x5c4dd124, 12); br = rotl(br, 10)
-  dr = fn4(dr, er, ar, br, cr, m[12], 0x5c4dd124, 7); ar = rotl(ar, 10)
-  cr = fn4(cr, dr, er, ar, br, m[4], 0x5c4dd124, 6); er = rotl(er, 10)
-  br = fn4(br, cr, dr, er, ar, m[9], 0x5c4dd124, 15); dr = rotl(dr, 10)
-  ar = fn4(ar, br, cr, dr, er, m[1], 0x5c4dd124, 13); cr = rotl(cr, 10)
-  er = fn4(er, ar, br, cr, dr, m[2], 0x5c4dd124, 11); br = rotl(br, 10)
-
-  // M'j = 15, 5, 1, 3, 7, 14, 6, 9, 11, 8, 12, 2, 10, 0, 4, 13
-  // K' = 0x6d703ef3
-  // S'j = 9, 7, 15, 11, 8, 6, 6, 14, 12, 13, 5, 14, 13, 13, 7, 5
-  dr = fn3(dr, er, ar, br, cr, m[15], 0x6d703ef3, 9); ar = rotl(ar, 10)
-  cr = fn3(cr, dr, er, ar, br, m[5], 0x6d703ef3, 7); er = rotl(er, 10)
-  br = fn3(br, cr, dr, er, ar, m[1], 0x6d703ef3, 15); dr = rotl(dr, 10)
-  ar = fn3(ar, br, cr, dr, er, m[3], 0x6d703ef3, 11); cr = rotl(cr, 10)
-  er = fn3(er, ar, br, cr, dr, m[7], 0x6d703ef3, 8); br = rotl(br, 10)
-  dr = fn3(dr, er, ar, br, cr, m[14], 0x6d703ef3, 6); ar = rotl(ar, 10)
-  cr = fn3(cr, dr, er, ar, br, m[6], 0x6d703ef3, 6); er = rotl(er, 10)
-  br = fn3(br, cr, dr, er, ar, m[9], 0x6d703ef3, 14); dr = rotl(dr, 10)
-  ar = fn3(ar, br, cr, dr, er, m[11], 0x6d703ef3, 12); cr = rotl(cr, 10)
-  er = fn3(er, ar, br, cr, dr, m[8], 0x6d703ef3, 13); br = rotl(br, 10)
-  dr = fn3(dr, er, ar, br, cr, m[12], 0x6d703ef3, 5); ar = rotl(ar, 10)
-  cr = fn3(cr, dr, er, ar, br, m[2], 0x6d703ef3, 14); er = rotl(er, 10)
-  br = fn3(br, cr, dr, er, ar, m[10], 0x6d703ef3, 13); dr = rotl(dr, 10)
-  ar = fn3(ar, br, cr, dr, er, m[0], 0x6d703ef3, 13); cr = rotl(cr, 10)
-  er = fn3(er, ar, br, cr, dr, m[4], 0x6d703ef3, 7); br = rotl(br, 10)
-  dr = fn3(dr, er, ar, br, cr, m[13], 0x6d703ef3, 5); ar = rotl(ar, 10)
-
-  // M'j = 8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14
-  // K' = 0x7a6d76e9
-  // S'j = 15, 5, 8, 11, 14, 14, 6, 14, 6, 9, 12, 9, 12, 5, 15, 8
-  cr = fn2(cr, dr, er, ar, br, m[8], 0x7a6d76e9, 15); er = rotl(er, 10)
-  br = fn2(br, cr, dr, er, ar, m[6], 0x7a6d76e9, 5); dr = rotl(dr, 10)
-  ar = fn2(ar, br, cr, dr, er, m[4], 0x7a6d76e9, 8); cr = rotl(cr, 10)
-  er = fn2(er, ar, br, cr, dr, m[1], 0x7a6d76e9, 11); br = rotl(br, 10)
-  dr = fn2(dr, er, ar, br, cr, m[3], 0x7a6d76e9, 14); ar = rotl(ar, 10)
-  cr = fn2(cr, dr, er, ar, br, m[11], 0x7a6d76e9, 14); er = rotl(er, 10)
-  br = fn2(br, cr, dr, er, ar, m[15], 0x7a6d76e9, 6); dr = rotl(dr, 10)
-  ar = fn2(ar, br, cr, dr, er, m[0], 0x7a6d76e9, 14); cr = rotl(cr, 10)
-  er = fn2(er, ar, br, cr, dr, m[5], 0x7a6d76e9, 6); br = rotl(br, 10)
-  dr = fn2(dr, er, ar, br, cr, m[12], 0x7a6d76e9, 9); ar = rotl(ar, 10)
-  cr = fn2(cr, dr, er, ar, br, m[2], 0x7a6d76e9, 12); er = rotl(er, 10)
-  br = fn2(br, cr, dr, er, ar, m[13], 0x7a6d76e9, 9); dr = rotl(dr, 10)
-  ar = fn2(ar, br, cr, dr, er, m[9], 0x7a6d76e9, 12); cr = rotl(cr, 10)
-  er = fn2(er, ar, br, cr, dr, m[7], 0x7a6d76e9, 5); br = rotl(br, 10)
-  dr = fn2(dr, er, ar, br, cr, m[10], 0x7a6d76e9, 15); ar = rotl(ar, 10)
-  cr = fn2(cr, dr, er, ar, br, m[14], 0x7a6d76e9, 8); er = rotl(er, 10)
-
-  // M'j = 12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11
-  // K' = 0x00000000
-  // S'j = 8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
-  br = fn1(br, cr, dr, er, ar, m[12], 0x00000000, 8); dr = rotl(dr, 10)
-  ar = fn1(ar, br, cr, dr, er, m[15], 0x00000000, 5); cr = rotl(cr, 10)
-  er = fn1(er, ar, br, cr, dr, m[10], 0x00000000, 12); br = rotl(br, 10)
-  dr = fn1(dr, er, ar, br, cr, m[4], 0x00000000, 9); ar = rotl(ar, 10)
-  cr = fn1(cr, dr, er, ar, br, m[1], 0x00000000, 12); er = rotl(er, 10)
-  br = fn1(br, cr, dr, er, ar, m[5], 0x00000000, 5); dr = rotl(dr, 10)
-  ar = fn1(ar, br, cr, dr, er, m[8], 0x00000000, 14); cr = rotl(cr, 10)
-  er = fn1(er, ar, br, cr, dr, m[7], 0x00000000, 6); br = rotl(br, 10)
-  dr = fn1(dr, er, ar, br, cr, m[6], 0x00000000, 8); ar = rotl(ar, 10)
-  cr = fn1(cr, dr, er, ar, br, m[2], 0x00000000, 13); er = rotl(er, 10)
-  br = fn1(br, cr, dr, er, ar, m[13], 0x00000000, 6); dr = rotl(dr, 10)
-  ar = fn1(ar, br, cr, dr, er, m[14], 0x00000000, 5); cr = rotl(cr, 10)
-  er = fn1(er, ar, br, cr, dr, m[0], 0x00000000, 15); br = rotl(br, 10)
-  dr = fn1(dr, er, ar, br, cr, m[3], 0x00000000, 13); ar = rotl(ar, 10)
-  cr = fn1(cr, dr, er, ar, br, m[9], 0x00000000, 11); er = rotl(er, 10)
-  br = fn1(br, cr, dr, er, ar, m[11], 0x00000000, 11); dr = rotl(dr, 10)
-
-  // change state
-  var t = (this._b + cl + dr) | 0
-  this._b = (this._c + dl + er) | 0
-  this._c = (this._d + el + ar) | 0
-  this._d = (this._e + al + br) | 0
-  this._e = (this._a + bl + cr) | 0
-  this._a = t
+  this._a = (this._a + a) | 0
+  this._b = (this._b + b) | 0
+  this._c = (this._c + c) | 0
+  this._d = (this._d + d) | 0
 }
 
-RIPEMD160.prototype._digest = function () {
+MD5.prototype._digest = function () {
   // create padding and handle blocks
   this._block[this._blockOffset++] = 0x80
   if (this._blockOffset > 56) {
@@ -28413,12 +28160,11 @@ RIPEMD160.prototype._digest = function () {
   this._update()
 
   // produce result
-  var buffer = new Buffer(20)
+  var buffer = new Buffer(16)
   buffer.writeInt32LE(this._a, 0)
   buffer.writeInt32LE(this._b, 4)
   buffer.writeInt32LE(this._c, 8)
   buffer.writeInt32LE(this._d, 12)
-  buffer.writeInt32LE(this._e, 16)
   return buffer
 }
 
@@ -28426,32 +28172,161 @@ function rotl (x, n) {
   return (x << n) | (x >>> (32 - n))
 }
 
-function fn1 (a, b, c, d, e, m, k, s) {
-  return (rotl((a + (b ^ c ^ d) + m + k) | 0, s) + e) | 0
+function fnF (a, b, c, d, m, k, s) {
+  return (rotl((a + ((b & c) | ((~b) & d)) + m + k) | 0, s) + b) | 0
 }
 
-function fn2 (a, b, c, d, e, m, k, s) {
-  return (rotl((a + ((b & c) | ((~b) & d)) + m + k) | 0, s) + e) | 0
+function fnG (a, b, c, d, m, k, s) {
+  return (rotl((a + ((b & d) | (c & (~d))) + m + k) | 0, s) + b) | 0
 }
 
-function fn3 (a, b, c, d, e, m, k, s) {
-  return (rotl((a + ((b | (~c)) ^ d) + m + k) | 0, s) + e) | 0
+function fnH (a, b, c, d, m, k, s) {
+  return (rotl((a + (b ^ c ^ d) + m + k) | 0, s) + b) | 0
 }
 
-function fn4 (a, b, c, d, e, m, k, s) {
-  return (rotl((a + ((b & d) | (c & (~d))) + m + k) | 0, s) + e) | 0
+function fnI (a, b, c, d, m, k, s) {
+  return (rotl((a + ((c ^ (b | (~d)))) + m + k) | 0, s) + b) | 0
 }
 
-function fn5 (a, b, c, d, e, m, k, s) {
-  return (rotl((a + (b ^ (c | (~d))) + m + k) | 0, s) + e) | 0
-}
+module.exports = MD5
 
-module.exports = RIPEMD160
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
 /* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+module.exports = Stream;
+
+var EE = __webpack_require__(64).EventEmitter;
+var inherits = __webpack_require__(0);
+
+inherits(Stream, EE);
+Stream.Readable = __webpack_require__(65);
+Stream.Writable = __webpack_require__(166);
+Stream.Duplex = __webpack_require__(167);
+Stream.Transform = __webpack_require__(168);
+Stream.PassThrough = __webpack_require__(169);
+
+// Backwards-compat with node 0.4.x
+Stream.Stream = Stream;
+
+
+
+// old-style streams.  Note that the pipe method (the only relevant
+// part of this class) is overridden in the Readable class.
+
+function Stream() {
+  EE.call(this);
+}
+
+Stream.prototype.pipe = function(dest, options) {
+  var source = this;
+
+  function ondata(chunk) {
+    if (dest.writable) {
+      if (false === dest.write(chunk) && source.pause) {
+        source.pause();
+      }
+    }
+  }
+
+  source.on('data', ondata);
+
+  function ondrain() {
+    if (source.readable && source.resume) {
+      source.resume();
+    }
+  }
+
+  dest.on('drain', ondrain);
+
+  // If the 'end' option is not supplied, dest.end() will be called when
+  // source gets the 'end' or 'close' events.  Only dest.end() once.
+  if (!dest._isStdio && (!options || options.end !== false)) {
+    source.on('end', onend);
+    source.on('close', onclose);
+  }
+
+  var didOnEnd = false;
+  function onend() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    dest.end();
+  }
+
+
+  function onclose() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    if (typeof dest.destroy === 'function') dest.destroy();
+  }
+
+  // don't leave dangling pipes when there are errors.
+  function onerror(er) {
+    cleanup();
+    if (EE.listenerCount(this, 'error') === 0) {
+      throw er; // Unhandled stream error in pipe.
+    }
+  }
+
+  source.on('error', onerror);
+  dest.on('error', onerror);
+
+  // remove all the event listeners that were added.
+  function cleanup() {
+    source.removeListener('data', ondata);
+    dest.removeListener('drain', ondrain);
+
+    source.removeListener('end', onend);
+    source.removeListener('close', onclose);
+
+    source.removeListener('error', onerror);
+    dest.removeListener('error', onerror);
+
+    source.removeListener('end', cleanup);
+    source.removeListener('close', cleanup);
+
+    dest.removeListener('close', cleanup);
+  }
+
+  source.on('end', cleanup);
+  source.on('close', cleanup);
+
+  dest.on('close', cleanup);
+
+  dest.emit('pipe', source);
+
+  // Allow for unix-like usage: A.pipe(B).pipe(C)
+  return dest;
+};
+
+
+/***/ }),
+/* 64 */
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -28759,20 +28634,20 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(88);
+exports = module.exports = __webpack_require__(91);
 exports.Stream = exports;
 exports.Readable = exports;
-exports.Writable = __webpack_require__(65);
-exports.Duplex = __webpack_require__(23);
-exports.Transform = __webpack_require__(91);
-exports.PassThrough = __webpack_require__(160);
+exports.Writable = __webpack_require__(66);
+exports.Duplex = __webpack_require__(24);
+exports.Transform = __webpack_require__(94);
+exports.PassThrough = __webpack_require__(165);
 
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28848,12 +28723,12 @@ util.inherits = __webpack_require__(0);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(159)
+  deprecate: __webpack_require__(164)
 };
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(89);
+var Stream = __webpack_require__(92);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -28869,14 +28744,14 @@ function _isUint8Array(obj) {
 
 /*</replacement>*/
 
-var destroyImpl = __webpack_require__(90);
+var destroyImpl = __webpack_require__(93);
 
 util.inherits(Writable, Stream);
 
 function nop() {}
 
 function WritableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(23);
+  Duplex = Duplex || __webpack_require__(24);
 
   options = options || {};
 
@@ -29026,7 +28901,7 @@ if (typeof Symbol === 'function' && Symbol.hasInstance && typeof Function.protot
 }
 
 function Writable(options) {
-  Duplex = Duplex || __webpack_require__(23);
+  Duplex = Duplex || __webpack_require__(24);
 
   // Writable ctor is applied to Duplexes, too.
   // `realHasInstance` is necessary because using plain `instanceof`
@@ -29145,6 +29020,16 @@ function decodeChunk(state, chunk, encoding) {
   }
   return chunk;
 }
+
+Object.defineProperty(Writable.prototype, 'writableHighWaterMark', {
+  // making it explicit this property is not enumerable
+  // because otherwise some prototype manipulation in
+  // userland will fail
+  enumerable: false,
+  get: function () {
+    return this._writableState.highWaterMark;
+  }
+});
 
 // if we're already writing something, then just put this
 // in the queue, and wait our turn.  Otherwise, call _write
@@ -29453,10 +29338,10 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20), __webpack_require__(45).setImmediate, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20), __webpack_require__(45).setImmediate, __webpack_require__(13)))
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29758,7 +29643,177 @@ function simpleEnd(buf) {
 }
 
 /***/ }),
-/* 67 */
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Buffer = __webpack_require__(3).Buffer
+var inherits = __webpack_require__(0)
+var HashBase = __webpack_require__(90)
+
+var ARRAY16 = new Array(16)
+
+var zl = [
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+  7, 4, 13, 1, 10, 6, 15, 3, 12, 0, 9, 5, 2, 14, 11, 8,
+  3, 10, 14, 4, 9, 15, 8, 1, 2, 7, 0, 6, 13, 11, 5, 12,
+  1, 9, 11, 10, 0, 8, 12, 4, 13, 3, 7, 15, 14, 5, 6, 2,
+  4, 0, 5, 9, 7, 12, 2, 10, 14, 1, 3, 8, 11, 6, 15, 13
+]
+
+var zr = [
+  5, 14, 7, 0, 9, 2, 11, 4, 13, 6, 15, 8, 1, 10, 3, 12,
+  6, 11, 3, 7, 0, 13, 5, 10, 14, 15, 8, 12, 4, 9, 1, 2,
+  15, 5, 1, 3, 7, 14, 6, 9, 11, 8, 12, 2, 10, 0, 4, 13,
+  8, 6, 4, 1, 3, 11, 15, 0, 5, 12, 2, 13, 9, 7, 10, 14,
+  12, 15, 10, 4, 1, 5, 8, 7, 6, 2, 13, 14, 0, 3, 9, 11
+]
+
+var sl = [
+  11, 14, 15, 12, 5, 8, 7, 9, 11, 13, 14, 15, 6, 7, 9, 8,
+  7, 6, 8, 13, 11, 9, 7, 15, 7, 12, 15, 9, 11, 7, 13, 12,
+  11, 13, 6, 7, 14, 9, 13, 15, 14, 8, 13, 6, 5, 12, 7, 5,
+  11, 12, 14, 15, 14, 15, 9, 8, 9, 14, 5, 6, 8, 6, 5, 12,
+  9, 15, 5, 11, 6, 8, 13, 12, 5, 12, 13, 14, 11, 8, 5, 6
+]
+
+var sr = [
+  8, 9, 9, 11, 13, 15, 15, 5, 7, 7, 8, 11, 14, 14, 12, 6,
+  9, 13, 15, 7, 12, 8, 9, 11, 7, 7, 12, 7, 6, 15, 13, 11,
+  9, 7, 15, 11, 8, 6, 6, 14, 12, 13, 5, 14, 13, 13, 7, 5,
+  15, 5, 8, 11, 14, 14, 6, 14, 6, 9, 12, 9, 12, 5, 15, 8,
+  8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
+]
+
+var hl = [0x00000000, 0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xa953fd4e]
+var hr = [0x50a28be6, 0x5c4dd124, 0x6d703ef3, 0x7a6d76e9, 0x00000000]
+
+function RIPEMD160 () {
+  HashBase.call(this, 64)
+
+  // state
+  this._a = 0x67452301
+  this._b = 0xefcdab89
+  this._c = 0x98badcfe
+  this._d = 0x10325476
+  this._e = 0xc3d2e1f0
+}
+
+inherits(RIPEMD160, HashBase)
+
+RIPEMD160.prototype._update = function () {
+  var words = ARRAY16
+  for (var j = 0; j < 16; ++j) words[j] = this._block.readInt32LE(j * 4)
+
+  var al = this._a | 0
+  var bl = this._b | 0
+  var cl = this._c | 0
+  var dl = this._d | 0
+  var el = this._e | 0
+
+  var ar = this._a | 0
+  var br = this._b | 0
+  var cr = this._c | 0
+  var dr = this._d | 0
+  var er = this._e | 0
+
+  // computation
+  for (var i = 0; i < 80; i += 1) {
+    var tl
+    var tr
+    if (i < 16) {
+      tl = fn1(al, bl, cl, dl, el, words[zl[i]], hl[0], sl[i])
+      tr = fn5(ar, br, cr, dr, er, words[zr[i]], hr[0], sr[i])
+    } else if (i < 32) {
+      tl = fn2(al, bl, cl, dl, el, words[zl[i]], hl[1], sl[i])
+      tr = fn4(ar, br, cr, dr, er, words[zr[i]], hr[1], sr[i])
+    } else if (i < 48) {
+      tl = fn3(al, bl, cl, dl, el, words[zl[i]], hl[2], sl[i])
+      tr = fn3(ar, br, cr, dr, er, words[zr[i]], hr[2], sr[i])
+    } else if (i < 64) {
+      tl = fn4(al, bl, cl, dl, el, words[zl[i]], hl[3], sl[i])
+      tr = fn2(ar, br, cr, dr, er, words[zr[i]], hr[3], sr[i])
+    } else { // if (i<80) {
+      tl = fn5(al, bl, cl, dl, el, words[zl[i]], hl[4], sl[i])
+      tr = fn1(ar, br, cr, dr, er, words[zr[i]], hr[4], sr[i])
+    }
+
+    al = el
+    el = dl
+    dl = rotl(cl, 10)
+    cl = bl
+    bl = tl
+
+    ar = er
+    er = dr
+    dr = rotl(cr, 10)
+    cr = br
+    br = tr
+  }
+
+  // update state
+  var t = (this._b + cl + dr) | 0
+  this._b = (this._c + dl + er) | 0
+  this._c = (this._d + el + ar) | 0
+  this._d = (this._e + al + br) | 0
+  this._e = (this._a + bl + cr) | 0
+  this._a = t
+}
+
+RIPEMD160.prototype._digest = function () {
+  // create padding and handle blocks
+  this._block[this._blockOffset++] = 0x80
+  if (this._blockOffset > 56) {
+    this._block.fill(0, this._blockOffset, 64)
+    this._update()
+    this._blockOffset = 0
+  }
+
+  this._block.fill(0, this._blockOffset, 56)
+  this._block.writeUInt32LE(this._length[0], 56)
+  this._block.writeUInt32LE(this._length[1], 60)
+  this._update()
+
+  // produce result
+  var buffer = Buffer.alloc ? Buffer.alloc(20) : new Buffer(20)
+  buffer.writeInt32LE(this._a, 0)
+  buffer.writeInt32LE(this._b, 4)
+  buffer.writeInt32LE(this._c, 8)
+  buffer.writeInt32LE(this._d, 12)
+  buffer.writeInt32LE(this._e, 16)
+  return buffer
+}
+
+function rotl (x, n) {
+  return (x << n) | (x >>> (32 - n))
+}
+
+function fn1 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + (b ^ c ^ d) + m + k) | 0, s) + e) | 0
+}
+
+function fn2 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b & c) | ((~b) & d)) + m + k) | 0, s) + e) | 0
+}
+
+function fn3 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b | (~c)) ^ d) + m + k) | 0, s) + e) | 0
+}
+
+function fn4 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + ((b & d) | (c & (~d))) + m + k) | 0, s) + e) | 0
+}
+
+function fn5 (a, b, c, d, e, m, k, s) {
+  return (rotl((a + (b ^ (c | (~d))) + m + k) | 0, s) + e) | 0
+}
+
+module.exports = RIPEMD160
+
+
+/***/ }),
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -29770,21 +29825,35 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(165)
-exports.sha1 = __webpack_require__(166)
-exports.sha224 = __webpack_require__(167)
-exports.sha256 = __webpack_require__(92)
-exports.sha384 = __webpack_require__(168)
-exports.sha512 = __webpack_require__(93)
+exports.sha = __webpack_require__(170)
+exports.sha1 = __webpack_require__(171)
+exports.sha224 = __webpack_require__(172)
+exports.sha256 = __webpack_require__(95)
+exports.sha384 = __webpack_require__(173)
+exports.sha512 = __webpack_require__(96)
 
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(175)
-var deciphers = __webpack_require__(183)
-var modes = __webpack_require__(102)
+"use strict";
+
+
+exports.utils = __webpack_require__(179);
+exports.Cipher = __webpack_require__(180);
+exports.DES = __webpack_require__(181);
+exports.CBC = __webpack_require__(182);
+exports.EDE = __webpack_require__(183);
+
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var ciphers = __webpack_require__(184)
+var deciphers = __webpack_require__(192)
+var modes = __webpack_require__(106)
 
 function getCiphers () {
   return Object.keys(modes)
@@ -29798,21 +29867,21 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var modeModules = {
-  ECB: __webpack_require__(176),
-  CBC: __webpack_require__(177),
-  CFB: __webpack_require__(178),
-  CFB8: __webpack_require__(179),
-  CFB1: __webpack_require__(180),
-  OFB: __webpack_require__(181),
-  CTR: __webpack_require__(100),
-  GCM: __webpack_require__(100)
+  ECB: __webpack_require__(185),
+  CBC: __webpack_require__(186),
+  CFB: __webpack_require__(187),
+  CFB8: __webpack_require__(188),
+  CFB1: __webpack_require__(189),
+  OFB: __webpack_require__(190),
+  CTR: __webpack_require__(104),
+  GCM: __webpack_require__(104)
 }
 
-var modes = __webpack_require__(102)
+var modes = __webpack_require__(106)
 
 for (var key in modes) {
   modes[key].module = modeModules[modes[key].mode]
@@ -29822,52 +29891,10 @@ module.exports = modes
 
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-exports.utils = __webpack_require__(185);
-exports.Cipher = __webpack_require__(186);
-exports.DES = __webpack_require__(187);
-exports.CBC = __webpack_require__(188);
-exports.EDE = __webpack_require__(189);
-
-
-/***/ }),
-/* 71 */
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-/* 72 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(5);
 var randomBytes = __webpack_require__(27);
 module.exports = crt;
 function blind(priv) {
@@ -29908,19 +29935,19 @@ function getr(priv) {
   return r;
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = exports;
 
 hash.utils = __webpack_require__(17);
 hash.common = __webpack_require__(35);
-hash.sha = __webpack_require__(205);
-hash.ripemd = __webpack_require__(209);
-hash.hmac = __webpack_require__(210);
+hash.sha = __webpack_require__(208);
+hash.ripemd = __webpack_require__(212);
+hash.hmac = __webpack_require__(213);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -29932,7 +29959,7 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(29),
@@ -29945,7 +29972,7 @@ module.exports = Map;
 
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(19);
@@ -29957,7 +29984,7 @@ module.exports = Symbol;
 
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -29989,7 +30016,7 @@ module.exports = isArray;
 
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29997,12 +30024,12 @@ module.exports = isArray;
 // Copyright (c) Jupyter Development Team.
 // Distributed under the terms of the Modified BSD License.
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JUPYTER_WIDGETS_VERSION = '1.0.0';
+exports.JUPYTER_WIDGETS_VERSION = '1.1.0';
 exports.PROTOCOL_VERSION = '2.0.0';
 
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30029,13 +30056,13 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils = __webpack_require__(25);
-var backbonePatch = __webpack_require__(310);
-var Backbone = __webpack_require__(60);
-var $ = __webpack_require__(12);
-var nativeview_1 = __webpack_require__(311);
+var backbonePatch = __webpack_require__(313);
+var Backbone = __webpack_require__(61);
+var $ = __webpack_require__(14);
+var nativeview_1 = __webpack_require__(314);
 var widgets_1 = __webpack_require__(30);
 var messaging_1 = __webpack_require__(6);
-var version_1 = __webpack_require__(77);
+var version_1 = __webpack_require__(78);
 /**
  * Replace model ids with models recursively.
  */
@@ -30757,7 +30784,7 @@ var DOMWidgetView = /** @class */ (function (_super) {
             el = this.el;
         }
         utils.difference(old_classes, new_classes).map(function (c) {
-            if (el.classList) {
+            if (el.classList) { // classList is not supported by IE for svg elements
                 el.classList.remove(c);
             }
             else {
@@ -30765,7 +30792,7 @@ var DOMWidgetView = /** @class */ (function (_super) {
             }
         });
         utils.difference(new_classes, old_classes).map(function (c) {
-            if (el.classList) {
+            if (el.classList) { // classList is not supported by IE for svg elements
                 el.classList.add(c);
             }
             else {
@@ -30847,7 +30874,7 @@ exports.DOMWidgetView = DOMWidgetView;
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30870,12 +30897,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var boxengine_1 = __webpack_require__(40);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var panellayout_1 = __webpack_require__(41);
 var widget_1 = __webpack_require__(8);
 /**
@@ -31421,7 +31448,7 @@ var Private;
 
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31716,7 +31743,7 @@ exports.Title = Title;
 
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31729,7 +31756,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A disposable object which delegates to a callback function.
  */
@@ -31864,7 +31891,7 @@ exports.DisposableSet = DisposableSet;
 
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32109,7 +32136,7 @@ var Private;
 
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32132,13 +32159,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var dragdrop_1 = __webpack_require__(56);
 var messaging_1 = __webpack_require__(6);
 var signaling_1 = __webpack_require__(11);
 var virtualdom_1 = __webpack_require__(55);
-var title_1 = __webpack_require__(80);
+var title_1 = __webpack_require__(81);
 var widget_1 = __webpack_require__(8);
 /**
  * A widget which displays titles as a single row or column of tabs.
@@ -33344,7 +33371,7 @@ var Private;
 
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33357,25 +33384,48 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__(16));
 __export(__webpack_require__(57));
-__export(__webpack_require__(347));
-__export(__webpack_require__(348));
-__export(__webpack_require__(349));
-__export(__webpack_require__(137));
-__export(__webpack_require__(350));
 __export(__webpack_require__(351));
 __export(__webpack_require__(352));
-__export(__webpack_require__(138));
+__export(__webpack_require__(353));
+__export(__webpack_require__(141));
+__export(__webpack_require__(354));
+__export(__webpack_require__(355));
+__export(__webpack_require__(356));
 __export(__webpack_require__(357));
 __export(__webpack_require__(358));
-__export(__webpack_require__(359));
-__export(__webpack_require__(360));
-__export(__webpack_require__(364));
-__export(__webpack_require__(22));
-exports.version = __webpack_require__(365).version;
+__export(__webpack_require__(142));
+__export(__webpack_require__(373));
+__export(__webpack_require__(374));
+__export(__webpack_require__(375));
+__export(__webpack_require__(376));
+__export(__webpack_require__(380));
+__export(__webpack_require__(23));
+exports.version = __webpack_require__(381).version;
 
 
 /***/ }),
-/* 85 */
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// Computes the decimal coefficient and exponent of the specified number x with
+// significant digits p, where x is positive and p is in [1, 21] or undefined.
+// For example, formatDecimal(1.23) returns ["123", 0].
+/* harmony default export */ __webpack_exports__["a"] = (function(x, p) {
+  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
+  var i, coefficient = x.slice(0, i);
+
+  // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
+  // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
+  return [
+    coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
+    +x.slice(i + 1)
+  ];
+});
+
+
+/***/ }),
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33385,10 +33435,10 @@ exports.version = __webpack_require__(365).version;
 
 // This widget is strongly coupled to the notebook because of the outputarea
 // dependency.
-var widgets = __webpack_require__(84);
-var outputBase = __webpack_require__(366);
-var _ = __webpack_require__(5);
-__webpack_require__(368);
+var widgets = __webpack_require__(85);
+var outputBase = __webpack_require__(382);
+var _ = __webpack_require__(4);
+__webpack_require__(384);
 
 var outputArea = new Promise(function(resolve, reject) {
         requirejs(["notebook/js/outputarea"], resolve, reject)
@@ -33529,7 +33579,7 @@ module.exports = {
 
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33554,65 +33604,97 @@ for (var i = 0, len = code.length; i < len; ++i) {
 revLookup['-'.charCodeAt(0)] = 62
 revLookup['_'.charCodeAt(0)] = 63
 
-function placeHoldersCount (b64) {
+function getLens (b64) {
   var len = b64.length
+
   if (len % 4 > 0) {
     throw new Error('Invalid string. Length must be a multiple of 4')
   }
 
-  // the number of equal signs (place holders)
-  // if there are two placeholders, than the two characters before it
-  // represent one byte
-  // if there is only one, then the three characters before it represent 2 bytes
-  // this is just a cheap hack to not do indexOf twice
-  return b64[len - 2] === '=' ? 2 : b64[len - 1] === '=' ? 1 : 0
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
 }
 
+// base64 is 4/3 + up to two characters of the original data
 function byteLength (b64) {
-  // base64 is 4/3 + up to two characters of the original data
-  return (b64.length * 3 / 4) - placeHoldersCount(b64)
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
 }
 
 function toByteArray (b64) {
-  var i, l, tmp, placeHolders, arr
-  var len = b64.length
-  placeHolders = placeHoldersCount(b64)
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
 
-  arr = new Arr((len * 3 / 4) - placeHolders)
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
 
   // if there are placeholders, only get up to the last complete 4 chars
-  l = placeHolders > 0 ? len - 4 : len
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
 
-  var L = 0
-
-  for (i = 0; i < l; i += 4) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 18) | (revLookup[b64.charCodeAt(i + 1)] << 12) | (revLookup[b64.charCodeAt(i + 2)] << 6) | revLookup[b64.charCodeAt(i + 3)]
-    arr[L++] = (tmp >> 16) & 0xFF
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
+  for (var i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
   }
 
-  if (placeHolders === 2) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 2) | (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[L++] = tmp & 0xFF
-  } else if (placeHolders === 1) {
-    tmp = (revLookup[b64.charCodeAt(i)] << 10) | (revLookup[b64.charCodeAt(i + 1)] << 4) | (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[L++] = (tmp >> 8) & 0xFF
-    arr[L++] = tmp & 0xFF
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
   }
 
   return arr
 }
 
 function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] + lookup[num >> 12 & 0x3F] + lookup[num >> 6 & 0x3F] + lookup[num & 0x3F]
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
 }
 
 function encodeChunk (uint8, start, end) {
   var tmp
   var output = []
   for (var i = start; i < end; i += 3) {
-    tmp = ((uint8[i] << 16) & 0xFF0000) + ((uint8[i + 1] << 8) & 0xFF00) + (uint8[i + 2] & 0xFF)
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
     output.push(tripletToBase64(tmp))
   }
   return output.join('')
@@ -33622,37 +33704,40 @@ function fromByteArray (uint8) {
   var tmp
   var len = uint8.length
   var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var output = ''
   var parts = []
   var maxChunkLength = 16383 // must be multiple of 3
 
   // go through the array every three bytes, we'll deal with trailing stuff later
   for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+    parts.push(encodeChunk(
+      uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)
+    ))
   }
 
   // pad the end with zeros, but make sure to not forget the extra bytes
   if (extraBytes === 1) {
     tmp = uint8[len - 1]
-    output += lookup[tmp >> 2]
-    output += lookup[(tmp << 4) & 0x3F]
-    output += '=='
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
   } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + (uint8[len - 1])
-    output += lookup[tmp >> 10]
-    output += lookup[(tmp >> 4) & 0x3F]
-    output += lookup[(tmp << 2) & 0x3F]
-    output += '='
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
   }
-
-  parts.push(output)
 
   return parts.join('')
 }
 
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33690,7 +33775,7 @@ var Random;
     Random.getRandomValues = (function () {
         // Look up the crypto module if available.
         var crypto = ((typeof window !== 'undefined' && (window.crypto || window.msCrypto)) ||
-            ("function" !== 'undefined' && __webpack_require__(149)) || null);
+            ("function" !== 'undefined' && __webpack_require__(156)) || null);
         // Modern browsers and IE 11
         if (crypto && typeof crypto.getRandomValues === 'function') {
             return function getRandomValues(buffer) {
@@ -33728,7 +33813,109 @@ var Random;
 
 
 /***/ }),
-/* 88 */
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Buffer = __webpack_require__(1).Buffer
+var Transform = __webpack_require__(63).Transform
+var inherits = __webpack_require__(0)
+
+function throwIfNotStringOrBuffer (val, prefix) {
+  if (!Buffer.isBuffer(val) && typeof val !== 'string') {
+    throw new TypeError(prefix + ' must be a string or a buffer')
+  }
+}
+
+function HashBase (blockSize) {
+  Transform.call(this)
+
+  this._block = Buffer.allocUnsafe(blockSize)
+  this._blockSize = blockSize
+  this._blockOffset = 0
+  this._length = [0, 0, 0, 0]
+
+  this._finalized = false
+}
+
+inherits(HashBase, Transform)
+
+HashBase.prototype._transform = function (chunk, encoding, callback) {
+  var error = null
+  try {
+    this.update(chunk, encoding)
+  } catch (err) {
+    error = err
+  }
+
+  callback(error)
+}
+
+HashBase.prototype._flush = function (callback) {
+  var error = null
+  try {
+    this.push(this.digest())
+  } catch (err) {
+    error = err
+  }
+
+  callback(error)
+}
+
+HashBase.prototype.update = function (data, encoding) {
+  throwIfNotStringOrBuffer(data, 'Data')
+  if (this._finalized) throw new Error('Digest already called')
+  if (!Buffer.isBuffer(data)) data = Buffer.from(data, encoding)
+
+  // consume data
+  var block = this._block
+  var offset = 0
+  while (this._blockOffset + data.length - offset >= this._blockSize) {
+    for (var i = this._blockOffset; i < this._blockSize;) block[i++] = data[offset++]
+    this._update()
+    this._blockOffset = 0
+  }
+  while (offset < data.length) block[this._blockOffset++] = data[offset++]
+
+  // update length
+  for (var j = 0, carry = data.length * 8; carry > 0; ++j) {
+    this._length[j] += carry
+    carry = (this._length[j] / 0x0100000000) | 0
+    if (carry > 0) this._length[j] -= 0x0100000000 * carry
+  }
+
+  return this
+}
+
+HashBase.prototype._update = function () {
+  throw new Error('_update is not implemented')
+}
+
+HashBase.prototype.digest = function (encoding) {
+  if (this._finalized) throw new Error('Digest already called')
+  this._finalized = true
+
+  var digest = this._digest()
+  if (encoding !== undefined) digest = digest.toString(encoding)
+
+  // reset state
+  this._block.fill(0)
+  this._blockOffset = 0
+  for (var i = 0; i < 4; ++i) this._length[i] = 0
+
+  return digest
+}
+
+HashBase.prototype._digest = function () {
+  throw new Error('_digest is not implemented')
+}
+
+module.exports = HashBase
+
+
+/***/ }),
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33763,7 +33950,7 @@ var pna = __webpack_require__(44);
 module.exports = Readable;
 
 /*<replacement>*/
-var isArray = __webpack_require__(154);
+var isArray = __webpack_require__(159);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -33773,7 +33960,7 @@ var Duplex;
 Readable.ReadableState = ReadableState;
 
 /*<replacement>*/
-var EE = __webpack_require__(63).EventEmitter;
+var EE = __webpack_require__(64).EventEmitter;
 
 var EElistenerCount = function (emitter, type) {
   return emitter.listeners(type).length;
@@ -33781,7 +33968,7 @@ var EElistenerCount = function (emitter, type) {
 /*</replacement>*/
 
 /*<replacement>*/
-var Stream = __webpack_require__(89);
+var Stream = __webpack_require__(92);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -33803,7 +33990,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(155);
+var debugUtil = __webpack_require__(160);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -33812,8 +33999,8 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(156);
-var destroyImpl = __webpack_require__(90);
+var BufferList = __webpack_require__(161);
+var destroyImpl = __webpack_require__(93);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -33833,7 +34020,7 @@ function prependListener(emitter, event, fn) {
 }
 
 function ReadableState(options, stream) {
-  Duplex = Duplex || __webpack_require__(23);
+  Duplex = Duplex || __webpack_require__(24);
 
   options = options || {};
 
@@ -33903,14 +34090,14 @@ function ReadableState(options, stream) {
   this.decoder = null;
   this.encoding = null;
   if (options.encoding) {
-    if (!StringDecoder) StringDecoder = __webpack_require__(66).StringDecoder;
+    if (!StringDecoder) StringDecoder = __webpack_require__(67).StringDecoder;
     this.decoder = new StringDecoder(options.encoding);
     this.encoding = options.encoding;
   }
 }
 
 function Readable(options) {
-  Duplex = Duplex || __webpack_require__(23);
+  Duplex = Duplex || __webpack_require__(24);
 
   if (!(this instanceof Readable)) return new Readable(options);
 
@@ -34059,7 +34246,7 @@ Readable.prototype.isPaused = function () {
 
 // backwards compatibility.
 Readable.prototype.setEncoding = function (enc) {
-  if (!StringDecoder) StringDecoder = __webpack_require__(66).StringDecoder;
+  if (!StringDecoder) StringDecoder = __webpack_require__(67).StringDecoder;
   this._readableState.decoder = new StringDecoder(enc);
   this._readableState.encoding = enc;
   return this;
@@ -34610,6 +34797,16 @@ Readable.prototype.wrap = function (stream) {
   return this;
 };
 
+Object.defineProperty(Readable.prototype, 'readableHighWaterMark', {
+  // making it explicit this property is not enumerable
+  // because otherwise some prototype manipulation in
+  // userland will fail
+  enumerable: false,
+  get: function () {
+    return this._readableState.highWaterMark;
+  }
+});
+
 // exposed for testing purposes only.
 Readable._fromList = fromList;
 
@@ -34735,29 +34932,23 @@ function endReadableNT(state, stream) {
   }
 }
 
-function forEach(xs, f) {
-  for (var i = 0, l = xs.length; i < l; i++) {
-    f(xs[i], i);
-  }
-}
-
 function indexOf(xs, x) {
   for (var i = 0, l = xs.length; i < l; i++) {
     if (xs[i] === x) return i;
   }
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(20)))
 
 /***/ }),
-/* 89 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(63).EventEmitter;
+module.exports = __webpack_require__(64).EventEmitter;
 
 
 /***/ }),
-/* 90 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34837,7 +35028,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 91 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34908,7 +35099,7 @@ module.exports = {
 
 module.exports = Transform;
 
-var Duplex = __webpack_require__(23);
+var Duplex = __webpack_require__(24);
 
 /*<replacement>*/
 var util = __webpack_require__(33);
@@ -35057,7 +35248,7 @@ function done(stream, er, data) {
 }
 
 /***/ }),
-/* 92 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -35198,7 +35389,7 @@ module.exports = Sha256
 
 
 /***/ }),
-/* 93 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
@@ -35464,19 +35655,19 @@ module.exports = Sha512
 
 
 /***/ }),
-/* 94 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 var inherits = __webpack_require__(0)
-var Legacy = __webpack_require__(169)
+var Legacy = __webpack_require__(174)
 var Base = __webpack_require__(21)
 var Buffer = __webpack_require__(1).Buffer
-var md5 = __webpack_require__(61)
-var RIPEMD160 = __webpack_require__(62)
+var md5 = __webpack_require__(98)
+var RIPEMD160 = __webpack_require__(68)
 
-var sha = __webpack_require__(67)
+var sha = __webpack_require__(69)
 
 var ZEROS = Buffer.alloc(128)
 
@@ -35533,27 +35724,46 @@ module.exports = function createHmac (alg, key) {
 
 
 /***/ }),
-/* 95 */
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MD5 = __webpack_require__(62)
+
+module.exports = function (buffer) {
+  return new MD5().update(buffer).digest()
+}
+
+
+/***/ }),
+/* 99 */
 /***/ (function(module, exports) {
 
 module.exports = {"sha224WithRSAEncryption":{"sign":"rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"RSA-SHA224":{"sign":"ecdsa/rsa","hash":"sha224","id":"302d300d06096086480165030402040500041c"},"sha256WithRSAEncryption":{"sign":"rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"RSA-SHA256":{"sign":"ecdsa/rsa","hash":"sha256","id":"3031300d060960864801650304020105000420"},"sha384WithRSAEncryption":{"sign":"rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"RSA-SHA384":{"sign":"ecdsa/rsa","hash":"sha384","id":"3041300d060960864801650304020205000430"},"sha512WithRSAEncryption":{"sign":"rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA512":{"sign":"ecdsa/rsa","hash":"sha512","id":"3051300d060960864801650304020305000440"},"RSA-SHA1":{"sign":"rsa","hash":"sha1","id":"3021300906052b0e03021a05000414"},"ecdsa-with-SHA1":{"sign":"ecdsa","hash":"sha1","id":""},"sha256":{"sign":"ecdsa","hash":"sha256","id":""},"sha224":{"sign":"ecdsa","hash":"sha224","id":""},"sha384":{"sign":"ecdsa","hash":"sha384","id":""},"sha512":{"sign":"ecdsa","hash":"sha512","id":""},"DSA-SHA":{"sign":"dsa","hash":"sha1","id":""},"DSA-SHA1":{"sign":"dsa","hash":"sha1","id":""},"DSA":{"sign":"dsa","hash":"sha1","id":""},"DSA-WITH-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-SHA224":{"sign":"dsa","hash":"sha224","id":""},"DSA-WITH-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-SHA256":{"sign":"dsa","hash":"sha256","id":""},"DSA-WITH-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-SHA384":{"sign":"dsa","hash":"sha384","id":""},"DSA-WITH-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-SHA512":{"sign":"dsa","hash":"sha512","id":""},"DSA-RIPEMD160":{"sign":"dsa","hash":"rmd160","id":""},"ripemd160WithRSA":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"RSA-RIPEMD160":{"sign":"rsa","hash":"rmd160","id":"3021300906052b2403020105000414"},"md5WithRSAEncryption":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"},"RSA-MD5":{"sign":"rsa","hash":"md5","id":"3020300c06082a864886f70d020505000410"}}
 
 /***/ }),
-/* 96 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
-
-exports.pbkdf2 = __webpack_require__(171)
-
-exports.pbkdf2Sync = __webpack_require__(99)
+exports.pbkdf2 = __webpack_require__(176)
+exports.pbkdf2Sync = __webpack_require__(103)
 
 
 /***/ }),
-/* 97 */
-/***/ (function(module, exports) {
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
 
-var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
-module.exports = function (iterations, keylen) {
+/* WEBPACK VAR INJECTION */(function(Buffer) {var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
+
+function checkBuffer (buf, name) {
+  if (typeof buf !== 'string' && !Buffer.isBuffer(buf)) {
+    throw new TypeError(name + ' must be a buffer or string')
+  }
+}
+
+module.exports = function (password, salt, iterations, keylen) {
+  checkBuffer(password, 'Password')
+  checkBuffer(salt, 'Salt')
+
   if (typeof iterations !== 'number') {
     throw new TypeError('Iterations not a number')
   }
@@ -35571,9 +35781,10 @@ module.exports = function (iterations, keylen) {
   }
 }
 
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 98 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var defaultEncoding
@@ -35590,15 +35801,15 @@ module.exports = defaultEncoding
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)))
 
 /***/ }),
-/* 99 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var md5 = __webpack_require__(61)
-var rmd160 = __webpack_require__(62)
-var sha = __webpack_require__(67)
+var md5 = __webpack_require__(98)
+var rmd160 = __webpack_require__(68)
+var sha = __webpack_require__(69)
 
-var checkParameters = __webpack_require__(97)
-var defaultEncoding = __webpack_require__(98)
+var checkParameters = __webpack_require__(101)
+var defaultEncoding = __webpack_require__(102)
 var Buffer = __webpack_require__(1).Buffer
 var ZEROS = Buffer.alloc(128)
 var sizes = {
@@ -35658,10 +35869,10 @@ function getDigest (alg) {
 }
 
 function pbkdf2 (password, salt, iterations, keylen, digest) {
+  checkParameters(password, salt, iterations, keylen)
+
   if (!Buffer.isBuffer(password)) password = Buffer.from(password, defaultEncoding)
   if (!Buffer.isBuffer(salt)) salt = Buffer.from(salt, defaultEncoding)
-
-  checkParameters(iterations, keylen)
 
   digest = digest || 'sha1'
 
@@ -35697,12 +35908,12 @@ module.exports = pbkdf2
 
 
 /***/ }),
-/* 100 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var xor = __webpack_require__(34)
 var Buffer = __webpack_require__(1).Buffer
-var incr32 = __webpack_require__(101)
+var incr32 = __webpack_require__(105)
 
 function getBlock (self) {
   var out = self._cipher.encryptBlockRaw(self._prev)
@@ -35733,7 +35944,7 @@ exports.encrypt = function (self, chunk) {
 
 
 /***/ }),
-/* 101 */
+/* 105 */
 /***/ (function(module, exports) {
 
 function incr32 (iv) {
@@ -35754,22 +35965,22 @@ module.exports = incr32
 
 
 /***/ }),
-/* 102 */
+/* 106 */
 /***/ (function(module, exports) {
 
 module.exports = {"aes-128-ecb":{"cipher":"AES","key":128,"iv":0,"mode":"ECB","type":"block"},"aes-192-ecb":{"cipher":"AES","key":192,"iv":0,"mode":"ECB","type":"block"},"aes-256-ecb":{"cipher":"AES","key":256,"iv":0,"mode":"ECB","type":"block"},"aes-128-cbc":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes-192-cbc":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes-256-cbc":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes128":{"cipher":"AES","key":128,"iv":16,"mode":"CBC","type":"block"},"aes192":{"cipher":"AES","key":192,"iv":16,"mode":"CBC","type":"block"},"aes256":{"cipher":"AES","key":256,"iv":16,"mode":"CBC","type":"block"},"aes-128-cfb":{"cipher":"AES","key":128,"iv":16,"mode":"CFB","type":"stream"},"aes-192-cfb":{"cipher":"AES","key":192,"iv":16,"mode":"CFB","type":"stream"},"aes-256-cfb":{"cipher":"AES","key":256,"iv":16,"mode":"CFB","type":"stream"},"aes-128-cfb8":{"cipher":"AES","key":128,"iv":16,"mode":"CFB8","type":"stream"},"aes-192-cfb8":{"cipher":"AES","key":192,"iv":16,"mode":"CFB8","type":"stream"},"aes-256-cfb8":{"cipher":"AES","key":256,"iv":16,"mode":"CFB8","type":"stream"},"aes-128-cfb1":{"cipher":"AES","key":128,"iv":16,"mode":"CFB1","type":"stream"},"aes-192-cfb1":{"cipher":"AES","key":192,"iv":16,"mode":"CFB1","type":"stream"},"aes-256-cfb1":{"cipher":"AES","key":256,"iv":16,"mode":"CFB1","type":"stream"},"aes-128-ofb":{"cipher":"AES","key":128,"iv":16,"mode":"OFB","type":"stream"},"aes-192-ofb":{"cipher":"AES","key":192,"iv":16,"mode":"OFB","type":"stream"},"aes-256-ofb":{"cipher":"AES","key":256,"iv":16,"mode":"OFB","type":"stream"},"aes-128-ctr":{"cipher":"AES","key":128,"iv":16,"mode":"CTR","type":"stream"},"aes-192-ctr":{"cipher":"AES","key":192,"iv":16,"mode":"CTR","type":"stream"},"aes-256-ctr":{"cipher":"AES","key":256,"iv":16,"mode":"CTR","type":"stream"},"aes-128-gcm":{"cipher":"AES","key":128,"iv":12,"mode":"GCM","type":"auth"},"aes-192-gcm":{"cipher":"AES","key":192,"iv":12,"mode":"GCM","type":"auth"},"aes-256-gcm":{"cipher":"AES","key":256,"iv":12,"mode":"GCM","type":"auth"}}
 
 /***/ }),
-/* 103 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(47)
+var aes = __webpack_require__(46)
 var Buffer = __webpack_require__(1).Buffer
 var Transform = __webpack_require__(21)
 var inherits = __webpack_require__(0)
-var GHASH = __webpack_require__(182)
+var GHASH = __webpack_require__(191)
 var xor = __webpack_require__(34)
-var incr32 = __webpack_require__(101)
+var incr32 = __webpack_require__(105)
 
 function xorTest (a, b) {
   var out = 0
@@ -35883,10 +36094,10 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 104 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var aes = __webpack_require__(47)
+var aes = __webpack_require__(46)
 var Buffer = __webpack_require__(1).Buffer
 var Transform = __webpack_require__(21)
 var inherits = __webpack_require__(0)
@@ -35916,16 +36127,16 @@ module.exports = StreamCipher
 
 
 /***/ }),
-/* 105 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var randomBytes = __webpack_require__(27);
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
 findPrime.fermatTest = fermatTest;
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var TWENTYFOUR = new BN(24);
-var MillerRabin = __webpack_require__(106);
+var MillerRabin = __webpack_require__(110);
 var millerRabin = new MillerRabin();
 var ONE = new BN(1);
 var TWO = new BN(2);
@@ -36027,11 +36238,11 @@ function findPrime(bits, gen) {
 
 
 /***/ }),
-/* 106 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var bn = __webpack_require__(4);
-var brorand = __webpack_require__(107);
+var bn = __webpack_require__(5);
+var brorand = __webpack_require__(111);
 
 function MillerRabin(rand) {
   this.rand = rand || new brorand.Rand();
@@ -36148,7 +36359,7 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
 
 
 /***/ }),
-/* 107 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var r;
@@ -36206,7 +36417,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(193);
+    var crypto = __webpack_require__(196);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -36219,7 +36430,7 @@ if (typeof self === 'object') {
 
 
 /***/ }),
-/* 108 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36284,7 +36495,7 @@ utils.encode = function encode(arr, enc) {
 
 
 /***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36340,7 +36551,7 @@ exports.g1_256 = g1_256;
 
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36348,8 +36559,8 @@ exports.g1_256 = g1_256;
 
 var utils = __webpack_require__(17);
 var common = __webpack_require__(35);
-var shaCommon = __webpack_require__(109);
-var assert = __webpack_require__(13);
+var shaCommon = __webpack_require__(113);
+var assert = __webpack_require__(15);
 
 var sum32 = utils.sum32;
 var sum32_4 = utils.sum32_4;
@@ -36452,7 +36663,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 111 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -36460,7 +36671,7 @@ SHA256.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(17);
 var common = __webpack_require__(35);
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 
 var rotr64_hi = utils.rotr64_hi;
 var rotr64_lo = utils.rotr64_lo;
@@ -36789,12 +37000,12 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 112 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
 var Reporter = __webpack_require__(37).Reporter;
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
 function DecoderBuffer(base, options) {
   Reporter.call(this, options);
@@ -36911,7 +37122,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
 
 
 /***/ }),
-/* 113 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = exports;
@@ -36932,11 +37143,11 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(225);
+constants.der = __webpack_require__(228);
 
 
 /***/ }),
-/* 114 */
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -37266,11 +37477,11 @@ function derDecodeLen(buf, primitive, fail) {
 
 
 /***/ }),
-/* 115 */
+/* 119 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
 var asn1 = __webpack_require__(36);
 var base = asn1.base;
@@ -37567,13 +37778,13 @@ function encodeTag(tag, primitive, cls, reporter) {
 
 
 /***/ }),
-/* 116 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = {"1.3.132.0.10":"secp256k1","1.3.132.0.33":"p224","1.2.840.10045.3.1.1":"p192","1.2.840.10045.3.1.7":"p256","1.3.132.0.34":"p384","1.3.132.0.35":"p521"}
 
 /***/ }),
-/* 117 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(32);
@@ -37592,10 +37803,10 @@ function i2ops(c) {
   out.writeUInt32BE(c,0);
   return out;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 118 */
+/* 122 */
 /***/ (function(module, exports) {
 
 module.exports = function xor(a, b) {
@@ -37608,10 +37819,10 @@ module.exports = function xor(a, b) {
 };
 
 /***/ }),
-/* 119 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var bn = __webpack_require__(5);
 function withPublic(paddedMsg, key) {
   return new Buffer(paddedMsg
     .toRed(bn.mont(key.modulus))
@@ -37621,10 +37832,10 @@ function withPublic(paddedMsg, key) {
 }
 
 module.exports = withPublic;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 120 */
+/* 124 */
 /***/ (function(module, exports) {
 
 /**
@@ -37667,11 +37878,11 @@ module.exports = eq;
 
 
 /***/ }),
-/* 121 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(38),
-    isObject = __webpack_require__(123);
+    isObject = __webpack_require__(127);
 
 /** `Object#toString` result references. */
 var asyncTag = '[object AsyncFunction]',
@@ -37710,7 +37921,7 @@ module.exports = isFunction;
 
 
 /***/ }),
-/* 122 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -37718,10 +37929,10 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 module.exports = freeGlobal;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
-/* 123 */
+/* 127 */
 /***/ (function(module, exports) {
 
 /**
@@ -37758,7 +37969,7 @@ module.exports = isObject;
 
 
 /***/ }),
-/* 124 */
+/* 128 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -37790,14 +38001,14 @@ module.exports = toSource;
 
 
 /***/ }),
-/* 125 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var mapCacheClear = __webpack_require__(261),
-    mapCacheDelete = __webpack_require__(268),
-    mapCacheGet = __webpack_require__(270),
-    mapCacheHas = __webpack_require__(271),
-    mapCacheSet = __webpack_require__(272);
+var mapCacheClear = __webpack_require__(264),
+    mapCacheDelete = __webpack_require__(271),
+    mapCacheGet = __webpack_require__(273),
+    mapCacheHas = __webpack_require__(274),
+    mapCacheSet = __webpack_require__(275);
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -37828,12 +38039,12 @@ module.exports = MapCache;
 
 
 /***/ }),
-/* 126 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var SetCache = __webpack_require__(273),
-    arraySome = __webpack_require__(276),
-    cacheHas = __webpack_require__(277);
+var SetCache = __webpack_require__(276),
+    arraySome = __webpack_require__(279),
+    cacheHas = __webpack_require__(280);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -37917,11 +38128,11 @@ module.exports = equalArrays;
 
 
 /***/ }),
-/* 127 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(19),
-    stubFalse = __webpack_require__(294);
+    stubFalse = __webpack_require__(297);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -37959,15 +38170,15 @@ var isBuffer = nativeIsBuffer || stubFalse;
 
 module.exports = isBuffer;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(71)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)(module)))
 
 /***/ }),
-/* 128 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsTypedArray = __webpack_require__(296),
-    baseUnary = __webpack_require__(297),
-    nodeUtil = __webpack_require__(298);
+var baseIsTypedArray = __webpack_require__(299),
+    baseUnary = __webpack_require__(300),
+    nodeUtil = __webpack_require__(301);
 
 /* Node.js helper references. */
 var nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
@@ -37995,7 +38206,7 @@ module.exports = isTypedArray;
 
 
 /***/ }),
-/* 129 */
+/* 133 */
 /***/ (function(module, exports) {
 
 /** Used as references for various `Number` constants. */
@@ -38036,7 +38247,7 @@ module.exports = isLength;
 
 
 /***/ }),
-/* 130 */
+/* 134 */
 /***/ (function(module, exports) {
 
 /**
@@ -38057,7 +38268,7 @@ module.exports = overArg;
 
 
 /***/ }),
-/* 131 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38070,11 +38281,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var coreutils_1 = __webpack_require__(26);
-var disposable_1 = __webpack_require__(81);
-var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(82);
+var disposable_1 = __webpack_require__(82);
+var domutils_1 = __webpack_require__(9);
+var keyboard_1 = __webpack_require__(83);
 var signaling_1 = __webpack_require__(11);
 /**
  * An object which manages a collection of commands.
@@ -38198,7 +38409,8 @@ var CommandRegistry = (function () {
     /**
      * Notify listeners that the state of a command has changed.
      *
-     * @param id - The id of the command which has changed.
+     * @param id - The id of the command which has changed. If more than
+     *   one command has changed, this argument should be omitted.
      *
      * @throws An error if the given `id` is not registered.
      *
@@ -38210,10 +38422,10 @@ var CommandRegistry = (function () {
      * This will cause the `commandChanged` signal to be emitted.
      */
     CommandRegistry.prototype.notifyCommandChanged = function (id) {
-        if (!(id in this._commands)) {
+        if (id !== undefined && !(id in this._commands)) {
             throw new Error("Command '" + id + "' is not registered.");
         }
-        this._commandChanged.emit({ id: id, type: 'changed' });
+        this._commandChanged.emit({ id: id, type: id ? 'changed' : 'many-changed' });
     };
     /**
      * Get the display label for a specific command.
@@ -38945,7 +39157,7 @@ var Private;
 
 
 /***/ }),
-/* 132 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -38976,11 +39188,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var commands_1 = __webpack_require__(131);
+var algorithm_1 = __webpack_require__(2);
+var commands_1 = __webpack_require__(135);
 var coreutils_1 = __webpack_require__(26);
-var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(82);
+var domutils_1 = __webpack_require__(9);
+var keyboard_1 = __webpack_require__(83);
 var messaging_1 = __webpack_require__(6);
 var signaling_1 = __webpack_require__(11);
 var virtualdom_1 = __webpack_require__(55);
@@ -40450,7 +40662,7 @@ var Private;
 
 
 /***/ }),
-/* 133 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -40473,11 +40685,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var boxengine_1 = __webpack_require__(40);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var widget_1 = __webpack_require__(8);
 /**
  * A layout which provides a flexible docking arrangement.
@@ -42027,7 +42239,7 @@ var Private;
 
 
 /***/ }),
-/* 134 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42050,12 +42262,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var boxengine_1 = __webpack_require__(40);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var panellayout_1 = __webpack_require__(41);
 var widget_1 = __webpack_require__(8);
 /**
@@ -42725,7 +42937,7 @@ var Private;
 
 
 /***/ }),
-/* 135 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -42748,10 +42960,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var panellayout_1 = __webpack_require__(41);
 var widget_1 = __webpack_require__(8);
 /**
@@ -43000,7 +43212,7 @@ exports.StackedLayout = StackedLayout;
 
 
 /***/ }),
-/* 136 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43025,7 +43237,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |----------------------------------------------------------------------------*/
 var signaling_1 = __webpack_require__(11);
 var panel_1 = __webpack_require__(54);
-var stackedlayout_1 = __webpack_require__(135);
+var stackedlayout_1 = __webpack_require__(139);
 /**
  * A panel where visible widgets are stacked atop one another.
  *
@@ -43088,7 +43300,7 @@ var Private;
 
 
 /***/ }),
-/* 137 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43114,14 +43326,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var widget_core_1 = __webpack_require__(14);
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
 var utils_1 = __webpack_require__(16);
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(6);
 var widgets_1 = __webpack_require__(30);
-var _ = __webpack_require__(5);
-var $ = __webpack_require__(12);
+var _ = __webpack_require__(4);
+var $ = __webpack_require__(14);
 var JupyterPhosphorPanelWidget = /** @class */ (function (_super) {
     __extends(JupyterPhosphorPanelWidget, _super);
     function JupyterPhosphorPanelWidget(options) {
@@ -43313,10 +43525,41 @@ var VBoxView = /** @class */ (function (_super) {
     return VBoxView;
 }(BoxView));
 exports.VBoxView = VBoxView;
+var GridBoxView = /** @class */ (function (_super) {
+    __extends(GridBoxView, _super);
+    function GridBoxView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * Public constructor
+     */
+    GridBoxView.prototype.initialize = function (parameters) {
+        _super.prototype.initialize.call(this, parameters);
+        this.pWidget.addClass('widget-gridbox');
+        // display needn't be set to flex and grid 
+        this.pWidget.removeClass('widget-box');
+    };
+    return GridBoxView;
+}(BoxView));
+exports.GridBoxView = GridBoxView;
+var GridBoxModel = /** @class */ (function (_super) {
+    __extends(GridBoxModel, _super);
+    function GridBoxModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    GridBoxModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _view_name: 'GridBoxView',
+            _model_name: 'GridBoxModel',
+        });
+    };
+    return GridBoxModel;
+}(BoxModel));
+exports.GridBoxModel = GridBoxModel;
 
 
 /***/ }),
-/* 138 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -43342,14 +43585,14 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var widget_description_1 = __webpack_require__(22);
-var base_1 = __webpack_require__(9);
+var widget_core_1 = __webpack_require__(12);
+var widget_description_1 = __webpack_require__(23);
+var base_1 = __webpack_require__(7);
 var utils_1 = __webpack_require__(16);
-var d3_format_1 = __webpack_require__(139);
-var _ = __webpack_require__(5);
-var $ = __webpack_require__(12);
-__webpack_require__(353);
+var d3_format_1 = __webpack_require__(143);
+var _ = __webpack_require__(4);
+var $ = __webpack_require__(14);
+__webpack_require__(369);
 var IntModel = /** @class */ (function (_super) {
     __extends(IntModel, _super);
     function IntModel() {
@@ -43556,7 +43799,7 @@ var BaseIntSliderView = /** @class */ (function (_super) {
         };
     };
     BaseIntSliderView.prototype.handleKeyDown = function (e) {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13) { /* keyboard keycodes `enter` */
             e.preventDefault();
             this.handleTextChange();
         }
@@ -44181,514 +44424,261 @@ exports.PlayView = PlayView;
 
 
 /***/ }),
-/* 139 */
-/***/ (function(module, exports, __webpack_require__) {
+/* 143 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-(function (global, factory) {
-   true ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.d3_format = {})));
-}(this, function (exports) { 'use strict';
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__defaultLocale__ = __webpack_require__(359);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatDefaultLocale", function() { return __WEBPACK_IMPORTED_MODULE_0__defaultLocale__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "format", function() { return __WEBPACK_IMPORTED_MODULE_0__defaultLocale__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatPrefix", function() { return __WEBPACK_IMPORTED_MODULE_0__defaultLocale__["c"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__locale__ = __webpack_require__(144);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatLocale", function() { return __WEBPACK_IMPORTED_MODULE_1__locale__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formatSpecifier__ = __webpack_require__(145);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatSpecifier", function() { return __WEBPACK_IMPORTED_MODULE_2__formatSpecifier__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__precisionFixed__ = __webpack_require__(366);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "precisionFixed", function() { return __WEBPACK_IMPORTED_MODULE_3__precisionFixed__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__precisionPrefix__ = __webpack_require__(367);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "precisionPrefix", function() { return __WEBPACK_IMPORTED_MODULE_4__precisionPrefix__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__precisionRound__ = __webpack_require__(368);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "precisionRound", function() { return __WEBPACK_IMPORTED_MODULE_5__precisionRound__["a"]; });
 
-  // Computes the decimal coefficient and exponent of the specified number x with
-  // significant digits p, where x is positive and p is in [1, 21] or undefined.
-  // For example, formatDecimal(1.23) returns ["123", 0].
-  function formatDecimal(x, p) {
-    if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
-    var i, coefficient = x.slice(0, i);
 
-    // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
-    // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
-    return [
-      coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient,
-      +x.slice(i + 1)
-    ];
-  }
 
-  function exponent(x) {
-    return x = formatDecimal(Math.abs(x)), x ? x[1] : NaN;
-  }
 
-  function formatGroup(grouping, thousands) {
-    return function(value, width) {
-      var i = value.length,
-          t = [],
-          j = 0,
-          g = grouping[0],
-          length = 0;
 
-      while (i > 0 && g > 0) {
-        if (length + g + 1 > width) g = Math.max(1, width - length);
-        t.push(value.substring(i -= g, i + g));
-        if ((length += g + 1) > width) break;
-        g = grouping[j = (j + 1) % grouping.length];
-      }
 
-      return t.reverse().join(thousands);
-    };
-  }
 
-  function formatDefault(x, p) {
-    x = x.toPrecision(p);
 
-    out: for (var n = x.length, i = 1, i0 = -1, i1; i < n; ++i) {
-      switch (x[i]) {
-        case ".": i0 = i1 = i; break;
-        case "0": if (i0 === 0) i0 = i; i1 = i; break;
-        case "e": break out;
-        default: if (i0 > 0) i0 = 0; break;
-      }
-    }
+/***/ }),
+/* 144 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-    return i0 > 0 ? x.slice(0, i0) + x.slice(i1 + 1) : x;
-  }
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__exponent__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formatGroup__ = __webpack_require__(360);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formatNumerals__ = __webpack_require__(361);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__formatSpecifier__ = __webpack_require__(145);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__formatTrim__ = __webpack_require__(362);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__formatTypes__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__formatPrefixAuto__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__identity__ = __webpack_require__(365);
 
-  var prefixExponent;
 
-  function formatPrefixAuto(x, p) {
-    var d = formatDecimal(x, p);
-    if (!d) return x + "";
-    var coefficient = d[0],
-        exponent = d[1],
-        i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
-        n = coefficient.length;
-    return i === n ? coefficient
-        : i > n ? coefficient + new Array(i - n + 1).join("0")
-        : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
-        : "0." + new Array(1 - i).join("0") + formatDecimal(x, Math.max(0, p + i - 1))[0]; // less than 1y!
-  }
 
-  function formatRounded(x, p) {
-    var d = formatDecimal(x, p);
-    if (!d) return x + "";
-    var coefficient = d[0],
-        exponent = d[1];
-    return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient
-        : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
-        : coefficient + new Array(exponent - coefficient.length + 2).join("0");
-  }
 
-  var formatTypes = {
-    "": formatDefault,
-    "%": function(x, p) { return (x * 100).toFixed(p); },
-    "b": function(x) { return Math.round(x).toString(2); },
-    "c": function(x) { return x + ""; },
-    "d": function(x) { return Math.round(x).toString(10); },
-    "e": function(x, p) { return x.toExponential(p); },
-    "f": function(x, p) { return x.toFixed(p); },
-    "g": function(x, p) { return x.toPrecision(p); },
-    "o": function(x) { return Math.round(x).toString(8); },
-    "p": function(x, p) { return formatRounded(x * 100, p); },
-    "r": formatRounded,
-    "s": formatPrefixAuto,
-    "X": function(x) { return Math.round(x).toString(16).toUpperCase(); },
-    "x": function(x) { return Math.round(x).toString(16); }
-  };
 
-  // [[fill]align][sign][symbol][0][width][,][.precision][type]
-  var re = /^(?:(.)?([<>=^]))?([+\-\( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?([a-z%])?$/i;
 
-  function formatSpecifier(specifier) {
-    return new FormatSpecifier(specifier);
-  }
 
-  function FormatSpecifier(specifier) {
-    if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
 
-    var match,
-        fill = match[1] || " ",
-        align = match[2] || ">",
-        sign = match[3] || "-",
-        symbol = match[4] || "",
-        zero = !!match[5],
-        width = match[6] && +match[6],
-        comma = !!match[7],
-        precision = match[8] && +match[8].slice(1),
-        type = match[9] || "";
+
+var prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z","Y"];
+
+/* harmony default export */ __webpack_exports__["a"] = (function(locale) {
+  var group = locale.grouping && locale.thousands ? Object(__WEBPACK_IMPORTED_MODULE_1__formatGroup__["a" /* default */])(locale.grouping, locale.thousands) : __WEBPACK_IMPORTED_MODULE_7__identity__["a" /* default */],
+      currency = locale.currency,
+      decimal = locale.decimal,
+      numerals = locale.numerals ? Object(__WEBPACK_IMPORTED_MODULE_2__formatNumerals__["a" /* default */])(locale.numerals) : __WEBPACK_IMPORTED_MODULE_7__identity__["a" /* default */],
+      percent = locale.percent || "%";
+
+  function newFormat(specifier) {
+    specifier = Object(__WEBPACK_IMPORTED_MODULE_3__formatSpecifier__["a" /* default */])(specifier);
+
+    var fill = specifier.fill,
+        align = specifier.align,
+        sign = specifier.sign,
+        symbol = specifier.symbol,
+        zero = specifier.zero,
+        width = specifier.width,
+        comma = specifier.comma,
+        precision = specifier.precision,
+        trim = specifier.trim,
+        type = specifier.type;
 
     // The "n" type is an alias for ",g".
     if (type === "n") comma = true, type = "g";
 
-    // Map invalid types to the default format.
-    else if (!formatTypes[type]) type = "";
+    // The "" type, and any invalid type, is an alias for ".12~g".
+    else if (!__WEBPACK_IMPORTED_MODULE_5__formatTypes__["a" /* default */][type]) precision == null && (precision = 12), trim = true, type = "g";
 
     // If zero fill is specified, padding goes after sign and before digits.
     if (zero || (fill === "0" && align === "=")) zero = true, fill = "0", align = "=";
 
-    this.fill = fill;
-    this.align = align;
-    this.sign = sign;
-    this.symbol = symbol;
-    this.zero = zero;
-    this.width = width;
-    this.comma = comma;
-    this.precision = precision;
-    this.type = type;
-  }
+    // Compute the prefix and suffix.
+    // For SI-prefix, the suffix is lazily computed.
+    var prefix = symbol === "$" ? currency[0] : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
+        suffix = symbol === "$" ? currency[1] : /[%p]/.test(type) ? percent : "";
 
-  FormatSpecifier.prototype.toString = function() {
-    return this.fill
-        + this.align
-        + this.sign
-        + this.symbol
-        + (this.zero ? "0" : "")
-        + (this.width == null ? "" : Math.max(1, this.width | 0))
-        + (this.comma ? "," : "")
-        + (this.precision == null ? "" : "." + Math.max(0, this.precision | 0))
-        + this.type;
-  };
+    // What format function should we use?
+    // Is this an integer type?
+    // Can this type generate exponential notation?
+    var formatType = __WEBPACK_IMPORTED_MODULE_5__formatTypes__["a" /* default */][type],
+        maybeSuffix = /[defgprs%]/.test(type);
 
-  var prefixes = ["y","z","a","f","p","n","µ","m","","k","M","G","T","P","E","Z","Y"];
+    // Set the default precision if not specified,
+    // or clamp the specified precision to the supported range.
+    // For significant precision, it must be in [1, 21].
+    // For fixed precision, it must be in [0, 20].
+    precision = precision == null ? 6
+        : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision))
+        : Math.max(0, Math.min(20, precision));
 
-  function identity(x) {
-    return x;
-  }
+    function format(value) {
+      var valuePrefix = prefix,
+          valueSuffix = suffix,
+          i, n, c;
 
-  function locale(locale) {
-    var group = locale.grouping && locale.thousands ? formatGroup(locale.grouping, locale.thousands) : identity,
-        currency = locale.currency,
-        decimal = locale.decimal;
+      if (type === "c") {
+        valueSuffix = formatType(value) + valueSuffix;
+        value = "";
+      } else {
+        value = +value;
 
-    function newFormat(specifier) {
-      specifier = formatSpecifier(specifier);
+        // Perform the initial formatting.
+        var valueNegative = value < 0;
+        value = formatType(Math.abs(value), precision);
 
-      var fill = specifier.fill,
-          align = specifier.align,
-          sign = specifier.sign,
-          symbol = specifier.symbol,
-          zero = specifier.zero,
-          width = specifier.width,
-          comma = specifier.comma,
-          precision = specifier.precision,
-          type = specifier.type;
+        // Trim insignificant zeros.
+        if (trim) value = Object(__WEBPACK_IMPORTED_MODULE_4__formatTrim__["a" /* default */])(value);
 
-      // Compute the prefix and suffix.
-      // For SI-prefix, the suffix is lazily computed.
-      var prefix = symbol === "$" ? currency[0] : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
-          suffix = symbol === "$" ? currency[1] : /[%p]/.test(type) ? "%" : "";
+        // If a negative value rounds to zero during formatting, treat as positive.
+        if (valueNegative && +value === 0) valueNegative = false;
 
-      // What format function should we use?
-      // Is this an integer type?
-      // Can this type generate exponential notation?
-      var formatType = formatTypes[type],
-          maybeSuffix = !type || /[defgprs%]/.test(type);
+        // Compute the prefix and suffix.
+        valuePrefix = (valueNegative ? (sign === "(" ? sign : "-") : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
+        valueSuffix = (type === "s" ? prefixes[8 + __WEBPACK_IMPORTED_MODULE_6__formatPrefixAuto__["b" /* prefixExponent */] / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : "");
 
-      // Set the default precision if not specified,
-      // or clamp the specified precision to the supported range.
-      // For significant precision, it must be in [1, 21].
-      // For fixed precision, it must be in [0, 20].
-      precision = precision == null ? (type ? 6 : 12)
-          : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision))
-          : Math.max(0, Math.min(20, precision));
-
-      function format(value) {
-        var valuePrefix = prefix,
-            valueSuffix = suffix,
-            i, n, c;
-
-        if (type === "c") {
-          valueSuffix = formatType(value) + valueSuffix;
-          value = "";
-        } else {
-          value = +value;
-
-          // Convert negative to positive, and compute the prefix.
-          // Note that -0 is not less than 0, but 1 / -0 is!
-          var valueNegative = (value < 0 || 1 / value < 0) && (value *= -1, true);
-
-          // Perform the initial formatting.
-          value = formatType(value, precision);
-
-          // If the original value was negative, it may be rounded to zero during
-          // formatting; treat this as (positive) zero.
-          if (valueNegative) {
-            i = -1, n = value.length;
-            valueNegative = false;
-            while (++i < n) {
-              if (c = value.charCodeAt(i), (48 < c && c < 58)
-                  || (type === "x" && 96 < c && c < 103)
-                  || (type === "X" && 64 < c && c < 71)) {
-                valueNegative = true;
-                break;
-              }
-            }
-          }
-
-          // Compute the prefix and suffix.
-          valuePrefix = (valueNegative ? (sign === "(" ? sign : "-") : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
-          valueSuffix = valueSuffix + (type === "s" ? prefixes[8 + prefixExponent / 3] : "") + (valueNegative && sign === "(" ? ")" : "");
-
-          // Break the formatted value into the integer “value” part that can be
-          // grouped, and fractional or exponential “suffix” part that is not.
-          if (maybeSuffix) {
-            i = -1, n = value.length;
-            while (++i < n) {
-              if (c = value.charCodeAt(i), 48 > c || c > 57) {
-                valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
-                value = value.slice(0, i);
-                break;
-              }
+        // Break the formatted value into the integer “value” part that can be
+        // grouped, and fractional or exponential “suffix” part that is not.
+        if (maybeSuffix) {
+          i = -1, n = value.length;
+          while (++i < n) {
+            if (c = value.charCodeAt(i), 48 > c || c > 57) {
+              valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+              value = value.slice(0, i);
+              break;
             }
           }
         }
-
-        // If the fill character is not "0", grouping is applied before padding.
-        if (comma && !zero) value = group(value, Infinity);
-
-        // Compute the padding.
-        var length = valuePrefix.length + value.length + valueSuffix.length,
-            padding = length < width ? new Array(width - length + 1).join(fill) : "";
-
-        // If the fill character is "0", grouping is applied after padding.
-        if (comma && zero) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
-
-        // Reconstruct the final output based on the desired alignment.
-        switch (align) {
-          case "<": return valuePrefix + value + valueSuffix + padding;
-          case "=": return valuePrefix + padding + value + valueSuffix;
-          case "^": return padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length);
-        }
-        return padding + valuePrefix + value + valueSuffix;
       }
 
-      format.toString = function() {
-        return specifier + "";
-      };
+      // If the fill character is not "0", grouping is applied before padding.
+      if (comma && !zero) value = group(value, Infinity);
 
-      return format;
+      // Compute the padding.
+      var length = valuePrefix.length + value.length + valueSuffix.length,
+          padding = length < width ? new Array(width - length + 1).join(fill) : "";
+
+      // If the fill character is "0", grouping is applied after padding.
+      if (comma && zero) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
+
+      // Reconstruct the final output based on the desired alignment.
+      switch (align) {
+        case "<": value = valuePrefix + value + valueSuffix + padding; break;
+        case "=": value = valuePrefix + padding + value + valueSuffix; break;
+        case "^": value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length); break;
+        default: value = padding + valuePrefix + value + valueSuffix; break;
+      }
+
+      return numerals(value);
     }
 
-    function formatPrefix(specifier, value) {
-      var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)),
-          e = Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3,
-          k = Math.pow(10, -e),
-          prefix = prefixes[8 + e / 3];
-      return function(value) {
-        return f(k * value) + prefix;
-      };
-    }
+    format.toString = function() {
+      return specifier + "";
+    };
 
-    return {
-      format: newFormat,
-      formatPrefix: formatPrefix
+    return format;
+  }
+
+  function formatPrefix(specifier, value) {
+    var f = newFormat((specifier = Object(__WEBPACK_IMPORTED_MODULE_3__formatSpecifier__["a" /* default */])(specifier), specifier.type = "f", specifier)),
+        e = Math.max(-8, Math.min(8, Math.floor(Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(value) / 3))) * 3,
+        k = Math.pow(10, -e),
+        prefix = prefixes[8 + e / 3];
+    return function(value) {
+      return f(k * value) + prefix;
     };
   }
 
-  var defaultLocale = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["$", ""]
-  });
+  return {
+    format: newFormat,
+    formatPrefix: formatPrefix
+  };
+});
 
-  var caES = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "\xa0€"]
-  });
-
-  var csCZ = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "\xa0Kč"]
-  });
-
-  var deCH = locale({
-    decimal: ",",
-    thousands: "'",
-    grouping: [3],
-    currency: ["", "\xa0CHF"]
-  });
-
-  var deDE = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "\xa0€"]
-  });
-
-  var enCA = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["$", ""]
-  });
-
-  var enGB = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["£", ""]
-  });
-
-  var esES = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "\xa0€"]
-  });
-
-  var fiFI = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "\xa0€"]
-  });
-
-  var frCA = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "$"]
-  });
-
-  var frFR = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "\xa0€"]
-  });
-
-  var heIL = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["₪", ""]
-  });
-
-  var huHU = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "\xa0Ft"]
-  });
-
-  var itIT = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["€", ""]
-  });
-
-  var jaJP = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["", "円"]
-  });
-
-  var koKR = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["₩", ""]
-  });
-
-  var mkMK = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "\xa0ден."]
-  });
-
-  var nlNL = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["€\xa0", ""]
-  });
-
-  var plPL = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["", "zł"]
-  });
-
-  var ptBR = locale({
-    decimal: ",",
-    thousands: ".",
-    grouping: [3],
-    currency: ["R$", ""]
-  });
-
-  var ruRU = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "\xa0руб."]
-  });
-
-  var svSE = locale({
-    decimal: ",",
-    thousands: "\xa0",
-    grouping: [3],
-    currency: ["", "SEK"]
-  });
-
-  var zhCN = locale({
-    decimal: ".",
-    thousands: ",",
-    grouping: [3],
-    currency: ["¥", ""]
-  });
-
-  function precisionFixed(step) {
-    return Math.max(0, -exponent(Math.abs(step)));
-  }
-
-  function precisionPrefix(step, value) {
-    return Math.max(0, Math.max(-8, Math.min(8, Math.floor(exponent(value) / 3))) * 3 - exponent(Math.abs(step)));
-  }
-
-  function precisionRound(step, max) {
-    step = Math.abs(step), max = Math.abs(max) - step;
-    return Math.max(0, exponent(max) - exponent(step)) + 1;
-  }
-
-  var format = defaultLocale.format;
-  var formatPrefix = defaultLocale.formatPrefix;
-
-  var version = "0.5.1";
-
-  exports.version = version;
-  exports.format = format;
-  exports.formatPrefix = formatPrefix;
-  exports.formatLocale = locale;
-  exports.formatCaEs = caES;
-  exports.formatCsCz = csCZ;
-  exports.formatDeCh = deCH;
-  exports.formatDeDe = deDE;
-  exports.formatEnCa = enCA;
-  exports.formatEnGb = enGB;
-  exports.formatEnUs = defaultLocale;
-  exports.formatEsEs = esES;
-  exports.formatFiFi = fiFI;
-  exports.formatFrCa = frCA;
-  exports.formatFrFr = frFR;
-  exports.formatHeIl = heIL;
-  exports.formatHuHu = huHU;
-  exports.formatItIt = itIT;
-  exports.formatJaJp = jaJP;
-  exports.formatKoKr = koKR;
-  exports.formatMkMk = mkMK;
-  exports.formatNlNl = nlNL;
-  exports.formatPlPl = plPL;
-  exports.formatPtBr = ptBR;
-  exports.formatRuRu = ruRU;
-  exports.formatSvSe = svSE;
-  exports.formatZhCn = zhCN;
-  exports.formatSpecifier = formatSpecifier;
-  exports.precisionFixed = precisionFixed;
-  exports.precisionPrefix = precisionPrefix;
-  exports.precisionRound = precisionRound;
-
-}));
 
 /***/ }),
-/* 140 */
+/* 145 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = formatSpecifier;
+// [[fill]align][sign][symbol][0][width][,][.precision][~][type]
+var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+
+function formatSpecifier(specifier) {
+  return new FormatSpecifier(specifier);
+}
+
+formatSpecifier.prototype = FormatSpecifier.prototype; // instanceof
+
+function FormatSpecifier(specifier) {
+  if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+  var match;
+  this.fill = match[1] || " ";
+  this.align = match[2] || ">";
+  this.sign = match[3] || "-";
+  this.symbol = match[4] || "";
+  this.zero = !!match[5];
+  this.width = match[6] && +match[6];
+  this.comma = !!match[7];
+  this.precision = match[8] && +match[8].slice(1);
+  this.trim = !!match[9];
+  this.type = match[10] || "";
+}
+
+FormatSpecifier.prototype.toString = function() {
+  return this.fill
+      + this.align
+      + this.sign
+      + this.symbol
+      + (this.zero ? "0" : "")
+      + (this.width == null ? "" : Math.max(1, this.width | 0))
+      + (this.comma ? "," : "")
+      + (this.precision == null ? "" : "." + Math.max(0, this.precision | 0))
+      + (this.trim ? "~" : "")
+      + this.type;
+};
+
+
+/***/ }),
+/* 146 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return prefixExponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__formatDecimal__ = __webpack_require__(86);
+
+
+var prefixExponent;
+
+/* harmony default export */ __webpack_exports__["a"] = (function(x, p) {
+  var d = Object(__WEBPACK_IMPORTED_MODULE_0__formatDecimal__["a" /* default */])(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1],
+      i = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
+      n = coefficient.length;
+  return i === n ? coefficient
+      : i > n ? coefficient + new Array(i - n + 1).join("0")
+      : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i)
+      : "0." + new Array(1 - i).join("0") + Object(__WEBPACK_IMPORTED_MODULE_0__formatDecimal__["a" /* default */])(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+});
+
+
+/***/ }),
+/* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -44710,7 +44700,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(12), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(14), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -45430,7 +45420,7 @@ return $.widget;
 
 
 /***/ }),
-/* 141 */
+/* 148 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45475,7 +45465,7 @@ module.exports = {action: action};
 
 
 /***/ }),
-/* 142 */
+/* 149 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45486,9 +45476,25 @@ module.exports = {action: action};
 
 var VIEW_MIME_TYPE = "application/vnd.jupyter.widget-view+json"
 
-var htmlManagerVersion = __webpack_require__(371).version;
+var htmlManagerVersion = __webpack_require__(387).version;
 
 var embed_widgets = function() {
+
+    /**
+     * Escape a string that will be the content of an HTML script tag.
+     *
+     * We replace the opening bracket of <script, </script, and <!-- with the
+     * unicode equivalent. This is inspired by the documentation for the script
+     * tag at
+     * https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements
+     *
+     * We only replace these three cases so that most html or other content
+     * involving `<` is readable.
+     */
+    function escapeScript(s) {
+        return s.replace(/<(script|\/script|!--)/gi, '\\u003c$1');
+    }
+
     return new Promise(function(resolve, reject) {
         requirejs(['base/js/namespace', 'base/js/dialog', '@jupyter-widgets/controls'], function(Jupyter, dialog, widgets) {
             var wm = Jupyter.WidgetManager._managers[0];
@@ -45498,7 +45504,7 @@ var embed_widgets = function() {
             wm.get_state({
                 'drop_defaults': true
             }).then(function(state) {
-                var data = JSON.stringify(state, null, '    ');
+                var data = escapeScript(JSON.stringify(state, null, '    '));
                 var value = [
 '<html><head>',
 '',
@@ -45521,7 +45527,7 @@ data,
                                 && output.data[VIEW_MIME_TYPE]
                                 && state.state[output.data[VIEW_MIME_TYPE].model_id]) {
                                 views.push(('\n<script type="'+VIEW_MIME_TYPE+'">\n'
-                                    + JSON.stringify(output.data[VIEW_MIME_TYPE], null, '    ')
+                                    + escapeScript(JSON.stringify(output.data[VIEW_MIME_TYPE], null, '    '))
                                     + '\n</script>'));
                             }
                         });
@@ -45575,7 +45581,7 @@ module.exports = {
 
 
 /***/ }),
-/* 143 */
+/* 150 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45596,9 +45602,9 @@ window['requirejs'].config({
 var MIME_TYPE = 'application/vnd.jupyter.widget-view+json';
 var CLASS_NAME = 'jupyter-widgets-view';
 
-var mngr = __webpack_require__(144);
-__webpack_require__(141);
-__webpack_require__(142);
+var mngr = __webpack_require__(151);
+__webpack_require__(148);
+__webpack_require__(149);
 var PhosphorWidget = __webpack_require__(30);
 
 /**
@@ -45743,23 +45749,23 @@ function load_ipython_extension () {
             "base/js/events",
             "notebook/js/outputarea"
         ], function(Jupyter, events, outputarea) {
-            __webpack_require__(373);
-            __webpack_require__(375);
-            __webpack_require__(377);
+            __webpack_require__(389);
+            __webpack_require__(391);
+            __webpack_require__(393);
             register_events(Jupyter, events, outputarea);
             resolve();
         });
     });
 }
 
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 module.exports = _.extend({
   load_ipython_extension: load_ipython_extension,
-}, __webpack_require__(84), __webpack_require__(9), __webpack_require__(85));
+}, __webpack_require__(85), __webpack_require__(7), __webpack_require__(87));
 
 
 /***/ }),
-/* 144 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -45767,15 +45773,15 @@ module.exports = _.extend({
 // Distributed under the terms of the Modified BSD License.
 
 
-var _ = __webpack_require__(5);
-var Backbone = __webpack_require__(60);
-var base = __webpack_require__(9);
-var widgets = __webpack_require__(84);
-var outputWidgets = __webpack_require__(85);
-var saveState = __webpack_require__(141);
-var embedWidgets = __webpack_require__(142);
-var version = __webpack_require__(372).version;
-var output = __webpack_require__(85);
+var _ = __webpack_require__(4);
+var Backbone = __webpack_require__(61);
+var base = __webpack_require__(7);
+var widgets = __webpack_require__(85);
+var outputWidgets = __webpack_require__(87);
+var saveState = __webpack_require__(148);
+var embedWidgets = __webpack_require__(149);
+var version = __webpack_require__(388).version;
+var output = __webpack_require__(87);
 
 var MIME_TYPE = 'application/vnd.jupyter.widget-view+json';
 
@@ -46103,9 +46109,11 @@ WidgetManager.prototype.setViewOptions = function (options) {
         // use the parent output if we don't have one
         options.output = options.parent.options.output;
     }
-    options.iopub_callbacks = {
-        output: options.output.handle_output.bind(options.output),
-        clear_output: options.output.handle_clear_output.bind(options.output)
+    if (options.output) {
+        options.iopub_callbacks = {
+            output: options.output.handle_output.bind(options.output),
+            clear_output: options.output.handle_clear_output.bind(options.output)
+        }
     }
     return options;
 };
@@ -46128,7 +46136,7 @@ module.exports = {
 
 
 /***/ }),
-/* 145 */
+/* 152 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46158,8 +46166,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -46180,7 +46188,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils = __webpack_require__(25);
-var version_1 = __webpack_require__(77);
+var version_1 = __webpack_require__(78);
 var PROTOCOL_MAJOR_VERSION = version_1.PROTOCOL_VERSION.split('.', 1)[0];
 /**
  * Manager abstract base class
@@ -46526,7 +46534,7 @@ var ManagerBase = /** @class */ (function () {
                     model_module: model.model_module,
                     model_module_version: model.model_module_version
                 };
-                if (live_comms.hasOwnProperty(model_id)) {
+                if (live_comms.hasOwnProperty(model_id)) { // live comm
                     // This connects to an existing comm if it exists, and
                     // should *not* send a comm open message.
                     return _this._create_comm(_this.comm_target_name, model_id).then(function (comm) {
@@ -46565,7 +46573,7 @@ exports.ManagerBase = ManagerBase;
 
 
 /***/ }),
-/* 146 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46740,7 +46748,7 @@ var JSONExt;
 
 
 /***/ }),
-/* 147 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46841,7 +46849,7 @@ exports.MimeData = MimeData;
 
 
 /***/ }),
-/* 148 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46896,7 +46904,7 @@ exports.PromiseDelegate = PromiseDelegate;
 
 
 /***/ }),
-/* 149 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -46904,20 +46912,20 @@ exports.PromiseDelegate = PromiseDelegate;
 
 exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = __webpack_require__(27)
 exports.createHash = exports.Hash = __webpack_require__(32)
-exports.createHmac = exports.Hmac = __webpack_require__(94)
+exports.createHmac = exports.Hmac = __webpack_require__(97)
 
-var algos = __webpack_require__(170)
+var algos = __webpack_require__(175)
 var algoKeys = Object.keys(algos)
 var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(algoKeys)
 exports.getHashes = function () {
   return hashes
 }
 
-var p = __webpack_require__(96)
+var p = __webpack_require__(100)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(172)
+var aes = __webpack_require__(177)
 
 exports.Cipher = aes.Cipher
 exports.createCipher = aes.createCipher
@@ -46930,7 +46938,7 @@ exports.createDecipheriv = aes.createDecipheriv
 exports.getCiphers = aes.getCiphers
 exports.listCiphers = aes.listCiphers
 
-var dh = __webpack_require__(191)
+var dh = __webpack_require__(194)
 
 exports.DiffieHellmanGroup = dh.DiffieHellmanGroup
 exports.createDiffieHellmanGroup = dh.createDiffieHellmanGroup
@@ -46938,16 +46946,16 @@ exports.getDiffieHellman = dh.getDiffieHellman
 exports.createDiffieHellman = dh.createDiffieHellman
 exports.DiffieHellman = dh.DiffieHellman
 
-var sign = __webpack_require__(196)
+var sign = __webpack_require__(199)
 
 exports.createSign = sign.createSign
 exports.Sign = sign.Sign
 exports.createVerify = sign.createVerify
 exports.Verify = sign.Verify
 
-exports.createECDH = __webpack_require__(234)
+exports.createECDH = __webpack_require__(237)
 
-var publicEncrypt = __webpack_require__(235)
+var publicEncrypt = __webpack_require__(238)
 
 exports.publicEncrypt = publicEncrypt.publicEncrypt
 exports.privateEncrypt = publicEncrypt.privateEncrypt
@@ -46967,7 +46975,7 @@ exports.privateDecrypt = publicEncrypt.privateDecrypt
 //   }
 // })
 
-var rf = __webpack_require__(238)
+var rf = __webpack_require__(241)
 
 exports.randomFill = rf.randomFill
 exports.randomFillSync = rf.randomFillSync
@@ -47000,7 +47008,7 @@ exports.constants = {
 
 
 /***/ }),
-/* 150 */
+/* 157 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -47090,7 +47098,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 151 */
+/* 158 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -47101,136 +47109,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 152 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
-var intSize = 4
-var zeroBuffer = new Buffer(intSize)
-zeroBuffer.fill(0)
-
-var charSize = 8
-var hashSize = 16
-
-function toArray (buf) {
-  if ((buf.length % intSize) !== 0) {
-    var len = buf.length + (intSize - (buf.length % intSize))
-    buf = Buffer.concat([buf, zeroBuffer], len)
-  }
-
-  var arr = new Array(buf.length >>> 2)
-  for (var i = 0, j = 0; i < buf.length; i += intSize, j++) {
-    arr[j] = buf.readInt32LE(i)
-  }
-
-  return arr
-}
-
-module.exports = function hash (buf, fn) {
-  var arr = fn(toArray(buf), buf.length * charSize)
-  buf = new Buffer(hashSize)
-  for (var i = 0; i < arr.length; i++) {
-    buf.writeInt32LE(arr[i], i << 2, true)
-  }
-  return buf
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 153 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
-var Transform = __webpack_require__(43).Transform
-var inherits = __webpack_require__(0)
-
-function HashBase (blockSize) {
-  Transform.call(this)
-
-  this._block = new Buffer(blockSize)
-  this._blockSize = blockSize
-  this._blockOffset = 0
-  this._length = [0, 0, 0, 0]
-
-  this._finalized = false
-}
-
-inherits(HashBase, Transform)
-
-HashBase.prototype._transform = function (chunk, encoding, callback) {
-  var error = null
-  try {
-    if (encoding !== 'buffer') chunk = new Buffer(chunk, encoding)
-    this.update(chunk)
-  } catch (err) {
-    error = err
-  }
-
-  callback(error)
-}
-
-HashBase.prototype._flush = function (callback) {
-  var error = null
-  try {
-    this.push(this._digest())
-  } catch (err) {
-    error = err
-  }
-
-  callback(error)
-}
-
-HashBase.prototype.update = function (data, encoding) {
-  if (!Buffer.isBuffer(data) && typeof data !== 'string') throw new TypeError('Data must be a string or a buffer')
-  if (this._finalized) throw new Error('Digest already called')
-  if (!Buffer.isBuffer(data)) data = new Buffer(data, encoding || 'binary')
-
-  // consume data
-  var block = this._block
-  var offset = 0
-  while (this._blockOffset + data.length - offset >= this._blockSize) {
-    for (var i = this._blockOffset; i < this._blockSize;) block[i++] = data[offset++]
-    this._update()
-    this._blockOffset = 0
-  }
-  while (offset < data.length) block[this._blockOffset++] = data[offset++]
-
-  // update length
-  for (var j = 0, carry = data.length * 8; carry > 0; ++j) {
-    this._length[j] += carry
-    carry = (this._length[j] / 0x0100000000) | 0
-    if (carry > 0) this._length[j] -= 0x0100000000 * carry
-  }
-
-  return this
-}
-
-HashBase.prototype._update = function (data) {
-  throw new Error('_update is not implemented')
-}
-
-HashBase.prototype.digest = function (encoding) {
-  if (this._finalized) throw new Error('Digest already called')
-  this._finalized = true
-
-  var digest = this._digest()
-  if (encoding !== undefined) digest = digest.toString(encoding)
-  return digest
-}
-
-HashBase.prototype._digest = function () {
-  throw new Error('_digest is not implemented')
-}
-
-module.exports = HashBase
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 154 */
+/* 159 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -47241,13 +47120,13 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 155 */
+/* 160 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 156 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47256,7 +47135,7 @@ module.exports = Array.isArray || function (arr) {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Buffer = __webpack_require__(1).Buffer;
-var util = __webpack_require__(157);
+var util = __webpack_require__(162);
 
 function copyBuffer(src, target, offset) {
   src.copy(target, offset);
@@ -47332,13 +47211,13 @@ if (util && util.inspect && util.inspect.custom) {
 }
 
 /***/ }),
-/* 157 */
+/* 162 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 158 */
+/* 163 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -47528,10 +47407,10 @@ if (util && util.inspect && util.inspect.custom) {
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(20)))
 
 /***/ }),
-/* 159 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -47602,10 +47481,10 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
-/* 160 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -47638,7 +47517,7 @@ function config (name) {
 
 module.exports = PassThrough;
 
-var Transform = __webpack_require__(91);
+var Transform = __webpack_require__(94);
 
 /*<replacement>*/
 var util = __webpack_require__(33);
@@ -47658,35 +47537,35 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 161 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(65);
+module.exports = __webpack_require__(66);
 
 
 /***/ }),
-/* 162 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(23);
+module.exports = __webpack_require__(24);
 
 
 /***/ }),
-/* 163 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(64).Transform
+module.exports = __webpack_require__(65).Transform
 
 
 /***/ }),
-/* 164 */
+/* 169 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(64).PassThrough
+module.exports = __webpack_require__(65).PassThrough
 
 
 /***/ }),
-/* 165 */
+/* 170 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47786,7 +47665,7 @@ module.exports = Sha
 
 
 /***/ }),
-/* 166 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -47891,7 +47770,7 @@ module.exports = Sha1
 
 
 /***/ }),
-/* 167 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -47903,7 +47782,7 @@ module.exports = Sha1
  */
 
 var inherits = __webpack_require__(0)
-var Sha256 = __webpack_require__(92)
+var Sha256 = __webpack_require__(95)
 var Hash = __webpack_require__(28)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -47950,11 +47829,11 @@ module.exports = Sha224
 
 
 /***/ }),
-/* 168 */
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0)
-var SHA512 = __webpack_require__(93)
+var SHA512 = __webpack_require__(96)
 var Hash = __webpack_require__(28)
 var Buffer = __webpack_require__(1).Buffer
 
@@ -48013,7 +47892,7 @@ module.exports = Sha384
 
 
 /***/ }),
-/* 169 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -48066,19 +47945,19 @@ module.exports = Hmac
 
 
 /***/ }),
-/* 170 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(95)
+module.exports = __webpack_require__(99)
 
 
 /***/ }),
-/* 171 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(97)
-var defaultEncoding = __webpack_require__(98)
-var sync = __webpack_require__(99)
+/* WEBPACK VAR INJECTION */(function(global, process) {var checkParameters = __webpack_require__(101)
+var defaultEncoding = __webpack_require__(102)
+var sync = __webpack_require__(103)
 var Buffer = __webpack_require__(1).Buffer
 
 var ZERO_BUF
@@ -48115,6 +47994,7 @@ function checkNative (algo) {
   checks[algo] = prom
   return prom
 }
+
 function browserPbkdf2 (password, salt, iterations, length, algo) {
   return subtle.importKey(
     'raw', password, {name: 'PBKDF2'}, false, ['deriveBits']
@@ -48131,6 +48011,7 @@ function browserPbkdf2 (password, salt, iterations, length, algo) {
     return Buffer.from(res)
   })
 }
+
 function resolvePromise (promise, callback) {
   promise.then(function (out) {
     process.nextTick(function () {
@@ -48143,18 +48024,14 @@ function resolvePromise (promise, callback) {
   })
 }
 module.exports = function (password, salt, iterations, keylen, digest, callback) {
-  if (!Buffer.isBuffer(password)) password = Buffer.from(password, defaultEncoding)
-  if (!Buffer.isBuffer(salt)) salt = Buffer.from(salt, defaultEncoding)
-
-  checkParameters(iterations, keylen)
   if (typeof digest === 'function') {
     callback = digest
     digest = undefined
   }
-  if (typeof callback !== 'function') throw new Error('No callback provided to pbkdf2')
 
   digest = digest || 'sha1'
   var algo = toBrowser[digest.toLowerCase()]
+
   if (!algo || typeof global.Promise !== 'function') {
     return process.nextTick(function () {
       var out
@@ -48166,29 +48043,35 @@ module.exports = function (password, salt, iterations, keylen, digest, callback)
       callback(null, out)
     })
   }
+
+  checkParameters(password, salt, iterations, keylen)
+  if (typeof callback !== 'function') throw new Error('No callback provided to pbkdf2')
+  if (!Buffer.isBuffer(password)) password = Buffer.from(password, defaultEncoding)
+  if (!Buffer.isBuffer(salt)) salt = Buffer.from(salt, defaultEncoding)
+
   resolvePromise(checkNative(algo).then(function (resp) {
-    if (resp) {
-      return browserPbkdf2(password, salt, iterations, keylen, algo)
-    } else {
-      return sync(password, salt, iterations, keylen, digest)
-    }
+    if (resp) return browserPbkdf2(password, salt, iterations, keylen, algo)
+
+    return sync(password, salt, iterations, keylen, digest)
   }), callback)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(20)))
 
 /***/ }),
-/* 172 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ebtk = __webpack_require__(46)
-var aes = __webpack_require__(68)
-var DES = __webpack_require__(184)
-var desModes = __webpack_require__(190)
-var aesModes = __webpack_require__(69)
+var DES = __webpack_require__(178)
+var aes = __webpack_require__(71)
+var aesModes = __webpack_require__(72)
+var desModes = __webpack_require__(193)
+var ebtk = __webpack_require__(47)
+
 function createCipher (suite, password) {
-  var keyLen, ivLen
   suite = suite.toLowerCase()
+
+  var keyLen, ivLen
   if (aesModes[suite]) {
     keyLen = aesModes[suite].key
     ivLen = aesModes[suite].iv
@@ -48198,12 +48081,15 @@ function createCipher (suite, password) {
   } else {
     throw new TypeError('invalid suite type')
   }
+
   var keys = ebtk(password, false, keyLen, ivLen)
   return createCipheriv(suite, keys.key, keys.iv)
 }
+
 function createDecipher (suite, password) {
-  var keyLen, ivLen
   suite = suite.toLowerCase()
+
+  var keyLen, ivLen
   if (aesModes[suite]) {
     keyLen = aesModes[suite].key
     ivLen = aesModes[suite].iv
@@ -48213,825 +48099,40 @@ function createDecipher (suite, password) {
   } else {
     throw new TypeError('invalid suite type')
   }
+
   var keys = ebtk(password, false, keyLen, ivLen)
   return createDecipheriv(suite, keys.key, keys.iv)
 }
 
 function createCipheriv (suite, key, iv) {
   suite = suite.toLowerCase()
-  if (aesModes[suite]) {
-    return aes.createCipheriv(suite, key, iv)
-  } else if (desModes[suite]) {
-    return new DES({
-      key: key,
-      iv: iv,
-      mode: suite
-    })
-  } else {
-    throw new TypeError('invalid suite type')
-  }
+  if (aesModes[suite]) return aes.createCipheriv(suite, key, iv)
+  if (desModes[suite]) return new DES({ key: key, iv: iv, mode: suite })
+
+  throw new TypeError('invalid suite type')
 }
+
 function createDecipheriv (suite, key, iv) {
   suite = suite.toLowerCase()
-  if (aesModes[suite]) {
-    return aes.createDecipheriv(suite, key, iv)
-  } else if (desModes[suite]) {
-    return new DES({
-      key: key,
-      iv: iv,
-      mode: suite,
-      decrypt: true
-    })
-  } else {
-    throw new TypeError('invalid suite type')
-  }
+  if (aesModes[suite]) return aes.createDecipheriv(suite, key, iv)
+  if (desModes[suite]) return new DES({ key: key, iv: iv, mode: suite, decrypt: true })
+
+  throw new TypeError('invalid suite type')
 }
+
+function getCiphers () {
+  return Object.keys(desModes).concat(aes.getCiphers())
+}
+
 exports.createCipher = exports.Cipher = createCipher
 exports.createCipheriv = exports.Cipheriv = createCipheriv
 exports.createDecipher = exports.Decipher = createDecipher
 exports.createDecipheriv = exports.Decipheriv = createDecipheriv
-function getCiphers () {
-  return Object.keys(desModes).concat(aes.getCiphers())
-}
 exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 173 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(Buffer) {
-var inherits = __webpack_require__(0)
-var HashBase = __webpack_require__(174)
-
-var ARRAY16 = new Array(16)
-
-function MD5 () {
-  HashBase.call(this, 64)
-
-  // state
-  this._a = 0x67452301
-  this._b = 0xefcdab89
-  this._c = 0x98badcfe
-  this._d = 0x10325476
-}
-
-inherits(MD5, HashBase)
-
-MD5.prototype._update = function () {
-  var M = ARRAY16
-  for (var i = 0; i < 16; ++i) M[i] = this._block.readInt32LE(i * 4)
-
-  var a = this._a
-  var b = this._b
-  var c = this._c
-  var d = this._d
-
-  a = fnF(a, b, c, d, M[0], 0xd76aa478, 7)
-  d = fnF(d, a, b, c, M[1], 0xe8c7b756, 12)
-  c = fnF(c, d, a, b, M[2], 0x242070db, 17)
-  b = fnF(b, c, d, a, M[3], 0xc1bdceee, 22)
-  a = fnF(a, b, c, d, M[4], 0xf57c0faf, 7)
-  d = fnF(d, a, b, c, M[5], 0x4787c62a, 12)
-  c = fnF(c, d, a, b, M[6], 0xa8304613, 17)
-  b = fnF(b, c, d, a, M[7], 0xfd469501, 22)
-  a = fnF(a, b, c, d, M[8], 0x698098d8, 7)
-  d = fnF(d, a, b, c, M[9], 0x8b44f7af, 12)
-  c = fnF(c, d, a, b, M[10], 0xffff5bb1, 17)
-  b = fnF(b, c, d, a, M[11], 0x895cd7be, 22)
-  a = fnF(a, b, c, d, M[12], 0x6b901122, 7)
-  d = fnF(d, a, b, c, M[13], 0xfd987193, 12)
-  c = fnF(c, d, a, b, M[14], 0xa679438e, 17)
-  b = fnF(b, c, d, a, M[15], 0x49b40821, 22)
-
-  a = fnG(a, b, c, d, M[1], 0xf61e2562, 5)
-  d = fnG(d, a, b, c, M[6], 0xc040b340, 9)
-  c = fnG(c, d, a, b, M[11], 0x265e5a51, 14)
-  b = fnG(b, c, d, a, M[0], 0xe9b6c7aa, 20)
-  a = fnG(a, b, c, d, M[5], 0xd62f105d, 5)
-  d = fnG(d, a, b, c, M[10], 0x02441453, 9)
-  c = fnG(c, d, a, b, M[15], 0xd8a1e681, 14)
-  b = fnG(b, c, d, a, M[4], 0xe7d3fbc8, 20)
-  a = fnG(a, b, c, d, M[9], 0x21e1cde6, 5)
-  d = fnG(d, a, b, c, M[14], 0xc33707d6, 9)
-  c = fnG(c, d, a, b, M[3], 0xf4d50d87, 14)
-  b = fnG(b, c, d, a, M[8], 0x455a14ed, 20)
-  a = fnG(a, b, c, d, M[13], 0xa9e3e905, 5)
-  d = fnG(d, a, b, c, M[2], 0xfcefa3f8, 9)
-  c = fnG(c, d, a, b, M[7], 0x676f02d9, 14)
-  b = fnG(b, c, d, a, M[12], 0x8d2a4c8a, 20)
-
-  a = fnH(a, b, c, d, M[5], 0xfffa3942, 4)
-  d = fnH(d, a, b, c, M[8], 0x8771f681, 11)
-  c = fnH(c, d, a, b, M[11], 0x6d9d6122, 16)
-  b = fnH(b, c, d, a, M[14], 0xfde5380c, 23)
-  a = fnH(a, b, c, d, M[1], 0xa4beea44, 4)
-  d = fnH(d, a, b, c, M[4], 0x4bdecfa9, 11)
-  c = fnH(c, d, a, b, M[7], 0xf6bb4b60, 16)
-  b = fnH(b, c, d, a, M[10], 0xbebfbc70, 23)
-  a = fnH(a, b, c, d, M[13], 0x289b7ec6, 4)
-  d = fnH(d, a, b, c, M[0], 0xeaa127fa, 11)
-  c = fnH(c, d, a, b, M[3], 0xd4ef3085, 16)
-  b = fnH(b, c, d, a, M[6], 0x04881d05, 23)
-  a = fnH(a, b, c, d, M[9], 0xd9d4d039, 4)
-  d = fnH(d, a, b, c, M[12], 0xe6db99e5, 11)
-  c = fnH(c, d, a, b, M[15], 0x1fa27cf8, 16)
-  b = fnH(b, c, d, a, M[2], 0xc4ac5665, 23)
-
-  a = fnI(a, b, c, d, M[0], 0xf4292244, 6)
-  d = fnI(d, a, b, c, M[7], 0x432aff97, 10)
-  c = fnI(c, d, a, b, M[14], 0xab9423a7, 15)
-  b = fnI(b, c, d, a, M[5], 0xfc93a039, 21)
-  a = fnI(a, b, c, d, M[12], 0x655b59c3, 6)
-  d = fnI(d, a, b, c, M[3], 0x8f0ccc92, 10)
-  c = fnI(c, d, a, b, M[10], 0xffeff47d, 15)
-  b = fnI(b, c, d, a, M[1], 0x85845dd1, 21)
-  a = fnI(a, b, c, d, M[8], 0x6fa87e4f, 6)
-  d = fnI(d, a, b, c, M[15], 0xfe2ce6e0, 10)
-  c = fnI(c, d, a, b, M[6], 0xa3014314, 15)
-  b = fnI(b, c, d, a, M[13], 0x4e0811a1, 21)
-  a = fnI(a, b, c, d, M[4], 0xf7537e82, 6)
-  d = fnI(d, a, b, c, M[11], 0xbd3af235, 10)
-  c = fnI(c, d, a, b, M[2], 0x2ad7d2bb, 15)
-  b = fnI(b, c, d, a, M[9], 0xeb86d391, 21)
-
-  this._a = (this._a + a) | 0
-  this._b = (this._b + b) | 0
-  this._c = (this._c + c) | 0
-  this._d = (this._d + d) | 0
-}
-
-MD5.prototype._digest = function () {
-  // create padding and handle blocks
-  this._block[this._blockOffset++] = 0x80
-  if (this._blockOffset > 56) {
-    this._block.fill(0, this._blockOffset, 64)
-    this._update()
-    this._blockOffset = 0
-  }
-
-  this._block.fill(0, this._blockOffset, 56)
-  this._block.writeUInt32LE(this._length[0], 56)
-  this._block.writeUInt32LE(this._length[1], 60)
-  this._update()
-
-  // produce result
-  var buffer = new Buffer(16)
-  buffer.writeInt32LE(this._a, 0)
-  buffer.writeInt32LE(this._b, 4)
-  buffer.writeInt32LE(this._c, 8)
-  buffer.writeInt32LE(this._d, 12)
-  return buffer
-}
-
-function rotl (x, n) {
-  return (x << n) | (x >>> (32 - n))
-}
-
-function fnF (a, b, c, d, m, k, s) {
-  return (rotl((a + ((b & c) | ((~b) & d)) + m + k) | 0, s) + b) | 0
-}
-
-function fnG (a, b, c, d, m, k, s) {
-  return (rotl((a + ((b & d) | (c & (~d))) + m + k) | 0, s) + b) | 0
-}
-
-function fnH (a, b, c, d, m, k, s) {
-  return (rotl((a + (b ^ c ^ d) + m + k) | 0, s) + b) | 0
-}
-
-function fnI (a, b, c, d, m, k, s) {
-  return (rotl((a + ((c ^ (b | (~d)))) + m + k) | 0, s) + b) | 0
-}
-
-module.exports = MD5
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 174 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var Buffer = __webpack_require__(1).Buffer
-var Transform = __webpack_require__(43).Transform
-var inherits = __webpack_require__(0)
-
-function throwIfNotStringOrBuffer (val, prefix) {
-  if (!Buffer.isBuffer(val) && typeof val !== 'string') {
-    throw new TypeError(prefix + ' must be a string or a buffer')
-  }
-}
-
-function HashBase (blockSize) {
-  Transform.call(this)
-
-  this._block = Buffer.allocUnsafe(blockSize)
-  this._blockSize = blockSize
-  this._blockOffset = 0
-  this._length = [0, 0, 0, 0]
-
-  this._finalized = false
-}
-
-inherits(HashBase, Transform)
-
-HashBase.prototype._transform = function (chunk, encoding, callback) {
-  var error = null
-  try {
-    this.update(chunk, encoding)
-  } catch (err) {
-    error = err
-  }
-
-  callback(error)
-}
-
-HashBase.prototype._flush = function (callback) {
-  var error = null
-  try {
-    this.push(this.digest())
-  } catch (err) {
-    error = err
-  }
-
-  callback(error)
-}
-
-HashBase.prototype.update = function (data, encoding) {
-  throwIfNotStringOrBuffer(data, 'Data')
-  if (this._finalized) throw new Error('Digest already called')
-  if (!Buffer.isBuffer(data)) data = Buffer.from(data, encoding)
-
-  // consume data
-  var block = this._block
-  var offset = 0
-  while (this._blockOffset + data.length - offset >= this._blockSize) {
-    for (var i = this._blockOffset; i < this._blockSize;) block[i++] = data[offset++]
-    this._update()
-    this._blockOffset = 0
-  }
-  while (offset < data.length) block[this._blockOffset++] = data[offset++]
-
-  // update length
-  for (var j = 0, carry = data.length * 8; carry > 0; ++j) {
-    this._length[j] += carry
-    carry = (this._length[j] / 0x0100000000) | 0
-    if (carry > 0) this._length[j] -= 0x0100000000 * carry
-  }
-
-  return this
-}
-
-HashBase.prototype._update = function () {
-  throw new Error('_update is not implemented')
-}
-
-HashBase.prototype.digest = function (encoding) {
-  if (this._finalized) throw new Error('Digest already called')
-  this._finalized = true
-
-  var digest = this._digest()
-  if (encoding !== undefined) digest = digest.toString(encoding)
-
-  // reset state
-  this._block.fill(0)
-  this._blockOffset = 0
-  for (var i = 0; i < 4; ++i) this._length[i] = 0
-
-  return digest
-}
-
-HashBase.prototype._digest = function () {
-  throw new Error('_digest is not implemented')
-}
-
-module.exports = HashBase
-
-
-/***/ }),
-/* 175 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var MODES = __webpack_require__(69)
-var AuthCipher = __webpack_require__(103)
-var Buffer = __webpack_require__(1).Buffer
-var StreamCipher = __webpack_require__(104)
-var Transform = __webpack_require__(21)
-var aes = __webpack_require__(47)
-var ebtk = __webpack_require__(46)
-var inherits = __webpack_require__(0)
-
-function Cipher (mode, key, iv) {
-  Transform.call(this)
-
-  this._cache = new Splitter()
-  this._cipher = new aes.AES(key)
-  this._prev = Buffer.from(iv)
-  this._mode = mode
-  this._autopadding = true
-}
-
-inherits(Cipher, Transform)
-
-Cipher.prototype._update = function (data) {
-  this._cache.add(data)
-  var chunk
-  var thing
-  var out = []
-
-  while ((chunk = this._cache.get())) {
-    thing = this._mode.encrypt(this, chunk)
-    out.push(thing)
-  }
-
-  return Buffer.concat(out)
-}
-
-var PADDING = Buffer.alloc(16, 0x10)
-
-Cipher.prototype._final = function () {
-  var chunk = this._cache.flush()
-  if (this._autopadding) {
-    chunk = this._mode.encrypt(this, chunk)
-    this._cipher.scrub()
-    return chunk
-  }
-
-  if (!chunk.equals(PADDING)) {
-    this._cipher.scrub()
-    throw new Error('data not multiple of block length')
-  }
-}
-
-Cipher.prototype.setAutoPadding = function (setTo) {
-  this._autopadding = !!setTo
-  return this
-}
-
-function Splitter () {
-  this.cache = Buffer.allocUnsafe(0)
-}
-
-Splitter.prototype.add = function (data) {
-  this.cache = Buffer.concat([this.cache, data])
-}
-
-Splitter.prototype.get = function () {
-  if (this.cache.length > 15) {
-    var out = this.cache.slice(0, 16)
-    this.cache = this.cache.slice(16)
-    return out
-  }
-  return null
-}
-
-Splitter.prototype.flush = function () {
-  var len = 16 - this.cache.length
-  var padBuff = Buffer.allocUnsafe(len)
-
-  var i = -1
-  while (++i < len) {
-    padBuff.writeUInt8(len, i)
-  }
-
-  return Buffer.concat([this.cache, padBuff])
-}
-
-function createCipheriv (suite, password, iv) {
-  var config = MODES[suite.toLowerCase()]
-  if (!config) throw new TypeError('invalid suite type')
-
-  if (typeof password === 'string') password = Buffer.from(password)
-  if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length)
-
-  if (typeof iv === 'string') iv = Buffer.from(iv)
-  if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length)
-
-  if (config.type === 'stream') {
-    return new StreamCipher(config.module, password, iv)
-  } else if (config.type === 'auth') {
-    return new AuthCipher(config.module, password, iv)
-  }
-
-  return new Cipher(config.module, password, iv)
-}
-
-function createCipher (suite, password) {
-  var config = MODES[suite.toLowerCase()]
-  if (!config) throw new TypeError('invalid suite type')
-
-  var keys = ebtk(password, false, config.key, config.iv)
-  return createCipheriv(suite, keys.key, keys.iv)
-}
-
-exports.createCipheriv = createCipheriv
-exports.createCipher = createCipher
-
-
-/***/ }),
-/* 176 */
-/***/ (function(module, exports) {
-
-exports.encrypt = function (self, block) {
-  return self._cipher.encryptBlock(block)
-}
-
-exports.decrypt = function (self, block) {
-  return self._cipher.decryptBlock(block)
-}
-
-
-/***/ }),
-/* 177 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var xor = __webpack_require__(34)
-
-exports.encrypt = function (self, block) {
-  var data = xor(block, self._prev)
-
-  self._prev = self._cipher.encryptBlock(data)
-  return self._prev
-}
-
-exports.decrypt = function (self, block) {
-  var pad = self._prev
-
-  self._prev = block
-  var out = self._cipher.decryptBlock(block)
-
-  return xor(out, pad)
-}
-
-
-/***/ }),
 /* 178 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(1).Buffer
-var xor = __webpack_require__(34)
-
-function encryptStart (self, data, decrypt) {
-  var len = data.length
-  var out = xor(data, self._cache)
-  self._cache = self._cache.slice(len)
-  self._prev = Buffer.concat([self._prev, decrypt ? data : out])
-  return out
-}
-
-exports.encrypt = function (self, data, decrypt) {
-  var out = Buffer.allocUnsafe(0)
-  var len
-
-  while (data.length) {
-    if (self._cache.length === 0) {
-      self._cache = self._cipher.encryptBlock(self._prev)
-      self._prev = Buffer.allocUnsafe(0)
-    }
-
-    if (self._cache.length <= data.length) {
-      len = self._cache.length
-      out = Buffer.concat([out, encryptStart(self, data.slice(0, len), decrypt)])
-      data = data.slice(len)
-    } else {
-      out = Buffer.concat([out, encryptStart(self, data, decrypt)])
-      break
-    }
-  }
-
-  return out
-}
-
-
-/***/ }),
-/* 179 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(1).Buffer
-
-function encryptByte (self, byteParam, decrypt) {
-  var pad = self._cipher.encryptBlock(self._prev)
-  var out = pad[0] ^ byteParam
-
-  self._prev = Buffer.concat([
-    self._prev.slice(1),
-    Buffer.from([decrypt ? byteParam : out])
-  ])
-
-  return out
-}
-
-exports.encrypt = function (self, chunk, decrypt) {
-  var len = chunk.length
-  var out = Buffer.allocUnsafe(len)
-  var i = -1
-
-  while (++i < len) {
-    out[i] = encryptByte(self, chunk[i], decrypt)
-  }
-
-  return out
-}
-
-
-/***/ }),
-/* 180 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(1).Buffer
-
-function encryptByte (self, byteParam, decrypt) {
-  var pad
-  var i = -1
-  var len = 8
-  var out = 0
-  var bit, value
-  while (++i < len) {
-    pad = self._cipher.encryptBlock(self._prev)
-    bit = (byteParam & (1 << (7 - i))) ? 0x80 : 0
-    value = pad[0] ^ bit
-    out += ((value & 0x80) >> (i % 8))
-    self._prev = shiftIn(self._prev, decrypt ? bit : value)
-  }
-  return out
-}
-
-function shiftIn (buffer, value) {
-  var len = buffer.length
-  var i = -1
-  var out = Buffer.allocUnsafe(buffer.length)
-  buffer = Buffer.concat([buffer, Buffer.from([value])])
-
-  while (++i < len) {
-    out[i] = buffer[i] << 1 | buffer[i + 1] >> (7)
-  }
-
-  return out
-}
-
-exports.encrypt = function (self, chunk, decrypt) {
-  var len = chunk.length
-  var out = Buffer.allocUnsafe(len)
-  var i = -1
-
-  while (++i < len) {
-    out[i] = encryptByte(self, chunk[i], decrypt)
-  }
-
-  return out
-}
-
-
-/***/ }),
-/* 181 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(34)
-
-function getBlock (self) {
-  self._prev = self._cipher.encryptBlock(self._prev)
-  return self._prev
-}
-
-exports.encrypt = function (self, chunk) {
-  while (self._cache.length < chunk.length) {
-    self._cache = Buffer.concat([self._cache, getBlock(self)])
-  }
-
-  var pad = self._cache.slice(0, chunk.length)
-  self._cache = self._cache.slice(chunk.length)
-  return xor(chunk, pad)
-}
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
-
-/***/ }),
-/* 182 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Buffer = __webpack_require__(1).Buffer
-var ZEROES = Buffer.alloc(16, 0)
-
-function toArray (buf) {
-  return [
-    buf.readUInt32BE(0),
-    buf.readUInt32BE(4),
-    buf.readUInt32BE(8),
-    buf.readUInt32BE(12)
-  ]
-}
-
-function fromArray (out) {
-  var buf = Buffer.allocUnsafe(16)
-  buf.writeUInt32BE(out[0] >>> 0, 0)
-  buf.writeUInt32BE(out[1] >>> 0, 4)
-  buf.writeUInt32BE(out[2] >>> 0, 8)
-  buf.writeUInt32BE(out[3] >>> 0, 12)
-  return buf
-}
-
-function GHASH (key) {
-  this.h = key
-  this.state = Buffer.alloc(16, 0)
-  this.cache = Buffer.allocUnsafe(0)
-}
-
-// from http://bitwiseshiftleft.github.io/sjcl/doc/symbols/src/core_gcm.js.html
-// by Juho Vähä-Herttua
-GHASH.prototype.ghash = function (block) {
-  var i = -1
-  while (++i < block.length) {
-    this.state[i] ^= block[i]
-  }
-  this._multiply()
-}
-
-GHASH.prototype._multiply = function () {
-  var Vi = toArray(this.h)
-  var Zi = [0, 0, 0, 0]
-  var j, xi, lsbVi
-  var i = -1
-  while (++i < 128) {
-    xi = (this.state[~~(i / 8)] & (1 << (7 - (i % 8)))) !== 0
-    if (xi) {
-      // Z_i+1 = Z_i ^ V_i
-      Zi[0] ^= Vi[0]
-      Zi[1] ^= Vi[1]
-      Zi[2] ^= Vi[2]
-      Zi[3] ^= Vi[3]
-    }
-
-    // Store the value of LSB(V_i)
-    lsbVi = (Vi[3] & 1) !== 0
-
-    // V_i+1 = V_i >> 1
-    for (j = 3; j > 0; j--) {
-      Vi[j] = (Vi[j] >>> 1) | ((Vi[j - 1] & 1) << 31)
-    }
-    Vi[0] = Vi[0] >>> 1
-
-    // If LSB(V_i) is 1, V_i+1 = (V_i >> 1) ^ R
-    if (lsbVi) {
-      Vi[0] = Vi[0] ^ (0xe1 << 24)
-    }
-  }
-  this.state = fromArray(Zi)
-}
-
-GHASH.prototype.update = function (buf) {
-  this.cache = Buffer.concat([this.cache, buf])
-  var chunk
-  while (this.cache.length >= 16) {
-    chunk = this.cache.slice(0, 16)
-    this.cache = this.cache.slice(16)
-    this.ghash(chunk)
-  }
-}
-
-GHASH.prototype.final = function (abl, bl) {
-  if (this.cache.length) {
-    this.ghash(Buffer.concat([this.cache, ZEROES], 16))
-  }
-
-  this.ghash(fromArray([0, abl, 0, bl]))
-  return this.state
-}
-
-module.exports = GHASH
-
-
-/***/ }),
-/* 183 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var AuthCipher = __webpack_require__(103)
-var Buffer = __webpack_require__(1).Buffer
-var MODES = __webpack_require__(69)
-var StreamCipher = __webpack_require__(104)
-var Transform = __webpack_require__(21)
-var aes = __webpack_require__(47)
-var ebtk = __webpack_require__(46)
-var inherits = __webpack_require__(0)
-
-function Decipher (mode, key, iv) {
-  Transform.call(this)
-
-  this._cache = new Splitter()
-  this._last = void 0
-  this._cipher = new aes.AES(key)
-  this._prev = Buffer.from(iv)
-  this._mode = mode
-  this._autopadding = true
-}
-
-inherits(Decipher, Transform)
-
-Decipher.prototype._update = function (data) {
-  this._cache.add(data)
-  var chunk
-  var thing
-  var out = []
-  while ((chunk = this._cache.get(this._autopadding))) {
-    thing = this._mode.decrypt(this, chunk)
-    out.push(thing)
-  }
-  return Buffer.concat(out)
-}
-
-Decipher.prototype._final = function () {
-  var chunk = this._cache.flush()
-  if (this._autopadding) {
-    return unpad(this._mode.decrypt(this, chunk))
-  } else if (chunk) {
-    throw new Error('data not multiple of block length')
-  }
-}
-
-Decipher.prototype.setAutoPadding = function (setTo) {
-  this._autopadding = !!setTo
-  return this
-}
-
-function Splitter () {
-  this.cache = Buffer.allocUnsafe(0)
-}
-
-Splitter.prototype.add = function (data) {
-  this.cache = Buffer.concat([this.cache, data])
-}
-
-Splitter.prototype.get = function (autoPadding) {
-  var out
-  if (autoPadding) {
-    if (this.cache.length > 16) {
-      out = this.cache.slice(0, 16)
-      this.cache = this.cache.slice(16)
-      return out
-    }
-  } else {
-    if (this.cache.length >= 16) {
-      out = this.cache.slice(0, 16)
-      this.cache = this.cache.slice(16)
-      return out
-    }
-  }
-
-  return null
-}
-
-Splitter.prototype.flush = function () {
-  if (this.cache.length) return this.cache
-}
-
-function unpad (last) {
-  var padded = last[15]
-  var i = -1
-  while (++i < padded) {
-    if (last[(i + (16 - padded))] !== padded) {
-      throw new Error('unable to decrypt data')
-    }
-  }
-  if (padded === 16) return
-
-  return last.slice(0, 16 - padded)
-}
-
-function createDecipheriv (suite, password, iv) {
-  var config = MODES[suite.toLowerCase()]
-  if (!config) throw new TypeError('invalid suite type')
-
-  if (typeof iv === 'string') iv = Buffer.from(iv)
-  if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length)
-
-  if (typeof password === 'string') password = Buffer.from(password)
-  if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length)
-
-  if (config.type === 'stream') {
-    return new StreamCipher(config.module, password, iv, true)
-  } else if (config.type === 'auth') {
-    return new AuthCipher(config.module, password, iv, true)
-  }
-
-  return new Decipher(config.module, password, iv)
-}
-
-function createDecipher (suite, password) {
-  var config = MODES[suite.toLowerCase()]
-  if (!config) throw new TypeError('invalid suite type')
-
-  var keys = ebtk(password, false, config.key, config.iv)
-  return createDecipheriv(suite, keys.key, keys.iv)
-}
-
-exports.createDecipher = createDecipher
-exports.createDecipheriv = createDecipheriv
-
-
-/***/ }),
-/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(21)
@@ -49078,10 +48179,10 @@ DES.prototype._final = function () {
   return new Buffer(this._des.final())
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 185 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -49344,13 +48445,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 186 */
+/* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 
 function Cipher(options) {
   this.options = options;
@@ -49492,13 +48593,13 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 187 */
+/* 181 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(0);
 
 var des = __webpack_require__(70);
@@ -49642,13 +48743,13 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 188 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(0);
 
 var proto = {};
@@ -49714,13 +48815,13 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 189 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 var inherits = __webpack_require__(0);
 
 var des = __webpack_require__(70);
@@ -49776,7 +48877,529 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var MODES = __webpack_require__(72)
+var AuthCipher = __webpack_require__(107)
+var Buffer = __webpack_require__(1).Buffer
+var StreamCipher = __webpack_require__(108)
+var Transform = __webpack_require__(21)
+var aes = __webpack_require__(46)
+var ebtk = __webpack_require__(47)
+var inherits = __webpack_require__(0)
+
+function Cipher (mode, key, iv) {
+  Transform.call(this)
+
+  this._cache = new Splitter()
+  this._cipher = new aes.AES(key)
+  this._prev = Buffer.from(iv)
+  this._mode = mode
+  this._autopadding = true
+}
+
+inherits(Cipher, Transform)
+
+Cipher.prototype._update = function (data) {
+  this._cache.add(data)
+  var chunk
+  var thing
+  var out = []
+
+  while ((chunk = this._cache.get())) {
+    thing = this._mode.encrypt(this, chunk)
+    out.push(thing)
+  }
+
+  return Buffer.concat(out)
+}
+
+var PADDING = Buffer.alloc(16, 0x10)
+
+Cipher.prototype._final = function () {
+  var chunk = this._cache.flush()
+  if (this._autopadding) {
+    chunk = this._mode.encrypt(this, chunk)
+    this._cipher.scrub()
+    return chunk
+  }
+
+  if (!chunk.equals(PADDING)) {
+    this._cipher.scrub()
+    throw new Error('data not multiple of block length')
+  }
+}
+
+Cipher.prototype.setAutoPadding = function (setTo) {
+  this._autopadding = !!setTo
+  return this
+}
+
+function Splitter () {
+  this.cache = Buffer.allocUnsafe(0)
+}
+
+Splitter.prototype.add = function (data) {
+  this.cache = Buffer.concat([this.cache, data])
+}
+
+Splitter.prototype.get = function () {
+  if (this.cache.length > 15) {
+    var out = this.cache.slice(0, 16)
+    this.cache = this.cache.slice(16)
+    return out
+  }
+  return null
+}
+
+Splitter.prototype.flush = function () {
+  var len = 16 - this.cache.length
+  var padBuff = Buffer.allocUnsafe(len)
+
+  var i = -1
+  while (++i < len) {
+    padBuff.writeUInt8(len, i)
+  }
+
+  return Buffer.concat([this.cache, padBuff])
+}
+
+function createCipheriv (suite, password, iv) {
+  var config = MODES[suite.toLowerCase()]
+  if (!config) throw new TypeError('invalid suite type')
+
+  if (typeof password === 'string') password = Buffer.from(password)
+  if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length)
+
+  if (typeof iv === 'string') iv = Buffer.from(iv)
+  if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length)
+
+  if (config.type === 'stream') {
+    return new StreamCipher(config.module, password, iv)
+  } else if (config.type === 'auth') {
+    return new AuthCipher(config.module, password, iv)
+  }
+
+  return new Cipher(config.module, password, iv)
+}
+
+function createCipher (suite, password) {
+  var config = MODES[suite.toLowerCase()]
+  if (!config) throw new TypeError('invalid suite type')
+
+  var keys = ebtk(password, false, config.key, config.iv)
+  return createCipheriv(suite, keys.key, keys.iv)
+}
+
+exports.createCipheriv = createCipheriv
+exports.createCipher = createCipher
+
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports) {
+
+exports.encrypt = function (self, block) {
+  return self._cipher.encryptBlock(block)
+}
+
+exports.decrypt = function (self, block) {
+  return self._cipher.decryptBlock(block)
+}
+
+
+/***/ }),
+/* 186 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var xor = __webpack_require__(34)
+
+exports.encrypt = function (self, block) {
+  var data = xor(block, self._prev)
+
+  self._prev = self._cipher.encryptBlock(data)
+  return self._prev
+}
+
+exports.decrypt = function (self, block) {
+  var pad = self._prev
+
+  self._prev = block
+  var out = self._cipher.decryptBlock(block)
+
+  return xor(out, pad)
+}
+
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(1).Buffer
+var xor = __webpack_require__(34)
+
+function encryptStart (self, data, decrypt) {
+  var len = data.length
+  var out = xor(data, self._cache)
+  self._cache = self._cache.slice(len)
+  self._prev = Buffer.concat([self._prev, decrypt ? data : out])
+  return out
+}
+
+exports.encrypt = function (self, data, decrypt) {
+  var out = Buffer.allocUnsafe(0)
+  var len
+
+  while (data.length) {
+    if (self._cache.length === 0) {
+      self._cache = self._cipher.encryptBlock(self._prev)
+      self._prev = Buffer.allocUnsafe(0)
+    }
+
+    if (self._cache.length <= data.length) {
+      len = self._cache.length
+      out = Buffer.concat([out, encryptStart(self, data.slice(0, len), decrypt)])
+      data = data.slice(len)
+    } else {
+      out = Buffer.concat([out, encryptStart(self, data, decrypt)])
+      break
+    }
+  }
+
+  return out
+}
+
+
+/***/ }),
+/* 188 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(1).Buffer
+
+function encryptByte (self, byteParam, decrypt) {
+  var pad = self._cipher.encryptBlock(self._prev)
+  var out = pad[0] ^ byteParam
+
+  self._prev = Buffer.concat([
+    self._prev.slice(1),
+    Buffer.from([decrypt ? byteParam : out])
+  ])
+
+  return out
+}
+
+exports.encrypt = function (self, chunk, decrypt) {
+  var len = chunk.length
+  var out = Buffer.allocUnsafe(len)
+  var i = -1
+
+  while (++i < len) {
+    out[i] = encryptByte(self, chunk[i], decrypt)
+  }
+
+  return out
+}
+
+
+/***/ }),
+/* 189 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(1).Buffer
+
+function encryptByte (self, byteParam, decrypt) {
+  var pad
+  var i = -1
+  var len = 8
+  var out = 0
+  var bit, value
+  while (++i < len) {
+    pad = self._cipher.encryptBlock(self._prev)
+    bit = (byteParam & (1 << (7 - i))) ? 0x80 : 0
+    value = pad[0] ^ bit
+    out += ((value & 0x80) >> (i % 8))
+    self._prev = shiftIn(self._prev, decrypt ? bit : value)
+  }
+  return out
+}
+
+function shiftIn (buffer, value) {
+  var len = buffer.length
+  var i = -1
+  var out = Buffer.allocUnsafe(buffer.length)
+  buffer = Buffer.concat([buffer, Buffer.from([value])])
+
+  while (++i < len) {
+    out[i] = buffer[i] << 1 | buffer[i + 1] >> (7)
+  }
+
+  return out
+}
+
+exports.encrypt = function (self, chunk, decrypt) {
+  var len = chunk.length
+  var out = Buffer.allocUnsafe(len)
+  var i = -1
+
+  while (++i < len) {
+    out[i] = encryptByte(self, chunk[i], decrypt)
+  }
+
+  return out
+}
+
+
+/***/ }),
 /* 190 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(34)
+
+function getBlock (self) {
+  self._prev = self._cipher.encryptBlock(self._prev)
+  return self._prev
+}
+
+exports.encrypt = function (self, chunk) {
+  while (self._cache.length < chunk.length) {
+    self._cache = Buffer.concat([self._cache, getBlock(self)])
+  }
+
+  var pad = self._cache.slice(0, chunk.length)
+  self._cache = self._cache.slice(chunk.length)
+  return xor(chunk, pad)
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
+
+/***/ }),
+/* 191 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Buffer = __webpack_require__(1).Buffer
+var ZEROES = Buffer.alloc(16, 0)
+
+function toArray (buf) {
+  return [
+    buf.readUInt32BE(0),
+    buf.readUInt32BE(4),
+    buf.readUInt32BE(8),
+    buf.readUInt32BE(12)
+  ]
+}
+
+function fromArray (out) {
+  var buf = Buffer.allocUnsafe(16)
+  buf.writeUInt32BE(out[0] >>> 0, 0)
+  buf.writeUInt32BE(out[1] >>> 0, 4)
+  buf.writeUInt32BE(out[2] >>> 0, 8)
+  buf.writeUInt32BE(out[3] >>> 0, 12)
+  return buf
+}
+
+function GHASH (key) {
+  this.h = key
+  this.state = Buffer.alloc(16, 0)
+  this.cache = Buffer.allocUnsafe(0)
+}
+
+// from http://bitwiseshiftleft.github.io/sjcl/doc/symbols/src/core_gcm.js.html
+// by Juho Vähä-Herttua
+GHASH.prototype.ghash = function (block) {
+  var i = -1
+  while (++i < block.length) {
+    this.state[i] ^= block[i]
+  }
+  this._multiply()
+}
+
+GHASH.prototype._multiply = function () {
+  var Vi = toArray(this.h)
+  var Zi = [0, 0, 0, 0]
+  var j, xi, lsbVi
+  var i = -1
+  while (++i < 128) {
+    xi = (this.state[~~(i / 8)] & (1 << (7 - (i % 8)))) !== 0
+    if (xi) {
+      // Z_i+1 = Z_i ^ V_i
+      Zi[0] ^= Vi[0]
+      Zi[1] ^= Vi[1]
+      Zi[2] ^= Vi[2]
+      Zi[3] ^= Vi[3]
+    }
+
+    // Store the value of LSB(V_i)
+    lsbVi = (Vi[3] & 1) !== 0
+
+    // V_i+1 = V_i >> 1
+    for (j = 3; j > 0; j--) {
+      Vi[j] = (Vi[j] >>> 1) | ((Vi[j - 1] & 1) << 31)
+    }
+    Vi[0] = Vi[0] >>> 1
+
+    // If LSB(V_i) is 1, V_i+1 = (V_i >> 1) ^ R
+    if (lsbVi) {
+      Vi[0] = Vi[0] ^ (0xe1 << 24)
+    }
+  }
+  this.state = fromArray(Zi)
+}
+
+GHASH.prototype.update = function (buf) {
+  this.cache = Buffer.concat([this.cache, buf])
+  var chunk
+  while (this.cache.length >= 16) {
+    chunk = this.cache.slice(0, 16)
+    this.cache = this.cache.slice(16)
+    this.ghash(chunk)
+  }
+}
+
+GHASH.prototype.final = function (abl, bl) {
+  if (this.cache.length) {
+    this.ghash(Buffer.concat([this.cache, ZEROES], 16))
+  }
+
+  this.ghash(fromArray([0, abl, 0, bl]))
+  return this.state
+}
+
+module.exports = GHASH
+
+
+/***/ }),
+/* 192 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var AuthCipher = __webpack_require__(107)
+var Buffer = __webpack_require__(1).Buffer
+var MODES = __webpack_require__(72)
+var StreamCipher = __webpack_require__(108)
+var Transform = __webpack_require__(21)
+var aes = __webpack_require__(46)
+var ebtk = __webpack_require__(47)
+var inherits = __webpack_require__(0)
+
+function Decipher (mode, key, iv) {
+  Transform.call(this)
+
+  this._cache = new Splitter()
+  this._last = void 0
+  this._cipher = new aes.AES(key)
+  this._prev = Buffer.from(iv)
+  this._mode = mode
+  this._autopadding = true
+}
+
+inherits(Decipher, Transform)
+
+Decipher.prototype._update = function (data) {
+  this._cache.add(data)
+  var chunk
+  var thing
+  var out = []
+  while ((chunk = this._cache.get(this._autopadding))) {
+    thing = this._mode.decrypt(this, chunk)
+    out.push(thing)
+  }
+  return Buffer.concat(out)
+}
+
+Decipher.prototype._final = function () {
+  var chunk = this._cache.flush()
+  if (this._autopadding) {
+    return unpad(this._mode.decrypt(this, chunk))
+  } else if (chunk) {
+    throw new Error('data not multiple of block length')
+  }
+}
+
+Decipher.prototype.setAutoPadding = function (setTo) {
+  this._autopadding = !!setTo
+  return this
+}
+
+function Splitter () {
+  this.cache = Buffer.allocUnsafe(0)
+}
+
+Splitter.prototype.add = function (data) {
+  this.cache = Buffer.concat([this.cache, data])
+}
+
+Splitter.prototype.get = function (autoPadding) {
+  var out
+  if (autoPadding) {
+    if (this.cache.length > 16) {
+      out = this.cache.slice(0, 16)
+      this.cache = this.cache.slice(16)
+      return out
+    }
+  } else {
+    if (this.cache.length >= 16) {
+      out = this.cache.slice(0, 16)
+      this.cache = this.cache.slice(16)
+      return out
+    }
+  }
+
+  return null
+}
+
+Splitter.prototype.flush = function () {
+  if (this.cache.length) return this.cache
+}
+
+function unpad (last) {
+  var padded = last[15]
+  if (padded < 1 || padded > 16) {
+    throw new Error('unable to decrypt data')
+  }
+  var i = -1
+  while (++i < padded) {
+    if (last[(i + (16 - padded))] !== padded) {
+      throw new Error('unable to decrypt data')
+    }
+  }
+  if (padded === 16) return
+
+  return last.slice(0, 16 - padded)
+}
+
+function createDecipheriv (suite, password, iv) {
+  var config = MODES[suite.toLowerCase()]
+  if (!config) throw new TypeError('invalid suite type')
+
+  if (typeof iv === 'string') iv = Buffer.from(iv)
+  if (config.mode !== 'GCM' && iv.length !== config.iv) throw new TypeError('invalid iv length ' + iv.length)
+
+  if (typeof password === 'string') password = Buffer.from(password)
+  if (password.length !== config.key / 8) throw new TypeError('invalid key length ' + password.length)
+
+  if (config.type === 'stream') {
+    return new StreamCipher(config.module, password, iv, true)
+  } else if (config.type === 'auth') {
+    return new AuthCipher(config.module, password, iv, true)
+  }
+
+  return new Decipher(config.module, password, iv)
+}
+
+function createDecipher (suite, password) {
+  var config = MODES[suite.toLowerCase()]
+  if (!config) throw new TypeError('invalid suite type')
+
+  var keys = ebtk(password, false, config.key, config.iv)
+  return createDecipheriv(suite, keys.key, keys.iv)
+}
+
+exports.createDecipher = createDecipher
+exports.createDecipheriv = createDecipheriv
+
+
+/***/ }),
+/* 193 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -49806,13 +49429,13 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 191 */
+/* 194 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(105)
-var primes = __webpack_require__(194)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(109)
+var primes = __webpack_require__(197)
 
-var DH = __webpack_require__(195)
+var DH = __webpack_require__(198)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -49852,39 +49475,39 @@ function createDiffieHellman (prime, enc, generator, genc) {
 exports.DiffieHellmanGroup = exports.createDiffieHellmanGroup = exports.getDiffieHellman = getDiffieHellman
 exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 192 */
+/* 195 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 193 */
+/* 196 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 194 */
+/* 197 */
 /***/ (function(module, exports) {
 
 module.exports = {"modp1":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a63a3620ffffffffffffffff"},"modp2":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece65381ffffffffffffffff"},"modp5":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca237327ffffffffffffffff"},"modp14":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aacaa68ffffffffffffffff"},"modp15":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a93ad2caffffffffffffffff"},"modp16":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c934063199ffffffffffffffff"},"modp17":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dcc4024ffffffffffffffff"},"modp18":{"gen":"02","prime":"ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"}}
 
 /***/ }),
-/* 195 */
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(4);
-var MillerRabin = __webpack_require__(106);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(5);
+var MillerRabin = __webpack_require__(110);
 var millerRabin = new MillerRabin();
 var TWENTYFOUR = new BN(24);
 var ELEVEN = new BN(11);
 var TEN = new BN(10);
 var THREE = new BN(3);
 var SEVEN = new BN(7);
-var primes = __webpack_require__(105);
+var primes = __webpack_require__(109);
 var randomBytes = __webpack_require__(27);
 module.exports = DH;
 
@@ -50041,19 +49664,19 @@ function formatReturnValue(bn, enc) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 196 */
+/* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(32)
-var stream = __webpack_require__(43)
+var stream = __webpack_require__(63)
 var inherits = __webpack_require__(0)
-var sign = __webpack_require__(197)
-var verify = __webpack_require__(233)
+var sign = __webpack_require__(200)
+var verify = __webpack_require__(236)
 
-var algorithms = __webpack_require__(95)
+var algorithms = __webpack_require__(99)
 Object.keys(algorithms).forEach(function (key) {
   algorithms[key].id = new Buffer(algorithms[key].id, 'hex')
   algorithms[key.toLowerCase()] = algorithms[key]
@@ -50139,19 +49762,19 @@ module.exports = {
   createVerify: createVerify
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 197 */
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var createHmac = __webpack_require__(94)
-var crt = __webpack_require__(72)
+var createHmac = __webpack_require__(97)
+var crt = __webpack_require__(73)
 var EC = __webpack_require__(10).ec
-var BN = __webpack_require__(4)
+var BN = __webpack_require__(5)
 var parseKeys = __webpack_require__(49)
-var curves = __webpack_require__(116)
+var curves = __webpack_require__(120)
 
 function sign (hash, key, hashType, signType, tag) {
   var priv = parseKeys(key)
@@ -50291,25 +49914,25 @@ module.exports = sign
 module.exports.getKey = getKey
 module.exports.makeKey = makeKey
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 198 */
+/* 201 */
 /***/ (function(module, exports) {
 
 module.exports = {"name":"elliptic","version":"6.4.0","description":"EC cryptography","main":"lib/elliptic.js","files":["lib"],"scripts":{"jscs":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","jshint":"jscs benchmarks/*.js lib/*.js lib/**/*.js lib/**/**/*.js test/index.js","lint":"npm run jscs && npm run jshint","unit":"istanbul test _mocha --reporter=spec test/index.js","test":"npm run lint && npm run unit","version":"grunt dist && git add dist/"},"repository":{"type":"git","url":"git@github.com:indutny/elliptic"},"keywords":["EC","Elliptic","curve","Cryptography"],"author":"Fedor Indutny <fedor@indutny.com>","license":"MIT","bugs":{"url":"https://github.com/indutny/elliptic/issues"},"homepage":"https://github.com/indutny/elliptic","devDependencies":{"brfs":"^1.4.3","coveralls":"^2.11.3","grunt":"^0.4.5","grunt-browserify":"^5.0.0","grunt-cli":"^1.2.0","grunt-contrib-connect":"^1.0.0","grunt-contrib-copy":"^1.0.0","grunt-contrib-uglify":"^1.0.1","grunt-mocha-istanbul":"^3.0.1","grunt-saucelabs":"^8.6.2","istanbul":"^0.4.2","jscs":"^2.9.0","jshint":"^2.6.0","mocha":"^2.1.0"},"dependencies":{"bn.js":"^4.4.0","brorand":"^1.0.1","hash.js":"^1.0.0","hmac-drbg":"^1.0.0","inherits":"^2.0.1","minimalistic-assert":"^1.0.0","minimalistic-crypto-utils":"^1.0.0"}}
 
 /***/ }),
-/* 199 */
+/* 202 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = exports;
-var BN = __webpack_require__(4);
-var minAssert = __webpack_require__(13);
-var minUtils = __webpack_require__(108);
+var BN = __webpack_require__(5);
+var minAssert = __webpack_require__(15);
+var minUtils = __webpack_require__(112);
 
 utils.assert = minAssert;
 utils.toArray = minUtils.toArray;
@@ -50427,13 +50050,13 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 200 */
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
 var getNAF = utils.getNAF;
@@ -50809,7 +50432,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 201 */
+/* 204 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50817,7 +50440,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 var curve = __webpack_require__(48);
 var elliptic = __webpack_require__(10);
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -51754,14 +51377,14 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 202 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var curve = __webpack_require__(48);
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -51941,7 +51564,7 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 203 */
+/* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51949,7 +51572,7 @@ Point.prototype.getX = function getX() {
 
 var curve = __webpack_require__(48);
 var elliptic = __webpack_require__(10);
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var inherits = __webpack_require__(0);
 var Base = curve.base;
 
@@ -52381,7 +52004,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 204 */
+/* 207 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52389,7 +52012,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 var curves = exports;
 
-var hash = __webpack_require__(73);
+var hash = __webpack_require__(74);
 var elliptic = __webpack_require__(10);
 
 var assert = elliptic.utils.assert;
@@ -52554,7 +52177,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(211);
+  pre = __webpack_require__(214);
 } catch (e) {
   pre = undefined;
 }
@@ -52593,21 +52216,21 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 205 */
+/* 208 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-exports.sha1 = __webpack_require__(206);
-exports.sha224 = __webpack_require__(207);
-exports.sha256 = __webpack_require__(110);
-exports.sha384 = __webpack_require__(208);
-exports.sha512 = __webpack_require__(111);
+exports.sha1 = __webpack_require__(209);
+exports.sha224 = __webpack_require__(210);
+exports.sha256 = __webpack_require__(114);
+exports.sha384 = __webpack_require__(211);
+exports.sha512 = __webpack_require__(115);
 
 
 /***/ }),
-/* 206 */
+/* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52615,7 +52238,7 @@ exports.sha512 = __webpack_require__(111);
 
 var utils = __webpack_require__(17);
 var common = __webpack_require__(35);
-var shaCommon = __webpack_require__(109);
+var shaCommon = __webpack_require__(113);
 
 var rotl32 = utils.rotl32;
 var sum32 = utils.sum32;
@@ -52688,14 +52311,14 @@ SHA1.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 207 */
+/* 210 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(17);
-var SHA256 = __webpack_require__(110);
+var SHA256 = __webpack_require__(114);
 
 function SHA224() {
   if (!(this instanceof SHA224))
@@ -52725,7 +52348,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 208 */
+/* 211 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52733,7 +52356,7 @@ SHA224.prototype._digest = function digest(enc) {
 
 var utils = __webpack_require__(17);
 
-var SHA512 = __webpack_require__(111);
+var SHA512 = __webpack_require__(115);
 
 function SHA384() {
   if (!(this instanceof SHA384))
@@ -52767,7 +52390,7 @@ SHA384.prototype._digest = function digest(enc) {
 
 
 /***/ }),
-/* 209 */
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52920,14 +52543,14 @@ var sh = [
 
 
 /***/ }),
-/* 210 */
+/* 213 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(17);
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 
 function Hmac(hash, key, enc) {
   if (!(this instanceof Hmac))
@@ -52974,7 +52597,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 211 */
+/* 214 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53760,20 +53383,20 @@ module.exports = {
 
 
 /***/ }),
-/* 212 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
-var HmacDRBG = __webpack_require__(213);
+var BN = __webpack_require__(5);
+var HmacDRBG = __webpack_require__(216);
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(214);
-var Signature = __webpack_require__(215);
+var KeyPair = __webpack_require__(217);
+var Signature = __webpack_require__(218);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -54007,15 +53630,15 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 213 */
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var hash = __webpack_require__(73);
-var utils = __webpack_require__(108);
-var assert = __webpack_require__(13);
+var hash = __webpack_require__(74);
+var utils = __webpack_require__(112);
+var assert = __webpack_require__(15);
 
 function HmacDRBG(options) {
   if (!(this instanceof HmacDRBG))
@@ -54127,13 +53750,13 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 214 */
+/* 217 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
 var assert = utils.assert;
@@ -54253,13 +53876,13 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 215 */
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
@@ -54395,19 +54018,19 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 216 */
+/* 219 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var hash = __webpack_require__(73);
+var hash = __webpack_require__(74);
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(217);
-var Signature = __webpack_require__(218);
+var KeyPair = __webpack_require__(220);
+var Signature = __webpack_require__(221);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -54520,7 +54143,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 217 */
+/* 220 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54623,13 +54246,13 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 218 */
+/* 221 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var BN = __webpack_require__(4);
+var BN = __webpack_require__(5);
 var elliptic = __webpack_require__(10);
 var utils = elliptic.utils;
 var assert = utils.assert;
@@ -54696,7 +54319,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 219 */
+/* 222 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54706,7 +54329,7 @@ module.exports = Signature;
 
 var asn1 = __webpack_require__(36)
 
-exports.certificate = __webpack_require__(230)
+exports.certificate = __webpack_require__(233)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -54825,7 +54448,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 220 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(36);
@@ -54848,7 +54471,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(221).runInThisContext(
+    named = __webpack_require__(224).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -54892,10 +54515,10 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 221 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(222);
+var indexOf = __webpack_require__(225);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -55036,7 +54659,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 222 */
+/* 225 */
 /***/ (function(module, exports) {
 
 
@@ -55051,7 +54674,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 223 */
+/* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
@@ -55178,13 +54801,13 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Reporter = __webpack_require__(37).Reporter;
 var EncoderBuffer = __webpack_require__(37).EncoderBuffer;
 var DecoderBuffer = __webpack_require__(37).DecoderBuffer;
-var assert = __webpack_require__(13);
+var assert = __webpack_require__(15);
 
 // Supported tags
 var tags = [
@@ -55818,10 +55441,10 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var constants = __webpack_require__(113);
+var constants = __webpack_require__(117);
 
 exports.tagClass = {
   0: 'universal',
@@ -55866,23 +55489,23 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 226 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
-decoders.der = __webpack_require__(114);
-decoders.pem = __webpack_require__(227);
+decoders.der = __webpack_require__(118);
+decoders.pem = __webpack_require__(230);
 
 
 /***/ }),
-/* 227 */
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
-var Buffer = __webpack_require__(2).Buffer;
+var Buffer = __webpack_require__(3).Buffer;
 
-var DERDecoder = __webpack_require__(114);
+var DERDecoder = __webpack_require__(118);
 
 function PEMDecoder(entity) {
   DERDecoder.call(this, entity);
@@ -55931,22 +55554,22 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
-encoders.der = __webpack_require__(115);
-encoders.pem = __webpack_require__(229);
+encoders.der = __webpack_require__(119);
+encoders.pem = __webpack_require__(232);
 
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(0);
 
-var DEREncoder = __webpack_require__(115);
+var DEREncoder = __webpack_require__(119);
 
 function PEMEncoder(entity) {
   DEREncoder.call(this, entity);
@@ -55968,7 +55591,7 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 230 */
+/* 233 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56063,32 +55686,32 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 231 */
+/* 234 */
 /***/ (function(module, exports) {
 
 module.exports = {"2.16.840.1.101.3.4.1.1":"aes-128-ecb","2.16.840.1.101.3.4.1.2":"aes-128-cbc","2.16.840.1.101.3.4.1.3":"aes-128-ofb","2.16.840.1.101.3.4.1.4":"aes-128-cfb","2.16.840.1.101.3.4.1.21":"aes-192-ecb","2.16.840.1.101.3.4.1.22":"aes-192-cbc","2.16.840.1.101.3.4.1.23":"aes-192-ofb","2.16.840.1.101.3.4.1.24":"aes-192-cfb","2.16.840.1.101.3.4.1.41":"aes-256-ecb","2.16.840.1.101.3.4.1.42":"aes-256-cbc","2.16.840.1.101.3.4.1.43":"aes-256-ofb","2.16.840.1.101.3.4.1.44":"aes-256-cfb"}
 
 /***/ }),
-/* 232 */
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
-var findProc = /Proc-Type: 4,ENCRYPTED\n\r?DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\n\r?\n\r?([0-9A-z\n\r\+\/\=]+)\n\r?/m
-var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----\n/m
-var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----\n\r?([0-9A-z\n\r\+\/\=]+)\n\r?-----END \1-----$/m
-var evp = __webpack_require__(46)
-var ciphers = __webpack_require__(68)
+var findProc = /Proc-Type: 4,ENCRYPTED[\n\r]+DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)[\n\r]+([0-9A-z\n\r\+\/\=]+)[\n\r]+/m
+var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----/m
+var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----([0-9A-z\n\r\+\/\=]+)-----END \1-----$/m
+var evp = __webpack_require__(47)
+var ciphers = __webpack_require__(71)
 module.exports = function (okey, password) {
   var key = okey.toString()
   var match = key.match(findProc)
   var decrypted
   if (!match) {
     var match2 = key.match(fullRegex)
-    decrypted = new Buffer(match2[2].replace(/\r?\n/g, ''), 'base64')
+    decrypted = new Buffer(match2[2].replace(/[\r\n]/g, ''), 'base64')
   } else {
     var suite = 'aes' + match[1]
     var iv = new Buffer(match[2], 'hex')
-    var cipherText = new Buffer(match[3].replace(/\r?\n/g, ''), 'base64')
+    var cipherText = new Buffer(match[3].replace(/[\r\n]/g, ''), 'base64')
     var cipherKey = evp(password, iv.slice(0, 8), parseInt(match[1], 10)).key
     var out = []
     var cipher = ciphers.createDecipheriv(suite, cipherKey, iv)
@@ -56103,17 +55726,17 @@ module.exports = function (okey, password) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 233 */
+/* 236 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
-var BN = __webpack_require__(4)
+var BN = __webpack_require__(5)
 var EC = __webpack_require__(10).ec
 var parseKeys = __webpack_require__(49)
-var curves = __webpack_require__(116)
+var curves = __webpack_require__(120)
 
 function verify (sig, hash, key, signType, tag) {
   var pub = parseKeys(key)
@@ -56193,143 +55816,145 @@ function checkValue (b, q) {
 
 module.exports = verify
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 234 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(10);
-var BN = __webpack_require__(4);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(10)
+var BN = __webpack_require__(5)
 
-module.exports = function createECDH(curve) {
-	return new ECDH(curve);
-};
+module.exports = function createECDH (curve) {
+  return new ECDH(curve)
+}
 
 var aliases = {
-	secp256k1: {
-		name: 'secp256k1',
-		byteLength: 32
-	},
-	secp224r1: {
-		name: 'p224',
-		byteLength: 28
-	},
-	prime256v1: {
-		name: 'p256',
-		byteLength: 32
-	},
-	prime192v1: {
-		name: 'p192',
-		byteLength: 24
-	},
-	ed25519: {
-		name: 'ed25519',
-		byteLength: 32
-	},
-	secp384r1: {
-		name: 'p384',
-		byteLength: 48
-	},
-	secp521r1: {
-		name: 'p521',
-		byteLength: 66
-	}
-};
+  secp256k1: {
+    name: 'secp256k1',
+    byteLength: 32
+  },
+  secp224r1: {
+    name: 'p224',
+    byteLength: 28
+  },
+  prime256v1: {
+    name: 'p256',
+    byteLength: 32
+  },
+  prime192v1: {
+    name: 'p192',
+    byteLength: 24
+  },
+  ed25519: {
+    name: 'ed25519',
+    byteLength: 32
+  },
+  secp384r1: {
+    name: 'p384',
+    byteLength: 48
+  },
+  secp521r1: {
+    name: 'p521',
+    byteLength: 66
+  }
+}
 
-aliases.p224 = aliases.secp224r1;
-aliases.p256 = aliases.secp256r1 = aliases.prime256v1;
-aliases.p192 = aliases.secp192r1 = aliases.prime192v1;
-aliases.p384 = aliases.secp384r1;
-aliases.p521 = aliases.secp521r1;
+aliases.p224 = aliases.secp224r1
+aliases.p256 = aliases.secp256r1 = aliases.prime256v1
+aliases.p192 = aliases.secp192r1 = aliases.prime192v1
+aliases.p384 = aliases.secp384r1
+aliases.p521 = aliases.secp521r1
 
-function ECDH(curve) {
-	this.curveType = aliases[curve];
-	if (!this.curveType ) {
-		this.curveType = {
-			name: curve
-		};
-	}
-	this.curve = new elliptic.ec(this.curveType.name);
-	this.keys = void 0;
+function ECDH (curve) {
+  this.curveType = aliases[curve]
+  if (!this.curveType) {
+    this.curveType = {
+      name: curve
+    }
+  }
+  this.curve = new elliptic.ec(this.curveType.name) // eslint-disable-line new-cap
+  this.keys = void 0
 }
 
 ECDH.prototype.generateKeys = function (enc, format) {
-	this.keys = this.curve.genKeyPair();
-	return this.getPublicKey(enc, format);
-};
-
-ECDH.prototype.computeSecret = function (other, inenc, enc) {
-	inenc = inenc || 'utf8';
-	if (!Buffer.isBuffer(other)) {
-		other = new Buffer(other, inenc);
-	}
-	var otherPub = this.curve.keyFromPublic(other).getPublic();
-	var out = otherPub.mul(this.keys.getPrivate()).getX();
-	return formatReturnValue(out, enc, this.curveType.byteLength);
-};
-
-ECDH.prototype.getPublicKey = function (enc, format) {
-	var key = this.keys.getPublic(format === 'compressed', true);
-	if (format === 'hybrid') {
-		if (key[key.length - 1] % 2) {
-			key[0] = 7;
-		} else {
-			key [0] = 6;
-		}
-	}
-	return formatReturnValue(key, enc);
-};
-
-ECDH.prototype.getPrivateKey = function (enc) {
-	return formatReturnValue(this.keys.getPrivate(), enc);
-};
-
-ECDH.prototype.setPublicKey = function (pub, enc) {
-	enc = enc || 'utf8';
-	if (!Buffer.isBuffer(pub)) {
-		pub = new Buffer(pub, enc);
-	}
-	this.keys._importPublic(pub);
-	return this;
-};
-
-ECDH.prototype.setPrivateKey = function (priv, enc) {
-	enc = enc || 'utf8';
-	if (!Buffer.isBuffer(priv)) {
-		priv = new Buffer(priv, enc);
-	}
-	var _priv = new BN(priv);
-	_priv = _priv.toString(16);
-	this.keys._importPrivate(_priv);
-	return this;
-};
-
-function formatReturnValue(bn, enc, len) {
-	if (!Array.isArray(bn)) {
-		bn = bn.toArray();
-	}
-	var buf = new Buffer(bn);
-	if (len && buf.length < len) {
-		var zeros = new Buffer(len - buf.length);
-		zeros.fill(0);
-		buf = Buffer.concat([zeros, buf]);
-	}
-	if (!enc) {
-		return buf;
-	} else {
-		return buf.toString(enc);
-	}
+  this.keys = this.curve.genKeyPair()
+  return this.getPublicKey(enc, format)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+ECDH.prototype.computeSecret = function (other, inenc, enc) {
+  inenc = inenc || 'utf8'
+  if (!Buffer.isBuffer(other)) {
+    other = new Buffer(other, inenc)
+  }
+  var otherPub = this.curve.keyFromPublic(other).getPublic()
+  var out = otherPub.mul(this.keys.getPrivate()).getX()
+  return formatReturnValue(out, enc, this.curveType.byteLength)
+}
+
+ECDH.prototype.getPublicKey = function (enc, format) {
+  var key = this.keys.getPublic(format === 'compressed', true)
+  if (format === 'hybrid') {
+    if (key[key.length - 1] % 2) {
+      key[0] = 7
+    } else {
+      key[0] = 6
+    }
+  }
+  return formatReturnValue(key, enc)
+}
+
+ECDH.prototype.getPrivateKey = function (enc) {
+  return formatReturnValue(this.keys.getPrivate(), enc)
+}
+
+ECDH.prototype.setPublicKey = function (pub, enc) {
+  enc = enc || 'utf8'
+  if (!Buffer.isBuffer(pub)) {
+    pub = new Buffer(pub, enc)
+  }
+  this.keys._importPublic(pub)
+  return this
+}
+
+ECDH.prototype.setPrivateKey = function (priv, enc) {
+  enc = enc || 'utf8'
+  if (!Buffer.isBuffer(priv)) {
+    priv = new Buffer(priv, enc)
+  }
+
+  var _priv = new BN(priv)
+  _priv = _priv.toString(16)
+  this.keys = this.curve.genKeyPair()
+  this.keys._importPrivate(_priv)
+  return this
+}
+
+function formatReturnValue (bn, enc, len) {
+  if (!Array.isArray(bn)) {
+    bn = bn.toArray()
+  }
+  var buf = new Buffer(bn)
+  if (len && buf.length < len) {
+    var zeros = new Buffer(len - buf.length)
+    zeros.fill(0)
+    buf = Buffer.concat([zeros, buf])
+  }
+  if (!enc) {
+    return buf
+  } else {
+    return buf.toString(enc)
+  }
+}
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 235 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(236);
-exports.privateDecrypt = __webpack_require__(237);
+exports.publicEncrypt = __webpack_require__(239);
+exports.privateDecrypt = __webpack_require__(240);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -56340,17 +55965,17 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 236 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(49);
 var randomBytes = __webpack_require__(27);
 var createHash = __webpack_require__(32);
-var mgf = __webpack_require__(117);
-var xor = __webpack_require__(118);
-var bn = __webpack_require__(4);
-var withPublic = __webpack_require__(119);
-var crt = __webpack_require__(72);
+var mgf = __webpack_require__(121);
+var xor = __webpack_require__(122);
+var bn = __webpack_require__(5);
+var withPublic = __webpack_require__(123);
+var crt = __webpack_require__(73);
 
 var constants = {
   RSA_PKCS1_OAEP_PADDING: 4,
@@ -56438,19 +56063,19 @@ function nonZero(len, crypto) {
   }
   return out;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 237 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(49);
-var mgf = __webpack_require__(117);
-var xor = __webpack_require__(118);
-var bn = __webpack_require__(4);
-var crt = __webpack_require__(72);
+var mgf = __webpack_require__(121);
+var xor = __webpack_require__(122);
+var bn = __webpack_require__(5);
+var crt = __webpack_require__(73);
 var createHash = __webpack_require__(32);
-var withPublic = __webpack_require__(119);
+var withPublic = __webpack_require__(123);
 module.exports = function privateDecrypt(private_key, enc, reverse) {
   var padding;
   if (private_key.padding) {
@@ -56552,10 +56177,10 @@ function compare(a, b){
   }
   return dif;
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 238 */
+/* 241 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56668,10 +56293,10 @@ function randomFillSync (buf, offset, size) {
   return actualFill(buf, offset, size)
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15), __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(20)))
 
 /***/ }),
-/* 239 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56707,7 +56332,7 @@ exports.Token = Token;
 
 
 /***/ }),
-/* 240 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56720,7 +56345,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var random_1 = __webpack_require__(87);
+var random_1 = __webpack_require__(89);
 /**
  * The namespace for UUID related functionality.
  */
@@ -56786,10 +56411,10 @@ var UUID;
 
 
 /***/ }),
-/* 241 */
+/* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqual = __webpack_require__(242);
+var baseIsEqual = __webpack_require__(245);
 
 /**
  * Performs a deep comparison between two values to determine if they are
@@ -56827,10 +56452,10 @@ module.exports = isEqual;
 
 
 /***/ }),
-/* 242 */
+/* 245 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsEqualDeep = __webpack_require__(243),
+var baseIsEqualDeep = __webpack_require__(246),
     isObjectLike = __webpack_require__(39);
 
 /**
@@ -56861,17 +56486,17 @@ module.exports = baseIsEqual;
 
 
 /***/ }),
-/* 243 */
+/* 246 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Stack = __webpack_require__(244),
-    equalArrays = __webpack_require__(126),
-    equalByTag = __webpack_require__(278),
-    equalObjects = __webpack_require__(282),
-    getTag = __webpack_require__(303),
-    isArray = __webpack_require__(76),
-    isBuffer = __webpack_require__(127),
-    isTypedArray = __webpack_require__(128);
+var Stack = __webpack_require__(247),
+    equalArrays = __webpack_require__(130),
+    equalByTag = __webpack_require__(281),
+    equalObjects = __webpack_require__(285),
+    getTag = __webpack_require__(306),
+    isArray = __webpack_require__(77),
+    isBuffer = __webpack_require__(131),
+    isTypedArray = __webpack_require__(132);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -56950,15 +56575,15 @@ module.exports = baseIsEqualDeep;
 
 
 /***/ }),
-/* 244 */
+/* 247 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(50),
-    stackClear = __webpack_require__(250),
-    stackDelete = __webpack_require__(251),
-    stackGet = __webpack_require__(252),
-    stackHas = __webpack_require__(253),
-    stackSet = __webpack_require__(254);
+    stackClear = __webpack_require__(253),
+    stackDelete = __webpack_require__(254),
+    stackGet = __webpack_require__(255),
+    stackHas = __webpack_require__(256),
+    stackSet = __webpack_require__(257);
 
 /**
  * Creates a stack cache object to store key-value pairs.
@@ -56983,7 +56608,7 @@ module.exports = Stack;
 
 
 /***/ }),
-/* 245 */
+/* 248 */
 /***/ (function(module, exports) {
 
 /**
@@ -57002,7 +56627,7 @@ module.exports = listCacheClear;
 
 
 /***/ }),
-/* 246 */
+/* 249 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(51);
@@ -57043,7 +56668,7 @@ module.exports = listCacheDelete;
 
 
 /***/ }),
-/* 247 */
+/* 250 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(51);
@@ -57068,7 +56693,7 @@ module.exports = listCacheGet;
 
 
 /***/ }),
-/* 248 */
+/* 251 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(51);
@@ -57090,7 +56715,7 @@ module.exports = listCacheHas;
 
 
 /***/ }),
-/* 249 */
+/* 252 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var assocIndexOf = __webpack_require__(51);
@@ -57122,7 +56747,7 @@ module.exports = listCacheSet;
 
 
 /***/ }),
-/* 250 */
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(50);
@@ -57143,7 +56768,7 @@ module.exports = stackClear;
 
 
 /***/ }),
-/* 251 */
+/* 254 */
 /***/ (function(module, exports) {
 
 /**
@@ -57167,7 +56792,7 @@ module.exports = stackDelete;
 
 
 /***/ }),
-/* 252 */
+/* 255 */
 /***/ (function(module, exports) {
 
 /**
@@ -57187,7 +56812,7 @@ module.exports = stackGet;
 
 
 /***/ }),
-/* 253 */
+/* 256 */
 /***/ (function(module, exports) {
 
 /**
@@ -57207,12 +56832,12 @@ module.exports = stackHas;
 
 
 /***/ }),
-/* 254 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ListCache = __webpack_require__(50),
-    Map = __webpack_require__(74),
-    MapCache = __webpack_require__(125);
+    Map = __webpack_require__(75),
+    MapCache = __webpack_require__(129);
 
 /** Used as the size to enable large array optimizations. */
 var LARGE_ARRAY_SIZE = 200;
@@ -57247,13 +56872,13 @@ module.exports = stackSet;
 
 
 /***/ }),
-/* 255 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(121),
-    isMasked = __webpack_require__(258),
-    isObject = __webpack_require__(123),
-    toSource = __webpack_require__(124);
+var isFunction = __webpack_require__(125),
+    isMasked = __webpack_require__(261),
+    isObject = __webpack_require__(127),
+    toSource = __webpack_require__(128);
 
 /**
  * Used to match `RegExp`
@@ -57300,10 +56925,10 @@ module.exports = baseIsNative;
 
 
 /***/ }),
-/* 256 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(75);
+var Symbol = __webpack_require__(76);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -57352,7 +56977,7 @@ module.exports = getRawTag;
 
 
 /***/ }),
-/* 257 */
+/* 260 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -57380,10 +57005,10 @@ module.exports = objectToString;
 
 
 /***/ }),
-/* 258 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var coreJsData = __webpack_require__(259);
+var coreJsData = __webpack_require__(262);
 
 /** Used to detect methods masquerading as native. */
 var maskSrcKey = (function() {
@@ -57406,7 +57031,7 @@ module.exports = isMasked;
 
 
 /***/ }),
-/* 259 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(19);
@@ -57418,7 +57043,7 @@ module.exports = coreJsData;
 
 
 /***/ }),
-/* 260 */
+/* 263 */
 /***/ (function(module, exports) {
 
 /**
@@ -57437,12 +57062,12 @@ module.exports = getValue;
 
 
 /***/ }),
-/* 261 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Hash = __webpack_require__(262),
+var Hash = __webpack_require__(265),
     ListCache = __webpack_require__(50),
-    Map = __webpack_require__(74);
+    Map = __webpack_require__(75);
 
 /**
  * Removes all key-value entries from the map.
@@ -57464,14 +57089,14 @@ module.exports = mapCacheClear;
 
 
 /***/ }),
-/* 262 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var hashClear = __webpack_require__(263),
-    hashDelete = __webpack_require__(264),
-    hashGet = __webpack_require__(265),
-    hashHas = __webpack_require__(266),
-    hashSet = __webpack_require__(267);
+var hashClear = __webpack_require__(266),
+    hashDelete = __webpack_require__(267),
+    hashGet = __webpack_require__(268),
+    hashHas = __webpack_require__(269),
+    hashSet = __webpack_require__(270);
 
 /**
  * Creates a hash object.
@@ -57502,7 +57127,7 @@ module.exports = Hash;
 
 
 /***/ }),
-/* 263 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(52);
@@ -57523,7 +57148,7 @@ module.exports = hashClear;
 
 
 /***/ }),
-/* 264 */
+/* 267 */
 /***/ (function(module, exports) {
 
 /**
@@ -57546,7 +57171,7 @@ module.exports = hashDelete;
 
 
 /***/ }),
-/* 265 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(52);
@@ -57582,7 +57207,7 @@ module.exports = hashGet;
 
 
 /***/ }),
-/* 266 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(52);
@@ -57611,7 +57236,7 @@ module.exports = hashHas;
 
 
 /***/ }),
-/* 267 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nativeCreate = __webpack_require__(52);
@@ -57640,7 +57265,7 @@ module.exports = hashSet;
 
 
 /***/ }),
-/* 268 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(53);
@@ -57664,7 +57289,7 @@ module.exports = mapCacheDelete;
 
 
 /***/ }),
-/* 269 */
+/* 272 */
 /***/ (function(module, exports) {
 
 /**
@@ -57685,7 +57310,7 @@ module.exports = isKeyable;
 
 
 /***/ }),
-/* 270 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(53);
@@ -57707,7 +57332,7 @@ module.exports = mapCacheGet;
 
 
 /***/ }),
-/* 271 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(53);
@@ -57729,7 +57354,7 @@ module.exports = mapCacheHas;
 
 
 /***/ }),
-/* 272 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getMapData = __webpack_require__(53);
@@ -57757,12 +57382,12 @@ module.exports = mapCacheSet;
 
 
 /***/ }),
-/* 273 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var MapCache = __webpack_require__(125),
-    setCacheAdd = __webpack_require__(274),
-    setCacheHas = __webpack_require__(275);
+var MapCache = __webpack_require__(129),
+    setCacheAdd = __webpack_require__(277),
+    setCacheHas = __webpack_require__(278);
 
 /**
  *
@@ -57790,7 +57415,7 @@ module.exports = SetCache;
 
 
 /***/ }),
-/* 274 */
+/* 277 */
 /***/ (function(module, exports) {
 
 /** Used to stand-in for `undefined` hash values. */
@@ -57815,7 +57440,7 @@ module.exports = setCacheAdd;
 
 
 /***/ }),
-/* 275 */
+/* 278 */
 /***/ (function(module, exports) {
 
 /**
@@ -57835,7 +57460,7 @@ module.exports = setCacheHas;
 
 
 /***/ }),
-/* 276 */
+/* 279 */
 /***/ (function(module, exports) {
 
 /**
@@ -57864,7 +57489,7 @@ module.exports = arraySome;
 
 
 /***/ }),
-/* 277 */
+/* 280 */
 /***/ (function(module, exports) {
 
 /**
@@ -57883,15 +57508,15 @@ module.exports = cacheHas;
 
 
 /***/ }),
-/* 278 */
+/* 281 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Symbol = __webpack_require__(75),
-    Uint8Array = __webpack_require__(279),
-    eq = __webpack_require__(120),
-    equalArrays = __webpack_require__(126),
-    mapToArray = __webpack_require__(280),
-    setToArray = __webpack_require__(281);
+var Symbol = __webpack_require__(76),
+    Uint8Array = __webpack_require__(282),
+    eq = __webpack_require__(124),
+    equalArrays = __webpack_require__(130),
+    mapToArray = __webpack_require__(283),
+    setToArray = __webpack_require__(284);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1,
@@ -58001,7 +57626,7 @@ module.exports = equalByTag;
 
 
 /***/ }),
-/* 279 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var root = __webpack_require__(19);
@@ -58013,7 +57638,7 @@ module.exports = Uint8Array;
 
 
 /***/ }),
-/* 280 */
+/* 283 */
 /***/ (function(module, exports) {
 
 /**
@@ -58037,7 +57662,7 @@ module.exports = mapToArray;
 
 
 /***/ }),
-/* 281 */
+/* 284 */
 /***/ (function(module, exports) {
 
 /**
@@ -58061,10 +57686,10 @@ module.exports = setToArray;
 
 
 /***/ }),
-/* 282 */
+/* 285 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getAllKeys = __webpack_require__(283);
+var getAllKeys = __webpack_require__(286);
 
 /** Used to compose bitmasks for value comparisons. */
 var COMPARE_PARTIAL_FLAG = 1;
@@ -58156,12 +57781,12 @@ module.exports = equalObjects;
 
 
 /***/ }),
-/* 283 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseGetAllKeys = __webpack_require__(284),
-    getSymbols = __webpack_require__(286),
-    keys = __webpack_require__(289);
+var baseGetAllKeys = __webpack_require__(287),
+    getSymbols = __webpack_require__(289),
+    keys = __webpack_require__(292);
 
 /**
  * Creates an array of own enumerable property names and symbols of `object`.
@@ -58178,11 +57803,11 @@ module.exports = getAllKeys;
 
 
 /***/ }),
-/* 284 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayPush = __webpack_require__(285),
-    isArray = __webpack_require__(76);
+var arrayPush = __webpack_require__(288),
+    isArray = __webpack_require__(77);
 
 /**
  * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
@@ -58204,7 +57829,7 @@ module.exports = baseGetAllKeys;
 
 
 /***/ }),
-/* 285 */
+/* 288 */
 /***/ (function(module, exports) {
 
 /**
@@ -58230,11 +57855,11 @@ module.exports = arrayPush;
 
 
 /***/ }),
-/* 286 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayFilter = __webpack_require__(287),
-    stubArray = __webpack_require__(288);
+var arrayFilter = __webpack_require__(290),
+    stubArray = __webpack_require__(291);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -58266,7 +57891,7 @@ module.exports = getSymbols;
 
 
 /***/ }),
-/* 287 */
+/* 290 */
 /***/ (function(module, exports) {
 
 /**
@@ -58297,7 +57922,7 @@ module.exports = arrayFilter;
 
 
 /***/ }),
-/* 288 */
+/* 291 */
 /***/ (function(module, exports) {
 
 /**
@@ -58326,12 +57951,12 @@ module.exports = stubArray;
 
 
 /***/ }),
-/* 289 */
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeKeys = __webpack_require__(290),
-    baseKeys = __webpack_require__(299),
-    isArrayLike = __webpack_require__(302);
+var arrayLikeKeys = __webpack_require__(293),
+    baseKeys = __webpack_require__(302),
+    isArrayLike = __webpack_require__(305);
 
 /**
  * Creates an array of the own enumerable property names of `object`.
@@ -58369,15 +57994,15 @@ module.exports = keys;
 
 
 /***/ }),
-/* 290 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseTimes = __webpack_require__(291),
-    isArguments = __webpack_require__(292),
-    isArray = __webpack_require__(76),
-    isBuffer = __webpack_require__(127),
-    isIndex = __webpack_require__(295),
-    isTypedArray = __webpack_require__(128);
+var baseTimes = __webpack_require__(294),
+    isArguments = __webpack_require__(295),
+    isArray = __webpack_require__(77),
+    isBuffer = __webpack_require__(131),
+    isIndex = __webpack_require__(298),
+    isTypedArray = __webpack_require__(132);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -58424,7 +58049,7 @@ module.exports = arrayLikeKeys;
 
 
 /***/ }),
-/* 291 */
+/* 294 */
 /***/ (function(module, exports) {
 
 /**
@@ -58450,10 +58075,10 @@ module.exports = baseTimes;
 
 
 /***/ }),
-/* 292 */
+/* 295 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var baseIsArguments = __webpack_require__(293),
+var baseIsArguments = __webpack_require__(296),
     isObjectLike = __webpack_require__(39);
 
 /** Used for built-in method references. */
@@ -58492,7 +58117,7 @@ module.exports = isArguments;
 
 
 /***/ }),
-/* 293 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(38),
@@ -58516,7 +58141,7 @@ module.exports = baseIsArguments;
 
 
 /***/ }),
-/* 294 */
+/* 297 */
 /***/ (function(module, exports) {
 
 /**
@@ -58540,7 +58165,7 @@ module.exports = stubFalse;
 
 
 /***/ }),
-/* 295 */
+/* 298 */
 /***/ (function(module, exports) {
 
 /** Used as references for various `Number` constants. */
@@ -58571,11 +58196,11 @@ module.exports = isIndex;
 
 
 /***/ }),
-/* 296 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(38),
-    isLength = __webpack_require__(129),
+    isLength = __webpack_require__(133),
     isObjectLike = __webpack_require__(39);
 
 /** `Object#toString` result references. */
@@ -58637,7 +58262,7 @@ module.exports = baseIsTypedArray;
 
 
 /***/ }),
-/* 297 */
+/* 300 */
 /***/ (function(module, exports) {
 
 /**
@@ -58657,10 +58282,10 @@ module.exports = baseUnary;
 
 
 /***/ }),
-/* 298 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(122);
+/* WEBPACK VAR INJECTION */(function(module) {var freeGlobal = __webpack_require__(126);
 
 /** Detect free variable `exports`. */
 var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
@@ -58677,20 +58302,28 @@ var freeProcess = moduleExports && freeGlobal.process;
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
   try {
+    // Use `util.types` for Node.js 10+.
+    var types = freeModule && freeModule.require && freeModule.require('util').types;
+
+    if (types) {
+      return types;
+    }
+
+    // Legacy `process.binding('util')` for Node.js < 10.
     return freeProcess && freeProcess.binding && freeProcess.binding('util');
   } catch (e) {}
 }());
 
 module.exports = nodeUtil;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(71)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)(module)))
 
 /***/ }),
-/* 299 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isPrototype = __webpack_require__(300),
-    nativeKeys = __webpack_require__(301);
+var isPrototype = __webpack_require__(303),
+    nativeKeys = __webpack_require__(304);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -58722,7 +58355,7 @@ module.exports = baseKeys;
 
 
 /***/ }),
-/* 300 */
+/* 303 */
 /***/ (function(module, exports) {
 
 /** Used for built-in method references. */
@@ -58746,10 +58379,10 @@ module.exports = isPrototype;
 
 
 /***/ }),
-/* 301 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var overArg = __webpack_require__(130);
+var overArg = __webpack_require__(134);
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
 var nativeKeys = overArg(Object.keys, Object);
@@ -58758,11 +58391,11 @@ module.exports = nativeKeys;
 
 
 /***/ }),
-/* 302 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isFunction = __webpack_require__(121),
-    isLength = __webpack_require__(129);
+var isFunction = __webpack_require__(125),
+    isLength = __webpack_require__(133);
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -58797,16 +58430,16 @@ module.exports = isArrayLike;
 
 
 /***/ }),
-/* 303 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DataView = __webpack_require__(304),
-    Map = __webpack_require__(74),
-    Promise = __webpack_require__(305),
-    Set = __webpack_require__(306),
-    WeakMap = __webpack_require__(307),
+var DataView = __webpack_require__(307),
+    Map = __webpack_require__(75),
+    Promise = __webpack_require__(308),
+    Set = __webpack_require__(309),
+    WeakMap = __webpack_require__(310),
     baseGetTag = __webpack_require__(38),
-    toSource = __webpack_require__(124);
+    toSource = __webpack_require__(128);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]',
@@ -58861,7 +58494,7 @@ module.exports = getTag;
 
 
 /***/ }),
-/* 304 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(29),
@@ -58874,7 +58507,7 @@ module.exports = DataView;
 
 
 /***/ }),
-/* 305 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(29),
@@ -58887,7 +58520,7 @@ module.exports = Promise;
 
 
 /***/ }),
-/* 306 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(29),
@@ -58900,7 +58533,7 @@ module.exports = Set;
 
 
 /***/ }),
-/* 307 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(29),
@@ -58913,11 +58546,11 @@ module.exports = WeakMap;
 
 
 /***/ }),
-/* 308 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(38),
-    getPrototype = __webpack_require__(309),
+    getPrototype = __webpack_require__(312),
     isObjectLike = __webpack_require__(39);
 
 /** `Object#toString` result references. */
@@ -58981,10 +58614,10 @@ module.exports = isPlainObject;
 
 
 /***/ }),
-/* 309 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var overArg = __webpack_require__(130);
+var overArg = __webpack_require__(134);
 
 /** Built-in value references. */
 var getPrototype = overArg(Object.getPrototypeOf, Object);
@@ -58993,7 +58626,7 @@ module.exports = getPrototype;
 
 
 /***/ }),
-/* 310 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59123,7 +58756,7 @@ exports.set = set;
 
 
 /***/ }),
-/* 311 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59171,7 +58804,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 */
-var Backbone = __webpack_require__(60);
+var Backbone = __webpack_require__(61);
 // Caches a local reference to `Element.prototype` for faster access.
 var ElementProto = Element.prototype; // : typeof Element = (typeof Element !== 'undefined' && Element.prototype) || {};
 // Find the right `Element#matches` for IE>=9 and modern browsers.
@@ -59296,7 +58929,7 @@ exports.NativeView = NativeView;
 
 
 /***/ }),
-/* 312 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60581,7 +60214,7 @@ var ArrayExt;
 
 
 /***/ }),
-/* 313 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60683,7 +60316,7 @@ exports.ChainIterator = ChainIterator;
 
 
 /***/ }),
-/* 314 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60746,7 +60379,7 @@ exports.EmptyIterator = EmptyIterator;
 
 
 /***/ }),
-/* 315 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60840,7 +60473,7 @@ exports.FilterIterator = FilterIterator;
 
 
 /***/ }),
-/* 316 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61034,7 +60667,7 @@ exports.minmax = minmax;
 
 
 /***/ }),
-/* 317 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61124,7 +60757,7 @@ exports.MapIterator = MapIterator;
 
 
 /***/ }),
-/* 318 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61243,7 +60876,7 @@ var Private;
 
 
 /***/ }),
-/* 319 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61301,7 +60934,7 @@ exports.reduce = reduce;
 
 
 /***/ }),
-/* 320 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61398,7 +61031,7 @@ exports.RepeatIterator = RepeatIterator;
 
 
 /***/ }),
-/* 321 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61484,7 +61117,7 @@ exports.RetroArrayIterator = RetroArrayIterator;
 
 
 /***/ }),
-/* 322 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61562,7 +61195,7 @@ exports.topologicSort = topologicSort;
 
 
 /***/ }),
-/* 323 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61651,7 +61284,7 @@ exports.StrideIterator = StrideIterator;
 
 
 /***/ }),
-/* 324 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61829,7 +61462,7 @@ var StringExt;
 
 
 /***/ }),
-/* 325 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61914,7 +61547,7 @@ exports.TakeIterator = TakeIterator;
 
 
 /***/ }),
-/* 326 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62007,7 +61640,7 @@ exports.ZipIterator = ZipIterator;
 
 
 /***/ }),
-/* 327 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62139,7 +61772,7 @@ var ElementExt;
 
 
 /***/ }),
-/* 328 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62177,7 +61810,7 @@ var Platform;
 
 
 /***/ }),
-/* 329 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62414,7 +62047,7 @@ var Private;
 
 
 /***/ }),
-/* 330 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62430,11 +62063,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-__export(__webpack_require__(331));
+__export(__webpack_require__(334));
 
 
 /***/ }),
-/* 331 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62447,7 +62080,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 /**
  * A generic doubly-linked list.
  */
@@ -63051,7 +62684,7 @@ var Private;
 
 
 /***/ }),
-/* 332 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63074,7 +62707,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var boxlayout_1 = __webpack_require__(79);
+var boxlayout_1 = __webpack_require__(80);
 var panel_1 = __webpack_require__(54);
 /**
  * A panel which arranges its widgets in a single row or column.
@@ -63236,7 +62869,7 @@ var Private;
 
 
 /***/ }),
-/* 333 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63267,10 +62900,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var coreutils_1 = __webpack_require__(26);
-var commands_1 = __webpack_require__(131);
-var domutils_1 = __webpack_require__(7);
+var commands_1 = __webpack_require__(135);
+var domutils_1 = __webpack_require__(9);
 var virtualdom_1 = __webpack_require__(55);
 var widget_1 = __webpack_require__(8);
 /**
@@ -63703,7 +63336,7 @@ exports.CommandPalette = CommandPalette;
         Renderer.prototype.renderItem = function (data) {
             var className = this.createItemClass(data);
             var dataset = this.createItemDataset(data);
-            return (virtualdom_1.h.li({ className: className, dataset: dataset }, this.renderItemShortcut(data), this.renderItemLabel(data), this.renderItemCaption(data)));
+            return (virtualdom_1.h.li({ className: className, dataset: dataset }, this.renderItemIcon(data), this.renderItemContent(data), this.renderItemShortcut(data)));
         };
         /**
          * Render the empty results message for a command palette.
@@ -63717,15 +63350,25 @@ exports.CommandPalette = CommandPalette;
             return virtualdom_1.h.li({ className: 'p-CommandPalette-emptyMessage' }, content);
         };
         /**
-         * Render the shortcut for a command palette item.
+         * Render the icon for a command palette item.
          *
-         * @param data - The data to use for rendering the shortcut.
+         * @param data - The data to use for rendering the icon.
          *
-         * @returns A virtual element representing the shortcut.
+         * @returns A virtual element representing the icon.
          */
-        Renderer.prototype.renderItemShortcut = function (data) {
-            var content = this.formatItemShortcut(data);
-            return virtualdom_1.h.div({ className: 'p-CommandPalette-itemShortcut' }, content);
+        Renderer.prototype.renderItemIcon = function (data) {
+            var className = this.createIconClass(data);
+            return virtualdom_1.h.div({ className: className }, data.item.iconLabel);
+        };
+        /**
+         * Render the content for a command palette item.
+         *
+         * @param data - The data to use for rendering the content.
+         *
+         * @returns A virtual element representing the content.
+         */
+        Renderer.prototype.renderItemContent = function (data) {
+            return (virtualdom_1.h.div({ className: 'p-CommandPalette-itemContent' }, this.renderItemLabel(data), this.renderItemCaption(data)));
         };
         /**
          * Render the label for a command palette item.
@@ -63748,6 +63391,17 @@ exports.CommandPalette = CommandPalette;
         Renderer.prototype.renderItemCaption = function (data) {
             var content = this.formatItemCaption(data);
             return virtualdom_1.h.div({ className: 'p-CommandPalette-itemCaption' }, content);
+        };
+        /**
+         * Render the shortcut for a command palette item.
+         *
+         * @param data - The data to use for rendering the shortcut.
+         *
+         * @returns A virtual element representing the shortcut.
+         */
+        Renderer.prototype.renderItemShortcut = function (data) {
+            var content = this.formatItemShortcut(data);
+            return virtualdom_1.h.div({ className: 'p-CommandPalette-itemShortcut' }, content);
         };
         /**
          * Create the class name for the command palette item.
@@ -63786,6 +63440,18 @@ exports.CommandPalette = CommandPalette;
          */
         Renderer.prototype.createItemDataset = function (data) {
             return __assign({}, data.item.dataset, { command: data.item.command });
+        };
+        /**
+         * Create the class name for the command item icon.
+         *
+         * @param data - The data to use for the class name.
+         *
+         * @returns The full class name for the item icon.
+         */
+        Renderer.prototype.createIconClass = function (data) {
+            var name = 'p-CommandPalette-itemIcon';
+            var extra = data.item.iconClass;
+            return extra ? name + " " + extra : name;
         };
         /**
          * Create the render content for the header node.
@@ -64179,6 +63845,26 @@ var Private;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(CommandItem.prototype, "iconClass", {
+            /**
+             * The icon class for the command item.
+             */
+            get: function () {
+                return this._commands.iconClass(this.command, this.args);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(CommandItem.prototype, "iconLabel", {
+            /**
+             * The icon label for the command item.
+             */
+            get: function () {
+                return this._commands.iconLabel(this.command, this.args);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(CommandItem.prototype, "caption", {
             /**
              * The display caption for the command item.
@@ -64258,7 +63944,7 @@ var Private;
 
 
 /***/ }),
-/* 334 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64279,10 +63965,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var disposable_1 = __webpack_require__(81);
-var domutils_1 = __webpack_require__(7);
-var menu_1 = __webpack_require__(132);
+var algorithm_1 = __webpack_require__(2);
+var disposable_1 = __webpack_require__(82);
+var domutils_1 = __webpack_require__(9);
+var menu_1 = __webpack_require__(136);
 /**
  * An object which implements a universal context menu.
  *
@@ -64479,7 +64165,7 @@ var Private;
 
 
 /***/ }),
-/* 335 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64502,15 +64188,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var coreutils_1 = __webpack_require__(26);
-var domutils_1 = __webpack_require__(7);
+var domutils_1 = __webpack_require__(9);
 var dragdrop_1 = __webpack_require__(56);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var signaling_1 = __webpack_require__(11);
-var docklayout_1 = __webpack_require__(133);
-var tabbar_1 = __webpack_require__(83);
+var docklayout_1 = __webpack_require__(137);
+var tabbar_1 = __webpack_require__(84);
 var widget_1 = __webpack_require__(8);
 /**
  * A widget which provides a flexible docking area for widgets.
@@ -65586,7 +65272,7 @@ var Private;
 
 
 /***/ }),
-/* 336 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65599,7 +65285,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var signaling_1 = __webpack_require__(11);
 /**
  * A class which tracks focus among a set of widgets.
@@ -65923,7 +65609,7 @@ exports.FocusTracker = FocusTracker;
 
 
 /***/ }),
-/* 337 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65946,12 +65632,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var properties_1 = __webpack_require__(31);
 var boxengine_1 = __webpack_require__(40);
-var layout_1 = __webpack_require__(24);
+var layout_1 = __webpack_require__(22);
 var widget_1 = __webpack_require__(8);
 /**
  * A layout which arranges its widgets in a grid.
@@ -66649,7 +66335,7 @@ var Private;
 
 
 /***/ }),
-/* 338 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66672,9 +66358,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
-var domutils_1 = __webpack_require__(7);
-var keyboard_1 = __webpack_require__(82);
+var algorithm_1 = __webpack_require__(2);
+var domutils_1 = __webpack_require__(9);
+var keyboard_1 = __webpack_require__(83);
 var messaging_1 = __webpack_require__(6);
 var virtualdom_1 = __webpack_require__(55);
 var widget_1 = __webpack_require__(8);
@@ -67433,7 +67119,7 @@ var Private;
 
 
 /***/ }),
-/* 339 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67449,7 +67135,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var domutils_1 = __webpack_require__(7);
+var domutils_1 = __webpack_require__(9);
 var dragdrop_1 = __webpack_require__(56);
 var signaling_1 = __webpack_require__(11);
 var widget_1 = __webpack_require__(8);
@@ -68110,7 +67796,7 @@ var Private;
 
 
 /***/ }),
-/* 340 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68133,10 +67819,201 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
+var messaging_1 = __webpack_require__(6);
+var layout_1 = __webpack_require__(22);
+var widget_1 = __webpack_require__(8);
+/**
+ * A concrete layout implementation which holds a single widget.
+ *
+ * #### Notes
+ * This class is useful for creating simple container widgets which
+ * hold a single child. The child should be positioned with CSS.
+ */
+var SingletonLayout = (function (_super) {
+    __extends(SingletonLayout, _super);
+    function SingletonLayout() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._widget = null;
+        return _this;
+    }
+    /**
+     * Dispose of the resources held by the layout.
+     */
+    SingletonLayout.prototype.dispose = function () {
+        if (this._widget) {
+            var widget = this._widget;
+            this._widget = null;
+            widget.dispose();
+        }
+        _super.prototype.dispose.call(this);
+    };
+    Object.defineProperty(SingletonLayout.prototype, "widget", {
+        /**
+         * Get the child widget for the layout.
+         */
+        get: function () {
+            return this._widget;
+        },
+        /**
+         * Set the child widget for the layout.
+         *
+         * #### Notes
+         * Setting the child widget will cause the old child widget to be
+         * automatically disposed. If that is not desired, set the parent
+         * of the old child to `null` before assigning a new child.
+         */
+        set: function (widget) {
+            // Bail early if the widget does not change.
+            if (this._widget === widget) {
+                return;
+            }
+            // Dispose of the old child widget.
+            if (this._widget) {
+                this._widget.dispose();
+            }
+            // Update the internal widget.
+            this._widget = widget;
+            // Attach the new child widget if needed.
+            if (this.parent && widget) {
+                this.attachWidget(widget);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Create an iterator over the widgets in the layout.
+     *
+     * @returns A new iterator over the widgets in the layout.
+     */
+    SingletonLayout.prototype.iter = function () {
+        return this._widget ? algorithm_1.once(this._widget) : algorithm_1.empty();
+    };
+    /**
+     * Remove a widget from the layout.
+     *
+     * @param widget - The widget to remove from the layout.
+     *
+     * #### Notes
+     * A widget is automatically removed from the layout when its `parent`
+     * is set to `null`. This method should only be invoked directly when
+     * removing a widget from a layout which has yet to be installed on a
+     * parent widget.
+     *
+     * This method does *not* modify the widget's `parent`.
+     */
+    SingletonLayout.prototype.removeWidget = function (widget) {
+        // Bail early if the widget does not exist in the layout.
+        if (this._widget !== widget) {
+            return;
+        }
+        // Clear the internal widget.
+        this._widget = null;
+        // If the layout is parented, detach the widget from the DOM.
+        if (this.parent) {
+            this.detachWidget(widget);
+        }
+    };
+    /**
+     * Perform layout initialization which requires the parent widget.
+     */
+    SingletonLayout.prototype.init = function () {
+        var _this = this;
+        _super.prototype.init.call(this);
+        algorithm_1.each(this, function (widget) { _this.attachWidget(widget); });
+    };
+    /**
+     * Attach a widget to the parent's DOM node.
+     *
+     * @param index - The current index of the widget in the layout.
+     *
+     * @param widget - The widget to attach to the parent.
+     *
+     * #### Notes
+     * This method is called automatically by the single layout at the
+     * appropriate time. It should not be called directly by user code.
+     *
+     * The default implementation adds the widgets's node to the parent's
+     * node at the proper location, and sends the appropriate attach
+     * messages to the widget if the parent is attached to the DOM.
+     *
+     * Subclasses may reimplement this method to control how the widget's
+     * node is added to the parent's node.
+     */
+    SingletonLayout.prototype.attachWidget = function (widget) {
+        // Send a `'before-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeAttach);
+        }
+        // Add the widget's node to the parent.
+        this.parent.node.appendChild(widget.node);
+        // Send an `'after-attach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterAttach);
+        }
+    };
+    /**
+     * Detach a widget from the parent's DOM node.
+     *
+     * @param widget - The widget to detach from the parent.
+     *
+     * #### Notes
+     * This method is called automatically by the single layout at the
+     * appropriate time. It should not be called directly by user code.
+     *
+     * The default implementation removes the widget's node from the
+     * parent's node, and sends the appropriate detach messages to the
+     * widget if the parent is attached to the DOM.
+     *
+     * Subclasses may reimplement this method to control how the widget's
+     * node is removed from the parent's node.
+     */
+    SingletonLayout.prototype.detachWidget = function (widget) {
+        // Send a `'before-detach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.BeforeDetach);
+        }
+        // Remove the widget's node from the parent.
+        this.parent.node.removeChild(widget.node);
+        // Send an `'after-detach'` message if the parent is attached.
+        if (this.parent.isAttached) {
+            messaging_1.MessageLoop.sendMessage(widget, widget_1.Widget.Msg.AfterDetach);
+        }
+    };
+    return SingletonLayout;
+}(layout_1.Layout));
+exports.SingletonLayout = SingletonLayout;
+
+
+/***/ }),
+/* 344 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+/*-----------------------------------------------------------------------------
+| Copyright (c) 2014-2017, PhosphorJS Contributors
+|
+| Distributed under the terms of the BSD 3-Clause License.
+|
+| The full license is in the file LICENSE, distributed with this software.
+|----------------------------------------------------------------------------*/
+var algorithm_1 = __webpack_require__(2);
 var dragdrop_1 = __webpack_require__(56);
 var panel_1 = __webpack_require__(54);
-var splitlayout_1 = __webpack_require__(134);
+var splitlayout_1 = __webpack_require__(138);
 /**
  * A panel which arranges its widgets into resizable sections.
  *
@@ -68506,7 +68383,7 @@ var Private;
 
 
 /***/ }),
-/* 341 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68529,12 +68406,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 |
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
-var domutils_1 = __webpack_require__(7);
+var domutils_1 = __webpack_require__(9);
 var messaging_1 = __webpack_require__(6);
 var signaling_1 = __webpack_require__(11);
-var boxlayout_1 = __webpack_require__(79);
-var stackedpanel_1 = __webpack_require__(136);
-var tabbar_1 = __webpack_require__(83);
+var boxlayout_1 = __webpack_require__(80);
+var stackedpanel_1 = __webpack_require__(140);
+var tabbar_1 = __webpack_require__(84);
 var widget_1 = __webpack_require__(8);
 /**
  * A widget which combines a `TabBar` and a `StackedPanel`.
@@ -68846,7 +68723,7 @@ var Private;
 
 
 /***/ }),
-/* 342 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68865,7 +68742,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(25);
-var widget_1 = __webpack_require__(78);
+var widget_1 = __webpack_require__(79);
 /**
  * css properties exposed by the layout widget with their default values.
  */
@@ -68894,7 +68771,19 @@ var css_properties = {
     right: null,
     top: null,
     visibility: null,
-    width: null
+    width: null,
+    // container
+    grid_auto_columns: null,
+    grid_auto_flow: null,
+    grid_auto_rows: null,
+    grid_gap: null,
+    grid_template_rows: null,
+    grid_template_columns: null,
+    grid_template_areas: null,
+    // items
+    grid_row: null,
+    grid_column: null,
+    grid_area: null
 };
 var LayoutModel = /** @class */ (function (_super) {
     __extends(LayoutModel, _super);
@@ -68947,7 +68836,7 @@ var LayoutView = /** @class */ (function (_super) {
      * @return css property name
      */
     LayoutView.prototype.css_name = function (trait) {
-        return trait.replace('_', '-');
+        return trait.replace(/_/g, '-');
     };
     /**
      * Handles when a trait value changes
@@ -68988,7 +68877,7 @@ exports.LayoutView = LayoutView;
 
 
 /***/ }),
-/* 343 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69007,7 +68896,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = __webpack_require__(25);
-var widget_1 = __webpack_require__(78);
+var widget_1 = __webpack_require__(79);
 var StyleModel = /** @class */ (function (_super) {
     __extends(StyleModel, _super);
     function StyleModel() {
@@ -69122,7 +69011,7 @@ exports.StyleView = StyleView;
 
 
 /***/ }),
-/* 344 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69144,8 +69033,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
         while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -69366,6 +69255,7 @@ var shims;
                                     case 'execute_result':
                                         callbacks.iopub.output(msg);
                                         break;
+                                    default: break;
                                 }
                             }
                         }
@@ -69380,7 +69270,7 @@ var shims;
 
 
 /***/ }),
-/* 345 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69477,7 +69367,7 @@ exports.ViewList = ViewList;
 
 
 /***/ }),
-/* 346 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69493,7 +69383,7 @@ exports.IJupyterWidgetRegistry = new coreutils_1.Token('jupyter.extensions.jupyt
 
 
 /***/ }),
-/* 347 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69519,9 +69409,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var widget_core_1 = __webpack_require__(14);
-var _ = __webpack_require__(5);
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
+var _ = __webpack_require__(4);
 var DirectionalLinkModel = /** @class */ (function (_super) {
     __extends(DirectionalLinkModel, _super);
     function DirectionalLinkModel() {
@@ -69556,6 +69446,7 @@ var DirectionalLinkModel = /** @class */ (function (_super) {
     };
     DirectionalLinkModel.prototype.updateBindings = function () {
         var _this = this;
+        var _a, _b;
         this.cleanup();
         _a = this.get('source') || [null, null], this.sourceModel = _a[0], this.sourceAttr = _a[1];
         _b = this.get('target') || [null, null], this.targetModel = _b[0], this.targetAttr = _b[1];
@@ -69569,7 +69460,6 @@ var DirectionalLinkModel = /** @class */ (function (_super) {
         if (this.targetModel) {
             this.listenToOnce(this.targetModel, 'destroy', this.cleanup);
         }
-        var _a, _b;
     };
     DirectionalLinkModel.prototype.cleanup = function () {
         // Stop listening to 'change' and 'destroy' events of the source and target
@@ -69616,7 +69506,7 @@ exports.LinkModel = LinkModel;
 
 
 /***/ }),
-/* 348 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69634,10 +69524,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var widget_description_1 = __webpack_require__(22);
-var base_1 = __webpack_require__(9);
-var _ = __webpack_require__(5);
+var widget_core_1 = __webpack_require__(12);
+var widget_description_1 = __webpack_require__(23);
+var base_1 = __webpack_require__(7);
+var _ = __webpack_require__(4);
 var BoolModel = /** @class */ (function (_super) {
     __extends(BoolModel, _super);
     function BoolModel() {
@@ -69934,7 +69824,7 @@ exports.ValidView = ValidView;
 
 
 /***/ }),
-/* 349 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -69952,10 +69842,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var widget_core_1 = __webpack_require__(14);
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
 var version_1 = __webpack_require__(57);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 var ButtonStyleModel = /** @class */ (function (_super) {
     __extends(ButtonStyleModel, _super);
     function ButtonStyleModel() {
@@ -70096,7 +69986,7 @@ exports.ButtonView = ButtonView;
 
 
 /***/ }),
-/* 350 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70122,9 +70012,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var widget_core_1 = __webpack_require__(14);
-var _ = __webpack_require__(5);
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
+var _ = __webpack_require__(4);
 var ImageModel = /** @class */ (function (_super) {
     __extends(ImageModel, _super);
     function ImageModel() {
@@ -70227,7 +70117,267 @@ exports.ImageView = ImageView;
 
 
 /***/ }),
-/* 351 */
+/* 355 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
+var _ = __webpack_require__(4);
+var VideoModel = /** @class */ (function (_super) {
+    __extends(VideoModel, _super);
+    function VideoModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    VideoModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _model_name: 'VideoModel',
+            _view_name: 'VideoView',
+            format: 'mp4',
+            width: '',
+            height: '',
+            autoplay: true,
+            loop: true,
+            controls: true,
+            value: new DataView(new ArrayBuffer(0))
+        });
+    };
+    VideoModel.serializers = __assign({}, widget_core_1.CoreDOMWidgetModel.serializers, { value: { serialize: function (value, manager) {
+                return new DataView(value.buffer.slice(0));
+            } } });
+    return VideoModel;
+}(widget_core_1.CoreDOMWidgetModel));
+exports.VideoModel = VideoModel;
+var VideoView = /** @class */ (function (_super) {
+    __extends(VideoView, _super);
+    function VideoView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    VideoView.prototype.render = function () {
+        /**
+         * Called when view is rendered.
+         */
+        _super.prototype.render.call(this);
+        this.pWidget.addClass('jupyter-widgets');
+        this.pWidget.addClass('widget-image');
+        this.update(); // Set defaults.
+    };
+    VideoView.prototype.update = function () {
+        /**
+         * Update the contents of this view
+         *
+         * Called when the model is changed.  The model may have been
+         * changed by another view or by a state update from the back-end.
+         */
+        var url;
+        var format = this.model.get('format');
+        var value = this.model.get('value');
+        if (format !== 'url') {
+            var blob = new Blob([value], { type: "video/" + this.model.get('format') });
+            url = URL.createObjectURL(blob);
+        }
+        else {
+            url = (new TextDecoder('utf-8')).decode(value.buffer);
+        }
+        // Clean up the old objectURL
+        var oldurl = this.el.src;
+        this.el.src = url;
+        if (oldurl && typeof oldurl !== 'string') {
+            URL.revokeObjectURL(oldurl);
+        }
+        // Height and width
+        var width = this.model.get('width');
+        if (width !== undefined && width.length > 0) {
+            this.el.setAttribute('width', width);
+        }
+        else {
+            this.el.removeAttribute('width');
+        }
+        var height = this.model.get('height');
+        if (height !== undefined && height.length > 0) {
+            this.el.setAttribute('height', height);
+        }
+        else {
+            this.el.removeAttribute('height');
+        }
+        // Video attributes
+        this.el.loop = this.model.get('loop');
+        this.el.autoplay = this.model.get('autoplay');
+        this.el.controls = this.model.get('controls');
+        return _super.prototype.update.call(this);
+    };
+    VideoView.prototype.remove = function () {
+        if (this.el.src) {
+            URL.revokeObjectURL(this.el.src);
+        }
+        _super.prototype.remove.call(this);
+    };
+    Object.defineProperty(VideoView.prototype, "tagName", {
+        /**
+         * The default tag name.
+         *
+         * #### Notes
+         * This is a read-only attribute.
+         */
+        get: function () {
+            // We can't make this an attribute with a default value
+            // since it would be set after it is needed in the
+            // constructor.
+            return 'video';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return VideoView;
+}(base_1.DOMWidgetView));
+exports.VideoView = VideoView;
+
+
+/***/ }),
+/* 356 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+// Copyright (c) Jupyter Development Team.
+// Distributed under the terms of the Modified BSD License.
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var base_1 = __webpack_require__(7);
+var widget_core_1 = __webpack_require__(12);
+var _ = __webpack_require__(4);
+var AudioModel = /** @class */ (function (_super) {
+    __extends(AudioModel, _super);
+    function AudioModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    AudioModel.prototype.defaults = function () {
+        return _.extend(_super.prototype.defaults.call(this), {
+            _model_name: 'AudioModel',
+            _view_name: 'AudioView',
+            format: 'mp3',
+            autoplay: true,
+            loop: true,
+            controls: true,
+            value: new DataView(new ArrayBuffer(0))
+        });
+    };
+    AudioModel.serializers = __assign({}, widget_core_1.CoreDOMWidgetModel.serializers, { value: { serialize: function (value, manager) {
+                return new DataView(value.buffer.slice(0));
+            } } });
+    return AudioModel;
+}(widget_core_1.CoreDOMWidgetModel));
+exports.AudioModel = AudioModel;
+var AudioView = /** @class */ (function (_super) {
+    __extends(AudioView, _super);
+    function AudioView() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    AudioView.prototype.render = function () {
+        /**
+         * Called when view is rendered.
+         */
+        _super.prototype.render.call(this);
+        this.pWidget.addClass('jupyter-widgets');
+        this.update(); // Set defaults.
+    };
+    AudioView.prototype.update = function () {
+        /**
+         * Update the contents of this view
+         *
+         * Called when the model is changed.  The model may have been
+         * changed by another view or by a state update from the back-end.
+         */
+        var url;
+        var format = this.model.get('format');
+        var value = this.model.get('value');
+        if (format !== 'url') {
+            var blob = new Blob([value], { type: "audio/" + this.model.get('format') });
+            url = URL.createObjectURL(blob);
+        }
+        else {
+            url = (new TextDecoder('utf-8')).decode(value.buffer);
+        }
+        // Clean up the old objectURL
+        var oldurl = this.el.src;
+        this.el.src = url;
+        if (oldurl && typeof oldurl !== 'string') {
+            URL.revokeObjectURL(oldurl);
+        }
+        // Audio attributes
+        this.el.loop = this.model.get('loop');
+        this.el.autoplay = this.model.get('autoplay');
+        this.el.controls = this.model.get('controls');
+        return _super.prototype.update.call(this);
+    };
+    AudioView.prototype.remove = function () {
+        if (this.el.src) {
+            URL.revokeObjectURL(this.el.src);
+        }
+        _super.prototype.remove.call(this);
+    };
+    Object.defineProperty(AudioView.prototype, "tagName", {
+        /**
+         * The default tag name.
+         *
+         * #### Notes
+         * This is a read-only attribute.
+         */
+        get: function () {
+            // We can't make this an attribute with a default value
+            // since it would be set after it is needed in the
+            // constructor.
+            return 'audio';
+        },
+        enumerable: true,
+        configurable: true
+    });
+    return AudioView;
+}(base_1.DOMWidgetView));
+exports.AudioView = AudioView;
+
+
+/***/ }),
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70245,10 +70395,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var widget_description_1 = __webpack_require__(22);
+var widget_core_1 = __webpack_require__(12);
+var widget_description_1 = __webpack_require__(23);
 var utils_1 = __webpack_require__(16);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 var ColorPickerModel = /** @class */ (function (_super) {
     __extends(ColorPickerModel, _super);
     function ColorPickerModel() {
@@ -70365,7 +70515,7 @@ function rgb3_to_rgb6(rgb) {
 
 
 /***/ }),
-/* 352 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -70391,10 +70541,10 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_description_1 = __webpack_require__(22);
-var widget_core_1 = __webpack_require__(14);
+var widget_description_1 = __webpack_require__(23);
+var widget_core_1 = __webpack_require__(12);
 var utils_1 = __webpack_require__(16);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 function serialize_date(value) {
     if (value === null) {
         return null;
@@ -70490,7 +70640,190 @@ exports.DatePickerView = DatePickerView;
 
 
 /***/ }),
-/* 353 */
+/* 359 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return format; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return formatPrefix; });
+/* harmony export (immutable) */ __webpack_exports__["a"] = defaultLocale;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__locale__ = __webpack_require__(144);
+
+
+var locale;
+var format;
+var formatPrefix;
+
+defaultLocale({
+  decimal: ".",
+  thousands: ",",
+  grouping: [3],
+  currency: ["$", ""]
+});
+
+function defaultLocale(definition) {
+  locale = Object(__WEBPACK_IMPORTED_MODULE_0__locale__["a" /* default */])(definition);
+  format = locale.format;
+  formatPrefix = locale.formatPrefix;
+  return locale;
+}
+
+
+/***/ }),
+/* 360 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function(grouping, thousands) {
+  return function(value, width) {
+    var i = value.length,
+        t = [],
+        j = 0,
+        g = grouping[0],
+        length = 0;
+
+    while (i > 0 && g > 0) {
+      if (length + g + 1 > width) g = Math.max(1, width - length);
+      t.push(value.substring(i -= g, i + g));
+      if ((length += g + 1) > width) break;
+      g = grouping[j = (j + 1) % grouping.length];
+    }
+
+    return t.reverse().join(thousands);
+  };
+});
+
+
+/***/ }),
+/* 361 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function(numerals) {
+  return function(value) {
+    return value.replace(/[0-9]/g, function(i) {
+      return numerals[+i];
+    });
+  };
+});
+
+
+/***/ }),
+/* 362 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// Trims insignificant zeros, e.g., replaces 1.2000k with 1.2k.
+/* harmony default export */ __webpack_exports__["a"] = (function(s) {
+  out: for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
+    switch (s[i]) {
+      case ".": i0 = i1 = i; break;
+      case "0": if (i0 === 0) i0 = i; i1 = i; break;
+      default: if (i0 > 0) { if (!+s[i]) break out; i0 = 0; } break;
+    }
+  }
+  return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+});
+
+
+/***/ }),
+/* 363 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__formatPrefixAuto__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formatRounded__ = __webpack_require__(364);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  "%": function(x, p) { return (x * 100).toFixed(p); },
+  "b": function(x) { return Math.round(x).toString(2); },
+  "c": function(x) { return x + ""; },
+  "d": function(x) { return Math.round(x).toString(10); },
+  "e": function(x, p) { return x.toExponential(p); },
+  "f": function(x, p) { return x.toFixed(p); },
+  "g": function(x, p) { return x.toPrecision(p); },
+  "o": function(x) { return Math.round(x).toString(8); },
+  "p": function(x, p) { return Object(__WEBPACK_IMPORTED_MODULE_1__formatRounded__["a" /* default */])(x * 100, p); },
+  "r": __WEBPACK_IMPORTED_MODULE_1__formatRounded__["a" /* default */],
+  "s": __WEBPACK_IMPORTED_MODULE_0__formatPrefixAuto__["a" /* default */],
+  "X": function(x) { return Math.round(x).toString(16).toUpperCase(); },
+  "x": function(x) { return Math.round(x).toString(16); }
+});
+
+
+/***/ }),
+/* 364 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__formatDecimal__ = __webpack_require__(86);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(x, p) {
+  var d = Object(__WEBPACK_IMPORTED_MODULE_0__formatDecimal__["a" /* default */])(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1];
+  return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient
+      : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1)
+      : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+});
+
+
+/***/ }),
+/* 365 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = (function(x) {
+  return x;
+});
+
+
+/***/ }),
+/* 366 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__exponent__ = __webpack_require__(58);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step) {
+  return Math.max(0, -Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(Math.abs(step)));
+});
+
+
+/***/ }),
+/* 367 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__exponent__ = __webpack_require__(58);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step, value) {
+  return Math.max(0, Math.max(-8, Math.min(8, Math.floor(Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(value) / 3))) * 3 - Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(Math.abs(step)));
+});
+
+
+/***/ }),
+/* 368 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__exponent__ = __webpack_require__(58);
+
+
+/* harmony default export */ __webpack_exports__["a"] = (function(step, max) {
+  step = Math.abs(step), max = Math.abs(max) - step;
+  return Math.max(0, Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(max) - Object(__WEBPACK_IMPORTED_MODULE_0__exponent__["a" /* default */])(step)) + 1;
+});
+
+
+/***/ }),
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -70516,11 +70849,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-			__webpack_require__(12),
-			__webpack_require__(354),
-			__webpack_require__(356),
+			__webpack_require__(14),
+			__webpack_require__(370),
+			__webpack_require__(372),
 			__webpack_require__(42),
-			__webpack_require__(140)
+			__webpack_require__(147)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -71251,7 +71584,7 @@ return $.widget( "ui.slider", $.ui.mouse, {
 
 
 /***/ }),
-/* 354 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71273,10 +71606,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 		// AMD. Register as an anonymous module.
 		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-			__webpack_require__(12),
-			__webpack_require__(355),
+			__webpack_require__(14),
+			__webpack_require__(371),
 			__webpack_require__(42),
-			__webpack_require__(140)
+			__webpack_require__(147)
 		], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
@@ -71486,14 +71819,14 @@ return $.widget( "ui.mouse", {
 
 
 /***/ }),
-/* 355 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(12), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(14), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -71510,7 +71843,7 @@ return $.ui.ie = !!/msie [\w.]+/.exec( navigator.userAgent.toLowerCase() );
 
 
 /***/ }),
-/* 356 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71531,7 +71864,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(12), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(14), __webpack_require__(42) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -71564,7 +71897,7 @@ return $.ui.keyCode = {
 
 
 /***/ }),
-/* 357 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71582,10 +71915,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var _ = __webpack_require__(5);
-var widget_int_1 = __webpack_require__(138);
-var d3_format_1 = __webpack_require__(139);
+var widget_core_1 = __webpack_require__(12);
+var _ = __webpack_require__(4);
+var widget_int_1 = __webpack_require__(142);
+var d3_format_1 = __webpack_require__(143);
 var FloatModel = /** @class */ (function (_super) {
     __extends(FloatModel, _super);
     function FloatModel() {
@@ -71886,7 +72219,7 @@ exports.FloatProgressModel = FloatProgressModel;
 
 
 /***/ }),
-/* 358 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71912,9 +72245,9 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var base_1 = __webpack_require__(9);
-var _ = __webpack_require__(5);
+var widget_core_1 = __webpack_require__(12);
+var base_1 = __webpack_require__(7);
+var _ = __webpack_require__(4);
 var utils = __webpack_require__(16);
 var ControllerButtonModel = /** @class */ (function (_super) {
     __extends(ControllerButtonModel, _super);
@@ -72274,7 +72607,7 @@ exports.ControllerView = ControllerView;
 
 
 /***/ }),
-/* 359 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72300,12 +72633,12 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var widget_description_1 = __webpack_require__(22);
+var widget_core_1 = __webpack_require__(12);
+var widget_description_1 = __webpack_require__(23);
 var utils_1 = __webpack_require__(16);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 var utils = __webpack_require__(16);
-var $ = __webpack_require__(12);
+var $ = __webpack_require__(14);
 function scrollIfNeeded(area, elem) {
     var ar = area.getBoundingClientRect();
     var er = elem.getBoundingClientRect();
@@ -72764,7 +73097,7 @@ var ToggleButtonsView = /** @class */ (function (_super) {
                         var buttons = this.buttongroup
                             .querySelectorAll('button');
                         if (buttons.length) {
-                            buttons[0].style[name_1] = this._css_state[name_1];
+                            (buttons[0]).style[name_1] = this._css_state[name_1];
                         }
                     }
                 }
@@ -73094,7 +73427,7 @@ exports.SelectionRangeSliderView = SelectionRangeSliderView;
 
 
 /***/ }),
-/* 360 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73112,16 +73445,16 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
-var widget_box_1 = __webpack_require__(137);
-var tabpanel_1 = __webpack_require__(361);
-var accordion_1 = __webpack_require__(362);
+var base_1 = __webpack_require__(7);
+var widget_box_1 = __webpack_require__(141);
+var tabpanel_1 = __webpack_require__(377);
+var accordion_1 = __webpack_require__(378);
 var widgets_1 = __webpack_require__(30);
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var messaging_1 = __webpack_require__(6);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 var utils = __webpack_require__(16);
-var $ = __webpack_require__(12);
+var $ = __webpack_require__(14);
 var SelectionContainerModel = /** @class */ (function (_super) {
     __extends(SelectionContainerModel, _super);
     function SelectionContainerModel() {
@@ -73493,7 +73826,7 @@ exports.TabView = TabView;
 
 
 /***/ }),
-/* 361 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73542,7 +73875,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var messaging_1 = __webpack_require__(6);
 var signaling_1 = __webpack_require__(11);
-var domutils_1 = __webpack_require__(7);
+var domutils_1 = __webpack_require__(9);
 var widgets_1 = __webpack_require__(30);
 /**
  * A panel where visible widgets are stacked atop one another.
@@ -73807,7 +74140,7 @@ exports.TabPanel = TabPanel;
 
 
 /***/ }),
-/* 362 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73825,10 +74158,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var signaling_1 = __webpack_require__(11);
 var widgets_1 = __webpack_require__(30);
-var currentselection_1 = __webpack_require__(363);
+var currentselection_1 = __webpack_require__(379);
 /**
  * The class name added to Collapse instances.
  */
@@ -74102,7 +74435,7 @@ exports.Accordion = Accordion;
 
 
 /***/ }),
-/* 363 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74113,7 +74446,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * A variety of convenience methods for maintaining a current selection
  */
-var algorithm_1 = __webpack_require__(3);
+var algorithm_1 = __webpack_require__(2);
 var signaling_1 = __webpack_require__(11);
 var Selection = /** @class */ (function () {
     function Selection(sequence, options) {
@@ -74455,7 +74788,7 @@ exports.Selection = Selection;
 
 
 /***/ }),
-/* 364 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74473,10 +74806,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var widget_core_1 = __webpack_require__(14);
-var widget_description_1 = __webpack_require__(22);
+var widget_core_1 = __webpack_require__(12);
+var widget_description_1 = __webpack_require__(23);
 var utils_1 = __webpack_require__(16);
-var _ = __webpack_require__(5);
+var _ = __webpack_require__(4);
 var StringModel = /** @class */ (function (_super) {
     __extends(StringModel, _super);
     function StringModel() {
@@ -74810,7 +75143,7 @@ var TextView = /** @class */ (function (_super) {
     TextView.prototype.handleKeypress = function (e) {
         e.stopPropagation();
         // The submit message is deprecated in widgets 7
-        if (e.keyCode == 13) {
+        if (e.keyCode == 13) { // Return key
             this.send({ event: 'submit' });
         }
     };
@@ -74865,13 +75198,13 @@ exports.PasswordView = PasswordView;
 
 
 /***/ }),
-/* 365 */
+/* 381 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@jupyter-widgets/controls","version":"1.2.0","description":"Jupyter interactive widgets","author":"Project Jupyter","license":"BSD-3-Clause","main":"lib/index.js","typings":"lib/index.d.ts","repository":{"type":"git","url":"https://github.com/jupyter-widgets/ipywidgets.git"},"files":["lib/**/*.d.ts","lib/**/*.js","css/*.css","dist/"],"scripts":{"clean:src":"rimraf lib","clean":"npm run clean:src","build:test":"tsc --project test/src && webpack --config test/webpack.conf.js","build:src":"tsc --project src","build:css":"postcss --use postcss-import --use postcss-cssnext -o css/widgets.built.css css/widgets.css","build":"npm run build:src && npm run build:css","lint":"tslint --project tslint.json --format stylish","test":"npm run test:unit","test:coverage":"npm run build:test && webpack --config test/webpack-cov.conf.js && karma start test/karma-cov.conf.js","test:unit":"npm run test:unit:firefox && npm run test:unit:chrome","test:unit:default":"npm run build:test && karma start test/karma.conf.js --log-level debug","test:unit:firefox":"npm run test:unit:default -- --browsers=Firefox","test:unit:chrome":"npm run test:unit:default -- --browsers=Chrome","test:unit:ie":"npm run test:unit:default -- --browsers=IE","prepublish":"npm run clean && npm run build"},"devDependencies":{"@jupyterlab/services":"^2.0.0","@types/expect.js":"^0.3.29","@types/mathjax":"0.0.31","@types/mocha":"^2.2.41","@types/node":"^8.0.1","@types/text-encoding":"^0.0.32","chai":"^4.0.0","css-loader":"^0.28.4","expect.js":"^0.3.1","file-loader":"^0.11.2","istanbul-instrumenter-loader":"^2.0.0","json-loader":"^0.5.4","karma":"^1.6.0","karma-chrome-launcher":"^2.0.0","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.1","karma-ie-launcher":"^1.0.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.3","karma-webpack":"^2.0.3","mocha":"^3.3.0","npm-run-all":"^1.5.1","postcss-cli":"^4.1.0","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","sinon":"^2.1.0","sinon-chai":"^2.11.0","style-loader":"^0.18.1","tslint":"^5.8.0","typescript":"~2.6.2","url-loader":"^0.5.9","webpack":"^3.5.5"},"dependencies":{"@jupyter-widgets/base":"^1.1.9","@phosphor/algorithm":"^1.1.0","@phosphor/domutils":"^1.1.0","@phosphor/messaging":"^1.2.1","@phosphor/signaling":"^1.2.0","@phosphor/widgets":"^1.3.0","d3-format":"^0.5.1","jquery":"^3.1.1","jquery-ui":"^1.12.1","underscore":"^1.8.3"}}
+module.exports = {"name":"@jupyter-widgets/controls","version":"1.4.1","description":"Jupyter interactive widgets","author":"Project Jupyter","license":"BSD-3-Clause","main":"lib/index.js","typings":"lib/index.d.ts","repository":{"type":"git","url":"https://github.com/jupyter-widgets/ipywidgets.git"},"files":["lib/**/*.d.ts","lib/**/*.js","css/*.css","dist/"],"scripts":{"clean:src":"rimraf lib","clean":"npm run clean:src","build:test":"tsc --project test/src && webpack --config test/webpack.conf.js","build:src":"tsc --project src","build:css":"postcss --use postcss-import --use postcss-cssnext -o css/widgets.built.css css/widgets.css","build":"npm run build:src && npm run build:css","lint":"tslint --project tslint.json --format stylish","test":"npm run test:unit","test:coverage":"npm run build:test && webpack --config test/webpack-cov.conf.js && karma start test/karma-cov.conf.js","test:unit":"npm run test:unit:firefox && npm run test:unit:chrome","test:unit:default":"npm run build:test && karma start test/karma.conf.js --log-level debug","test:unit:firefox":"npm run test:unit:default -- --browsers=Firefox","test:unit:chrome":"npm run test:unit:default -- --browsers=Chrome","test:unit:ie":"npm run test:unit:default -- --browsers=IE","prepublish":"npm run clean && npm run build"},"devDependencies":{"@jupyterlab/services":"^2.0.0 || ^3.0.0","@types/expect.js":"^0.3.29","@types/mathjax":"0.0.31","@types/mocha":"^2.2.41","@types/node":"^8.0.1","chai":"^4.0.0","css-loader":"^0.28.4","expect.js":"^0.3.1","file-loader":"^0.11.2","istanbul-instrumenter-loader":"^2.0.0","json-loader":"^0.5.4","karma":"^1.6.0","karma-chrome-launcher":"^2.0.0","karma-coverage":"^1.0.0","karma-firefox-launcher":"^1.0.1","karma-ie-launcher":"^1.0.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.3","karma-webpack":"^2.0.3","mocha":"^3.3.0","npm-run-all":"^1.5.1","postcss-cli":"^4.1.0","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","sinon":"^2.1.0","sinon-chai":"^2.11.0","style-loader":"^0.18.1","tslint":"^5.8.0","typescript":"~2.9.2","url-loader":"^0.5.9","webpack":"^3.5.5"},"dependencies":{"@jupyter-widgets/base":"^1.2.1","@phosphor/algorithm":"^1.1.0","@phosphor/domutils":"^1.1.0","@phosphor/messaging":"^1.2.1","@phosphor/signaling":"^1.2.0","@phosphor/widgets":"^1.3.0","d3-format":"^1.3.0","jquery":"^3.1.1","jquery-ui":"^1.12.1","underscore":"^1.8.3"}}
 
 /***/ }),
-/* 366 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74880,11 +75213,11 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__(367));
+__export(__webpack_require__(383));
 
 
 /***/ }),
-/* 367 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -74908,7 +75241,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var base_1 = __webpack_require__(9);
+var base_1 = __webpack_require__(7);
 exports.OUTPUT_WIDGET_VERSION = '1.0.0';
 var OutputModel = /** @class */ (function (_super) {
     __extends(OutputModel, _super);
@@ -74932,13 +75265,13 @@ exports.OutputView = OutputView;
 
 
 /***/ }),
-/* 368 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(369);
+var content = __webpack_require__(385);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -74946,7 +75279,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(59)(content, options);
+var update = __webpack_require__(60)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -74963,10 +75296,10 @@ if(false) {
 }
 
 /***/ }),
-/* 369 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(58)(false);
+exports = module.exports = __webpack_require__(59)(false);
 // imports
 
 
@@ -74977,7 +75310,7 @@ exports.push([module.i, "/*\n * Copyright (c) Jupyter Development Team.\n * Dist
 
 
 /***/ }),
-/* 370 */
+/* 386 */
 /***/ (function(module, exports) {
 
 
@@ -75072,25 +75405,25 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 371 */
+/* 387 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@jupyter-widgets/html-manager","version":"0.12.0","description":"Standalone package for rendering Jupyter widgets outside notebooks","main":"lib/index.js","typings":"lib/index.d.ts","repository":{"type":"git","url":"https://github.com/jupyter-widgets/ipywidgets.git"},"files":["lib/**/*.d.ts","lib/**/*.js","dist/","css/*.css"],"scripts":{"clean":"rimraf lib && rimraf dist","build:src":"tsc --project src","build:embed-amd":"node scripts/concat-amd-build.js && rimraf dist/amd","build:test":"tsc --project test/src && webpack --config test/webpack.conf.js","build":"npm run build:src && webpack && npm run build:embed-amd","lint":"tslint --project tslint.json --format stylish","test":"npm run test:unit","test:unit":"npm run test:unit:firefox && npm run test:unit:chrome","test:unit:default":"npm run build:test && karma start test/karma.conf.js --log-level debug --browsers=Firefox","test:unit:firefox":"npm run test:unit:default -- --browsers=Firefox","test:unit:chrome":"npm run test:unit:default -- --browsers=Chrome","prepublish":"npm run clean && npm run build"},"author":"Jupyter Project","license":"BSD-3-Clause","bugs":{"url":"https://github.com/jupyter-widgets/ipywidgets/issues"},"homepage":"https://github.com/jupyter-widgets/ipywidgets#readme","dependencies":{"@jupyter-widgets/base":"^1.1.9","@jupyter-widgets/controls":"^1.2.0","@jupyter-widgets/output":"^1.0.16","@jupyter-widgets/schema":"^0.3.3","@jupyterlab/outputarea":"^0.16.0","@jupyterlab/rendermime":"^0.16.0","@jupyterlab/rendermime-interfaces":"^1.0.1","@phosphor/widgets":"^1.3.0","ajv":"^5.2.2","font-awesome":"^4.7.0","jquery":"^3.1.1"},"devDependencies":{"@types/mocha":"^2.2.41","@types/requirejs":"^2.1.28","chai":"^4.0.0","css-loader":"^0.28.4","file-loader":"^0.11.2","json-loader":"^0.5.4","karma":"^1.6.0","karma-chrome-launcher":"^2.0.0","karma-firefox-launcher":"^1.0.1","karma-ie-launcher":"^1.0.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.3","mocha":"^3.3.0","postcss":"^6.0.2","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","style-loader":"^0.18.1","tslint":"^5.8.0","typescript":"~2.6.2","url-loader":"^0.5.9","webpack":"^3.5.5"}}
+module.exports = {"name":"@jupyter-widgets/html-manager","version":"0.14.3","description":"Standalone package for rendering Jupyter widgets outside notebooks","main":"lib/index.js","typings":"lib/index.d.ts","repository":{"type":"git","url":"https://github.com/jupyter-widgets/ipywidgets.git"},"files":["lib/**/*.d.ts","lib/**/*.js","dist/","css/*.css"],"scripts":{"clean":"rimraf lib && rimraf dist","build:src":"tsc --project src","build:embed-amd":"node scripts/concat-amd-build.js && rimraf dist/amd","build:test":"tsc --project test/src && webpack --config test/webpack.conf.js","build":"npm run build:src && webpack && npm run build:embed-amd","lint":"tslint --project tslint.json --format stylish","test":"npm run test:unit","test:unit":"npm run test:unit:firefox && npm run test:unit:chrome","test:unit:default":"npm run build:test && karma start test/karma.conf.js --log-level debug --browsers=Firefox","test:unit:firefox":"npm run test:unit:default -- --browsers=Firefox","test:unit:chrome":"npm run test:unit:default -- --browsers=Chrome","prepublish":"npm run clean && npm run build"},"author":"Jupyter Project","license":"BSD-3-Clause","bugs":{"url":"https://github.com/jupyter-widgets/ipywidgets/issues"},"homepage":"https://github.com/jupyter-widgets/ipywidgets#readme","dependencies":{"@jupyter-widgets/base":"^1.2.1","@jupyter-widgets/controls":"^1.4.1","@jupyter-widgets/output":"^1.1.1","@jupyter-widgets/schema":"^0.3.6","@jupyterlab/outputarea":"^0.17.0","@jupyterlab/rendermime":"^0.17.0","@jupyterlab/rendermime-interfaces":"^1.1.0","@phosphor/widgets":"^1.3.0","ajv":"^5.2.2","font-awesome":"^4.7.0","jquery":"^3.1.1"},"devDependencies":{"@types/mocha":"^2.2.41","@types/requirejs":"^2.1.28","chai":"^4.0.0","css-loader":"^0.28.4","file-loader":"^0.11.2","json-loader":"^0.5.4","karma":"^1.6.0","karma-chrome-launcher":"^2.0.0","karma-firefox-launcher":"^1.0.1","karma-ie-launcher":"^1.0.0","karma-mocha":"^1.3.0","karma-mocha-reporter":"^2.2.3","mocha":"^3.3.0","postcss":"^6.0.2","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","style-loader":"^0.18.1","tslint":"^5.8.0","typescript":"~2.9.2","url-loader":"^0.5.9","webpack":"^3.5.5"}}
 
 /***/ }),
-/* 372 */
+/* 388 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@jupyter-widgets/notebook-manager","version":"3.2.0","description":"Jupyter Widgets nbextension","main":"src/extension.js","private":true,"scripts":{"clean":"rimraf widgetsnbextension/static","build":"webpack","test":"echo \"Error: no test specified\" && exit 1","prepublish":"npm run clean && npm run build"},"repository":{"type":"git","url":"git+https://github.com/jupyter-widgets/ipywidgets.git"},"author":"Jupyter Project","license":"BSD-3-Clause","bugs":{"url":"https://github.com/jupyter-widgets/ipywidgets/issues"},"homepage":"https://github.com/jupyter-widgets/ipywidgets#readme","dependencies":{"@jupyter-widgets/base":"^1.1.9","@jupyter-widgets/controls":"^1.2.0","@jupyter-widgets/html-manager":"^0.12.0","@jupyter-widgets/output":"^1.0.16","@phosphor/messaging":"^1.2.1","@phosphor/widgets":"^1.3.0","backbone":"1.2.3","underscore":"^1.8.3"},"devDependencies":{"css-loader":"^0.28.4","json-loader":"^0.5.4","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","style-loader":"^0.18.1","webpack":"^3.5.5"}}
+module.exports = {"name":"@jupyter-widgets/notebook-manager","version":"3.3.3","description":"Jupyter Widgets nbextension","main":"src/extension.js","private":true,"scripts":{"clean":"rimraf widgetsnbextension/static","build":"webpack","test":"echo \"Error: no test specified\" && exit 1","prepublish":"npm run clean && npm run build"},"repository":{"type":"git","url":"git+https://github.com/jupyter-widgets/ipywidgets.git"},"author":"Jupyter Project","license":"BSD-3-Clause","bugs":{"url":"https://github.com/jupyter-widgets/ipywidgets/issues"},"homepage":"https://github.com/jupyter-widgets/ipywidgets#readme","dependencies":{"@jupyter-widgets/base":"^1.2.1","@jupyter-widgets/controls":"^1.4.1","@jupyter-widgets/html-manager":"^0.14.3","@jupyter-widgets/output":"^1.1.1","@jupyterlab/services":"^1.0.1 || ^2.0.0","@phosphor/messaging":"^1.2.1","@phosphor/widgets":"^1.3.0","backbone":"1.2.3","underscore":"^1.8.3"},"devDependencies":{"css-loader":"^0.28.4","json-loader":"^0.5.4","postcss-cssnext":"^3.0.2","postcss-import":"^10.0.0","postcss-loader":"^2.0.6","rimraf":"^2.6.1","style-loader":"^0.18.1","webpack":"^3.5.5"}}
 
 /***/ }),
-/* 373 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(374);
+var content = __webpack_require__(390);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -75098,7 +75431,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(59)(content, options);
+var update = __webpack_require__(60)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -75115,27 +75448,27 @@ if(false) {
 }
 
 /***/ }),
-/* 374 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(58)(false);
+exports = module.exports = __webpack_require__(59)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-Widget {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: relative;\r\n  overflow: hidden;\r\n  cursor: default;\r\n}\r\n.p-Widget.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-CommandPalette {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-CommandPalette-search {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-CommandPalette-content {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  margin: 0;\r\n  padding: 0;\r\n  min-height: 0;\r\n  overflow: auto;\r\n  list-style-type: none;\r\n}\r\n.p-CommandPalette-header {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n}\r\n.p-CommandPalette-itemShortcut {\r\n  float: right;\r\n}\r\n.p-CommandPalette-itemLabel {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-DockPanel {\r\n  z-index: 0;\r\n}\r\n.p-DockPanel-widget {\r\n  z-index: 0;\r\n}\r\n.p-DockPanel-tabBar {\r\n  z-index: 1;\r\n}\r\n.p-DockPanel-handle {\r\n  z-index: 2;\r\n}\r\n.p-DockPanel-handle.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-DockPanel-handle:after {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  content: '';\r\n}\r\n.p-DockPanel-handle[data-orientation='horizontal'] {\r\n  cursor: ew-resize;\r\n}\r\n.p-DockPanel-handle[data-orientation='vertical'] {\r\n  cursor: ns-resize;\r\n}\r\n.p-DockPanel-handle[data-orientation='horizontal']:after {\r\n  left: 50%;\r\n  min-width: 8px;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n}\r\n.p-DockPanel-handle[data-orientation='vertical']:after {\r\n  top: 50%;\r\n  min-height: 8px;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\r\n}\r\n.p-DockPanel-overlay {\r\n  z-index: 3;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  pointer-events: none;\r\n}\r\n.p-DockPanel-overlay.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-Menu {\r\n  z-index: 10000;\r\n  position: absolute;\r\n  white-space: nowrap;\r\n  overflow-x: hidden;\r\n  overflow-y: auto;\r\n  outline: none;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-Menu-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: table;\r\n  list-style-type: none;\r\n}\r\n.p-Menu-item {\r\n  display: table-row;\r\n}\r\n.p-Menu-item.p-mod-hidden,\r\n.p-Menu-item.p-mod-collapsed {\r\n  display: none !important;\r\n}\r\n.p-Menu-itemIcon,\r\n.p-Menu-itemSubmenuIcon {\r\n  display: table-cell;\r\n  text-align: center;\r\n}\r\n.p-Menu-itemLabel {\r\n  display: table-cell;\r\n  text-align: left;\r\n}\r\n.p-Menu-itemShortcut {\r\n  display: table-cell;\r\n  text-align: right;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-MenuBar {\r\n  outline: none;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-MenuBar-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n  list-style-type: none;\r\n}\r\n.p-MenuBar-item {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n}\r\n.p-MenuBar-itemIcon,\r\n.p-MenuBar-itemLabel {\r\n  display: inline-block;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-ScrollBar {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-ScrollBar[data-orientation='horizontal'] {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-ScrollBar[data-orientation='vertical'] {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-ScrollBar-button {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-ScrollBar-track {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: relative;\r\n  overflow: hidden;\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n}\r\n.p-ScrollBar-thumb {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: absolute;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-SplitPanel-child {\r\n  z-index: 0;\r\n}\r\n.p-SplitPanel-handle {\r\n  z-index: 1;\r\n}\r\n.p-SplitPanel-handle.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-SplitPanel-handle:after {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  content: '';\r\n}\r\n.p-SplitPanel[data-orientation='horizontal'] > .p-SplitPanel-handle {\r\n  cursor: ew-resize;\r\n}\r\n.p-SplitPanel[data-orientation='vertical'] > .p-SplitPanel-handle {\r\n  cursor: ns-resize;\r\n}\r\n.p-SplitPanel[data-orientation='horizontal'] > .p-SplitPanel-handle:after {\r\n  left: 50%;\r\n  min-width: 8px;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n}\r\n.p-SplitPanel[data-orientation='vertical'] > .p-SplitPanel-handle:after {\r\n  top: 50%;\r\n  min-height: 8px;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-TabBar {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-TabBar[data-orientation='horizontal'] {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-TabBar[data-orientation='vertical'] {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-TabBar-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  list-style-type: none;\r\n}\r\n.p-TabBar[data-orientation='horizontal'] > .p-TabBar-content {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-TabBar[data-orientation='vertical'] > .p-TabBar-content {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-TabBar-tab {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  overflow: hidden;\r\n}\r\n.p-TabBar-tabIcon,\r\n.p-TabBar-tabCloseIcon {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-TabBar-tabLabel {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n}\r\n.p-TabBar-tab.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-TabBar.p-mod-dragging .p-TabBar-tab {\r\n  position: relative;\r\n}\r\n.p-TabBar.p-mod-dragging[data-orientation='horizontal'] .p-TabBar-tab {\r\n  left: 0;\r\n  -webkit-transition: left 150ms ease;\r\n  transition: left 150ms ease;\r\n}\r\n.p-TabBar.p-mod-dragging[data-orientation='vertical'] .p-TabBar-tab {\r\n  top: 0;\r\n  -webkit-transition: top 150ms ease;\r\n  transition: top 150ms ease;\r\n}\r\n.p-TabBar.p-mod-dragging .p-TabBar-tab.p-mod-dragging {\r\n  -webkit-transition: none;\r\n  transition: none;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-TabPanel-tabBar {\r\n  z-index: 1;\r\n}\r\n.p-TabPanel-stackedPanel {\r\n  z-index: 0;\r\n}\r\n", ""]);
+exports.push([module.i, "/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-Widget {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: relative;\r\n  overflow: hidden;\r\n  cursor: default;\r\n}\r\n.p-Widget.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-CommandPalette {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-CommandPalette-search {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-CommandPalette-content {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  margin: 0;\r\n  padding: 0;\r\n  min-height: 0;\r\n  overflow: auto;\r\n  list-style-type: none;\r\n}\r\n.p-CommandPalette-header {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n}\r\n.p-CommandPalette-item {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-CommandPalette-itemIcon {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-CommandPalette-itemContent {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n}\r\n.p-CommandPalette-itemShortcut {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-CommandPalette-itemLabel {\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n  text-overflow: ellipsis;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-DockPanel {\r\n  z-index: 0;\r\n}\r\n.p-DockPanel-widget {\r\n  z-index: 0;\r\n}\r\n.p-DockPanel-tabBar {\r\n  z-index: 1;\r\n}\r\n.p-DockPanel-handle {\r\n  z-index: 2;\r\n}\r\n.p-DockPanel-handle.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-DockPanel-handle:after {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  content: '';\r\n}\r\n.p-DockPanel-handle[data-orientation='horizontal'] {\r\n  cursor: ew-resize;\r\n}\r\n.p-DockPanel-handle[data-orientation='vertical'] {\r\n  cursor: ns-resize;\r\n}\r\n.p-DockPanel-handle[data-orientation='horizontal']:after {\r\n  left: 50%;\r\n  min-width: 8px;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n}\r\n.p-DockPanel-handle[data-orientation='vertical']:after {\r\n  top: 50%;\r\n  min-height: 8px;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\r\n}\r\n.p-DockPanel-overlay {\r\n  z-index: 3;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  pointer-events: none;\r\n}\r\n.p-DockPanel-overlay.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-Menu {\r\n  z-index: 10000;\r\n  position: absolute;\r\n  white-space: nowrap;\r\n  overflow-x: hidden;\r\n  overflow-y: auto;\r\n  outline: none;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-Menu-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: table;\r\n  list-style-type: none;\r\n}\r\n.p-Menu-item {\r\n  display: table-row;\r\n}\r\n.p-Menu-item.p-mod-hidden,\r\n.p-Menu-item.p-mod-collapsed {\r\n  display: none !important;\r\n}\r\n.p-Menu-itemIcon,\r\n.p-Menu-itemSubmenuIcon {\r\n  display: table-cell;\r\n  text-align: center;\r\n}\r\n.p-Menu-itemLabel {\r\n  display: table-cell;\r\n  text-align: left;\r\n}\r\n.p-Menu-itemShortcut {\r\n  display: table-cell;\r\n  text-align: right;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-MenuBar {\r\n  outline: none;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-MenuBar-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n  list-style-type: none;\r\n}\r\n.p-MenuBar-item {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n}\r\n.p-MenuBar-itemIcon,\r\n.p-MenuBar-itemLabel {\r\n  display: inline-block;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-ScrollBar {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-ScrollBar[data-orientation='horizontal'] {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-ScrollBar[data-orientation='vertical'] {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-ScrollBar-button {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-ScrollBar-track {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: relative;\r\n  overflow: hidden;\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n}\r\n.p-ScrollBar-thumb {\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  position: absolute;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-SplitPanel-child {\r\n  z-index: 0;\r\n}\r\n.p-SplitPanel-handle {\r\n  z-index: 1;\r\n}\r\n.p-SplitPanel-handle.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-SplitPanel-handle:after {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  content: '';\r\n}\r\n.p-SplitPanel[data-orientation='horizontal'] > .p-SplitPanel-handle {\r\n  cursor: ew-resize;\r\n}\r\n.p-SplitPanel[data-orientation='vertical'] > .p-SplitPanel-handle {\r\n  cursor: ns-resize;\r\n}\r\n.p-SplitPanel[data-orientation='horizontal'] > .p-SplitPanel-handle:after {\r\n  left: 50%;\r\n  min-width: 8px;\r\n  -webkit-transform: translateX(-50%);\r\n          transform: translateX(-50%);\r\n}\r\n.p-SplitPanel[data-orientation='vertical'] > .p-SplitPanel-handle:after {\r\n  top: 50%;\r\n  min-height: 8px;\r\n  -webkit-transform: translateY(-50%);\r\n          transform: translateY(-50%);\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-TabBar {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n}\r\n.p-TabBar[data-orientation='horizontal'] {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-TabBar[data-orientation='vertical'] {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-TabBar-content {\r\n  margin: 0;\r\n  padding: 0;\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  list-style-type: none;\r\n}\r\n.p-TabBar[data-orientation='horizontal'] > .p-TabBar-content {\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n}\r\n.p-TabBar[data-orientation='vertical'] > .p-TabBar-content {\r\n  -webkit-box-orient: vertical;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: column;\r\n          flex-direction: column;\r\n}\r\n.p-TabBar-tab {\r\n  display: -webkit-box;\r\n  display: -ms-flexbox;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n      -ms-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  overflow: hidden;\r\n}\r\n.p-TabBar-tabIcon,\r\n.p-TabBar-tabCloseIcon {\r\n  -webkit-box-flex: 0;\r\n      -ms-flex: 0 0 auto;\r\n          flex: 0 0 auto;\r\n}\r\n.p-TabBar-tabLabel {\r\n  -webkit-box-flex: 1;\r\n      -ms-flex: 1 1 auto;\r\n          flex: 1 1 auto;\r\n  overflow: hidden;\r\n  white-space: nowrap;\r\n}\r\n.p-TabBar-tab.p-mod-hidden {\r\n  display: none !important;\r\n}\r\n.p-TabBar.p-mod-dragging .p-TabBar-tab {\r\n  position: relative;\r\n}\r\n.p-TabBar.p-mod-dragging[data-orientation='horizontal'] .p-TabBar-tab {\r\n  left: 0;\r\n  -webkit-transition: left 150ms ease;\r\n  transition: left 150ms ease;\r\n}\r\n.p-TabBar.p-mod-dragging[data-orientation='vertical'] .p-TabBar-tab {\r\n  top: 0;\r\n  -webkit-transition: top 150ms ease;\r\n  transition: top 150ms ease;\r\n}\r\n.p-TabBar.p-mod-dragging .p-TabBar-tab.p-mod-dragging {\r\n  -webkit-transition: none;\r\n  transition: none;\r\n}\r\n/*-----------------------------------------------------------------------------\r\n| Copyright (c) 2014-2017, PhosphorJS Contributors\r\n|\r\n| Distributed under the terms of the BSD 3-Clause License.\r\n|\r\n| The full license is in the file LICENSE, distributed with this software.\r\n|----------------------------------------------------------------------------*/\r\n.p-TabPanel-tabBar {\r\n  z-index: 1;\r\n}\r\n.p-TabPanel-stackedPanel {\r\n  z-index: 0;\r\n}\r\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 375 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(376);
+var content = __webpack_require__(392);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -75143,7 +75476,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(59)(content, options);
+var update = __webpack_require__(60)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -75160,10 +75493,10 @@ if(false) {
 }
 
 /***/ }),
-/* 376 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(58)(false);
+exports = module.exports = __webpack_require__(59)(false);
 // imports
 
 
@@ -75174,13 +75507,13 @@ exports.push([module.i, "/* Copyright (c) Jupyter Development Team.\n * Distribu
 
 
 /***/ }),
-/* 377 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(378);
+var content = __webpack_require__(394);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -75188,7 +75521,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(59)(content, options);
+var update = __webpack_require__(60)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -75205,15 +75538,15 @@ if(false) {
 }
 
 /***/ }),
-/* 378 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(58)(false);
+exports = module.exports = __webpack_require__(59)(false);
 // imports
 
 
 // module
-exports.push([module.i, "/* Copyright (c) Jupyter Development Team.\n * Distributed under the terms of the Modified BSD License.\n */\n\n /* We import all of these together in a single css file because the Webpack\nloader sees only one file at a time. This allows postcss to see the variable\ndefinitions when they are used. */\n\n /*-----------------------------------------------------------------------------\n| Copyright (c) Jupyter Development Team.\n| Distributed under the terms of the Modified BSD License.\n|----------------------------------------------------------------------------*/\n\n /*\nThis file is copied from the JupyterLab project to define default styling for\nwhen the widget styling is compiled down to eliminate CSS variables. We make one\nchange - we comment out the font import below.\n*/\n\n /**\n * The material design colors are adapted from google-material-color v1.2.6\n * https://github.com/danlevan/google-material-color\n * https://github.com/danlevan/google-material-color/blob/f67ca5f4028b2f1b34862f64b0ca67323f91b088/dist/palette.var.css\n *\n * The license for the material design color CSS variables is as follows (see\n * https://github.com/danlevan/google-material-color/blob/f67ca5f4028b2f1b34862f64b0ca67323f91b088/LICENSE)\n *\n * The MIT License (MIT)\n *\n * Copyright (c) 2014 Dan Le Van\n *\n * Permission is hereby granted, free of charge, to any person obtaining a copy\n * of this software and associated documentation files (the \"Software\"), to deal\n * in the Software without restriction, including without limitation the rights\n * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the Software, and to permit persons to whom the Software is\n * furnished to do so, subject to the following conditions:\n *\n * The above copyright notice and this permission notice shall be included in\n * all copies or substantial portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n * SOFTWARE.\n */\n\n /*\nThe following CSS variables define the main, public API for styling JupyterLab.\nThese variables should be used by all plugins wherever possible. In other\nwords, plugins should not define custom colors, sizes, etc unless absolutely\nnecessary. This enables users to change the visual theme of JupyterLab\nby changing these variables.\n\nMany variables appear in an ordered sequence (0,1,2,3). These sequences\nare designed to work well together, so for example, `--jp-border-color1` should\nbe used with `--jp-layout-color1`. The numbers have the following meanings:\n\n* 0: super-primary, reserved for special emphasis\n* 1: primary, most important under normal situations\n* 2: secondary, next most important under normal situations\n* 3: tertiary, next most important under normal situations\n\nThroughout JupyterLab, we are mostly following principles from Google's\nMaterial Design when selecting colors. We are not, however, following\nall of MD as it is not optimized for dense, information rich UIs.\n*/\n\n /*\n * Optional monospace font for input/output prompt.\n */\n\n /* Commented out in ipywidgets since we don't need it. */\n\n /* @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); */\n\n /*\n * Added for compabitility with output area\n */\n\n :root {\n\n  /* Borders\n\n  The following variables, specify the visual styling of borders in JupyterLab.\n   */\n\n  /* UI Fonts\n\n  The UI font CSS variables are used for the typography all of the JupyterLab\n  user interface elements that are not directly user generated content.\n  */ /* Base font size */ /* Ensures px perfect FontAwesome icons */\n\n  /* Use these font colors against the corresponding main layout colors.\n     In a light theme, these go from dark to light.\n  */\n\n  /* Use these against the brand/accent/warn/error colors.\n     These will typically go from light to darker, in both a dark and light theme\n   */\n\n  /* Content Fonts\n\n  Content font variables are used for typography of user generated content.\n  */ /* Base font size */\n\n\n  /* Layout\n\n  The following are the main layout colors use in JupyterLab. In a light\n  theme these would go from light to dark.\n  */\n\n  /* Brand/accent */\n\n  /* State colors (warn, error, success, info) */\n\n  /* Cell specific styles */\n  /* A custom blend of MD grey and blue 600\n   * See https://meyerweb.com/eric/tools/color-blend/#546E7A:1E88E5:5:hex */\n  /* A custom blend of MD grey and orange 600\n   * https://meyerweb.com/eric/tools/color-blend/#546E7A:F4511E:5:hex */\n\n  /* Notebook specific styles */\n\n  /* Console specific styles */\n\n  /* Toolbar specific styles */\n}\n\n /* Copyright (c) Jupyter Development Team.\n * Distributed under the terms of the Modified BSD License.\n */\n\n /*\n * We assume that the CSS variables in\n * https://github.com/jupyterlab/jupyterlab/blob/master/src/default-theme/variables.css\n * have been defined.\n */\n\n /* This file has code derived from PhosphorJS CSS files, as noted below. The license for this PhosphorJS code is:\n\nCopyright (c) 2014-2017, PhosphorJS Contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n*/\n\n /*\n * The following section is derived from https://github.com/phosphorjs/phosphor/blob/23b9d075ebc5b73ab148b6ebfc20af97f85714c4/packages/widgets/style/tabbar.css \n * We've scoped the rules so that they are consistent with exactly our code.\n */\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='horizontal'] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='vertical'] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar > .p-TabBar-content {\n  margin: 0;\n  padding: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  list-style-type: none;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='horizontal'] > .p-TabBar-content {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='vertical'] > .p-TabBar-content {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  overflow: hidden;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabIcon,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabCloseIcon {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabLabel {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  overflow: hidden;\n  white-space: nowrap;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-hidden {\n  display: none !important;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging .p-TabBar-tab {\n  position: relative;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging[data-orientation='horizontal'] .p-TabBar-tab {\n  left: 0;\n  -webkit-transition: left 150ms ease;\n  transition: left 150ms ease;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging[data-orientation='vertical'] .p-TabBar-tab {\n  top: 0;\n  -webkit-transition: top 150ms ease;\n  transition: top 150ms ease;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging .p-TabBar-tab.p-mod-dragging {\n  -webkit-transition: none;\n  transition: none;\n}\n\n /* End tabbar.css */\n\n :root { /* margin between inline elements */\n\n    /* From Material Design Lite */\n}\n\n .jupyter-widgets {\n    margin: 2px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    color: black;\n    overflow: visible;\n}\n\n .jupyter-widgets.jupyter-widgets-disconnected::before {\n    line-height: 28px;\n    height: 28px;\n}\n\n .jp-Output-result > .jupyter-widgets {\n    margin-left: 0;\n    margin-right: 0;\n}\n\n /* vbox and hbox */\n\n .widget-inline-hbox {\n    /* Horizontal widgets */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: baseline;\n        -ms-flex-align: baseline;\n            align-items: baseline;\n}\n\n .widget-inline-vbox {\n    /* Vertical Widgets */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n\n .widget-box {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    margin: 0;\n    overflow: auto;\n}\n\n .widget-hbox {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n\n .widget-vbox {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n /* General Button Styling */\n\n .jupyter-button {\n    padding-left: 10px;\n    padding-right: 10px;\n    padding-top: 0px;\n    padding-bottom: 0px;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    text-align: center;\n    font-size: 13px;\n    cursor: pointer;\n\n    height: 28px;\n    border: 0px solid;\n    line-height: 28px;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n\n    color: rgba(0, 0, 0, .8);\n    background-color: #EEEEEE;\n    border-color: #E0E0E0;\n    border: none;\n}\n\n .jupyter-button i.fa {\n    margin-right: 4px;\n    pointer-events: none;\n}\n\n .jupyter-button:empty:before {\n    content: \"\\200B\"; /* zero-width space */\n}\n\n .jupyter-widgets.jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n .jupyter-button i.fa.center {\n    margin-right: 0;\n}\n\n .jupyter-button:hover:enabled, .jupyter-button:focus:enabled {\n    /* MD Lite 2dp shadow */\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),\n                0 3px 1px -2px rgba(0, 0, 0, .2),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),\n                0 3px 1px -2px rgba(0, 0, 0, .2),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n}\n\n .jupyter-button:active, .jupyter-button.mod-active {\n    /* MD Lite 4dp shadow */\n    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14),\n                0 1px 10px 0 rgba(0, 0, 0, .12),\n                0 2px 4px -1px rgba(0, 0, 0, .2);\n            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14),\n                0 1px 10px 0 rgba(0, 0, 0, .12),\n                0 2px 4px -1px rgba(0, 0, 0, .2);\n    color: rgba(0, 0, 0, .8);\n    background-color: #BDBDBD;\n}\n\n .jupyter-button:focus:enabled {\n    outline: 1px solid #64B5F6;\n}\n\n /* Button \"Primary\" Styling */\n\n .jupyter-button.mod-primary {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #2196F3;\n}\n\n .jupyter-button.mod-primary.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #1976D2;\n}\n\n .jupyter-button.mod-primary:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #1976D2;\n}\n\n /* Button \"Success\" Styling */\n\n .jupyter-button.mod-success {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #4CAF50;\n}\n\n .jupyter-button.mod-success.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #388E3C;\n }\n\n .jupyter-button.mod-success:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #388E3C;\n }\n\n /* Button \"Info\" Styling */\n\n .jupyter-button.mod-info {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #00BCD4;\n}\n\n .jupyter-button.mod-info.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #0097A7;\n}\n\n .jupyter-button.mod-info:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #0097A7;\n}\n\n /* Button \"Warning\" Styling */\n\n .jupyter-button.mod-warning {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #FF9800;\n}\n\n .jupyter-button.mod-warning.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #F57C00;\n}\n\n .jupyter-button.mod-warning:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #F57C00;\n}\n\n /* Button \"Danger\" Styling */\n\n .jupyter-button.mod-danger {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #F44336;\n}\n\n .jupyter-button.mod-danger.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #D32F2F;\n}\n\n .jupyter-button.mod-danger:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #D32F2F;\n}\n\n /* Widget Button*/\n\n .widget-button, .widget-toggle-button {\n    width: 148px;\n}\n\n /* Widget Label Styling */\n\n /* Override Bootstrap label css */\n\n .jupyter-widgets label {\n    margin-bottom: 0;\n    margin-bottom: initial;\n}\n\n .widget-label-basic {\n    /* Basic Label */\n    color: black;\n    font-size: 13px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    line-height: 28px;\n}\n\n .widget-label {\n    /* Label */\n    color: black;\n    font-size: 13px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    line-height: 28px;\n}\n\n .widget-inline-hbox .widget-label {\n    /* Horizontal Widget Label */\n    color: black;\n    text-align: right;\n    margin-right: 8px;\n    width: 80px;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n}\n\n .widget-inline-vbox .widget-label {\n    /* Vertical Widget Label */\n    color: black;\n    text-align: center;\n    line-height: 28px;\n}\n\n /* Widget Readout Styling */\n\n .widget-readout {\n    color: black;\n    font-size: 13px;\n    height: 28px;\n    line-height: 28px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-align: center;\n}\n\n .widget-readout.overflow {\n    /* Overflowing Readout */\n\n    /* From Material Design Lite\n        shadow-key-umbra-opacity: 0.2;\n        shadow-key-penumbra-opacity: 0.14;\n        shadow-ambient-shadow-opacity: 0.12;\n     */\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2),\n                        0 3px 1px -2px rgba(0, 0, 0, .14),\n                        0 1px 5px 0 rgba(0, 0, 0, .12);\n\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2),\n                0 3px 1px -2px rgba(0, 0, 0, .14),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n}\n\n .widget-inline-hbox .widget-readout {\n    /* Horizontal Readout */\n    text-align: center;\n    max-width: 148px;\n    min-width: 72px;\n    margin-left: 4px;\n}\n\n .widget-inline-vbox .widget-readout {\n    /* Vertical Readout */\n    margin-top: 4px;\n    /* as wide as the widget */\n    width: inherit;\n}\n\n /* Widget Checkbox Styling */\n\n .widget-checkbox {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-checkbox input[type=\"checkbox\"] {\n    margin: 0px 8px 0px 0px;\n    line-height: 28px;\n    font-size: large;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-item-align: center;\n        align-self: center;\n}\n\n /* Widget Valid Styling */\n\n .widget-valid {\n    height: 28px;\n    line-height: 28px;\n    width: 148px;\n    font-size: 13px;\n}\n\n .widget-valid i:before {\n    line-height: 28px;\n    margin-right: 4px;\n    margin-left: 4px;\n\n    /* from the fa class in FontAwesome: https://github.com/FortAwesome/Font-Awesome/blob/49100c7c3a7b58d50baa71efef11af41a66b03d3/css/font-awesome.css#L14 */\n    display: inline-block;\n    font: normal normal normal 14px/1 FontAwesome;\n    font-size: inherit;\n    text-rendering: auto;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n\n .widget-valid.mod-valid i:before {\n    content: \"\\F00C\";\n    color: green;\n}\n\n .widget-valid.mod-invalid i:before {\n    content: \"\\F00D\";\n    color: red;\n}\n\n .widget-valid.mod-valid .widget-valid-readout {\n    display: none;\n}\n\n /* Widget Text and TextArea Stying */\n\n .widget-textarea, .widget-text {\n    width: 300px;\n}\n\n .widget-text input[type=\"text\"], .widget-text input[type=\"number\"]{\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-text input[type=\"text\"]:disabled, .widget-text input[type=\"number\"]:disabled, .widget-textarea textarea:disabled {\n    opacity: 0.6;\n}\n\n .widget-text input[type=\"text\"], .widget-text input[type=\"number\"], .widget-textarea textarea {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    padding: 4px 8px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    outline: none !important;\n}\n\n .widget-textarea textarea {\n    height: inherit;\n    width: inherit;\n}\n\n .widget-text input:focus, .widget-textarea textarea:focus {\n    border-color: #64B5F6;\n}\n\n /* Widget Slider */\n\n .widget-slider .ui-slider {\n    /* Slider Track */\n    border: 1px solid #BDBDBD;\n    background: #BDBDBD;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    position: relative;\n    border-radius: 0px;\n}\n\n .widget-slider .ui-slider .ui-slider-handle {\n    /* Slider Handle */\n    outline: none !important; /* focused slider handles are colored - see below */\n    position: absolute;\n    background-color: white;\n    border: 1px solid #9E9E9E;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    z-index: 1;\n    background-image: none; /* Override jquery-ui */\n}\n\n /* Override jquery-ui */\n\n .widget-slider .ui-slider .ui-slider-handle:hover, .widget-slider .ui-slider .ui-slider-handle:focus {\n    background-color: #2196F3;\n    border: 1px solid #2196F3;\n}\n\n .widget-slider .ui-slider .ui-slider-handle:active {\n    background-color: #2196F3;\n    border-color: #2196F3;\n    z-index: 2;\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n}\n\n .widget-slider  .ui-slider .ui-slider-range {\n    /* Interval between the two specified value of a double slider */\n    position: absolute;\n    background: #2196F3;\n    z-index: 0;\n}\n\n /* Shapes of Slider Handles */\n\n .widget-hslider .ui-slider .ui-slider-handle {\n    width: 16px;\n    height: 16px;\n    margin-top: -7px;\n    margin-left: -7px;\n    border-radius: 50%;\n    top: 0;\n}\n\n .widget-vslider .ui-slider .ui-slider-handle {\n    width: 16px;\n    height: 16px;\n    margin-bottom: -7px;\n    margin-left: -7px;\n    border-radius: 50%;\n    left: 0;\n}\n\n .widget-hslider .ui-slider .ui-slider-range {\n    height: 8px;\n    margin-top: -3px;\n}\n\n .widget-vslider .ui-slider .ui-slider-range {\n    width: 8px;\n    margin-left: -3px;\n}\n\n /* Horizontal Slider */\n\n .widget-hslider {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n\n    /* Override the align-items baseline. This way, the description and readout\n    still seem to align their baseline properly, and we don't have to have\n    align-self: stretch in the .slider-container. */\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n\n .widgets-slider .slider-container {\n    overflow: visible;\n}\n\n .widget-hslider .slider-container {\n    height: 28px;\n    margin-left: 6px;\n    margin-right: 6px;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n}\n\n .widget-hslider .ui-slider {\n    /* Inner, invisible slide div */\n    height: 4px;\n    margin-top: 12px;\n    width: 100%;\n}\n\n /* Vertical Slider */\n\n .widget-vbox .widget-label {\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-vslider {\n    /* Vertical Slider */\n    height: 200px;\n    width: 72px;\n}\n\n .widget-vslider .slider-container {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    margin-left: auto;\n    margin-right: auto;\n    margin-bottom: 6px;\n    margin-top: 6px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n .widget-vslider .ui-slider-vertical {\n    /* Inner, invisible slide div */\n    width: 4px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-left: auto;\n    margin-right: auto;\n}\n\n /* Widget Progress Styling */\n\n .progress-bar {\n    -webkit-transition: none;\n    transition: none;\n}\n\n .progress-bar {\n    height: 28px;\n}\n\n .progress-bar {\n    background-color: #2196F3;\n}\n\n .progress-bar-success {\n    background-color: #4CAF50;\n}\n\n .progress-bar-info {\n    background-color: #00BCD4;\n}\n\n .progress-bar-warning {\n    background-color: #FF9800;\n}\n\n .progress-bar-danger {\n    background-color: #F44336;\n}\n\n .progress {\n    background-color: #EEEEEE;\n    border: none;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n}\n\n /* Horisontal Progress */\n\n .widget-hprogress {\n    /* Progress Bar */\n    height: 28px;\n    line-height: 28px;\n    width: 300px;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n\n}\n\n .widget-hprogress .progress {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-top: 4px;\n    margin-bottom: 4px;\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    /* Override bootstrap style */\n    height: auto;\n    height: initial;\n}\n\n /* Vertical Progress */\n\n .widget-vprogress {\n    height: 200px;\n    width: 72px;\n}\n\n .widget-vprogress .progress {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    width: 20px;\n    margin-left: auto;\n    margin-right: auto;\n    margin-bottom: 0;\n}\n\n /* Select Widget Styling */\n\n .widget-dropdown {\n    height: 28px;\n    width: 300px;\n    line-height: 28px;\n}\n\n .widget-dropdown > select {\n    border: 1px solid #9E9E9E;\n    border-radius: 0;\n    height: inherit;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    outline: none !important;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    vertical-align: top;\n    padding-left: 8px;\n\tappearance: none;\n\t-webkit-appearance: none;\n\t-moz-appearance: none;\n    background-repeat: no-repeat;\n\tbackground-size: 20px;\n\tbackground-position: right center;\n    background-image: url(\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOCAxOCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTggMTg7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDpub25lO30KPC9zdHlsZT4KPHBhdGggZD0iTTUuMiw1LjlMOSw5LjdsMy44LTMuOGwxLjIsMS4ybC00LjksNWwtNC45LTVMNS4yLDUuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTAtMC42aDE4djE4SDBWLTAuNnoiLz4KPC9zdmc+Cg\");\n}\n\n .widget-dropdown > select:focus {\n    border-color: #64B5F6;\n}\n\n .widget-dropdown > select:disabled {\n    opacity: 0.6;\n}\n\n /* To disable the dotted border in Firefox around select controls.\n   See http://stackoverflow.com/a/18853002 */\n\n .widget-dropdown > select:-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000;\n}\n\n /* Select and SelectMultiple */\n\n .widget-select {\n    width: 300px;\n    line-height: 28px;\n\n    /* Because Firefox defines the baseline of a select as the bottom of the\n    control, we align the entire control to the top and add padding to the\n    select to get an approximate first line baseline alignment. */\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n}\n\n .widget-select > select {\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    outline: none !important;\n    overflow: auto;\n    height: inherit;\n\n    /* Because Firefox defines the baseline of a select as the bottom of the\n    control, we align the entire control to the top and add padding to the\n    select to get an approximate first line baseline alignment. */\n    padding-top: 5px;\n}\n\n .widget-select > select:focus {\n    border-color: #64B5F6;\n}\n\n .wiget-select > select > option {\n    padding-left: 4px;\n    line-height: 28px;\n    /* line-height doesn't work on some browsers for select options */\n    padding-top: calc(28px - var(--jp-widgets-font-size) / 2);\n    padding-bottom: calc(28px - var(--jp-widgets-font-size) / 2);\n}\n\n /* Toggle Buttons Styling */\n\n .widget-toggle-buttons {\n    line-height: 28px;\n}\n\n .widget-toggle-buttons .widget-toggle-button {\n    margin-left: 2px;\n    margin-right: 2px;\n}\n\n .widget-toggle-buttons .jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n /* Radio Buttons Styling */\n\n .widget-radio {\n    width: 300px;\n    line-height: 28px;\n}\n\n .widget-radio-box {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-bottom: 8px;\n}\n\n .widget-radio-box label {\n    height: 20px;\n    line-height: 20px;\n    font-size: 13px;\n}\n\n .widget-radio-box input {\n    height: 20px;\n    line-height: 20px;\n    margin: 0 8px 0 1px;\n    float: left;\n}\n\n /* Color Picker Styling */\n\n .widget-colorpicker {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-colorpicker > .widget-colorpicker-input {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    min-width: 72px;\n}\n\n .widget-colorpicker input[type=\"color\"] {\n    width: 28px;\n    height: 28px;\n    padding: 0 2px; /* make the color square actually square on Chrome on OS X */\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    border-left: none;\n    -webkit-box-flex: 0;\n        -ms-flex-positive: 0;\n            flex-grow: 0;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    outline: none !important;\n}\n\n .widget-colorpicker.concise input[type=\"color\"] {\n    border-left: 1px solid #9E9E9E;\n}\n\n .widget-colorpicker input[type=\"color\"]:focus, .widget-colorpicker input[type=\"text\"]:focus {\n    border-color: #64B5F6;\n}\n\n .widget-colorpicker input[type=\"text\"] {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    outline: none !important;\n    height: 28px;\n    line-height: 28px;\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    font-size: 13px;\n    padding: 4px 8px;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n}\n\n .widget-colorpicker input[type=\"text\"]:disabled {\n    opacity: 0.6;\n}\n\n /* Date Picker Styling */\n\n .widget-datepicker {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-datepicker input[type=\"date\"] {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    outline: none !important;\n    height: 28px;\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    padding: 4px 8px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n}\n\n .widget-datepicker input[type=\"date\"]:focus {\n    border-color: #64B5F6;\n}\n\n .widget-datepicker input[type=\"date\"]:invalid {\n    border-color: #FF9800;\n}\n\n .widget-datepicker input[type=\"date\"]:disabled {\n    opacity: 0.6;\n}\n\n /* Play Widget */\n\n .widget-play {\n    width: 148px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .widget-play .jupyter-button {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    height: auto;\n}\n\n .widget-play .jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n /* Tab Widget */\n\n .jupyter-widgets.widget-tab {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n    /* Necessary so that a tab can be shifted down to overlay the border of the box below. */\n    overflow-x: visible;\n    overflow-y: visible;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar > .p-TabBar-content {\n    /* Make sure that the tab grows from bottom up */\n    -webkit-box-align: end;\n        -ms-flex-align: end;\n            align-items: flex-end;\n    min-width: 0;\n    min-height: 0;\n}\n\n .jupyter-widgets.widget-tab > .widget-tab-contents {\n    width: 100%;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    margin: 0;\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    padding: 15px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    overflow: auto;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n    font: 13px Helvetica, Arial, sans-serif;\n    min-height: 25px;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 144px;\n            flex: 0 1 144px;\n    min-width: 35px;\n    min-height: 25px;\n    line-height: 24px;\n    margin-left: -1px;\n    padding: 0px 10px;\n    background: #EEEEEE;\n    color: rgba(0, 0, 0, .5);\n    border: 1px solid #9E9E9E;\n    border-bottom: none;\n    position: relative;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-current {\n    color: rgba(0, 0, 0, 1.0);\n    /* We want the background to match the tab content background */\n    background: white;\n    min-height: 26px;\n    -webkit-transform: translateY(1px);\n            transform: translateY(1px);\n    overflow: visible;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-current:before {\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    content: '';\n    height: 2px;\n    width: calc(100% + 2px);\n    background: #2196F3;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab:first-child {\n    margin-left: 0;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab:hover:not(.p-mod-current) {\n    background: white;\n    color: rgba(0, 0, 0, .8);\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-mod-closable > .p-TabBar-tabCloseIcon {\n    margin-left: 4px;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-mod-closable > .p-TabBar-tabCloseIcon:before {\n    font-family: FontAwesome;\n    content: '\\F00D'; /* close */\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabIcon,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabLabel,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabCloseIcon {\n    line-height: 24px;\n}\n\n /* Accordion Widget */\n\n .p-Collapse {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .p-Collapse-header {\n    padding: 4px;\n    cursor: pointer;\n    color: rgba(0, 0, 0, .5);\n    background-color: #EEEEEE;\n    border: 1px solid #9E9E9E;\n    padding: 10px 15px;\n    font-weight: bold;\n}\n\n .p-Collapse-header:hover {\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n}\n\n .p-Collapse-open > .p-Collapse-header {\n    background-color: white;\n    color: rgba(0, 0, 0, 1.0);\n    cursor: default;\n    border-bottom: none;\n}\n\n .p-Collapse .p-Collapse-header::before {\n    content: '\\F0DA\\A0';  /* caret-right, non-breaking space */\n    display: inline-block;\n    font: normal normal normal 14px/1 FontAwesome;\n    font-size: inherit;\n    text-rendering: auto;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n\n .p-Collapse-open > .p-Collapse-header::before {\n    content: '\\F0D7\\A0'; /* caret-down, non-breaking space */\n}\n\n .p-Collapse-contents {\n    padding: 15px;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    border-left: 1px solid #9E9E9E;\n    border-right: 1px solid #9E9E9E;\n    border-bottom: 1px solid #9E9E9E;\n    overflow: auto;\n}\n\n .p-Accordion {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .p-Accordion .p-Collapse {\n    margin-bottom: 0;\n}\n\n .p-Accordion .p-Collapse + .p-Collapse {\n    margin-top: 4px;\n}\n\n /* HTML widget */\n\n .widget-html, .widget-htmlmath {\n    font-size: 13px;\n}\n\n .widget-html > .widget-html-content, .widget-htmlmath > .widget-html-content {\n    /* Fill out the area in the HTML widget */\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    /* Makes sure the baseline is still aligned with other elements */\n    line-height: 28px;\n    /* Make it possible to have absolutely-positioned elements in the html */\n    position: relative;\n}\n", ""]);
+exports.push([module.i, "/* Copyright (c) Jupyter Development Team.\n * Distributed under the terms of the Modified BSD License.\n */\n\n /* We import all of these together in a single css file because the Webpack\nloader sees only one file at a time. This allows postcss to see the variable\ndefinitions when they are used. */\n\n /*-----------------------------------------------------------------------------\n| Copyright (c) Jupyter Development Team.\n| Distributed under the terms of the Modified BSD License.\n|----------------------------------------------------------------------------*/\n\n /*\nThis file is copied from the JupyterLab project to define default styling for\nwhen the widget styling is compiled down to eliminate CSS variables. We make one\nchange - we comment out the font import below.\n*/\n\n /**\n * The material design colors are adapted from google-material-color v1.2.6\n * https://github.com/danlevan/google-material-color\n * https://github.com/danlevan/google-material-color/blob/f67ca5f4028b2f1b34862f64b0ca67323f91b088/dist/palette.var.css\n *\n * The license for the material design color CSS variables is as follows (see\n * https://github.com/danlevan/google-material-color/blob/f67ca5f4028b2f1b34862f64b0ca67323f91b088/LICENSE)\n *\n * The MIT License (MIT)\n *\n * Copyright (c) 2014 Dan Le Van\n *\n * Permission is hereby granted, free of charge, to any person obtaining a copy\n * of this software and associated documentation files (the \"Software\"), to deal\n * in the Software without restriction, including without limitation the rights\n * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the Software, and to permit persons to whom the Software is\n * furnished to do so, subject to the following conditions:\n *\n * The above copyright notice and this permission notice shall be included in\n * all copies or substantial portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n * SOFTWARE.\n */\n\n /*\nThe following CSS variables define the main, public API for styling JupyterLab.\nThese variables should be used by all plugins wherever possible. In other\nwords, plugins should not define custom colors, sizes, etc unless absolutely\nnecessary. This enables users to change the visual theme of JupyterLab\nby changing these variables.\n\nMany variables appear in an ordered sequence (0,1,2,3). These sequences\nare designed to work well together, so for example, `--jp-border-color1` should\nbe used with `--jp-layout-color1`. The numbers have the following meanings:\n\n* 0: super-primary, reserved for special emphasis\n* 1: primary, most important under normal situations\n* 2: secondary, next most important under normal situations\n* 3: tertiary, next most important under normal situations\n\nThroughout JupyterLab, we are mostly following principles from Google's\nMaterial Design when selecting colors. We are not, however, following\nall of MD as it is not optimized for dense, information rich UIs.\n*/\n\n /*\n * Optional monospace font for input/output prompt.\n */\n\n /* Commented out in ipywidgets since we don't need it. */\n\n /* @import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); */\n\n /*\n * Added for compabitility with output area\n */\n\n :root {\n\n  /* Borders\n\n  The following variables, specify the visual styling of borders in JupyterLab.\n   */\n\n  /* UI Fonts\n\n  The UI font CSS variables are used for the typography all of the JupyterLab\n  user interface elements that are not directly user generated content.\n  */ /* Base font size */ /* Ensures px perfect FontAwesome icons */\n\n  /* Use these font colors against the corresponding main layout colors.\n     In a light theme, these go from dark to light.\n  */\n\n  /* Use these against the brand/accent/warn/error colors.\n     These will typically go from light to darker, in both a dark and light theme\n   */\n\n  /* Content Fonts\n\n  Content font variables are used for typography of user generated content.\n  */ /* Base font size */\n\n\n  /* Layout\n\n  The following are the main layout colors use in JupyterLab. In a light\n  theme these would go from light to dark.\n  */\n\n  /* Brand/accent */\n\n  /* State colors (warn, error, success, info) */\n\n  /* Cell specific styles */\n  /* A custom blend of MD grey and blue 600\n   * See https://meyerweb.com/eric/tools/color-blend/#546E7A:1E88E5:5:hex */\n  /* A custom blend of MD grey and orange 600\n   * https://meyerweb.com/eric/tools/color-blend/#546E7A:F4511E:5:hex */\n\n  /* Notebook specific styles */\n\n  /* Console specific styles */\n\n  /* Toolbar specific styles */\n}\n\n /* Copyright (c) Jupyter Development Team.\n * Distributed under the terms of the Modified BSD License.\n */\n\n /*\n * We assume that the CSS variables in\n * https://github.com/jupyterlab/jupyterlab/blob/master/src/default-theme/variables.css\n * have been defined.\n */\n\n /* This file has code derived from PhosphorJS CSS files, as noted below. The license for this PhosphorJS code is:\n\nCopyright (c) 2014-2017, PhosphorJS Contributors\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:\n\n* Redistributions of source code must retain the above copyright notice, this\n  list of conditions and the following disclaimer.\n\n* Redistributions in binary form must reproduce the above copyright notice,\n  this list of conditions and the following disclaimer in the documentation\n  and/or other materials provided with the distribution.\n\n* Neither the name of the copyright holder nor the names of its\n  contributors may be used to endorse or promote products derived from\n  this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\"\nAND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE\nIMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\nDISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE\nFOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL\nDAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR\nSERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER\nCAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,\nOR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE\nOF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n*/\n\n /*\n * The following section is derived from https://github.com/phosphorjs/phosphor/blob/23b9d075ebc5b73ab148b6ebfc20af97f85714c4/packages/widgets/style/tabbar.css \n * We've scoped the rules so that they are consistent with exactly our code.\n */\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='horizontal'] {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='vertical'] {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar > .p-TabBar-content {\n  margin: 0;\n  padding: 0;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  list-style-type: none;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='horizontal'] > .p-TabBar-content {\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar[data-orientation='vertical'] > .p-TabBar-content {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  overflow: hidden;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabIcon,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabCloseIcon {\n  -webkit-box-flex: 0;\n      -ms-flex: 0 0 auto;\n          flex: 0 0 auto;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabLabel {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n  overflow: hidden;\n  white-space: nowrap;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-hidden {\n  display: none !important;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging .p-TabBar-tab {\n  position: relative;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging[data-orientation='horizontal'] .p-TabBar-tab {\n  left: 0;\n  -webkit-transition: left 150ms ease;\n  transition: left 150ms ease;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging[data-orientation='vertical'] .p-TabBar-tab {\n  top: 0;\n  -webkit-transition: top 150ms ease;\n  transition: top 150ms ease;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar.p-mod-dragging .p-TabBar-tab.p-mod-dragging {\n  -webkit-transition: none;\n  transition: none;\n}\n\n /* End tabbar.css */\n\n :root { /* margin between inline elements */\n\n    /* From Material Design Lite */\n}\n\n .jupyter-widgets {\n    margin: 2px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    color: black;\n    overflow: visible;\n}\n\n .jupyter-widgets.jupyter-widgets-disconnected::before {\n    line-height: 28px;\n    height: 28px;\n}\n\n .jp-Output-result > .jupyter-widgets {\n    margin-left: 0;\n    margin-right: 0;\n}\n\n /* vbox and hbox */\n\n .widget-inline-hbox {\n    /* Horizontal widgets */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: baseline;\n        -ms-flex-align: baseline;\n            align-items: baseline;\n}\n\n .widget-inline-vbox {\n    /* Vertical Widgets */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n\n .widget-box {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    margin: 0;\n    overflow: auto;\n}\n\n .widget-gridbox {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    display: grid;\n    margin: 0;\n    overflow: auto;\n}\n\n .widget-hbox {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n\n .widget-vbox {\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n /* General Button Styling */\n\n .jupyter-button {\n    padding-left: 10px;\n    padding-right: 10px;\n    padding-top: 0px;\n    padding-bottom: 0px;\n    display: inline-block;\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    text-align: center;\n    font-size: 13px;\n    cursor: pointer;\n\n    height: 28px;\n    border: 0px solid;\n    line-height: 28px;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n\n    color: rgba(0, 0, 0, .8);\n    background-color: #EEEEEE;\n    border-color: #E0E0E0;\n    border: none;\n}\n\n .jupyter-button i.fa {\n    margin-right: 4px;\n    pointer-events: none;\n}\n\n .jupyter-button:empty:before {\n    content: \"\\200B\"; /* zero-width space */\n}\n\n .jupyter-widgets.jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n .jupyter-button i.fa.center {\n    margin-right: 0;\n}\n\n .jupyter-button:hover:enabled, .jupyter-button:focus:enabled {\n    /* MD Lite 2dp shadow */\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),\n                0 3px 1px -2px rgba(0, 0, 0, .2),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14),\n                0 3px 1px -2px rgba(0, 0, 0, .2),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n}\n\n .jupyter-button:active, .jupyter-button.mod-active {\n    /* MD Lite 4dp shadow */\n    -webkit-box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14),\n                0 1px 10px 0 rgba(0, 0, 0, .12),\n                0 2px 4px -1px rgba(0, 0, 0, .2);\n            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14),\n                0 1px 10px 0 rgba(0, 0, 0, .12),\n                0 2px 4px -1px rgba(0, 0, 0, .2);\n    color: rgba(0, 0, 0, .8);\n    background-color: #BDBDBD;\n}\n\n .jupyter-button:focus:enabled {\n    outline: 1px solid #64B5F6;\n}\n\n /* Button \"Primary\" Styling */\n\n .jupyter-button.mod-primary {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #2196F3;\n}\n\n .jupyter-button.mod-primary.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #1976D2;\n}\n\n .jupyter-button.mod-primary:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #1976D2;\n}\n\n /* Button \"Success\" Styling */\n\n .jupyter-button.mod-success {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #4CAF50;\n}\n\n .jupyter-button.mod-success.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #388E3C;\n }\n\n .jupyter-button.mod-success:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #388E3C;\n }\n\n /* Button \"Info\" Styling */\n\n .jupyter-button.mod-info {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #00BCD4;\n}\n\n .jupyter-button.mod-info.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #0097A7;\n}\n\n .jupyter-button.mod-info:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #0097A7;\n}\n\n /* Button \"Warning\" Styling */\n\n .jupyter-button.mod-warning {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #FF9800;\n}\n\n .jupyter-button.mod-warning.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #F57C00;\n}\n\n .jupyter-button.mod-warning:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #F57C00;\n}\n\n /* Button \"Danger\" Styling */\n\n .jupyter-button.mod-danger {\n    color: rgba(255, 255, 255, 1.0);\n    background-color: #F44336;\n}\n\n .jupyter-button.mod-danger.mod-active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #D32F2F;\n}\n\n .jupyter-button.mod-danger:active {\n    color: rgba(255, 255, 255, 1);\n    background-color: #D32F2F;\n}\n\n /* Widget Button*/\n\n .widget-button, .widget-toggle-button {\n    width: 148px;\n}\n\n /* Widget Label Styling */\n\n /* Override Bootstrap label css */\n\n .jupyter-widgets label {\n    margin-bottom: 0;\n    margin-bottom: initial;\n}\n\n .widget-label-basic {\n    /* Basic Label */\n    color: black;\n    font-size: 13px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    line-height: 28px;\n}\n\n .widget-label {\n    /* Label */\n    color: black;\n    font-size: 13px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    line-height: 28px;\n}\n\n .widget-inline-hbox .widget-label {\n    /* Horizontal Widget Label */\n    color: black;\n    text-align: right;\n    margin-right: 8px;\n    width: 80px;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n}\n\n .widget-inline-vbox .widget-label {\n    /* Vertical Widget Label */\n    color: black;\n    text-align: center;\n    line-height: 28px;\n}\n\n /* Widget Readout Styling */\n\n .widget-readout {\n    color: black;\n    font-size: 13px;\n    height: 28px;\n    line-height: 28px;\n    overflow: hidden;\n    white-space: nowrap;\n    text-align: center;\n}\n\n .widget-readout.overflow {\n    /* Overflowing Readout */\n\n    /* From Material Design Lite\n        shadow-key-umbra-opacity: 0.2;\n        shadow-key-penumbra-opacity: 0.14;\n        shadow-ambient-shadow-opacity: 0.12;\n     */\n    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2),\n                        0 3px 1px -2px rgba(0, 0, 0, .14),\n                        0 1px 5px 0 rgba(0, 0, 0, .12);\n\n    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2),\n                0 3px 1px -2px rgba(0, 0, 0, .14),\n                0 1px 5px 0 rgba(0, 0, 0, .12);\n}\n\n .widget-inline-hbox .widget-readout {\n    /* Horizontal Readout */\n    text-align: center;\n    max-width: 148px;\n    min-width: 72px;\n    margin-left: 4px;\n}\n\n .widget-inline-vbox .widget-readout {\n    /* Vertical Readout */\n    margin-top: 4px;\n    /* as wide as the widget */\n    width: inherit;\n}\n\n /* Widget Checkbox Styling */\n\n .widget-checkbox {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-checkbox input[type=\"checkbox\"] {\n    margin: 0px 8px 0px 0px;\n    line-height: 28px;\n    font-size: large;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -ms-flex-item-align: center;\n        align-self: center;\n}\n\n /* Widget Valid Styling */\n\n .widget-valid {\n    height: 28px;\n    line-height: 28px;\n    width: 148px;\n    font-size: 13px;\n}\n\n .widget-valid i:before {\n    line-height: 28px;\n    margin-right: 4px;\n    margin-left: 4px;\n\n    /* from the fa class in FontAwesome: https://github.com/FortAwesome/Font-Awesome/blob/49100c7c3a7b58d50baa71efef11af41a66b03d3/css/font-awesome.css#L14 */\n    display: inline-block;\n    font: normal normal normal 14px/1 FontAwesome;\n    font-size: inherit;\n    text-rendering: auto;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n\n .widget-valid.mod-valid i:before {\n    content: \"\\F00C\";\n    color: green;\n}\n\n .widget-valid.mod-invalid i:before {\n    content: \"\\F00D\";\n    color: red;\n}\n\n .widget-valid.mod-valid .widget-valid-readout {\n    display: none;\n}\n\n /* Widget Text and TextArea Stying */\n\n .widget-textarea, .widget-text {\n    width: 300px;\n}\n\n .widget-text input[type=\"text\"], .widget-text input[type=\"number\"]{\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-text input[type=\"text\"]:disabled, .widget-text input[type=\"number\"]:disabled, .widget-textarea textarea:disabled {\n    opacity: 0.6;\n}\n\n .widget-text input[type=\"text\"], .widget-text input[type=\"number\"], .widget-textarea textarea {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    padding: 4px 8px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    outline: none !important;\n}\n\n .widget-textarea textarea {\n    height: inherit;\n    width: inherit;\n}\n\n .widget-text input:focus, .widget-textarea textarea:focus {\n    border-color: #64B5F6;\n}\n\n /* Widget Slider */\n\n .widget-slider .ui-slider {\n    /* Slider Track */\n    border: 1px solid #BDBDBD;\n    background: #BDBDBD;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    position: relative;\n    border-radius: 0px;\n}\n\n .widget-slider .ui-slider .ui-slider-handle {\n    /* Slider Handle */\n    outline: none !important; /* focused slider handles are colored - see below */\n    position: absolute;\n    background-color: white;\n    border: 1px solid #9E9E9E;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    z-index: 1;\n    background-image: none; /* Override jquery-ui */\n}\n\n /* Override jquery-ui */\n\n .widget-slider .ui-slider .ui-slider-handle:hover, .widget-slider .ui-slider .ui-slider-handle:focus {\n    background-color: #2196F3;\n    border: 1px solid #2196F3;\n}\n\n .widget-slider .ui-slider .ui-slider-handle:active {\n    background-color: #2196F3;\n    border-color: #2196F3;\n    z-index: 2;\n    -webkit-transform: scale(1.2);\n            transform: scale(1.2);\n}\n\n .widget-slider  .ui-slider .ui-slider-range {\n    /* Interval between the two specified value of a double slider */\n    position: absolute;\n    background: #2196F3;\n    z-index: 0;\n}\n\n /* Shapes of Slider Handles */\n\n .widget-hslider .ui-slider .ui-slider-handle {\n    width: 16px;\n    height: 16px;\n    margin-top: -7px;\n    margin-left: -7px;\n    border-radius: 50%;\n    top: 0;\n}\n\n .widget-vslider .ui-slider .ui-slider-handle {\n    width: 16px;\n    height: 16px;\n    margin-bottom: -7px;\n    margin-left: -7px;\n    border-radius: 50%;\n    left: 0;\n}\n\n .widget-hslider .ui-slider .ui-slider-range {\n    height: 8px;\n    margin-top: -3px;\n}\n\n .widget-vslider .ui-slider .ui-slider-range {\n    width: 8px;\n    margin-left: -3px;\n}\n\n /* Horizontal Slider */\n\n .widget-hslider {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n\n    /* Override the align-items baseline. This way, the description and readout\n    still seem to align their baseline properly, and we don't have to have\n    align-self: stretch in the .slider-container. */\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n\n .widgets-slider .slider-container {\n    overflow: visible;\n}\n\n .widget-hslider .slider-container {\n    height: 28px;\n    margin-left: 6px;\n    margin-right: 6px;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n}\n\n .widget-hslider .ui-slider {\n    /* Inner, invisible slide div */\n    height: 4px;\n    margin-top: 12px;\n    width: 100%;\n}\n\n /* Vertical Slider */\n\n .widget-vbox .widget-label {\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-vslider {\n    /* Vertical Slider */\n    height: 200px;\n    width: 72px;\n}\n\n .widget-vslider .slider-container {\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    margin-left: auto;\n    margin-right: auto;\n    margin-bottom: 6px;\n    margin-top: 6px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n .widget-vslider .ui-slider-vertical {\n    /* Inner, invisible slide div */\n    width: 4px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-left: auto;\n    margin-right: auto;\n}\n\n /* Widget Progress Styling */\n\n .progress-bar {\n    -webkit-transition: none;\n    transition: none;\n}\n\n .progress-bar {\n    height: 28px;\n}\n\n .progress-bar {\n    background-color: #2196F3;\n}\n\n .progress-bar-success {\n    background-color: #4CAF50;\n}\n\n .progress-bar-info {\n    background-color: #00BCD4;\n}\n\n .progress-bar-warning {\n    background-color: #FF9800;\n}\n\n .progress-bar-danger {\n    background-color: #F44336;\n}\n\n .progress {\n    background-color: #EEEEEE;\n    border: none;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n}\n\n /* Horisontal Progress */\n\n .widget-hprogress {\n    /* Progress Bar */\n    height: 28px;\n    line-height: 28px;\n    width: 300px;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n\n}\n\n .widget-hprogress .progress {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-top: 4px;\n    margin-bottom: 4px;\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    /* Override bootstrap style */\n    height: auto;\n    height: initial;\n}\n\n /* Vertical Progress */\n\n .widget-vprogress {\n    height: 200px;\n    width: 72px;\n}\n\n .widget-vprogress .progress {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    width: 20px;\n    margin-left: auto;\n    margin-right: auto;\n    margin-bottom: 0;\n}\n\n /* Select Widget Styling */\n\n .widget-dropdown {\n    height: 28px;\n    width: 300px;\n    line-height: 28px;\n}\n\n .widget-dropdown > select {\n    padding-right: 20px;\n    border: 1px solid #9E9E9E;\n    border-radius: 0;\n    height: inherit;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    outline: none !important;\n    -webkit-box-shadow: none;\n            box-shadow: none;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    vertical-align: top;\n    padding-left: 8px;\n\tappearance: none;\n\t-webkit-appearance: none;\n\t-moz-appearance: none;\n    background-repeat: no-repeat;\n\tbackground-size: 20px;\n\tbackground-position: right center;\n    background-image: url(\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCAxOCAxOCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMTggMTg7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDpub25lO30KPC9zdHlsZT4KPHBhdGggZD0iTTUuMiw1LjlMOSw5LjdsMy44LTMuOGwxLjIsMS4ybC00LjksNWwtNC45LTVMNS4yLDUuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTAtMC42aDE4djE4SDBWLTAuNnoiLz4KPC9zdmc+Cg\");\n}\n\n .widget-dropdown > select:focus {\n    border-color: #64B5F6;\n}\n\n .widget-dropdown > select:disabled {\n    opacity: 0.6;\n}\n\n /* To disable the dotted border in Firefox around select controls.\n   See http://stackoverflow.com/a/18853002 */\n\n .widget-dropdown > select:-moz-focusring {\n    color: transparent;\n    text-shadow: 0 0 0 #000;\n}\n\n /* Select and SelectMultiple */\n\n .widget-select {\n    width: 300px;\n    line-height: 28px;\n\n    /* Because Firefox defines the baseline of a select as the bottom of the\n    control, we align the entire control to the top and add padding to the\n    select to get an approximate first line baseline alignment. */\n    -webkit-box-align: start;\n        -ms-flex-align: start;\n            align-items: flex-start;\n}\n\n .widget-select > select {\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 148px;\n            flex: 1 1 148px;\n    outline: none !important;\n    overflow: auto;\n    height: inherit;\n\n    /* Because Firefox defines the baseline of a select as the bottom of the\n    control, we align the entire control to the top and add padding to the\n    select to get an approximate first line baseline alignment. */\n    padding-top: 5px;\n}\n\n .widget-select > select:focus {\n    border-color: #64B5F6;\n}\n\n .wiget-select > select > option {\n    padding-left: 4px;\n    line-height: 28px;\n    /* line-height doesn't work on some browsers for select options */\n    padding-top: calc(28px - var(--jp-widgets-font-size) / 2);\n    padding-bottom: calc(28px - var(--jp-widgets-font-size) / 2);\n}\n\n /* Toggle Buttons Styling */\n\n .widget-toggle-buttons {\n    line-height: 28px;\n}\n\n .widget-toggle-buttons .widget-toggle-button {\n    margin-left: 2px;\n    margin-right: 2px;\n}\n\n .widget-toggle-buttons .jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n /* Radio Buttons Styling */\n\n .widget-radio {\n    width: 300px;\n    line-height: 28px;\n}\n\n .widget-radio-box {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    margin-bottom: 8px;\n}\n\n .widget-radio-box label {\n    height: 20px;\n    line-height: 20px;\n    font-size: 13px;\n}\n\n .widget-radio-box input {\n    height: 20px;\n    line-height: 20px;\n    margin: 0 8px 0 1px;\n    float: left;\n}\n\n /* Color Picker Styling */\n\n .widget-colorpicker {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-colorpicker > .widget-colorpicker-input {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    min-width: 72px;\n}\n\n .widget-colorpicker input[type=\"color\"] {\n    width: 28px;\n    height: 28px;\n    padding: 0 2px; /* make the color square actually square on Chrome on OS X */\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    border-left: none;\n    -webkit-box-flex: 0;\n        -ms-flex-positive: 0;\n            flex-grow: 0;\n    -ms-flex-negative: 0;\n        flex-shrink: 0;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    outline: none !important;\n}\n\n .widget-colorpicker.concise input[type=\"color\"] {\n    border-left: 1px solid #9E9E9E;\n}\n\n .widget-colorpicker input[type=\"color\"]:focus, .widget-colorpicker input[type=\"text\"]:focus {\n    border-color: #64B5F6;\n}\n\n .widget-colorpicker input[type=\"text\"] {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    outline: none !important;\n    height: 28px;\n    line-height: 28px;\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    font-size: 13px;\n    padding: 4px 8px;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n}\n\n .widget-colorpicker input[type=\"text\"]:disabled {\n    opacity: 0.6;\n}\n\n /* Date Picker Styling */\n\n .widget-datepicker {\n    width: 300px;\n    height: 28px;\n    line-height: 28px;\n}\n\n .widget-datepicker input[type=\"date\"] {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    min-width: 0; /* This makes it possible for the flexbox to shrink this input */\n    outline: none !important;\n    height: 28px;\n    border: 1px solid #9E9E9E;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    font-size: 13px;\n    padding: 4px 8px;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n}\n\n .widget-datepicker input[type=\"date\"]:focus {\n    border-color: #64B5F6;\n}\n\n .widget-datepicker input[type=\"date\"]:invalid {\n    border-color: #FF9800;\n}\n\n .widget-datepicker input[type=\"date\"]:disabled {\n    opacity: 0.6;\n}\n\n /* Play Widget */\n\n .widget-play {\n    width: 148px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .widget-play .jupyter-button {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    height: auto;\n}\n\n .widget-play .jupyter-button:disabled {\n    opacity: 0.6;\n}\n\n /* Tab Widget */\n\n .jupyter-widgets.widget-tab {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n    /* Necessary so that a tab can be shifted down to overlay the border of the box below. */\n    overflow-x: visible;\n    overflow-y: visible;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar > .p-TabBar-content {\n    /* Make sure that the tab grows from bottom up */\n    -webkit-box-align: end;\n        -ms-flex-align: end;\n            align-items: flex-end;\n    min-width: 0;\n    min-height: 0;\n}\n\n .jupyter-widgets.widget-tab > .widget-tab-contents {\n    width: 100%;\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box;\n    margin: 0;\n    background: white;\n    color: rgba(0, 0, 0, .8);\n    border: 1px solid #9E9E9E;\n    padding: 15px;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    overflow: auto;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar {\n    font: 13px Helvetica, Arial, sans-serif;\n    min-height: 25px;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab {\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 144px;\n            flex: 0 1 144px;\n    min-width: 35px;\n    min-height: 25px;\n    line-height: 24px;\n    margin-left: -1px;\n    padding: 0px 10px;\n    background: #EEEEEE;\n    color: rgba(0, 0, 0, .5);\n    border: 1px solid #9E9E9E;\n    border-bottom: none;\n    position: relative;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-current {\n    color: rgba(0, 0, 0, 1.0);\n    /* We want the background to match the tab content background */\n    background: white;\n    min-height: 26px;\n    -webkit-transform: translateY(1px);\n            transform: translateY(1px);\n    overflow: visible;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab.p-mod-current:before {\n    position: absolute;\n    top: -1px;\n    left: -1px;\n    content: '';\n    height: 2px;\n    width: calc(100% + 2px);\n    background: #2196F3;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab:first-child {\n    margin-left: 0;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tab:hover:not(.p-mod-current) {\n    background: white;\n    color: rgba(0, 0, 0, .8);\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-mod-closable > .p-TabBar-tabCloseIcon {\n    margin-left: 4px;\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-mod-closable > .p-TabBar-tabCloseIcon:before {\n    font-family: FontAwesome;\n    content: '\\F00D'; /* close */\n}\n\n .jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabIcon,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabLabel,\n.jupyter-widgets.widget-tab > .p-TabBar .p-TabBar-tabCloseIcon {\n    line-height: 24px;\n}\n\n /* Accordion Widget */\n\n .p-Collapse {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .p-Collapse-header {\n    padding: 4px;\n    cursor: pointer;\n    color: rgba(0, 0, 0, .5);\n    background-color: #EEEEEE;\n    border: 1px solid #9E9E9E;\n    padding: 10px 15px;\n    font-weight: bold;\n}\n\n .p-Collapse-header:hover {\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n}\n\n .p-Collapse-open > .p-Collapse-header {\n    background-color: white;\n    color: rgba(0, 0, 0, 1.0);\n    cursor: default;\n    border-bottom: none;\n}\n\n .p-Collapse .p-Collapse-header::before {\n    content: '\\F0DA\\A0';  /* caret-right, non-breaking space */\n    display: inline-block;\n    font: normal normal normal 14px/1 FontAwesome;\n    font-size: inherit;\n    text-rendering: auto;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n}\n\n .p-Collapse-open > .p-Collapse-header::before {\n    content: '\\F0D7\\A0'; /* caret-down, non-breaking space */\n}\n\n .p-Collapse-contents {\n    padding: 15px;\n    background-color: white;\n    color: rgba(0, 0, 0, .8);\n    border-left: 1px solid #9E9E9E;\n    border-right: 1px solid #9E9E9E;\n    border-bottom: 1px solid #9E9E9E;\n    overflow: auto;\n}\n\n .p-Accordion {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: stretch;\n        -ms-flex-align: stretch;\n            align-items: stretch;\n}\n\n .p-Accordion .p-Collapse {\n    margin-bottom: 0;\n}\n\n .p-Accordion .p-Collapse + .p-Collapse {\n    margin-top: 4px;\n}\n\n /* HTML widget */\n\n .widget-html, .widget-htmlmath {\n    font-size: 13px;\n}\n\n .widget-html > .widget-html-content, .widget-htmlmath > .widget-html-content {\n    /* Fill out the area in the HTML widget */\n    -ms-flex-item-align: stretch;\n        align-self: stretch;\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1;\n    -ms-flex-negative: 1;\n        flex-shrink: 1;\n    /* Makes sure the baseline is still aligned with other elements */\n    line-height: 28px;\n    /* Make it possible to have absolutely-positioned elements in the html */\n    position: relative;\n}\n", ""]);
 
 // exports
 

@@ -114,6 +114,15 @@ nbconvert_flags.update({
         },
         "Exclude input and output prompts from converted document."
         ),
+    'no-input' : (
+        {'TemplateExporter' : {
+            'exclude_output_prompt' : True,
+            'exclude_input': True,
+            }
+        },
+        """Exclude input cells and output prompts from converted document. 
+        This mode is ideal for generating code-free reports."""
+        ),
 })
 
 
@@ -246,6 +255,9 @@ class NbConvertApp(JupyterApp):
         if new:
             self.postprocessor_factory = import_item(new)
 
+    ipywidgets_base_url = Unicode("https://unpkg.com/",
+                                  help="URL base for ipywidgets package").tag(config=True)
+
 
     export_format = Unicode(
         'html',
@@ -299,7 +311,7 @@ class NbConvertApp(JupyterApp):
             globbed_files = glob.glob(pattern)
             globbed_files.extend(glob.glob(pattern + '.ipynb'))
             if not globbed_files:
-                self.log.warn("pattern %r matched no files", pattern)
+                self.log.warning("pattern %r matched no files", pattern)
 
             for filename in globbed_files:
                 if not filename in filenames:
@@ -360,6 +372,8 @@ class NbConvertApp(JupyterApp):
                             .format(notebook_name=notebook_name))
 
         resources['output_files_dir'] = output_files_dir
+
+        resources['ipywidgets_base_url'] = self.ipywidgets_base_url
 
         return resources
 
