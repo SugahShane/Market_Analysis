@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Users\Shane\Dropbox\PyCharm Projects\Market_Analysis\venv"
+VIRTUAL_ENV="D:\Users\Shane\OneDrive\PyCharm Projects\Market_Analysis\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
