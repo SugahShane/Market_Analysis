@@ -1,4 +1,5 @@
 from Data_Import.IEX_Data_Download import *
+from Data_Import.CoinMarketCap_Data_Download import *
 
 
 START_DATE = datetime(2017, 1, 1)
@@ -11,11 +12,12 @@ OUTPUT_DIRECTORY = "D:\\Users\\Shane\\OneDrive\\Documents\\Trading\\Research\\Da
 OUTPUT_EXCEL_FILENAME = OUTPUT_DIRECTORY + "Portfolio Data.xlsx"
 
 
-def write_excel_file(last_df, historical_df):
+def write_excel_file(last_df, historical_df, crytocurrency_last_price_df):
     print("Writing Excel File: " + OUTPUT_EXCEL_FILENAME)
     writer = pd.ExcelWriter(OUTPUT_EXCEL_FILENAME)
-    last_df.to_excel(writer, 'Last Day Data')
-    historical_df.to_excel(writer, 'Historical Data')
+    last_df.to_excel(writer, 'Last Day')
+    historical_df.to_excel(writer, 'Historical')
+    crytocurrency_last_price_df.to_excel(writer, 'Crytocurrency')
     writer.save()
 
 
@@ -26,6 +28,8 @@ portfolio_historical_price_df = get_historical_equity_prices_from_csv_file(PORTF
                                                                              START_DATE,
                                                                              END_DATE)
 
+crytocurrency_last_price_df = get_latest_cryptocurrency_portfolio_prices()
+
 #portfolio_monthly_prices_dict = get_historical_equity_prices_from_csv_file(PORTFOLIO_CSV_FILENAME)
 
-write_excel_file(portfolio_last_price_df, portfolio_historical_price_df)
+write_excel_file(portfolio_last_price_df, portfolio_historical_price_df, crytocurrency_last_price_df)
