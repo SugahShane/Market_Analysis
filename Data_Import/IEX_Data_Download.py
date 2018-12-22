@@ -4,16 +4,16 @@ import pandas as pd
 import time
 
 
-START_DATE = datetime(2018, 1, 1)
+START_DATE = datetime(2017, 1, 1)
 END_DATE = datetime.now()
-BASE_DIRECTORY = "D:\\Users\\Shane\\Dropbox\\PyCharm Projects\\Market_Analysis\\"
+BASE_DIRECTORY = "D:\\Users\\Shane\\OneDrive\\PyCharm Projects\\Market_Analysis\\"
 DATA_DIRECTORY = BASE_DIRECTORY + "data\\"
 #INPUT_DATA_FILENAME = "MarketDashboardInstruments.csv"
 #INPUT_DATA_FILENAME = "PortfolioInstruments.csv"
 INPUT_DATA_FILENAME = "TestData.csv"
 OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 OUTPUT_EXCEL_FILENAME = "Market Data.xlsx"
-SLEEP_PERIOD = 0.5
+SLEEP_PERIOD = 0.1
 
 def read_equity_list_from_csv(filename_and_path):
     print("Reading data file: " + filename_and_path)
@@ -50,15 +50,22 @@ def get_last_price_from_iex(instrument):
     return stock.get_price()
 
 
-def get_batch_last_price_from_iex(instruments):
-    list = instruments['Instrument'].values.tolist()
-    stocks = Stock(list)
+def get_batch_last_price_from_iex(instruments_df):
+    stock_list = instruments_df['Instrument'].values.tolist()
+    stocks = Stock(stock_list)
     return stocks.get_price()
 
 
 def get_historical_equity_prices_from_csv_file(filename, start_date=START_DATE, end_date=END_DATE):
     instruments_df = read_equity_list_from_csv(filename)
     return get_instrument_list_historical_price_data(instruments_df, start_date, end_date)
+
+
+def get_historical_monthly_equity_prices_from_csv_file(filename, start_date=START_DATE, end_date=END_DATE):
+    instruments_df = get_historical_equity_prices_from_csv_file(filename, start_date, end_date)
+
+    # Filter down to only the price at the start of each month
+    instruments_df.sort_index(inplace=True)
 
 
 def get_last_prices_from_instruments_in_csv_file(filename):
