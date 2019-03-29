@@ -1,0 +1,142 @@
+Metadata-Version: 2.1
+Name: coinmarketcap-client
+Version: 2.5.3
+Summary: Python Coin Market Cap Client
+Home-page: https://gitlab.com/pgrangeiro/python-coinmarketcap-client
+Author: Paula Grangeiro
+Author-email: contato@paulagrangeiro.com.br
+License: GNU General Public License v3.0
+Download-URL: https://gitlab.com/pgrangeiro/python-coinmarketcap-client/-/archive/master/python-coinmarketcap-client-master.tar.gz
+Keywords: coinmarketcap,cryptocurrency,cryptocoin
+Platform: UNKNOWN
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Requires-Dist: requests (>=2.18)
+
+# Python Coin Market Cap Client
+
+A Python library to connect with [Coin Market Cap](https://coinmarketcap.com/) APIs.
+
+Supported APIs:
+- [Ticker](https://coinmarketcap.com/api/#endpoint_ticker)
+- [Ticker for Specific Cryptocurrency](https://coinmarketcap.com/api/#endpoint_ticker_specific_cryptocurrency)
+- [Listings](https://coinmarketcap.com/api/#endpoint_listings)
+- [Global Data](https://coinmarketcap.com/api/#endpoint_global_data)
+
+
+# Install
+```
+pip install coinmarketcap-client
+```
+
+
+# Tests
+```
+tox
+```
+
+
+# Usage
+
+```
+>>> from coinmarketcap.clients import CoinMarketCapClient
+>>> client = CoinMarketCapClient()
+```
+
+## List cryptocurrencies
+
+Return the active list of cryptocurrencies.
+
+```
+>>> client.listing.get()
+[{'id': 1, 'name': 'Bitcoin', 'symbol': 'BTC', 'website_slug': 'bitcoin'}, {'id': 2, 'name': 'Litecoin', 'symbol': 'LTC', 'website_slug': 'litecoin'}, ...
+```
+
+## Get tickers
+
+Return the ticker data for all active cryptocurrencies.
+
+Parameters:
+- limit[optional]: Return a maximum of [limit] results (default is 100; max is 100)
+- start[optional]: Return results from rank [start] and above
+- sort[optional]: Return results sorted by [sort] . Possible values are "id", "rank", "volume_24h" and "percent_change_24h" (default is rank).
+- currency[optional]: Return pricing info in terms of another currency (default is USD)
+    - Supported values are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
+    - Also supports these cryptocurrency values: "BTC", "ETH" "XRP", "LTC", and "BCH"
+
+```
+>>> client.tickers.get()
+[{'id': 1, 'name': 'Bitcoin', 'symbol': 'BTC', 'website_slug': 'bitcoin', 'rank': 1, 'circulating_supply': 17073725.0, 'total_supply': 17073725.0, 'max_supply': 21000000.0, 'quotes': {'USD': {'price': 7600.48, 'volume_24h': 4943200000.0, 'market_cap': 129768505388.0, 'percent_change_1h': -0.32, 'percent_change_24h': -1.66, 'percent_change_7d': 4.4}}, 'last_updated': 1528100975}, {'id': 1027, 'name': 'Ethereum', 'symbol': 'ETH', 'website_slug': 'e...
+```
+
+## Get ticker by Cryptocurrency
+
+Return the last ticker data for specific cryptocurrency.
+
+Parameters:
+- coin_id: The cryptocurrency id in Coin Market Cap API.
+- currency[optional]: Return pricing info in terms of another currency (default is USD)
+    - Supported values are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
+    - Also supports these cryptocurrency values: "BTC", "ETH" "XRP", "LTC", and "BCH"
+
+```
+>>> client.cryptocoin.get(coin_id=1)
+{'id': 1, 'name': 'Bitcoin', 'symbol': 'BTC', 'website_slug': 'bitcoin', 'rank': 1, 'circulating_supply': 17083000.0, 'total_supply': 17083000.0, 'max_supply': 21000000.0, 'quotes': {'USD': {'price': 7635.7, 'volume_24h':4211460000.0, 'market_cap': 130440663100.0, 'percent_change_1h': -0.13, 'percent_change_24h': -0.6, 'percent_change_7d': 1.86}}, 'last_updated': 1528503874}
+```
+
+## Get global summary data
+
+Returns the global summary data from Coin Market Cap.
+
+Parameters:
+- currency[optional]: Return pricing info in terms of another currency (default is USD)
+    - Supported values are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
+    - Also supports these cryptocurrency values: "BTC", "ETH" "XRP", "LTC", and "BCH"
+
+```
+>>> client.global_data.get()
+{'active_cryptocurrencies': 1654, 'active_markets': 11318, 'bitcoin_percentage_of_market_cap': 38.08, 'quotes': {'USD': {'total_market_cap': 342680267176.0, 'total_volume_24h': 13469496559.0}}, 'last_updated': 1528506574}
+```
+
+
+# Customizing
+
+## Parsing response data from Coin Market Cap API
+
+You can create your own parser to customizing Coin Market Cap response.
+
+```
+class MyParser:
+
+    @classmethod
+    def parse(cls, data):
+        """
+            Implement your customized parse classmethod.
+        """
+```
+
+Then you can pass your custom parser _MyParser_ by param into some client initialization.
+
+```
+client = TickerClient(MyParser) # Client to get tickers from Coin Market Cap
+```
+
+This way, you can customize the parsing method from any single client from this lib.
+
+```
+from coinmarketcap.clients import *
+
+tickers_c = TickerClient(MyParser)
+criptocoin_c = CryptoCoinTickerClient(MyParser)
+listing_c = ListCryptoCoinClient(MyParser)
+global_c = GlobalSummaryClient(MyParser)
+```
+
+But you also can customize the response from CoinMarketCapClient, like the example above:
+
+```
+client = CoinMarketCap()
+MyParser.parse(client_c.tickers.get())
+```
+
+

@@ -26,7 +26,7 @@ def get_instrument_list_historical_price_data(instruments_df, start_date=START_D
     for row in instruments_df.itertuples():
         instrument_df = get_historical_price_data_from_iex(getattr(row, 'Instrument'), start_date, end_date)
         instrument_df['Date'] = instrument_df.index.values
-        instruments_price_data_df = instruments_price_data_df.append(instrument_df, ignore_index=True)
+        instruments_price_data_df = instruments_price_data_df.append(instrument_df, ignore_index=True, sort=True)
         time.sleep(SLEEP_PERIOD)
     return instruments_price_data_df
 

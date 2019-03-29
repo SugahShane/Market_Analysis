@@ -1,8 +1,3 @@
-import pandas as pd
-import time
-import math
-import statistics
-import plotly.plotly as py
 import plotly.graph_objs as go
 import dash
 import dash_core_components as dcc
@@ -16,7 +11,7 @@ from Data_Import.IEX_Data_Download import *
 
 START_DATE = datetime(2018, 1, 1)
 END_DATE = datetime.now()
-BASE_DIRECTORY = "D:\\Users\\Shane\\Dropbox\\PyCharm Projects\\Market_Analysis\\"
+BASE_DIRECTORY = "D:\\Users\\Shane\\OneDrive\\Programming Projects\\Investing\\Market_Analysis\\"
 DATA_DIRECTORY = BASE_DIRECTORY + "data\\"
 #INPUT_DATA_FILENAME = "DataInstruments.csv"
 INPUT_DATA_FILENAME = "TestData.csv"
@@ -100,12 +95,12 @@ def generate_sqn_table(spy_df, qqq_df, dia_df):
     qqq_df = qqq_df.sort_index(ascending=False)
     dia_df = dia_df.sort_index(ascending=False)
 
-    sqn_df = spy_df[['Ticker', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
+    sqn_df = spy_df[['Instrument', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
                      'ATR_Percent_Of_Close_20', 'SQN_100_Market_Type']].head(1)
-    sqn_df = sqn_df.append(qqq_df[['Ticker', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
+    sqn_df = sqn_df.append(qqq_df[['Instrument', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
                                    'ATR_Percent_Of_Close_20', 'SQN_100_Market_Type']].head(1),
                            ignore_index=True)
-    sqn_df = sqn_df.append(dia_df[['Ticker', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
+    sqn_df = sqn_df.append(dia_df[['Instrument', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
                                    'ATR_Percent_Of_Close_20', 'SQN_100_Market_Type']].head(1),
                            ignore_index=True)
     return sqn_df
@@ -116,10 +111,17 @@ def generate_ndx_table(spy_df, qqq_df, dia_df):
     qqq_df = qqq_df.sort_index(ascending=False)
     dia_df = dia_df.sort_index(ascending=False)
 
-    ndx_df = spy_df[['Ticker', 'NDX_10', 'NDX_200']].head(1)
-    ndx_df = ndx_df.append(qqq_df[['Ticker', 'NDX_10', 'NDX_200']].head(1), ignore_index=True)
-    ndx_df = ndx_df.append(dia_df[['Ticker', 'NDX_10', 'NDX_200']].head(1), ignore_index=True)
+    ndx_df = spy_df[['Instrument', 'NDX_10', 'NDX_200']].head(1)
+    ndx_df = ndx_df.append(qqq_df[['Instrument', 'NDX_10', 'NDX_200']].head(1), ignore_index=True)
+    ndx_df = ndx_df.append(dia_df[['Instrument', 'NDX_10', 'NDX_200']].head(1), ignore_index=True)
+
+    # TODO: Add Overbought/Oversold/Neutral classifications
     return ndx_df
+
+
+def generate_price_table(spy_df):
+    return 0
+
 
 def generate_long_term_overview_df():
     df = pd.DataFrame()
@@ -138,7 +140,60 @@ def render_overview_content():
         html.H3('NDX Overview'),
         html.Table(make_dash_table(ndx_df)),
         html.H3('Long-term Trend'),
+        html.H5('Price')
+    ])
 
+
+def render_sqn_dashboard():
+    return html.Div(children=[
+        html.H3('S&P 500 SQN(200) Chart'),
+        dcc.Graph(
+            id='SP500_SQN200_chart',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=spy_df.index.tolist(),
+                        y=spy_df['SQN_200'].dropna().values.tolist()
+                    )
+                ]
+            }
+        ),
+        html.H3('S&P 500 SQN(100) Chart'),
+        dcc.Graph(
+            id='SP500_SQN100_chart',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=spy_df.index.tolist(),
+                        y=spy_df['SQN_100'].dropna().values.tolist()
+                    )
+                ]
+            }
+        ),
+        html.H3('S&P 500 SQN(50) Chart'),
+        dcc.Graph(
+            id='SP500_SQN50_chart',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=spy_df.index.tolist(),
+                        y=spy_df['SQN_50'].dropna().values.tolist()
+                    )
+                ]
+            }
+        ),
+        html.H3('S&P 500 SQN(25) Chart'),
+        dcc.Graph(
+            id='SP500_SQN25_chart',
+            figure={
+                'data': [
+                    go.Scatter(
+                        x=spy_df.index.tolist(),
+                        y=spy_df['SQN_25'].dropna().values.tolist()
+                    )
+                ]
+            }
+        )
     ])
 
 
@@ -148,9 +203,7 @@ def render_content(tab):
     if tab == 'overview':
         return render_overview_content()
     elif tab == 'sqn_dashboard':
-        return html.Div([
-            html.H3('SQN Dashboard')
-        ])
+        return render_sqn_dashboard()
     elif tab == 'market_breadth':
         return html.Div([
             html.H3('Market Breadth')
@@ -180,6 +233,18 @@ dia_df = generate_sqn_market_type_data(dia_df)
 
 sqn_df = generate_sqn_table(spy_df, qqq_df, dia_df)
 ndx_df = generate_ndx_table(spy_df, qqq_df, dia_df)
+
+price_df = generate_price_table(spy_df)
+
+# TODO: Long-Term Trend
+# TODO: Prices: Price to SMA(200), SMA(50) to SMA(200), NDX, SMA Slope
+# TODO: Momentum: ADX, RSI(20)
+# TODO: Volatility: VIX, ATR
+# TODO: Market Breadth: Cumulative Tick
+# TODO: Interest Rates Chart
+# TODO: SQN Charts
+# TODO: ETF Money Flow table
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
