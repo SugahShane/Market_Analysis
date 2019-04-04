@@ -34,7 +34,7 @@ def get_instrument_list_historical_price_data(instruments_df, start_date=START_D
 def get_historical_price_data_from_iex(instrument, start_date=START_DATE, end_date=END_DATE):
     print("Processing: " + instrument)
     try:
-        instrument_df = get_historical_data(instrument,
+        instrument_df = stocks.get_historical_data(instrument,
                                             start=start_date,
                                             end=end_date,
                                             output_format='pandas')
@@ -46,14 +46,12 @@ def get_historical_price_data_from_iex(instrument, start_date=START_DATE, end_da
 
 def get_last_price_from_iex(instrument):
     print("Processing: " + instrument)
-    stock = Stock(instrument)
+    stock = stocks.Stock(instrument)
     return stock.get_price()
 
 
 def get_batch_last_price_from_iex(instruments_df):
-    stock_list = instruments_df['Instrument'].values.tolist()
-    stocks = Stock(stock_list)
-    return stocks.get_price()
+    return stocks.Stock(instruments_df['Instrument'].values.tolist()).get_price()
 
 
 def get_historical_equity_prices_from_csv_file(filename, start_date=START_DATE, end_date=END_DATE):
