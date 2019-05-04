@@ -17,6 +17,8 @@ DATA_DIRECTORY = BASE_DIRECTORY + "data\\"
 INPUT_DATA_FILENAME = "TestData.csv"
 OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 OUTPUT_EXCEL_FILENAME = "Market Data.xlsx"
+US_INDEX_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "US_Market_Instruments.csv"
+US_SECTOR_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "US_Sector_Instruments.csv"
 
 app = dash.Dash(__name__)
 
@@ -146,7 +148,8 @@ def render_overview_content():
 
 def render_sqn_dashboard():
     return html.Div(children=[
-        html.H3('S&P 500 SQN(200) Chart'),
+        html.H3('S&P 500 SQN Charts'),
+        html.H5('S&P 500 SQN(200) Chart'),
         dcc.Graph(
             id='SP500_SQN200_chart',
             figure={
@@ -158,7 +161,7 @@ def render_sqn_dashboard():
                 ]
             }
         ),
-        html.H3('S&P 500 SQN(100) Chart'),
+        html.H5('S&P 500 SQN(100) Chart'),
         dcc.Graph(
             id='SP500_SQN100_chart',
             figure={
@@ -170,7 +173,7 @@ def render_sqn_dashboard():
                 ]
             }
         ),
-        html.H3('S&P 500 SQN(50) Chart'),
+        html.H5('S&P 500 SQN(50) Chart'),
         dcc.Graph(
             id='SP500_SQN50_chart',
             figure={
@@ -182,7 +185,7 @@ def render_sqn_dashboard():
                 ]
             }
         ),
-        html.H3('S&P 500 SQN(25) Chart'),
+        html.H5('S&P 500 SQN(25) Chart'),
         dcc.Graph(
             id='SP500_SQN25_chart',
             figure={
@@ -193,7 +196,10 @@ def render_sqn_dashboard():
                     )
                 ]
             }
-        )
+        ),
+        html.H3('Sector SQN Table'),
+        html.H5('US Sectors'),
+
     ])
 
 
@@ -222,14 +228,29 @@ def render_content(tab):
         ])
 
 
-spy_df = get_historical_price_data_from_iex('SPY')
-qqq_df = get_historical_price_data_from_iex('QQQ')
-dia_df = get_historical_price_data_from_iex('DIA')
-#amzn_df = get_equity_price_data_from_iex('AMZN')
+def load_instrument_data(instrument_list_csv_file):
+    sector_instruments_df = pd.read_csv(instrument_list_csv_file)
 
-spy_df = generate_sqn_market_type_data(spy_df)
-qqq_df = generate_sqn_market_type_data(qqq_df)
-dia_df = generate_sqn_market_type_data(dia_df)
+    instruments_price_data_dictionary = {}
+    for row in sector_instruments_df.itertuples():
+        instrument_price_data_df = get_historical_price_data_from_iex(getattr(row, 'Instrument'))
+        instruments_price_data_dictionary[getattr(row, 'Instrument')] = instrument_price_data_df
+
+    return instruments_price_data_dictionary
+
+
+#qqq_df = get_historical_price_data_from_iex('QQQ')
+#dia_df = get_historical_price_data_from_iex('DIA')
+#spy_df = get_historical_price_data_from_iex('SPY')
+#qqq_df = get_historical_price_data_from_iex('QQQ')
+#dia_df = get_historical_price_data_from_iex('DIA')
+
+us_market_price_data_dictionary = load_instrument_data(US_INDEX_INSTRUMENTS_FILENAME)
+#us_sector_price_data_dictionary = load_instrument_data(US_SECTOR_INSTRUMENTS_FILENAME)
+
+spy_df = generate_sqn_market_type_data(us_market_price_data_dictionary['SPY'])
+qqq_df = generate_sqn_market_type_data(us_market_price_data_dictionary['QQQ'])
+dia_df = generate_sqn_market_type_data(us_market_price_data_dictionary['DIA'])
 
 sqn_df = generate_sqn_table(spy_df, qqq_df, dia_df)
 ndx_df = generate_ndx_table(spy_df, qqq_df, dia_df)
