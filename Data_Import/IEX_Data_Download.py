@@ -1,4 +1,5 @@
-from iexfinance import *
+from iexfinance.stocks import get_historical_data
+from iexfinance.stocks import Stock
 from datetime import datetime
 import pandas as pd
 import time
@@ -27,14 +28,14 @@ def get_instrument_list_historical_price_data(instruments_df, start_date=START_D
         instrument_df = get_historical_price_data_from_iex(getattr(row, 'Instrument'), start_date, end_date)
         instrument_df['Date'] = instrument_df.index.values
         instruments_price_data_df = instruments_price_data_df.append(instrument_df, ignore_index=True, sort=True)
-        time.sleep(SLEEP_PERIOD)
+        #time.sleep(SLEEP_PERIOD)
     return instruments_price_data_df
 
 
 def get_historical_price_data_from_iex(instrument, start_date=START_DATE, end_date=END_DATE):
     print("Processing: " + instrument)
     try:
-        instrument_df = stocks.get_historical_data(instrument,
+        instrument_df = get_historical_data(instrument,
                                             start=start_date,
                                             end=end_date,
                                             output_format='pandas')
@@ -46,12 +47,17 @@ def get_historical_price_data_from_iex(instrument, start_date=START_DATE, end_da
 
 def get_last_price_from_iex(instrument):
     print("Processing: " + instrument)
-    stock = stocks.Stock(instrument)
+    stock = Stock(instrument)
     return stock.get_price()
 
 
+def get_company_info_from_iex(instrument):
+    stock = Stock(instrument)
+    return stock.get_company()
+
+
 def get_batch_last_price_from_iex(instruments_df):
-    return stocks.Stock(instruments_df['Instrument'].values.tolist()).get_price()
+    return Stock(instruments_df['Instrument'].values.tolist()).get_price()
 
 
 def get_historical_equity_prices_from_csv_file(filename, start_date=START_DATE, end_date=END_DATE):
@@ -65,6 +71,15 @@ def get_historical_monthly_equity_prices_from_csv_file(filename, start_date=STAR
     # Filter down to only the price at the start of each month
     instruments_df.sort_index(inplace=True)
 
+
+def get_company_info_from_csv_file(filename):
+    instruments_df = read_equity_list_from_csv(filename)
+    companies_info_df = pd.DataFrame()
+
+    for row in instruments_df.itertuples():
+        company_info_df = get_company_info_from_iex(getattr(row, 'Instrument'))
+        
+    return companies_info_df
 
 def get_last_prices_from_instruments_in_csv_file(filename):
     instruments_df = read_equity_list_from_csv(filename)

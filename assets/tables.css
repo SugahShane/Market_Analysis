@@ -1,5 +1,4 @@
-/* Tables
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Tables –––––––––––––––––––––––––––––––––––––––––––––––––– */
 table {
     border-collapse: collapse;
     font-family: Helvetica;
@@ -10,7 +9,6 @@ th {
     padding-bottom: 12px;
     text-align: left;
     background-color: #4CAF50;
-    color: white;
     border: 1px solid #ddd;
 }
 
