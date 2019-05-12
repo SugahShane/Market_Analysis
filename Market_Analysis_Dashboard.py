@@ -35,7 +35,6 @@ app.layout = html.Div(children=[
         dcc.Tab(label='Market Breadth', value='market_breadth'),
         dcc.Tab(label='Harmonic Rotations', value='harmonic_rotations'),
         dcc.Tab(label='Inflation', value='inflation'),
-        dcc.Tab(label='Volume Profile', value='volume_profile'),
     ]),
     html.Div(id='tabs-content')
 ])
@@ -106,11 +105,11 @@ def generate_sqn_market_type_from_df_dict(df_dict):
 
 
 def generate_sqn_table(df_dict):
-    df = pd.DataFrame(columns=['Instrument', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
+    df = pd.DataFrame(columns=['Instrument', 'Name', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
                      'ATR_Percent_Of_Close_20', 'SQN_100_Market_Type'])
     for key, value in df_dict.items():
         value = value.sort_index(ascending=False)
-        df = df.append(value[['Instrument', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
+        df = df.append(value[['Instrument', 'Name', 'SQN_200', 'SQN_100', 'SQN_50', 'SQN_25',
                      'ATR_Percent_Of_Close_20', 'SQN_100_Market_Type']].head(1),
                      ignore_index=True)
     return df
@@ -212,6 +211,28 @@ def render_sqn_dashboard():
     ])
 
 
+def load_instrument_price_data(instrument_list_csv_file):
+    instruments_df = pd.read_csv(instrument_list_csv_file)
+
+    instruments_price_data_dictionary = {}
+    for row in instruments_df.itertuples():
+        instrument_price_data_df = get_historical_price_data_from_iex(getattr(row, 'Instrument'))
+        instrument_company_info_df = get_company_info_from_iex(getattr(row, 'Instrument'))
+        instrument_price_data_df['Name'] = instrument_company_info_df['companyName']
+        instruments_price_data_dictionary[getattr(row, 'Instrument')] = instrument_price_data_df
+    return instruments_price_data_dictionary
+
+
+def load_instrument_company_data(instrument_list_csv_file):
+    instruments_df = pd.read_csv(instrument_list_csv_file)
+
+    instruments_company_data_dictionary = {}
+    for row in instruments_df.itertuples():
+        instrument_company_data_df = get_company_info_from_iex(getattr(row, 'Instrument'))
+        instruments_company_data_dictionary[getattr(row, 'Instrument')] = instrument_company_data_df
+    return instruments_company_data_dictionary
+
+
 @app.callback(Output('tabs-content', 'children'),
               [Input('tabs', 'value')])
 def render_content(tab):
@@ -231,28 +252,15 @@ def render_content(tab):
         return html.Div([
             html.H3('Inflation')
         ])
-    elif tab == 'volume_profile':
-        return html.Div([
-            html.H3('Volume Profile')
-        ])
 
 
-def load_instrument_data(instrument_list_csv_file):
-    sector_instruments_df = pd.read_csv(instrument_list_csv_file)
+us_market_price_data_dictionary = load_instrument_price_data(US_INDEX_INSTRUMENTS_FILENAME)
+us_sector_price_data_dictionary = load_instrument_price_data(US_SECTOR_INSTRUMENTS_FILENAME)
+commoditiy_price_data_dictionary = load_instrument_price_data(COMMODITY_INSTRUMENTS_FILENAME)
+interest_rate_price_data_dictionary = load_instrument_price_data(INTEREST_RATE_INSTRUMENTS_FILENAME)
+real_estate_price_data_dictionary = load_instrument_price_data(REAL_ESTATE_INSTRUMENTS_FILENAME)
 
-    instruments_price_data_dictionary = {}
-    for row in sector_instruments_df.itertuples():
-        instrument_price_data_df = get_historical_price_data_from_iex(getattr(row, 'Instrument'))
-        instruments_price_data_dictionary[getattr(row, 'Instrument')] = instrument_price_data_df
-
-    return instruments_price_data_dictionary
-
-
-us_market_price_data_dictionary = load_instrument_data(US_INDEX_INSTRUMENTS_FILENAME)
-us_sector_price_data_dictionary = load_instrument_data(US_SECTOR_INSTRUMENTS_FILENAME)
-commoditiy_price_data_dictionary = load_instrument_data(COMMODITY_INSTRUMENTS_FILENAME)
-interest_rate_price_data_dictionary = load_instrument_data(INTEREST_RATE_INSTRUMENTS_FILENAME)
-real_estate_price_data_dictionary = load_instrument_data(REAL_ESTATE_INSTRUMENTS_FILENAME)
+us_market_company_data_dictionary = load_instrument_company_data(US_INDEX_INSTRUMENTS_FILENAME)
 
 us_market_price_sqn_data_dictionary = generate_sqn_market_type_from_df_dict(us_market_price_data_dictionary)
 us_sector_price_sqn_data_dictionary = generate_sqn_market_type_from_df_dict(us_sector_price_data_dictionary)
