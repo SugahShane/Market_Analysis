@@ -1,3 +1,4 @@
+import os
 import plotly.graph_objs as go
 import dash
 import dash_core_components as dcc
@@ -5,17 +6,17 @@ import dash_html_components as html
 import dash_table as dt
 from dash.dependencies import Input, Output
 from Trading_Functions.SQN import *
-from Trading_Functions.NDX import *
+from Trading_Functions.NDX import ndx
 from Trading_Functions.ATR_Percent_Of_Close import *
 from Data_Import.IEX_Data_Download import *
 
 
+# CONSTANTS
+#########################################################################################
 START_DATE = datetime(2018, 1, 1)
 END_DATE = datetime.now()
-BASE_DIRECTORY = "D:\\Users\\Shane\\OneDrive\\Programming Projects\\Investing\\Market_Analysis\\"
+BASE_DIRECTORY = os.getcwd()
 DATA_DIRECTORY = BASE_DIRECTORY + "data\\"
-#INPUT_DATA_FILENAME = "DataInstruments.csv"
-INPUT_DATA_FILENAME = "TestData.csv"
 OUTPUT_DIRECTORY = BASE_DIRECTORY + "output\\"
 OUTPUT_EXCEL_FILENAME = "Market Data.xlsx"
 US_INDEX_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "US_Market_Instruments.csv"
@@ -23,6 +24,12 @@ US_SECTOR_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "US_Sector_Instruments.csv"
 COMMODITY_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "Commodity_Instruments.csv"
 INTEREST_RATE_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "Interest_Rate_Instruments.csv"
 REAL_ESTATE_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "Real_Estate_Instruments.csv"
+DASHBOARD_INSTRUMENTS_FILENAME = DATA_DIRECTORY + "Market_Dashboard_Instruments.csv"
+
+US_SECTOR_TICKERS = ['BJK', 'IAI', 'IGN', 'IGV', 'IHE', 'ITA', 'ITB', 'IYH', 'IYT', 'IYZ', 
+'KBE', 'KCE', 'KIE', 'KRE', 'OIH', 'PBJ', 'PBS', 'RWR', 'SMH', 'TLT', 'XAR', 'XBI', 'XES', 
+'XHB', 'XHE', 'XHS', 'XITK', 'XLB', 'XLE', 'XLF', 'XLI', 'XLK', 'XLP', 'XLRE', 'XLU', 'XLV', 
+'XLY', 'XME', 'XOP', 'XPH', 'XRT', 'XSD', 'XSW', 'XTL', 'XTN']
 
 
 app = dash.Dash(__name__)
@@ -90,7 +97,7 @@ def generate_sqn_market_type_data(df):
         df['SQN_50'] = sqn(df.close, 50)
         df['SQN_25'] = sqn(df.close, 25)
         df['ATR_Percent_Of_Close_20'] = ATR_percent_of_close(df, 20)
-        df['SQN_100_Market_Type'] = market_classification(df)
+        df['SQN_100_Market_Type'] = classify_sqn_market_type(df)
         df['NDX_10'] = ndx(df, 10)
         df['NDX_200'] = ndx(df, 200)
     except Exception:
@@ -120,15 +127,6 @@ def generate_ndx_table(df_dict):
     for key, value in df_dict.items():
         value = value.sort_index(ascending=False)
         df = df.append(value[['Instrument', 'NDX_10', 'NDX_200']].head(1), ignore_index=True)
-    return df
-
-
-def generate_price_table(spy_df):
-    return 0
-
-
-def generate_long_term_overview_df():
-    df = pd.DataFrame()
     return df
 
 
@@ -241,18 +239,16 @@ def render_content(tab):
     elif tab == 'sqn_dashboard':
         return render_sqn_dashboard()
     elif tab == 'market_breadth':
-        return html.Div([
-            html.H3('Market Breadth')
-        ])
+        return html.Div([html.H3('Market Breadth')])
     elif tab == 'harmonic_rotations':
-        return html.Div([
-            html.H3('Harmonic Rotations')
-        ])
+        return html.Div([html.H3('Harmonic Rotations')])
     elif tab == 'inflation':
-        return html.Div([
-            html.H3('Inflation')
-        ])
+        return html.Div([html.H3('Inflation')])
 
+
+dashboard_price_data_dict = load_instrument_price_data(DASHBOARD_INSTRUMENTS_FILENAME)
+
+us_sector_dict = dict((k, dashboard_price_data_dict[k]) for k in US_SECTOR_TICKERS if k in dashboard_price_data_dict)
 
 us_market_price_data_dictionary = load_instrument_price_data(US_INDEX_INSTRUMENTS_FILENAME)
 us_sector_price_data_dictionary = load_instrument_price_data(US_SECTOR_INSTRUMENTS_FILENAME)
@@ -276,8 +272,6 @@ us_sector_sqn_df = generate_sqn_table(us_sector_price_sqn_data_dictionary)
 commodity_sqn_df = generate_sqn_table(commoditiy_price_sqn_data_dictionary)
 interest_rate_sqn_df = generate_sqn_table(interest_rate_price_sqn_data_dictionary)
 real_estate_sqn_df = generate_sqn_table(real_estate_price_sqn_data_dictionary)
-
-price_df = generate_price_table(spy_df)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

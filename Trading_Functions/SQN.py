@@ -29,7 +29,7 @@ def sqn(df, period):
     return (avg_df / stdev_df * multiplier).round(decimals=2)
 
 
-def market_classification(df):
+def classify_sqn_market_type(df):
     return df.apply(get_market_classification, axis=1)
 
 
