@@ -32,6 +32,8 @@ US_SECTOR_TICKERS = ['BJK', 'IAI', 'IGN', 'IGV', 'IHE', 'ITA', 'ITB', 'IYH', 'IY
 'XLY', 'XME', 'XOP', 'XPH', 'XRT', 'XSD', 'XSW', 'XTL', 'XTN']
 
 
+# APPLICATION
+########################################################################################
 app = dash.Dash(__name__)
 
 app.layout = html.Div(children=[

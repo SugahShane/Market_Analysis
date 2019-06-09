@@ -13,7 +13,7 @@ NORMAL_ATR = 1
 
 
 def sqn(df, period):
-    if len(df.index) < period:
+    if len(df.index) <= period:
         raise Exception('Not enough data in data frame for period. Period=' + str(period) + ' Length=' + str(len(df.index)))
 
     percent_change_df = (df - df.shift()) / df.shift()

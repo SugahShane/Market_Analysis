@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "d:\\Users\\Shane\\OneDrive\\Repositories\\Investing\\Market_Analysis_Dashboard\\.venv\\Scripts\\python.exe",
+    "python.testing.pyTestArgs": [
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pyTestEnabled": true
+}
