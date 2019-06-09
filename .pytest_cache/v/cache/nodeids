@@ -1,3 +1,4 @@
 [
-  "test/test_sqn.py::test_sqn"
+  "test/test_sqn.py::test_sqn",
+  "test/test_sqn.py::test_percent_change"
 ]

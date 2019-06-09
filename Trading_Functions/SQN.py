@@ -12,11 +12,15 @@ VOLATILE_ATR = 1.65
 NORMAL_ATR = 1
 
 
+def percent_change(df):
+    return (df.shift(periods=-1) - df) / df
+
+
 def sqn(df, period):
     if len(df.index) <= period:
         raise Exception('Not enough data in data frame for period. Period=' + str(period) + ' Length=' + str(len(df.index)))
 
-    percent_change_df = (df - df.shift()) / df.shift()
+    percent_change_df = percent_change(df)
     avg_df = percent_change_df.rolling(window=period).mean()
     stdev_df = percent_change_df.rolling(window=period).std()
 
